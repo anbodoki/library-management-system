@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+<head>
+  <!--<meta charset="utf-8">-->
+  <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+  <title tiles:fragment="title">Sign In</title>
+  <link rel="stylesheet" th:href="@{/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/main.css}"/>
+</head>
+
+<body class="login-page">
+<div tiles:fragment="content" class="container center">
+  <h2 class="form-signin-heading">Library Management System</h2>
+  <form name="f" th:action="@{/login}" method="post" class="form-signin">
+    <div th:if="${param.error}" class="alert alert-danger">
+      Invalid username or password.
+    </div>
+    <div th:if="${param.logout}" class="alert alert-success">
+      You have been logged out.
+    </div>
+    <input type="text" id="username" name="username" class="form-control username-input" placeholder="Username"/>
+    <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
+    <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
+  </form>
+</div>
+</body>
+</html>

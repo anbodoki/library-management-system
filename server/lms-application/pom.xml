@@ -116,7 +116,7 @@
                             <outputDirectory>${basedir}/src/main/resources/static/</outputDirectory >
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/../../lms-system-dashboard/dist</directory >
+                                    <directory>${basedir}/../../admin-panel/dist</directory >
                                     <excludes>
                                         <exclude>**/login/**</exclude>
                                     </excludes>
@@ -132,7 +132,7 @@
                             <outputDirectory>${basedir}/src/main/resources/templates/</outputDirectory >
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/../../lms-system-dashboard/dist/login</directory >
+                                    <directory>${basedir}/../../admin-panel/dist/login</directory >
                                 </resource>
                             </resources>
                         </configuration>
