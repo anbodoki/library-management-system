@@ -1,0 +1,33 @@
+<div *ngIf="visible && fieldObject && enabled && capRequired" class="w-100 m-bottom-5" [ngClass]="{'input-group' : addon}"><span
+  class="required">{{label}}</span>
+    <input required type="{{fieldType}}" class="form-control" placeholder="{{placeholder}}" #req="ngModel"
+           pattern="{{capPattern}}" [value]="fieldObject[fieldName] !== undefined ? fieldObject[fieldName] : ''"
+           [ngModel]="fieldObject[fieldName]"
+           (input)="fieldObject[fieldName] = $event.target.value">
+    <small class="cap-alert" [hidden]="req.valid">
+      {{alertText}}
+    </small>
+</div>
+
+<div *ngIf="visible && !capRequired && fieldObject && enabled && !capPattern" class="w-100 m-bottom-5"><span>{{label}}</span>
+    <input type="{{fieldType}}" class="form-control" placeholder="{{placeholder}}"
+           [value]="fieldObject[fieldName] !== undefined ? fieldObject[fieldName] : ''"
+           (input)="fieldObject[fieldName] = $event.target.value">
+</div>
+
+<div *ngIf="visible && !capRequired && fieldObject && enabled && capPattern" class="w-100 m-bottom-5"><span>{{label}}</span>
+    <input type="{{fieldType}}" class="form-control" placeholder="{{placeholder}}" #req="ngModel"
+           pattern="{{capPattern}}" [value]="fieldObject[fieldName] !== undefined ? fieldObject[fieldName] : ''"
+           [ngModel]="fieldObject[fieldName]"
+           (input)="fieldObject[fieldName] = $event.target.value">
+    <small class="cap-alert" [hidden]="req.valid">
+      {{alertText}}</small>
+</div>
+
+<div *ngIf="visible && !capRequired && fieldObject && !enabled" class="w-100 m-bottom-5"><span>{{label}}</span>
+    <input type="{{fieldType}}" readonly class="form-control"
+           placeholder="{{placeholder}}"
+           [value]="fieldObject[fieldName] !== undefined ? fieldObject[fieldName] : ''"
+           (input)="fieldObject[fieldName] = $event.target.value">
+</div>
+

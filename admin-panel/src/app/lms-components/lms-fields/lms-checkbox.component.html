@@ -1,0 +1,20 @@
+<div *ngIf="!capRequired && visible" class="cap-checkbox m-bottom-5">
+  <input *ngIf="enabled" type="checkbox" class="flat"
+         [checked]="fieldObject && fieldObject[fieldName]"
+         (change)="fieldObject[fieldName] = $event.target.checked">
+  <input *ngIf="!enabled" type="checkbox" class="flat" readonly
+         [checked]="fieldObject && fieldObject[fieldName]"
+         (change)="fieldObject[fieldName] = $event.target.checked">
+  {{label}}
+  <a *ngIf="removable" class="field-remove" (click)="fieldObject[fieldName] = null"><i class="fa fa-times"></i></a>
+</div>
+<div *ngIf="capRequired && visible && fieldObject" class="cap-checkbox m-bottom-5">
+  <input type="checkbox" class="flat"
+         [checked]="fieldObject && fieldObject[fieldName]"
+         (change)="fieldObject[fieldName] = $event.target.checked" [ngModel]="fieldObject[fieldName]" required #req="ngModel">
+  <span class="required">{{label}}</span>
+  <small class="cap-alert" [hidden]="req.value==true || req.value==false">
+    {{alertText}}
+  </small>
+  <a *ngIf="removable" class="field-remove" (click)="fieldObject[fieldName] = null"><i class="fa fa-remove"></i></a>
+</div>

@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {UserService} from "./services/user.service";
 import {AccessService} from "./services/access.service";
+import {User} from "./model/security/user";
 import {Router} from "@angular/router";
 
 declare let jquery: any;
@@ -16,19 +18,23 @@ export class AppComponent implements OnInit {
   loggedInUserName: string;
   errorTitle: string;
   errorMessage: string;
+  loggedInUser: User;
 
-  notifications: Notification[] = [];
-
-  myNotifications: any[] = [];
-  myNotificationsCount: number;
-
-  constructor(private router: Router) {
+  constructor(private userService: UserService,
+              public accessService: AccessService,
+              private router: Router) {
     let ref = this;
+    this.userService.getUser().then(function (response) {
+      if (response.success) {
+        ref.loggedInUser = response.data;
+        ref.loggedInUserName = response.data.username;
+        ref.accessService.setPrivileges(response.data.privileges);
+        ref.myInit();
+      } else {
+        window.location.pathname = "/login";
+      }
+    });
     this.errorTitle = "Alert";
-  }
-
-  markAllAsSeen() {
-    let ref = this;
   }
 
   myInit(): void {
@@ -191,15 +197,15 @@ export class AppComponent implements OnInit {
       let view = false;
 
       $(this).parent().find('ul > li > a').each(function () {
-        /*if (!ref.accessService.containsCodeAfterInit($(this).attr('privilege'))) {
+        if (!ref.accessService.containsCodeAfterInit($(this).attr('privilege'))) {
           $(this).parent().addClass('hide');
         } else {
           view = true;
-        }*/
+        }
       });
-      /*if (!ref.accessService.containsGroupName($(this).parent().attr('groupName')) || !view) {
+      if (!ref.accessService.containsGroupName($(this).parent().attr('groupName')) || !view) {
         $(this).parent().addClass('hide');
-      }*/
+      }
     })
   }
 

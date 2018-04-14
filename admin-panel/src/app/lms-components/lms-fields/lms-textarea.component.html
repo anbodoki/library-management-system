@@ -1,0 +1,15 @@
+<div *ngIf="visible && fieldObject && capRequired" class="w-100 m-bottom-5"><span class="required">{{label}}</span>
+  <textarea required class="form-control" #req="ngModel" placeholder="{{placeholder}}"
+            pattern="{{capPattern}}" [value]="fieldObject[fieldName] !== undefined ? fieldObject[fieldName] : ''"
+            [ngModel]="fieldObject[fieldName]"
+            (input)="fieldObject[fieldName] = $event.target.value"></textarea>
+
+  <small class="cap-alert" [hidden]="req.valid">
+    {{alertText}}
+  </small>
+</div>
+<div *ngIf="visible && !capRequired && fieldObject && enabled" class="w-100 m-bottom-5">{{label}}
+  <textarea class="form-control" placeholder="{{placeholder}}"
+            [value]="fieldObject[fieldName] !== undefined ? fieldObject[fieldName] : ''"
+            (input)="fieldObject[fieldName] = $event.target.value"></textarea>
+</div>

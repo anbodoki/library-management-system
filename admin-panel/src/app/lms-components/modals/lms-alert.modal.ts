@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'cap-alert-modal',
+  selector: 'lms-alert-modal',
   templateUrl: 'lms-alert.modal.html',
 })
 
-export class CapAlertModal implements OnInit{
+export class LMSAlertModal implements OnInit{
 
   ngOnInit(): void {
   }

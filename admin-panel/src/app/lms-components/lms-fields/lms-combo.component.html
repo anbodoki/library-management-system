@@ -1,0 +1,42 @@
+<div *ngIf="!capRequired && visible && returnObject" class="m-bottom-5">{{label}}
+  <select #selectElem class="form-control" (change)="getValue(selectElem.value)">
+    <option *ngIf="placeholder" value="" disabled selected>{{placeholder}}</option>
+    <option></option>
+    <option *ngFor="let p of values" [selected]="p && fieldObject && fieldObject[fieldName] && p[optionValue] == fieldObject[fieldName][optionValue]"
+            [value]="p[optionValue]">{{p[optionLabel]}}
+    </option>
+  </select>
+</div>
+<div *ngIf="!capRequired && visible && !returnObject" class="m-bottom-5">{{label}}
+  <select #selectElem class="form-control" (change)="getValue(selectElem.value)">
+    <option *ngIf="placeholder" value="" disabled selected>{{placeholder}}</option>
+    <option></option>
+    <option *ngFor="let p of values" [selected]="p && fieldObject && fieldObject[fieldName] && p[optionValue] == fieldObject[fieldName]"
+            [value]="p[optionValue]">{{p[optionLabel]}}
+    </option>
+  </select>
+</div>
+<div *ngIf="capRequired && visible && fieldObject && returnObject" class="m-bottom-5"><span class="required">{{label}}</span>
+  <select #selectElem class="form-control" (change)="getValue(selectElem.value)" [ngClass]="{'ng-invalid': !selectElem.value}" required>
+    <option *ngIf="placeholder" value="" disabled selected>{{placeholder}}</option>
+    <option></option>
+    <option *ngFor="let p of values" [selected]="p && fieldObject && fieldObject[fieldName] && p[optionValue] == fieldObject[fieldName][optionValue]"
+            [value]="p[optionValue]">{{p[optionLabel]}}
+    </option>
+  </select>
+  <small class="cap-alert" [hidden]="selectElem.value">
+    {{alertText}}
+  </small>
+</div>
+<div *ngIf="capRequired && visible && fieldObject && !returnObject" class="m-bottom-5"><span class="required">{{label}}</span>
+  <select #selectElem class="form-control" (change)="getValue(selectElem.value)" [ngClass]="{'ng-invalid': !selectElem.value}" required>
+    <option *ngIf="placeholder" value="" disabled selected>{{placeholder}}</option>
+    <option></option>
+    <option *ngFor="let p of values" [selected]="p && fieldObject && fieldObject[fieldName] && p[optionValue] == fieldObject[fieldName]"
+            [value]="p[optionValue]">{{p[optionLabel]}}
+    </option>
+  </select>
+  <small class="cap-alert" [hidden]="selectElem.value">
+    {{alertText}}
+  </small>
+</div>

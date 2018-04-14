@@ -1,0 +1,81 @@
+<lms-confirm-modal id="confirmModal" modalTitle="Confirmation" modalMessage="Are you sure you want to delete this role?"
+                   (onOkClick)="onDeleteConfirmed()">
+</lms-confirm-modal>
+
+<div *ngIf="isManage" class="modal fade" data-backdrop="static" id="roleModal" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Role Details</h4>
+      </div>
+      <div class="modal-body">
+
+        <lms-input label="Name" fieldName="name"
+                   [fieldObject]="selectedRole" fieldType="text" capPattern="^.{4,50}$" [capRequired]="true"
+                   alertText="Name must contain minimum 4 characters"></lms-input>
+
+        <lms-color-picker [targetObject]="selectedRole" targetObjectField="color"></lms-color-picker>
+
+        <lms-tree-checkbox label="Privileges" [items]="privileges" viewName="name"
+                           [targetObject]="selectedRole" targetObjectField="rolePrivileges"
+                           identifier="code"></lms-tree-checkbox>
+
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="(selectedRole && selectedRole.id)" type="button" class="btn btn-danger left"
+                (click)="deleteRole()">Delete
+        </button>
+        <button *ngIf="(selectedRole && selectedRole.id)" type="button" class="btn btn-success"
+                (click)="updateRole()">Update
+        </button>
+        <button *ngIf="!(selectedRole && selectedRole.id)" type="button" class="btn btn-success"
+                (click)="saveRole()"
+                [disabled]="false">
+          Save
+        </button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="">
+  <div class="page-title">
+    <div class="title_left">
+      <h3>Roles
+        <small>Managing role records</small>
+      </h3>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <lms-table [items]="roles"
+             (rowDoubleClick)="showAddEditModal($event)"
+             (onAddButtonClick)="showAddModal($event)"
+             [addable]="isManage"
+             [editable]="isManage"
+             [searchable]="true"
+             (onTermSearch)="updateRolesData($event)"
+             [pagination]="true"
+             [pageNum]="pageNum"
+             [reloadEvent]="loader"
+             (onPageChange)="changePage($event)"
+
+  >
+    <lms-column header="ID" field="id"></lms-column>
+    <lms-column header="Name" field="name"></lms-column>
+    <lms-column header="Privileges" field="privileges" type="list">
+      <ng-template #dataTableCell let-item="item">
+        <span class="lms-tag" *ngFor="let p of item.rolePrivileges">{{p.name}}</span>
+      </ng-template>
+    </lms-column>
+    <lms-column header="Color" field="color">
+      <ng-template #dataTableCell let-item="item">
+        <div class="cap-color-tag m-auto" [ngStyle]="{'background-color': item.color }"></div>
+      </ng-template>
+    </lms-column>
+  </lms-table>
+
+</div>

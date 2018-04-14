@@ -1,0 +1,26 @@
+<div>
+  {{label}}
+  <div class="checkbox-group">
+    <div class="">
+      <div *ngFor="let key of keys" class="panel panel-default">
+        <div class="panel-heading">
+          <input type="checkbox" class="flat"
+                 [checked]="targetObject && targetObject[targetObjectField] && allChildrenChecked(key)"
+                 (change)="onParentChanged(key, $event.target.checked)"/>
+          <a data-toggle="collapse" href="#{{key}}"> {{key}}</a>
+        </div>
+        <div id="{{key}}" class="panel-collapse collapse">
+          <ul class="to_do margin-0">
+            <li *ngFor="let val of items[key]">
+              <label style="cursor: pointer" for="{{val[identifier]}}">
+                <input id="{{val[identifier]}}" type="checkbox" class="flat"
+                       [checked]="targetObject && targetObject[targetObjectField] && arrayContains(targetObject[targetObjectField], val, identifier) > -1"
+                       (change)="onChanged(val, $event.target.checked)"> {{val[viewName]}}
+              </label>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

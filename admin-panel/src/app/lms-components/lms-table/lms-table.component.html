@@ -1,0 +1,101 @@
+<div class="row" id="{{identifier}}">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_content">
+
+        <div class="table-toolbar">
+          <div class="btn-group" role="group">
+            <button *ngIf="addable" type="button" class="btn btn-success" (click)="onAddButtonClicked()"><i
+              class="fa fa-plus-circle toolbar-button-icon"></i>Add
+            </button>
+
+          </div>
+
+          <div class="table-search">
+            <button [ngClass]="{'hide' : !beingFiltered}" type="button" class="btn btn-default"
+                    (click)="onFilteredClicked()"><i class="fa fa-search f-16"></i>
+            </button>
+            <button *ngIf="advanceFilter" type="button" class="btn btn-default filter-button"
+                    (click)="onAdvanceButtonClicked()"><i
+              class="glyphicon glyphicon-filter"></i>
+            </button>
+            <label *ngIf="searchable"><input type="search" class="form-control input-sm table-search-bar"
+                                             placeholder="Search"
+                                             aria-controls="datatable"
+                                             (input)="onTermSearched($event.target.value)"></label>
+
+          </div>
+        </div>
+
+        <div *ngIf="advanceFilter" class="table-toolbar advance-filter hide" (keydown)="keyDownFunction($event)">
+          <div *ngFor="let column of columns"
+               [ngClass]="{'filter-block' : column.filtered && column.filtered.length > 0, 'hide' : !column.filtered}">
+            <lms-input *ngIf="column.filtered == 'text' || column.filtered == 'number'" [fieldType]="column.filtered"
+                       [fieldObject]="filterRequest" fieldName="{{column.field}}"
+                       placeholder="{{column.header}}"></lms-input>
+            <lms-checkbox *ngIf="column.filtered == 'checkbox'" [fieldObject]="filterRequest"
+                          fieldName="{{column.field}}" label="{{column.header}}" [removable]="true"></lms-checkbox>
+            <div *ngIf="column.filtered == 'date'" class="cap-flex">
+              <dp-date-picker theme="dp-material"
+                              [(ngModel)]="filterRequest['from' + capitalizeFirstLetter(column.field)]"
+                              placeholder="{{'From ' + column.header}}"
+                              [config]="utils.datePickerConfig"></dp-date-picker>
+              <dp-date-picker theme="dp-material"
+                              [(ngModel)]="filterRequest['to' + capitalizeFirstLetter(column.field)]"
+                              placeholder="{{'To ' + column.header}}"
+                              [config]="utils.datePickerConfig"></dp-date-picker>
+            </div>
+            <lms-combo *ngIf="column.filtered == 'combo'" [values]="column.filteredOptions"
+                       [fieldObject]="filterRequest" fieldName="{{column.filteredFieldName}}"
+                       placeholder="{{column.header ? 'Select ' + column.header : 'Select ' + column.field}}"
+                       [optionLabel]="column.filteredOptionName" [optionValue]="column.filteredOptionValue"
+                       [returnObject]="column.filteredOptionReturnObject"></lms-combo>
+            <lms-dynamic-component *ngIf="column.filtered == 'dynamic-combo'" [values]="column.filteredOptions"
+                                   [fieldObject]="filterRequest" fieldName="{{column.filteredFieldName}}"
+                                   placeholder="{{'Select ' + column.header}}"
+                                   [returnFieldName]="column.filteredOptionValue" [showValue]="column.filteredOptionName"
+                                   [returnObject]="column.filteredOptionReturnObject" (onSearch)="column.onSearchedFunction($event)">
+              <lms-dynamic-column *ngFor="let n of column.filteredOptionColumns" [field]="n"></lms-dynamic-column>
+            </lms-dynamic-component>
+          </div>
+        </div>
+
+        <table id="datatable" class="table table-bordered">
+          <thead>
+          <tr>
+            <th *ngFor="let column of columns" [ngClass]="{'hide' : column.hidden}">{{column.header}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of items let i = index" (dblclick)="rowDoubleClicked(item)" (click)="rowClicked(item, i + 1)" [class]="'row_' + (i + 1)">
+            <td *ngFor="let column of columns" [ngClass]="{'hide' : column.hidden}">
+              <div *ngIf="!column.cellTemplate">{{item[column.field]}}</div>
+              <div *ngIf="column.cellTemplate" [ngTemplateOutlet]="column.cellTemplate"
+                   [ngTemplateOutletContext]="{column: column, item: item}"></div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="dataTables_length">
+          <div>Show <select #selectElem class="form-control input-sm"
+                            (change)="setNewPageNumOptions(selectElem.value)">
+            <option *ngFor="let p of pageNumOptions" [selected]="pageLimit == p.value" [value]="p.id">{{p.value}}
+            </option>
+          </select> entries
+          </div>
+        </div>
+        <div *ngIf="pagination" class="dataTables_paginate">
+          <ul class="pagination">
+            <li id="datatable-buttons_previous" [ngClass]="{'disabled': currentPage == 0 || pageNum == 0}"><a
+              (click)="onPrevClicked()">Previous</a>
+            </li>
+            <li *ngFor="let i of getTrimmedArray(5)" [ngClass]="{'active': currentPage == i - 1}"><a
+              (click)="onPageChanged(i)">{{i}}</a></li>
+            <li class="next" [ngClass]="{'disabled': currentPage == pageNum - 1 || pageNum == 0}"><a
+              (click)="onNextClicked()">Next</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

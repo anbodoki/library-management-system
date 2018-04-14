@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO updateUser(UserDTO userDTO) throws Exception {
         User prevUser = repository.getOne(userDTO.getId());
-        if (!prevUser.getUsername().equals(userDTO.getUsername()) ||
+        if (!prevUser.getUsername().equals(userDTO.getUsername()) &&
                 repository.getUserByUsername(userDTO.getUsername()) != null) {
             throw new SecurityException(Messages.get("usernameAlreadyExists"));
         }

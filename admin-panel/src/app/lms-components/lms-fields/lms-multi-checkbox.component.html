@@ -1,0 +1,18 @@
+{{label}}
+<div class="panel-group checkbox-group" [ngClass]="{'cap-small': small}">
+  <ul class="to_do">
+    <li *ngFor="let val of items" [ngStyle]="{'background-color': val.color}" [ngClass]="{'h-40': val[imageField]}">
+      <label style="cursor: pointer" for="{{val[viewName]}}">
+
+        <input type="checkbox" class="flat" id="{{val[viewName]}}"
+               [checked]="targetObject && targetObject[targetObjectField] && arrayContains(targetObject[targetObjectField], val, identifier) > -1"
+               (change)="onChanged(val, $event.target.checked)" [ngClass]="{'margin-top-6': val[imageField]}"/>
+        <span *ngIf="imageField && val[imageField]" class="user-profile img-square">
+          <img src="{{val[imageField]}}">
+        </span>
+        <span>{{val[viewName]}}</span>
+      </label>
+    </li>
+  </ul>
+</div>
+
