@@ -1,17 +1,17 @@
 -- urls insert
-INSERT INTO lms_v1.cap_api_url (id, url) VALUES (1, '/security/user-api/quick-find');
-INSERT INTO lms_v1.cap_api_url (id, url) VALUES (2, '/security/user-api/find');
-INSERT INTO lms_v1.cap_api_url (id, url) VALUES (3, '/security/user-api/authorized-user');
-INSERT INTO lms_v1.cap_api_url (id, url) VALUES (4, '/security/user-api/update');
-INSERT INTO lms_v1.cap_api_url (id, url) VALUES (5, '/security/user-api/save');
-INSERT INTO lms_v1.cap_api_url (id, url) VALUES (6, '/security/user-api/find-by-username/{username}');
-INSERT INTO lms_v1.cap_api_url (id, url) VALUES (7, '/security/user-api/user/{id}');
-INSERT INTO lms_v1.cap_api_url (id, url) VALUES (8, '/security/role-api/quick-find');
-INSERT INTO lms_v1.cap_api_url (id, url) VALUES (9, '/security/role-api/find');
-INSERT INTO lms_v1.cap_api_url (id, url) VALUES (10, '/security/role-api/update');
-INSERT INTO lms_v1.cap_api_url (id, url) VALUES (11, '/security/role-api/save');
-INSERT INTO lms_v1.cap_api_url (id, url) VALUES (12, '/security/role-api/delete/{id}');
-INSERT INTO lms_v1.cap_api_url (id, url) VALUES (13, '/security/role-api/privileges');
+INSERT INTO lms_v1.api_url (id, url) VALUES (1, '/security/user-api/quick-find');
+INSERT INTO lms_v1.api_url (id, url) VALUES (2, '/security/user-api/find');
+INSERT INTO lms_v1.api_url (id, url) VALUES (3, '/security/user-api/authorized-user');
+INSERT INTO lms_v1.api_url (id, url) VALUES (4, '/security/user-api/update');
+INSERT INTO lms_v1.api_url (id, url) VALUES (5, '/security/user-api/save');
+INSERT INTO lms_v1.api_url (id, url) VALUES (6, '/security/user-api/find-by-username/{username}');
+INSERT INTO lms_v1.api_url (id, url) VALUES (7, '/security/user-api/user/{id}');
+INSERT INTO lms_v1.api_url (id, url) VALUES (8, '/security/role-api/quick-find');
+INSERT INTO lms_v1.api_url (id, url) VALUES (9, '/security/role-api/find');
+INSERT INTO lms_v1.api_url (id, url) VALUES (10, '/security/role-api/update');
+INSERT INTO lms_v1.api_url (id, url) VALUES (11, '/security/role-api/save');
+INSERT INTO lms_v1.api_url (id, url) VALUES (12, '/security/role-api/delete/{id}');
+INSERT INTO lms_v1.api_url (id, url) VALUES (13, '/security/role-api/privileges');
 
 -- privilege inserts
 INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (1, 'user_view', 'Security', 'User View');
