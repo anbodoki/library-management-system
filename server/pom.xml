@@ -13,6 +13,7 @@
         <module>lms-common</module>
         <module>lms-security</module>
         <module>lms-atom</module>
+        <module>lms-file-system</module>
     </modules>
 
     <properties>

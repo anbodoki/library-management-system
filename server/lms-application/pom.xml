@@ -33,6 +33,12 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.lms.filesystem</groupId>
+            <artifactId>lms-file-system</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!--other-->
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
