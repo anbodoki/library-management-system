@@ -1,7 +1,6 @@
 package com.lms.atom.material.service;
 
 import com.lms.atom.exception.AtomException;
-import com.lms.atom.material.storage.model.MaterialType;
 import com.lms.common.dto.atom.materialtype.MaterialTypeDTO;
 import com.lms.common.dto.response.ListResult;
 

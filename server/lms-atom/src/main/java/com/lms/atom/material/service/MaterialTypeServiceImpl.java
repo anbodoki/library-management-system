@@ -48,12 +48,18 @@ public class MaterialTypeServiceImpl implements MaterialTypeService {
         MaterialType saved;
         try {
             saved = repository.getOne(materialType.getId());
+            if (saved == null) {
+                throw new AtomException(Messages.get("materialTypeNotExists"));
+            }
         } catch (EntityNotFoundException e) {
             throw new AtomException(Messages.get("materialTypeNotExists"));
         }
         if (!materialType.getCode().equals(saved.getCode())) {
             try {
-                repository.getByCode(materialType.getCode());
+                MaterialType byCode = repository.getByCode(materialType.getCode());
+                if (byCode == null) {
+                    throw new AtomException(Messages.get("materialTypeWithThisCodeAlreadyExists"));
+                }
             } catch (EntityNotFoundException e) {
                 throw new AtomException(Messages.get("materialTypeWithThisCodeAlreadyExists"));
             }
@@ -65,7 +71,10 @@ public class MaterialTypeServiceImpl implements MaterialTypeService {
     @Override
     public MaterialTypeDTO save(MaterialTypeDTO materialType) throws AtomException {
         try {
-            repository.getByCode(materialType.getCode());
+            MaterialType byCode = repository.getByCode(materialType.getCode());
+            if (byCode == null) {
+                throw new AtomException(Messages.get("materialTypeWithThisCodeAlreadyExists"));
+            }
         } catch (EntityNotFoundException e) {
             throw new AtomException(Messages.get("materialTypeWithThisCodeAlreadyExists"));
         }

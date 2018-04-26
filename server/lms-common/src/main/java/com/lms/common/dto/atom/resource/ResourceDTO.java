@@ -2,24 +2,36 @@ package com.lms.common.dto.atom.resource;
 
 import com.lms.common.dto.atom.materialtype.MaterialTypeDTO;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
 public class ResourceDTO implements Serializable {
 
     private Long id;
+    @NotNull
     private String name;
+    @NotNull
     private String author;
+    @NotNull
     private String subName;
-    private int edition;
+    private Integer edition;
+    @NotNull
     private String publisher;
+    @NotNull
     private Date editionDate;
+    @NotNull
     private String language;
-    private int pageNum;
+    private Integer pageNum;
+    @NotNull
     private String isbn;
+    @NotNull
     private String udc;
+    @NotNull
     private String identifier; //რესურსის შიფრი ???
+    @NotNull
     private ResourceTypeDTO resourceType;
+    @NotNull
     private MaterialTypeDTO materialType;
     private String referenceURL;
     private Date creationDate;
@@ -57,11 +69,11 @@ public class ResourceDTO implements Serializable {
         this.subName = subName;
     }
 
-    public int getEdition() {
+    public Integer getEdition() {
         return edition;
     }
 
-    public void setEdition(int edition) {
+    public void setEdition(Integer edition) {
         this.edition = edition;
     }
 
@@ -89,11 +101,11 @@ public class ResourceDTO implements Serializable {
         this.language = language;
     }
 
-    public int getPageNum() {
+    public Integer getPageNum() {
         return pageNum;
     }
 
-    public void setPageNum(int pageNum) {
+    public void setPageNum(Integer pageNum) {
         this.pageNum = pageNum;
     }
 
