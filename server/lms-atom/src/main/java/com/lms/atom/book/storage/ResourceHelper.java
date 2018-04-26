@@ -2,6 +2,7 @@ package com.lms.atom.book.storage;
 
 import com.lms.atom.book.storage.model.Resource;
 import com.lms.atom.book.storage.model.ResourceType;
+import com.lms.atom.language.storage.LanguageHelper;
 import com.lms.atom.material.storage.MaterialTypeHelper;
 import com.lms.common.dto.atom.resource.ResourceDTO;
 import com.lms.common.dto.atom.resource.ResourceTypeDTO;
@@ -23,7 +24,7 @@ public class ResourceHelper {
         result.setEdition(resource.getEdition());
         result.setPublisher(resource.getPublisher());
         result.setEditionDate(resource.getEditionDate());
-        result.setLanguage(resource.getLanguage());
+        result.setLanguage(LanguageHelper.fromEntity(resource.getLanguage()));
         result.setPageNum(resource.getPageNum());
         result.setIsbn(resource.getIsbn());
         result.setUdc(resource.getUdc());
@@ -48,7 +49,7 @@ public class ResourceHelper {
         result.setEdition(resource.getEdition());
         result.setPublisher(resource.getPublisher());
         result.setEditionDate(resource.getEditionDate());
-        result.setLanguage(resource.getLanguage());
+        result.setLanguage(LanguageHelper.toEntity(resource.getLanguage()));
         result.setPageNum(resource.getPageNum());
         result.setIsbn(resource.getIsbn());
         result.setUdc(resource.getUdc());

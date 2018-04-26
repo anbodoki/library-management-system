@@ -9,13 +9,16 @@ import com.lms.atom.exception.AtomException;
 import com.lms.atom.messages.Messages;
 import com.lms.common.dto.atom.resource.ResourceDTO;
 import com.lms.common.dto.atom.resource.ResourceTypeDTO;
+import com.lms.common.dto.response.ComboObject;
 import com.lms.common.dto.response.ListResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @Transactional
@@ -132,5 +135,14 @@ public class ResourceServiceImpl implements ResourceService {
         }
         repository.delete(bookId);
         //TODO delete files uploaded for this book
+    }
+
+    @Override
+    public List<ComboObject> getResourceTypes() {
+        List<ComboObject> result = new ArrayList<>();
+        for (ResourceType userType : ResourceType.values()) {
+            result.add(new ComboObject(userType.name(), Messages.get(ResourceType.class.getSimpleName() + "_" + userType.name())));
+        }
+        return result;
     }
 }

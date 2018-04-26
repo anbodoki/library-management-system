@@ -1,5 +1,6 @@
 package com.lms.common.dto.atom.resource;
 
+import com.lms.common.dto.atom.language.LanguageDTO;
 import com.lms.common.dto.atom.materialtype.MaterialTypeDTO;
 
 import javax.validation.constraints.NotNull;
@@ -21,7 +22,7 @@ public class ResourceDTO implements Serializable {
     @NotNull
     private Date editionDate;
     @NotNull
-    private String language;
+    private LanguageDTO language;
     private Integer pageNum;
     @NotNull
     private String isbn;
@@ -93,11 +94,11 @@ public class ResourceDTO implements Serializable {
         this.editionDate = editionDate;
     }
 
-    public String getLanguage() {
+    public LanguageDTO getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language) {
+    public void setLanguage(LanguageDTO language) {
         this.language = language;
     }
 

@@ -1,5 +1,6 @@
 package com.lms.atom.book.storage.model;
 
+import com.lms.atom.language.storage.model.Language;
 import com.lms.atom.material.storage.model.MaterialType;
 
 import javax.persistence.*;
@@ -21,7 +22,8 @@ public class Resource implements Serializable {
     private int edition;
     private String publisher;
     private Date editionDate;
-    private String language;
+    @ManyToOne
+    private Language language;
     private int pageNum;
     private String isbn;
     private String udc;
@@ -90,11 +92,11 @@ public class Resource implements Serializable {
         this.editionDate = editionDate;
     }
 
-    public String getLanguage() {
+    public Language getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language) {
+    public void setLanguage(Language language) {
         this.language = language;
     }
 

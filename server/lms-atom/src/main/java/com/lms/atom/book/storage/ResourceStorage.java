@@ -95,7 +95,6 @@ public class ResourceStorage {
             builder.append(" AND u.publisher = :publisher");
             params.put("publisher", publisher);
         }
-
         if (fromEditionDate != null) {
             builder.append(" AND u.fromEditionDate >= :fromEditionDate");
             params.put("fromEditionDate", fromEditionDate);
@@ -104,9 +103,8 @@ public class ResourceStorage {
             builder.append(" AND u.toEditionDate <= :toEditionDate");
             params.put("toEditionDate", toEditionDate);
         }
-
         if (language != null) {
-            builder.append(" AND u.language = :language");
+            builder.append(" AND u.language.code = :language");
             params.put("language", language);
         }
         if (isbn != null) {
@@ -129,7 +127,6 @@ public class ResourceStorage {
             builder.append(" AND u.materialType = :materialTypeCode");
             params.put("materialTypeCode", materialTypeCode);
         }
-
         if (fromCreationDate != null) {
             builder.append(" AND u.fromCreationDate >= :fromCreationDate");
             params.put("fromCreationDate", fromCreationDate);
@@ -138,7 +135,6 @@ public class ResourceStorage {
             builder.append(" AND u.toCreationDate <= :toCreationDate");
             params.put("toCreationDate", toCreationDate);
         }
-
         if (fromModificationDate != null) {
             builder.append(" AND u.fromModificationDate >= :fromModificationDate");
             params.put("fromModificationDate", fromModificationDate);

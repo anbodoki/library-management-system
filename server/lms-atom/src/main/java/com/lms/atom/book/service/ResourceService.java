@@ -3,9 +3,11 @@ package com.lms.atom.book.service;
 import com.lms.atom.exception.AtomException;
 import com.lms.common.dto.atom.resource.ResourceDTO;
 import com.lms.common.dto.atom.resource.ResourceTypeDTO;
+import com.lms.common.dto.response.ComboObject;
 import com.lms.common.dto.response.ListResult;
 
 import java.util.Date;
+import java.util.List;
 
 public interface ResourceService {
 
@@ -33,4 +35,6 @@ public interface ResourceService {
     ResourceDTO save(ResourceDTO resource) throws AtomException;
 
     void delete(Long bookId) throws Exception;
+
+    List<ComboObject> getResourceTypes();
 }

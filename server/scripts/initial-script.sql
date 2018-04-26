@@ -22,6 +22,11 @@ INSERT INTO lms_v1.api_url (id, url) VALUES (20, 'atom/resource-api/find');
 INSERT INTO lms_v1.api_url (id, url) VALUES (21, 'atom/resource-api/update');
 INSERT INTO lms_v1.api_url (id, url) VALUES (22, 'atom/resource-api/save');
 INSERT INTO lms_v1.api_url (id, url) VALUES (23, 'atom/resource-api/resource/{id}');
+INSERT INTO lms_v1.api_url (id, url) VALUES (24, 'atom/language-api/quick-find');
+INSERT INTO lms_v1.api_url (id, url) VALUES (25, 'atom/language-api/find');
+INSERT INTO lms_v1.api_url (id, url) VALUES (26, 'atom/language-api/update');
+INSERT INTO lms_v1.api_url (id, url) VALUES (27, 'atom/language-api/save');
+INSERT INTO lms_v1.api_url (id, url) VALUES (28, 'atom/language-api/language/{id}');
 
 -- privilege inserts
 INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (1, 'user_view', 'Security', 'User View');
@@ -32,6 +37,8 @@ INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (5, 'material_t
 INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (6, 'material_type_manage', 'Resource', 'Material Type Manage');
 INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (7, 'resource_view', 'Resource', 'Resource View');
 INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (8, 'resource_manage', 'Resource', 'Resource Manage');
+INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (9, 'language_view', 'Resource', 'Language View');
+INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (10, 'language_manage', 'Resource', 'Language Manage');
 -- URLS
 -- user view
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (1, 1);
@@ -64,6 +71,13 @@ INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (7, 20);
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (8, 21);
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (8, 22);
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (8, 23);
+-- language view
+INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (9, 24);
+INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (9, 25);
+-- language manage
+INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (10, 26);
+INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (10, 27);
+INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (10, 28);
 
 -- user role
 INSERT INTO lms_v1.userrole (id, color, name) VALUES (1, '#fdad9e', 'role');

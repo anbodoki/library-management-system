@@ -72,4 +72,9 @@ public class ResourceController {
         resourceService.delete(id);
         return new ActionResponse(true);
     }
+
+    @GetMapping(value = "resource-types", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ActionResponse getResourceTypes() throws Exception {
+        return new ActionResponseWithData<>(resourceService.getResourceTypes(), true);
+    }
 }
