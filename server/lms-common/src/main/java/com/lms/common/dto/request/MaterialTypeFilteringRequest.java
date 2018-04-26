@@ -1,14 +1,11 @@
-package com.lms.common.dto.atom.materialtype;
+package com.lms.common.dto.request;
 
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
+import com.lms.common.dto.response.PagingRequest;
 
-public class MaterialTypeDTO implements Serializable {
+public class MaterialTypeFilteringRequest extends PagingRequest {
 
     private Long id;
-    @NotNull
     private String code;
-    @NotNull
     private String name;
     private String description;
 
