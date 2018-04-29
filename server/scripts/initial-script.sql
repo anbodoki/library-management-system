@@ -32,7 +32,7 @@ INSERT INTO lms_v1.api_url (id, url) VALUES (30, 'configuration/configuration-pr
 INSERT INTO lms_v1.api_url (id, url) VALUES (31, 'configuration/configuration-property-api/update');
 INSERT INTO lms_v1.api_url (id, url) VALUES (32, 'configuration/configuration-property-api/save');
 INSERT INTO lms_v1.api_url (id, url) VALUES (33, 'configuration/configuration-property-api/delete/{id}');
-
+INSERT INTO lms_v1.api_url (id, url) VALUES (34, 'atom/resource-api/find-by-id/{id}');
 
 -- privilege inserts
 INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (1, 'user_view', 'Security', 'User View');
@@ -75,6 +75,7 @@ INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (6, 18);
 -- resource view
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (7, 19);
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (7, 20);
+INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (7, 34);
 -- resource manage
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (8, 21);
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (8, 22);

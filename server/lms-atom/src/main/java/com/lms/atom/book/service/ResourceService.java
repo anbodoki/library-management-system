@@ -37,4 +37,6 @@ public interface ResourceService {
     void delete(Long bookId) throws Exception;
 
     List<ComboObject> getResourceTypes();
+
+    ResourceDTO getResourceById(Long id) throws AtomException;
 }

@@ -3,6 +3,7 @@ package com.lms.application.exception;
 import com.lms.application.messages.Messages;
 import com.lms.atom.exception.AtomException;
 import com.lms.common.dto.response.ActionResponse;
+import com.lms.configuration.exception.ConfigurationException;
 import com.lms.security.exception.SecurityException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -23,6 +24,7 @@ public class ExceptionHandlerAspect {
         } catch (Exception ex) {
             if (ex instanceof SecurityException ||
                     ex instanceof AtomException ||
+                    ex instanceof ConfigurationException ||
                     ex instanceof LMSAccessDeniedException ||
                     (ex instanceof PersistenceException && ex.getCause() instanceof ConstraintViolationException)) {
                 return new ActionResponse(false, ex.getMessage());

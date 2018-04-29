@@ -145,4 +145,13 @@ public class ResourceServiceImpl implements ResourceService {
         }
         return result;
     }
+
+    @Override
+    public ResourceDTO getResourceById(Long id) throws AtomException {
+        try {
+            return ResourceHelper.fromEntity(repository.getOne(id));
+        } catch (EntityNotFoundException e) {
+            throw new AtomException(Messages.get("resourceWithThisIdNotExists"));
+        }
+    }
 }

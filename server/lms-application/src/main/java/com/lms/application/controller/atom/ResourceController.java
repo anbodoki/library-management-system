@@ -77,4 +77,10 @@ public class ResourceController {
     public ActionResponse getResourceTypes() throws Exception {
         return new ActionResponseWithData<>(resourceService.getResourceTypes(), true);
     }
+
+    @GetMapping(value = "find-by-id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PermissionCheck
+    public ActionResponse findByUsername(@PathVariable Long id) throws Exception {
+        return new ActionResponseWithData<>(resourceService.getResourceById(id), true);
+    }
 }
