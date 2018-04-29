@@ -5,6 +5,8 @@ import com.lms.common.dto.configuration.ConfigurationPropertyTypeDTO;
 import com.lms.common.dto.response.ComboObject;
 import com.lms.common.dto.response.ListResult;
 import com.lms.configuration.exception.ConfigurationException;
+import com.lms.configuration.messages.Messages;
+import com.lms.configuration.properties.storage.ConfigurationPropertyHelper;
 import com.lms.configuration.properties.storage.ConfigurationPropertyRepository;
 import com.lms.configuration.properties.storage.ConfigurationPropertyStorage;
 import com.lms.configuration.properties.storage.model.ConfigurationProperty;
@@ -33,39 +35,83 @@ public class ConfigurationPropertyServiceImpl implements ConfigurationPropertySe
         this.repository = repository;
     }
 
-
     @Override
     public ListResult<ConfigurationPropertyDTO> find(String query, int limit, int offset) throws Exception {
-        return null;
+        ListResult<ConfigurationProperty> properties = storage.find(query, limit, offset);
+        ListResult<ConfigurationPropertyDTO> result = properties.copy(ConfigurationPropertyDTO.class);
+        result.setResultList(ConfigurationPropertyHelper.fromEntities(properties.getResultList()));
+        return result;
     }
 
     @Override
     public ListResult<ConfigurationPropertyDTO> find(Long id, String code, ConfigurationPropertyTypeDTO type, int limit, int offset) throws Exception {
-        return null;
+        ListResult<ConfigurationProperty> properties = storage.find(id, code, ConfigurationPropertyType.valueOf(type.name()), limit, offset);
+        ListResult<ConfigurationPropertyDTO> result = properties.copy(ConfigurationPropertyDTO.class);
+        result.setResultList(ConfigurationPropertyHelper.fromEntities(properties.getResultList()));
+        return result;
     }
 
     @Override
     public ConfigurationPropertyDTO update(ConfigurationPropertyDTO configurationProperty) throws ConfigurationException {
-        return null;
+        ConfigurationProperty old = repository.findByCode(configurationProperty.getCode());
+        if (!old.getType().name().equals(configurationProperty.getType().name()) || !old.getCode().equals(configurationProperty.getCode())) {
+            throw new ConfigurationException(Messages.get("unableToModifyTypeAndCode"));
+        }
+        ConfigurationProperty saved = repository.save(ConfigurationPropertyHelper.toEntity(configurationProperty));
+        setOriginalValue(saved);
+        return ConfigurationPropertyHelper.fromEntity(saved);
     }
 
     @Override
     public ConfigurationPropertyDTO save(ConfigurationPropertyDTO configurationProperty) throws ConfigurationException {
-        return null;
+        ConfigurationProperty byCode = repository.findByCode(configurationProperty.getCode());
+        if (byCode == null) {
+            ConfigurationProperty saved = repository.save(ConfigurationPropertyHelper.toEntity(configurationProperty));
+            setOriginalValue(saved);
+            return ConfigurationPropertyHelper.fromEntity(saved);
+        } else {
+            throw new ConfigurationException(Messages.get("propertyWithThisCodeAlreadyExists"));
+        }
     }
 
     @Override
     public void delete(long id) throws Exception {
-
+        repository.delete(id);
     }
 
     @Override
     public List<ComboObject> getTypes() {
-        return null;
+        List<ComboObject> result = new ArrayList<>();
+        for (ConfigurationPropertyType userType : ConfigurationPropertyType.values()) {
+            result.add(new ComboObject(userType.name(), Messages.get(ConfigurationPropertyType.class.getSimpleName() + "_" + userType.name())));
+        }
+        return result;
     }
 
     @Override
     public ConfigurationProperty get(String code) {
-        return null;
+        ConfigurationProperty property = storage.get(code);
+        setOriginalValue(property);
+        return property;
+    }
+
+    public void setOriginalValue(ConfigurationProperty property) {
+        try {
+            switch (property.getType()) {
+                case NUMBER:
+                    property.setNumberValue(Integer.parseInt(property.getValue()));
+                    break;
+                case TEXT:
+                    property.setStringValue(property.getValue());
+                    break;
+                case DATE:
+                    property.setDateValue(formatter.parse(property.getValue()));
+                    break;
+                case LOGICAL:
+                    property.setLogicalValue(Boolean.valueOf(property.getValue()));
+                    break;
+            }
+        } catch (Exception ignored) {
+        }
     }
 }

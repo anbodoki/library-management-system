@@ -17,5 +17,10 @@
             <artifactId>lms-common</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.lms.security</groupId>
+            <artifactId>lms-security</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>
