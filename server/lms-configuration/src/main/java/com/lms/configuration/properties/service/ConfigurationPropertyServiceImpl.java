@@ -4,6 +4,7 @@ import com.lms.common.dto.configuration.ConfigurationPropertyDTO;
 import com.lms.common.dto.configuration.ConfigurationPropertyTypeDTO;
 import com.lms.common.dto.response.ComboObject;
 import com.lms.common.dto.response.ListResult;
+import com.lms.configuration.cache.ConfigurationPropertiesCache;
 import com.lms.configuration.exception.ConfigurationException;
 import com.lms.configuration.messages.Messages;
 import com.lms.configuration.properties.storage.ConfigurationPropertyHelper;
@@ -59,6 +60,7 @@ public class ConfigurationPropertyServiceImpl implements ConfigurationPropertySe
         }
         ConfigurationProperty saved = repository.save(ConfigurationPropertyHelper.toEntity(configurationProperty));
         setOriginalValue(saved);
+        ConfigurationPropertiesCache.put(saved);
         return ConfigurationPropertyHelper.fromEntity(saved);
     }
 
@@ -68,6 +70,7 @@ public class ConfigurationPropertyServiceImpl implements ConfigurationPropertySe
         if (byCode == null) {
             ConfigurationProperty saved = repository.save(ConfigurationPropertyHelper.toEntity(configurationProperty));
             setOriginalValue(saved);
+            ConfigurationPropertiesCache.put(saved);
             return ConfigurationPropertyHelper.fromEntity(saved);
         } else {
             throw new ConfigurationException(Messages.get("propertyWithThisCodeAlreadyExists"));
@@ -90,9 +93,15 @@ public class ConfigurationPropertyServiceImpl implements ConfigurationPropertySe
 
     @Override
     public ConfigurationProperty get(String code) {
-        ConfigurationProperty property = storage.get(code);
-        setOriginalValue(property);
-        return property;
+        ConfigurationProperty property = ConfigurationPropertiesCache.get(code);
+        if (property == null) {
+            property = storage.get(code);
+            setOriginalValue(property);
+            ConfigurationPropertiesCache.put(property);
+            return property;
+        } else {
+            return property;
+        }
     }
 
     public void setOriginalValue(ConfigurationProperty property) {
