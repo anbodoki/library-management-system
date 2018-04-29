@@ -14,16 +14,19 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
                 "com.lms.security",
                 "com.lms.atom",
                 "com.lms.filesystem",
+                "com.lms.configuration",
                 "com.lms.application"
         })
 @EnableJpaRepositories(basePackages =
         {
                 "com.lms.security",
+                "com.lms.configuration",
                 "com.lms.atom"
         })
 @EntityScan(basePackages =
         {
                 "com.lms.security",
+                "com.lms.configuration",
                 "com.lms.atom"
         })
 @EnableTransactionManagement
