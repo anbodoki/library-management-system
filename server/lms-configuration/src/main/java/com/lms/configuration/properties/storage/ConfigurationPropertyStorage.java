@@ -3,7 +3,7 @@ package com.lms.configuration.properties.storage;
 import com.lms.common.dto.response.ListResult;
 import com.lms.configuration.properties.storage.model.ConfigurationProperty;
 import com.lms.configuration.properties.storage.model.ConfigurationPropertyType;
-import com.lms.security.utils.MathUtils;
+import com.lms.utils.MathUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;

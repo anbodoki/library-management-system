@@ -37,10 +37,14 @@
             <artifactId>lms-file-system</artifactId>
             <version>${project.version}</version>
         </dependency>
-
         <dependency>
             <groupId>com.lms.configuration</groupId>
             <artifactId>lms-configuration</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lms.utils</groupId>
+            <artifactId>lms-utils</artifactId>
             <version>${project.version}</version>
         </dependency>
         <!--other-->

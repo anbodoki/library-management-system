@@ -2,7 +2,7 @@ package com.lms.security.user.storage;
 
 import com.lms.common.dto.response.ListResult;
 import com.lms.security.user.storage.model.User;
-import com.lms.security.utils.MathUtils;
+import com.lms.utils.MathUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 

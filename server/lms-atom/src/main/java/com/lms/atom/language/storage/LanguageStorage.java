@@ -2,7 +2,7 @@ package com.lms.atom.language.storage;
 
 import com.lms.atom.language.storage.model.Language;
 import com.lms.common.dto.response.ListResult;
-import com.lms.security.utils.MathUtils;
+import com.lms.utils.MathUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

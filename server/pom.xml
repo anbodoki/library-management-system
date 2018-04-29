@@ -15,6 +15,7 @@
         <module>lms-atom</module>
         <module>lms-file-system</module>
         <module>lms-configuration</module>
+        <module>lms-utils</module>
     </modules>
 
     <properties>
