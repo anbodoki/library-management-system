@@ -32,6 +32,8 @@ import {LanguagesComponent} from "./view/resources/languages.component";
 import {LanguageService} from "./services/language.service";
 import {ConfigurationPropertyComponent} from "./view/configuration/configuration-property.component";
 import {ConfigurationPropertyService} from "./services/configuration-property.service";
+import {MaterialTypeComponent} from "./view/resources/materialtype.component";
+import {MaterialTypeService} from "./services/materialtype.service";
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import {ConfigurationPropertyService} from "./services/configuration-property.se
     RolesComponent,
     LanguagesComponent,
     ConfigurationPropertyComponent,
+    MaterialTypeComponent,
     DashboardComponent,
     LMSColorPickerComponent,
     LMSCheckboxComponent,
@@ -73,7 +76,8 @@ import {ConfigurationPropertyService} from "./services/configuration-property.se
     PrivilegeService,
     UserService,
     LanguageService,
-    ConfigurationPropertyService
+    ConfigurationPropertyService,
+    MaterialTypeService
   ],
   bootstrap: [AppComponent]
 })
