@@ -33,6 +33,11 @@ INSERT INTO lms_v1.api_url (id, url) VALUES (31, '/configuration/configuration-p
 INSERT INTO lms_v1.api_url (id, url) VALUES (32, '/configuration/configuration-property-api/save');
 INSERT INTO lms_v1.api_url (id, url) VALUES (33, '/configuration/configuration-property-api/delete/{id}');
 INSERT INTO lms_v1.api_url (id, url) VALUES (34, '/atom/resource-api/find-by-id/{id}');
+INSERT INTO lms_v1.api_url (id, url) VALUES (35, '/atom/category-api/quick-find');
+INSERT INTO lms_v1.api_url (id, url) VALUES (36, '/atom/category-api/find');
+INSERT INTO lms_v1.api_url (id, url) VALUES (37, '/atom/category-api/update');
+INSERT INTO lms_v1.api_url (id, url) VALUES (38, '/atom/category-api/save');
+INSERT INTO lms_v1.api_url (id, url) VALUES (39, '/atom/category-api/category/{id}');
 
 -- privilege inserts
 INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (1, 'user_view', 'Security', 'User View');
@@ -47,6 +52,8 @@ INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (9, 'language_v
 INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (10, 'language_manage', 'Resource', 'Language Manage');
 INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (11, 'configuration_property_view', 'Configuration', 'Configuration Property View');
 INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (12, 'configuration_property_manage', 'Configuration', 'Configuration Property Manage');
+INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (13, 'category_view', 'Resource', 'Category View');
+INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (14, 'category_manage', 'Resource', 'Category Manage');
 -- URLS
 -- user view
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (1, 1);
@@ -94,6 +101,13 @@ INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (11, 30);
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (12, 31);
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (12, 32);
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (12, 33);
+-- category view
+INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (13, 35);
+INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (13, 36);
+-- category manage
+INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (14, 37);
+INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (14, 38);
+INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (14, 39);
 
 -- user role
 INSERT INTO lms_v1.userrole (id, color, name) VALUES (1, '#fdad9e', 'role');
