@@ -28,6 +28,8 @@ import {RolesComponent} from "./view/security/roles.component";
 import {LMSConfirmModalComponent} from "./lms-components/modals/lms-confirm.modal";
 import {LMSTableComponent} from "./lms-components/lms-table/lms-table.component";
 import {LMSColumnComponent} from "./lms-components/lms-table/lms-column.component";
+import {LanguagesComponent} from "./view/resources/languages.component";
+import {LanguageService} from "./services/language.service";
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import {LMSColumnComponent} from "./lms-components/lms-table/lms-column.componen
     AppComponent,
     UsersComponent,
     RolesComponent,
+    LanguagesComponent,
     DashboardComponent,
     LMSColorPickerComponent,
     LMSCheckboxComponent,
@@ -65,7 +68,8 @@ import {LMSColumnComponent} from "./lms-components/lms-table/lms-column.componen
     Utils,
     RoleService,
     PrivilegeService,
-    UserService
+    UserService,
+    LanguageService
   ],
   bootstrap: [AppComponent]
 })

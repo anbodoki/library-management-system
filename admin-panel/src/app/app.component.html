@@ -28,6 +28,12 @@
                   <li><a routerLink="roles" routerLinkActive="" privilege="role_view">Roles</a></li>
                 </ul>
               </li>
+              <li groupName="Resource"><a><i class="fa fa-book"></i>Resources<span
+                class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li><a routerLink="languages" routerLinkActive="" privilege="language_view">Languages</a></li>
+                </ul>
+              </li>
             </ul>
           </div>
         </div>
@@ -50,7 +56,7 @@
 
           <ul class="nav navbar-nav navbar-right">
             <li class="">
-              <a class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <a class="user-profilme dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 <div *ngIf="loggedInUser">
                   {{loggedInUserName}}
                   <span class=" fa fa-angle-down"></span>

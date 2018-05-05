@@ -49,7 +49,7 @@ public class LanguageServiceImpl implements LanguageService {
             Language old = repository.getOne(language.getId());
             if (!old.getCode().equals(language.getCode())) {
                 Language byCode = repository.getByCode(language.getCode());
-                if (byCode == null) {
+                if (byCode != null) {
                     throw new AtomException(Messages.get("languageWithThisCodeAlreadyExists"));
                 }
             }
@@ -63,7 +63,7 @@ public class LanguageServiceImpl implements LanguageService {
     @Override
     public LanguageDTO save(LanguageDTO language) throws AtomException {
         Language byCode = repository.getByCode(language.getCode());
-        if (byCode == null) {
+        if (byCode != null) {
             throw new AtomException(Messages.get("languageWithThisCodeAlreadyExists"));
         }
         Language saved = repository.save(LanguageHelper.toEntity(language));
