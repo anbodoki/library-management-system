@@ -50,6 +50,7 @@ public class ResourceController {
                 request.getMaterialTypeCode(),
                 request.getFromCreationDate(), request.getToCreationDate(),
                 request.getFromModificationDate(), request.getToModificationDate(),
+                request.getCategoryCode(),
                 request.getLimit(), request.getOffset());
         return new ActionResponseWithData<>(result, true);
     }

@@ -1,5 +1,6 @@
 package com.lms.common.dto.atom.resource;
 
+import com.lms.common.dto.atom.category.CategoryDTO;
 import com.lms.common.dto.atom.language.LanguageDTO;
 import com.lms.common.dto.atom.materialtype.MaterialTypeDTO;
 
@@ -37,6 +38,7 @@ public class ResourceDTO implements Serializable {
     private String referenceURL;
     private Date creationDate;
     private Date modificationDate;
+    private CategoryDTO category;
 
     public Long getId() {
         return id;
@@ -172,5 +174,13 @@ public class ResourceDTO implements Serializable {
 
     public void setModificationDate(Date modificationDate) {
         this.modificationDate = modificationDate;
+    }
+
+    public CategoryDTO getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryDTO category) {
+        this.category = category;
     }
 }

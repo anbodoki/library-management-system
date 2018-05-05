@@ -2,6 +2,7 @@ package com.lms.atom.book.storage;
 
 import com.lms.atom.book.storage.model.Resource;
 import com.lms.atom.book.storage.model.ResourceType;
+import com.lms.atom.category.storage.CategoryHelper;
 import com.lms.atom.language.storage.LanguageHelper;
 import com.lms.atom.material.storage.MaterialTypeHelper;
 import com.lms.common.dto.atom.resource.ResourceDTO;
@@ -34,6 +35,7 @@ public class ResourceHelper {
         result.setReferenceURL(resource.getReferenceURL());
         result.setCreationDate(resource.getCreationDate());
         result.setModificationDate(resource.getModificationDate());
+        result.setCategory(CategoryHelper.fromEntity(resource.getCategory()));
         return result;
     }
 
@@ -59,6 +61,7 @@ public class ResourceHelper {
         result.setReferenceURL(resource.getReferenceURL());
         result.setCreationDate(resource.getCreationDate());
         result.setModificationDate(resource.getModificationDate());
+        result.setCategory(CategoryHelper.toEntity(resource.getCategory()));
         return result;
     }
 

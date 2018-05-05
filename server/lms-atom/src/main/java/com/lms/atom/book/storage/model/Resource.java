@@ -1,5 +1,6 @@
 package com.lms.atom.book.storage.model;
 
+import com.lms.atom.category.storage.model.Category;
 import com.lms.atom.language.storage.model.Language;
 import com.lms.atom.material.storage.model.MaterialType;
 
@@ -35,6 +36,8 @@ public class Resource implements Serializable {
     private String referenceURL;
     private Date creationDate;
     private Date modificationDate;
+    @ManyToOne
+    private Category category;
 
     public Long getId() {
         return id;
@@ -170,5 +173,13 @@ public class Resource implements Serializable {
 
     public void setModificationDate(Date modificationDate) {
         this.modificationDate = modificationDate;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

@@ -25,6 +25,7 @@ public class ResourceFilteringRequest extends PagingRequest {
     private Date toCreationDate;
     private Date fromModificationDate;
     private Date toModificationDate;
+    private String categoryCode;
 
     public Long getId() {
         return id;
@@ -168,5 +169,13 @@ public class ResourceFilteringRequest extends PagingRequest {
 
     public void setToModificationDate(Date toModificationDate) {
         this.toModificationDate = toModificationDate;
+    }
+
+    public String getCategoryCode() {
+        return categoryCode;
+    }
+
+    public void setCategoryCode(String categoryCode) {
+        this.categoryCode = categoryCode;
     }
 }

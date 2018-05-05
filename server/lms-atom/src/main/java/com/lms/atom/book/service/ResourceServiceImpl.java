@@ -57,6 +57,7 @@ public class ResourceServiceImpl implements ResourceService {
                                         String materialTypeCode,
                                         Date fromCreationDate, Date toCreationDate,
                                         Date fromModificationDate, Date toModificationDate,
+                                        String categoryCode,
                                         int limit, int offset) throws Exception {
         ListResult<Resource> materialTypes = storage.find(id,
                 name,
@@ -73,6 +74,7 @@ public class ResourceServiceImpl implements ResourceService {
                 materialTypeCode,
                 fromCreationDate, toCreationDate,
                 fromModificationDate, toModificationDate,
+                categoryCode,
                 limit, offset);
         ListResult<ResourceDTO> result = materialTypes.copy(ResourceDTO.class);
         result.setResultList(ResourceHelper.fromEntities(materialTypes.getResultList()));
