@@ -30,6 +30,8 @@ import {LMSTableComponent} from "./lms-components/lms-table/lms-table.component"
 import {LMSColumnComponent} from "./lms-components/lms-table/lms-column.component";
 import {LanguagesComponent} from "./view/resources/languages.component";
 import {LanguageService} from "./services/language.service";
+import {ConfigurationPropertyComponent} from "./view/configuration/configuration-property.component";
+import {ConfigurationPropertyService} from "./services/configuration-property.service";
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import {LanguageService} from "./services/language.service";
     UsersComponent,
     RolesComponent,
     LanguagesComponent,
+    ConfigurationPropertyComponent,
     DashboardComponent,
     LMSColorPickerComponent,
     LMSCheckboxComponent,
@@ -69,7 +72,8 @@ import {LanguageService} from "./services/language.service";
     RoleService,
     PrivilegeService,
     UserService,
-    LanguageService
+    LanguageService,
+    ConfigurationPropertyService
   ],
   bootstrap: [AppComponent]
 })

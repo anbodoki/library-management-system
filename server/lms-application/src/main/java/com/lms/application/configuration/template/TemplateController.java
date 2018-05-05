@@ -11,7 +11,7 @@ public class TemplateController {
         return "login";
     }
 
-    @RequestMapping(value = {"/", "/dashboard", "/users", "/roles", "/languages"})
+    @RequestMapping(value = {"/", "/dashboard", "/users", "/roles", "/languages", "/configurationProperties"})
     public String index() {
         return "forward:/index.html";
     }

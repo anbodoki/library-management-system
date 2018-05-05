@@ -4,6 +4,7 @@ import {DashboardComponent} from "./view/dashboard.component";
 import {UsersComponent} from "./view/security/users.component";
 import {RolesComponent} from "./view/security/roles.component";
 import {LanguagesComponent} from "./view/resources/languages.component";
+import {ConfigurationPropertyComponent} from "./view/configuration/configuration-property.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -11,6 +12,7 @@ const routes: Routes = [
   {path: 'users', component: UsersComponent},
   {path: 'roles', component: RolesComponent},
   {path: 'languages', component: LanguagesComponent},
+  {path: 'configurationProperties', component: ConfigurationPropertyComponent},
 ];
 
 @NgModule({

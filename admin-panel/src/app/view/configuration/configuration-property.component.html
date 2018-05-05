@@ -1,0 +1,104 @@
+<lms-confirm-modal id="confirmModal" modalTitle="Confirmation"
+                   modalMessage="Are you sure you want to delete this configuration property?"
+                   (onOkClick)="onDeleteConfirmed()">
+</lms-confirm-modal>
+
+<div *ngIf="isManage" class="modal fade" data-backdrop="static" id="propertyModal" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Configuration Property Details</h4>
+      </div>
+      <div class="modal-body">
+
+        <lms-input label="Code" [enabled]="!(selectedProperty && selectedProperty.id)" fieldName="code"
+                   [fieldObject]="selectedProperty" fieldType="text" capPattern="^\w{4,50}$"
+                   [capRequired]="!(selectedProperty && selectedProperty.id)"
+                   alertText="Code must contain minimum 4 characters"></lms-input>
+
+        <lms-combo *ngIf="selectedProperty && !selectedProperty.id" label="Configuration Property Type"
+                   optionLabel="name"
+                   optionValue="id"
+                   [values]="configurationPropertyTypes" [returnObject]="false" [capRequired]="true"
+                   alertText="Configuration property type must not be null"
+                   fieldName="type" [fieldObject]="selectedProperty">
+        </lms-combo>
+
+        <lms-input *ngIf="selectedProperty && selectedProperty.type == 'TEXT'" label="Value" fieldName="value" [fieldObject]="selectedProperty"
+                   fieldType="text" [capRequired]="true"
+                   alertText="Value must not be null"></lms-input>
+
+        <lms-input *ngIf="selectedProperty && selectedProperty.type == 'NUMBER'" label="Value" fieldName="value" [fieldObject]="selectedProperty"
+                   fieldType="text" [capRequired]="true" capPattern="^([0-9])+$"
+                   alertText="Value must not be null"></lms-input>
+
+        <lms-input *ngIf="selectedProperty && selectedProperty.type == 'DATE'" label="Value" fieldName="value"
+                   [fieldObject]="selectedProperty" fieldType="text"
+                   capPattern="^([0-2][0-9]|3[0-1])/(0[0-9]|1[0-2])/(([0-9][0-9])?[0-9][0-9]) ([0-2][0-9]):([0-5][0-9]):([0-5][0-9])$"
+                   [capRequired]="true"
+                   alertText="Valid pattern dd/MM/yyyy HH:mm:ss"></lms-input>
+
+        <lms-combo *ngIf="selectedProperty && selectedProperty.type == 'LOGICAL'" label="Value"
+                   optionLabel="name"
+                   optionValue="id"
+                   [values]="[{name:'True', id:'true'}, {name:'False', id:'false'}]" [returnObject]="false" [capRequired]="true"
+                   alertText="Value must not be null"
+                   fieldName="value" [fieldObject]="selectedProperty">
+        </lms-combo>
+
+        <label *ngIf="selectedProperty && selectedProperty.id" class="w-100 m-bottom-5">Configuration Property Type
+          <div class="form-control cap-disabled h-auto">{{selectedProperty.type}}</div>
+        </label>
+
+        <lms-textarea label="Description" fieldName="description" [fieldObject]="selectedProperty"></lms-textarea>
+
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="(selectedProperty && selectedProperty.id)" type="button" class="btn btn-danger left"
+                (click)="deleteProperty()">Delete
+        </button>
+        <button *ngIf="(selectedProperty && selectedProperty.id)" type="button" class="btn btn-success"
+                (click)="updateProperty()">Update
+        </button>
+        <button *ngIf="!(selectedProperty && selectedProperty.id)" type="button" class="btn btn-success"
+                (click)="saveProperty()"
+                [disabled]="selectedProperty && (!selectedProperty.code || !selectedProperty.type || !selectedProperty.value)">
+          Save
+        </button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="">
+  <div class="page-title">
+    <div class="title_left">
+      <h3>Configuration Properties
+        <small>Manage Configuration Properties</small>
+      </h3>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <lms-table [items]="properties"
+             (rowDoubleClick)="showAddEditModal($event)"
+             (onAddButtonClick)="showAddModal($event)"
+             [addable]="isManage"
+             [editable]="isManage"
+             [searchable]="true"
+             (onTermSearch)="reloadData($event)"
+             [pagination]="true"
+             [pageNum]="pageNum"
+             [reloadEvent]="loader"
+             (onPageChange)="changePage($event)"
+  >
+    <lms-column header="ID" field="id"></lms-column>
+    <lms-column header="Code" field="code"></lms-column>
+    <lms-column header="Type" field="type"></lms-column>
+    <lms-column header="Value" field="value"></lms-column>
+    <lms-column header="Description" field="description"></lms-column>
+  </lms-table>
+
+</div>

@@ -837,3 +837,7 @@ article.comment {
 .margin-right-20 {
   margin-right: 20px;
 }
+
+.cap-disabled {
+  background-color: #eee
+}

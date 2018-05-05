@@ -45,8 +45,8 @@ INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (7, 'resource_v
 INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (8, 'resource_manage', 'Resource', 'Resource Manage');
 INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (9, 'language_view', 'Resource', 'Language View');
 INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (10, 'language_manage', 'Resource', 'Language Manage');
-INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (11, 'configuration_view', 'Configuration', 'Configuration view');
-INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (12, 'configuration_manage', 'Configuration', 'Configuration Manage');
+INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (11, 'configuration_property_view', 'Configuration', 'Configuration Property View');
+INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (12, 'configuration_property_manage', 'Configuration', 'Configuration Property Manage');
 -- URLS
 -- user view
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (1, 1);
