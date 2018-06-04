@@ -1,0 +1,9 @@
+{
+    "include": [
+      "./src/**/*"
+    ],
+    "compilerOptions": {
+      "experimentalDecorators": true,
+      "module": "es2015"
+    }
+  }

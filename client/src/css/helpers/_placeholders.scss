@@ -1,0 +1,50 @@
+%container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+%conainer-whole {
+  max-width: 1200px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+%container-fluid {
+  width: 100%;
+  position: relative;
+  @extend %clearfix;
+}
+%center-around {
+  position: absolute;
+  top:50%;
+  left: 50%;
+  @include transform(-50%, -50%);
+}
+%center-header {
+  position: absolute;
+  left: 50%;
+  @include transform(-45%, 0);
+}
+%box-shadow {
+  -webkit-box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow:    0px 1px 10px 0px rgba(0, 0, 0, 0.05);
+  box-shadow:         0px 1px 10px 0px rgba(0, 0, 0, 0.05);
+}
+%cover-bg {
+  -webkit-background-size:cover;
+  background-size:cover;
+  background-position: center center;
+}
+%contain-bg {
+  -webkit-background-size:contain;
+  background-size:contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+%clearfix {
+  &::after {
+    content: "";
+    clear: both;
+    display: block;
+  }
+}
