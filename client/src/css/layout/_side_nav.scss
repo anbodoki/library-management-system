@@ -4,8 +4,20 @@
   top: 0;
   bottom: 0;
   overflow-y: auto;
-  padding: $nav-height 0 40px;
+  padding: $nav-height $container-padding;
   z-index: 5;
 }
 
-.side-nav-menu {}
+.side-nav-title {
+  display: block;
+  margin: 5rem 0 1rem;
+}
+
+.side-nav-menu-item {
+  padding: 5px;
+}
+
+.side-nav-menu-item-icon {
+  width: 20px;
+  margin-right: 15px;
+}
