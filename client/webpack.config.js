@@ -21,10 +21,24 @@ const config = {
     output: {
         path: path.resolve(__dirname, './dist'),
         chunkFilename: '[name].bundle.js',
-        filename: '[name].bundle.js'
+        filename: '[name].bundle.js',
+        publicPath: '/',
     },
     module: {
         rules: [
+            {
+                test: /\.svg$/,
+                loader: 'vue-svg-loader', // `vue-svg` for webpack 1.x
+                options: {
+                    // optional [svgo](https://github.com/svg/svgo) options
+                    svgo: {
+                        plugins: [
+                            {removeDoctype: true},
+                            {removeComments: true}
+                        ]
+                    }
+                }
+            },
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
@@ -59,7 +73,7 @@ const config = {
                         fallback: 'style-loader',
                         use: ['css-loader', 'sass-loader']
                     })
-                }
+                },
         ]
     },
     devServer: {

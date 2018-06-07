@@ -3,7 +3,7 @@
         <span class="side-nav-title text-primary-light f-nino-mtavruli">ნავიგაცია</span>
         <ul class="side-nav-menu">
             <li class="side-nav-menu-item flex-center-vertically">
-                <img class="side-nav-menu-item-icon" src="/dist/imgs/icons/cargoType.svg"/>
+                <img class="side-nav-menu-item-icon" src="../../images/icons/cargoType.svg"/>
                 <span>მთავარი</span>
             </li>
             <li class="side-nav-menu-item flex-center-vertically">

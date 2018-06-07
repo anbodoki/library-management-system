@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <component v-if="layout" :is="layout"></component>
-        <router-view></router-view>
+        <!--<router-view></router-view>-->
     </div>
 </template>
 

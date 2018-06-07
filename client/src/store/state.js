@@ -1,3 +1,4 @@
 export default {
-  layout: 'default-layout'
+    layout: 'default-layout',
+    layouts: ['default-layout']
 };
