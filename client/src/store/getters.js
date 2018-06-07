@@ -1,5 +1,3 @@
 export default {
-  counterTimesTwo(state) {
-    return state.counter * 2;
-  }
+    layout: state => state.layout,
 };

@@ -4,6 +4,7 @@
     font-family: "#{$style-name}";
     src: url($filepath + ".ttf");
     src: url($filepath + ".woff2");
+    src: url($filepath + ".svg");
     src: url($filepath + ".ttf");
     src: url($filepath + ".eot?#iefix") format('embedded-opentype'), url($filepath + ".woff2") format('woff'), url($filepath + ".ttf")  format('truetype'), url($filepath + ".svg#" + $style-name + "") format('svg');
   }
@@ -20,4 +21,17 @@
   }
 }
 
-@include font-face('avaza-mtavruli', '/avaza/AvazaMtavruli');
+//@include font-face('avaza-mtavruli', '/avaza/AvazaMtavruli');
+//@include font-face('avaza-mtavruli', '/glaho/bpg_glaho_sylfaen');
+@include font-face('nino-mtavruli', '/ninomtavruli/bpg_nino_mtavruli_bold');
+@include font-face('bgp-arial', '/ninomtavruli/BPGArial');
+
+//
+//@font-face {
+//  font-family: 'bpg_glaho_sylfaen';
+//  src: url('/dist/fonts/bpg_glaho_sylfaen.ttf');
+//  src: url('/dist/fonts/bpg_glaho_sylfaen.eot') format('embedded-opentype'),
+//  url('/dist/fonts/bpg_glaho_sylfaen.woff2') format('woff2'),
+//  url('/dist/fonts/bpg_glaho_sylfaen.woff') format('woff'),
+//  url('/dist/fonts/bpg_glaho_sylfaen.ttf') format('truetype');
+//}

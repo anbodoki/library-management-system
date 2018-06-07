@@ -1,0 +1,30 @@
+.main-header {
+  z-index: 100;
+  width: 100%;
+  position: fixed;
+  height: $nav-height;
+  padding: 0 $container-padding;
+  background-color: white;
+  box-shadow: 0 0 25px -10px #000;
+}
+
+.main-header-nav {
+  justify-content: space-between;
+  height: 100%;
+}
+
+.main-header-logo {
+  max-height: 100%;
+  position: relative;
+  top: -10px;
+}
+
+.main-header-menu {
+  height: 100%;
+  display: flex;
+
+  .main-header-menu-item {
+    height: 100%;
+    padding-left: 2.5rem;
+  }
+}

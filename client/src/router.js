@@ -7,9 +7,13 @@ const Home = () => import(/* webpackChunkName: "home" */ './components/pages/Hom
 const NotFound = () => import(/* webpackChunkName: "not-found" */ './components/pages/NotFound.vue');
 
 const routes = [
-  { path: '/', redirect: '/home' },
-  { path: '/home', component: Home, meta: { title: 'Home' } },
-  { path: '*', component: NotFound, meta: { title: 'Not Found' } }
+    {
+        path: '/', component: require('./components/layouts/defaultLayout.vue'), children: [
+            { path: '/', name: 'home', redirect: '/home' },
+            { path: '/home', name: 'home', component: Home, meta: { title: 'Home' } },
+        ]
+    },
+  { path: '*', component: NotFound, meta: { title: 'Not Found' } },
 ];
 
 const router = new VueRouter({ routes, mode: 'history' });

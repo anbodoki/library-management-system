@@ -1,6 +1,10 @@
 <template>
-    <div>
-       <h1></h1>
+    <div class="home-page">
+        <div class="container">
+            <section class="my-withdrawn-books">
+
+            </section>
+        </div>
     </div>
 </template>
 

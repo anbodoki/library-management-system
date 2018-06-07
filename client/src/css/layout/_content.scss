@@ -1,16 +1,17 @@
 html, body {
   font-size: 62.5%;
   box-sizing: border-box;
-  font-family: avaza-mtavruli, serif;
+  font-family: $bgp-arial;
+  color: $text-primary;
 }
 
 body {
   margin: 0;
   padding: 0;
-  position: fixed;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  background-color: $content-gray;
+  font-size: 1.6rem;
 }
 
 * {
@@ -18,23 +19,26 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
+  list-style: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  overflow-x: hidden;
 }
 
 .content {
-  width: calc(100% - 47.5rem);
+  width: 100%;
   height: 100%;
-  position: absolute;
-  left: 47.5rem;
-  top: 0;
   padding: 0 1.5rem 0 3rem;
-  background-color: #e9ebf3;
-  &.active {
-    width: calc(100% - 12rem);
-    left: 12rem;
-    header nav {
-      padding-left: 12rem;
-    }
-  }
 }
 
 .transform-center {
@@ -78,11 +82,11 @@ body {
 }
 
 .text-primary {
-  color: #848FA0;
+  color: $text-primary;
 }
 
 .text-primary-light {
-  color: #f5f0f6;
+  color: $text-primary-light;
 }
 
 .text-success {
@@ -142,3 +146,10 @@ body {
   font-family: 'gotham', sans-serif;
 }
 
+.f-nino-mtavruli {
+  font-family: $nino-mtavruli;
+}
+
+.f-bgp-arial {
+  font-family: $bgp-arial;
+}

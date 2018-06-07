@@ -1,0 +1,11 @@
+.side-nav {
+  position: fixed;
+  width: 280px;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto;
+  padding: $nav-height 0 40px;
+  z-index: 5;
+}
+
+.side-nav-menu {}

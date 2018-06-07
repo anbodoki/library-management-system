@@ -80,7 +80,13 @@ const config = {
       inject: true
     })
   ],
-  devtool: isDev ? 'cheap-module-eval-source-map' : 'source-map'
+  devtool: isDev ? 'cheap-module-eval-source-map' : 'source-map',
+    resolve: {
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js'
+        },
+        extensions: ['*', '.js', '.vue', '.json']
+    },
 };
 
 if (isDev) {
