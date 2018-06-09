@@ -62,4 +62,9 @@
 .book-title {
   margin: 0 0 10px;
   font-weight: lighter;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

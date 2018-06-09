@@ -1,0 +1,11 @@
+@media (max-width: 1800px) {
+  .book-title {
+    -webkit-line-clamp: 5;
+  }
+}
+
+@media (max-width: 1600px) {
+  .book-title {
+    -webkit-line-clamp: 4;
+  }
+}
