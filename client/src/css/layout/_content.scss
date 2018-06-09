@@ -50,7 +50,7 @@ main {
 .content {
   width: 100%;
   height: 100%;
-  padding: $nav-height 1.5rem 0 $side-nav-width;
+  padding: $nav-height $container-padding 0 $side-nav-width;
 }
 
 .transform-center {

@@ -3,3 +3,56 @@
     margin: 5rem 0 1rem;
   }
 }
+
+.books-grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 45px;
+}
+
+.book-card {
+  padding: 68% 0;
+  overflow: hidden;
+  position: relative;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+
+  &.book-card:after {
+    width: 4px;
+    content: '';
+    display: block;
+    height: 100%;
+    background: #00000052;
+    top: 0;
+    left: 0;
+    position: absolute;
+  }
+}
+
+.book-img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.cover-bg {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.book-title-and-author {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 20px 15px;
+}
+
+.book-title {
+  margin: 0 0 10px;
+  font-weight: lighter;
+}
