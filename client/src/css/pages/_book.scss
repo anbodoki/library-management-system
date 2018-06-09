@@ -1,0 +1,31 @@
+.book-info-container > p {
+  margin-top:  0;
+}
+
+.book-info-container > h1 {
+  margin-bottom:  0;
+}
+
+.book-cover {
+  width: 250px;
+  height: 350px;
+  border: 1px solid #e3e3e3;
+  border-radius:  3px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.book-page-top {
+  display:  flex;
+  align-items:  flex-start;
+  margin-top:  50px;
+}
+
+.book-cover-image {
+  margin-right:  30px;
+}
+
+.download-book {
+  margin-top: 10px;
+}
