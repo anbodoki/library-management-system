@@ -25,6 +25,7 @@ public class UserHelper {
         result.setModificationDate(user.getModificationDate());
         result.setActive(user.getActive());
         result.setRoles(RoleHelper.toEntities(user.getRoles()));
+        result.setImageUrl(user.getImageUrl());
         return result;
     }
 
@@ -44,6 +45,7 @@ public class UserHelper {
         result.setModificationDate(user.getModificationDate());
         result.setActive(user.getActive());
         result.setRoles(RoleHelper.fromEntities(user.getRoles()));
+        result.setImageUrl(user.getImageUrl());
         return result;
     }
 

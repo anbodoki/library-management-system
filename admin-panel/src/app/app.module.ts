@@ -36,6 +36,9 @@ import {MaterialTypeComponent} from "./view/resources/materialtype.component";
 import {MaterialTypeService} from "./services/materialtype.service";
 import {CategoryComponent} from "./view/resources/category.component";
 import {CategoryService} from "./services/category.service";
+import {FormUploadComponent} from "./lms-components/lms-fields/lms-upload.component";
+import {LmsUploadModal} from "./lms-components/lms-fields/lms-upload-modal.component";
+import {UploadFileService} from "./services/upload-file.service";
 
 @NgModule({
   declarations: [
@@ -61,7 +64,9 @@ import {CategoryService} from "./services/category.service";
     LMSTextareaComponent,
     LMSConfirmModalComponent,
     LMSTableComponent,
-    LMSColumnComponent
+    LMSColumnComponent,
+    FormUploadComponent,
+    LmsUploadModal
   ],
   imports: [
     BrowserModule,
@@ -81,7 +86,8 @@ import {CategoryService} from "./services/category.service";
     LanguageService,
     ConfigurationPropertyService,
     MaterialTypeService,
-    CategoryService
+    CategoryService,
+    UploadFileService
   ],
   bootstrap: [AppComponent]
 })

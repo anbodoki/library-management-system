@@ -132,4 +132,10 @@ export class UsersComponent implements OnInit {
       }
     );
   }
+
+  openImageModal(item) {
+    this.selectedUser = <User> JSON.parse(JSON.stringify(item));
+    this.utils.setPrevObj(JSON.stringify(item));
+    $("users-list .uploadImageModal").modal("show");
+  }
 }

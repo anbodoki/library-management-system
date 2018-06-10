@@ -1,0 +1,24 @@
+<div class="modal fade uploadImageModal" data-backdrop="static" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" (click)="closeModal()">&times;</button>
+        <h4 class="modal-title">Upload Image</h4>
+      </div>
+      <div class="modal-body" *ngIf="fieldObject">
+        <lms-upload *ngIf="abilityToUpload" [fieldObject]="fieldObject" fieldName="{{fieldName}}"
+                    [prevFieldObject]="prevFieldObject"></lms-upload>
+        <div *ngIf="!abilityToUpload && fieldObject && fieldObject[fieldName]" class="m-bottom-5 image-thumbnail">
+          <img *ngIf="(fieldObject && fieldObject[fieldName])" src="{{fieldObject[fieldName]}}"/>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="abilityToUpload" type="button" class="btn btn-success"
+                (click)="saveImage()">
+          Save
+        </button>
+        <button type="button" class="btn btn-default" (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

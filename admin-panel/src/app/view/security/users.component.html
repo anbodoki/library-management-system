@@ -1,6 +1,9 @@
 <lms-confirm-modal id="confirmModal" modalTitle="Confirmation" modalMessage="Are you sure you want to delete this user?"
                    (onOkClick)="onDeleteConfirmed()">
 </lms-confirm-modal>
+<lms-upload-modal [abilityToUpload]="isManage" [fieldObject]="selectedUser" fieldName="imageUrl"
+                  (uploadImageClick)="updateUser($event)"
+                  [prevFieldObject]="utils.getPrevObj()"></lms-upload-modal>
 
 <div *ngIf="isManage" class="modal fade" data-backdrop="static" id="userModal" role="dialog">
   <div class="modal-dialog modal-md">
@@ -111,6 +114,12 @@
              (onPageChange)="changePage($event)"
 
   >
+    <lms-column header="" field="imageUrl">
+      <ng-template #dataTableCell let-item="item">
+        <div class="user-profile img-square cap-pointer cap-hover" title="Upload Image" (click)="openImageModal(item)">
+          <img src="{{item.imageUrl}}" alt="NO IMAGE"></div>
+      </ng-template>
+    </lms-column>
     <lms-column header="ID" field="id"></lms-column>
     <lms-column header="User Name" field="username" filtered="text"></lms-column>
     <lms-column header="First Name" field="firstName" filtered="text"></lms-column>

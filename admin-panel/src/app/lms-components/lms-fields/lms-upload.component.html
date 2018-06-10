@@ -1,0 +1,13 @@
+<div *ngIf="fieldObject && fieldObject[fieldName]" class="m-bottom-5 image-thumbnail">
+  <img *ngIf="(fieldObject && fieldObject[fieldName])" src="{{fieldObject[fieldName]}}"/>
+</div>
+<div class="cap-flex">
+  <label class="btn btn-default">
+    <input type="file" (change)="selectFile($event)">
+  </label>
+
+  <button class="btn btn-success" [disabled]="!selectedFiles"
+          (click)="upload()">Upload
+  </button>
+</div>
+

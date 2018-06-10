@@ -11,4 +11,5 @@ export class User {
   public active: boolean;
   public roles: Role[];
   public privileges: {};
+  public imageUrl: string;
 }

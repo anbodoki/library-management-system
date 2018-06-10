@@ -1,4 +1,4 @@
-package com.lms.application.controller.filesystem;
+package com.lms.application;
 
 import com.lms.filesystem.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;

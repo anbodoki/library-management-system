@@ -28,6 +28,7 @@ public class UserDTO implements Serializable{
     private boolean active;
     private List<RoleDTO> roles = new ArrayList<>();
     private Map<String, List<String>> privileges = new HashMap<>();
+    private String imageUrl;
 
     public UserDTO() {
     }
@@ -131,5 +132,13 @@ public class UserDTO implements Serializable{
 
     public void setPrivileges(Map<String, List<String>> privileges) {
         this.privileges = privileges;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

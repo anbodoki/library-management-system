@@ -32,6 +32,7 @@ public class User implements Serializable {
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Role> roles;
+    private String imageUrl;
 
     public User() {
     }
@@ -127,5 +128,13 @@ public class User implements Serializable {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
