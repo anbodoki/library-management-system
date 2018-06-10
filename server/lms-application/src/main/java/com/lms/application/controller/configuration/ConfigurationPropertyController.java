@@ -15,7 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "configuration/configuration-property-api/")
+@RequestMapping(path = "/configuration/configuration-property-api/")
 public class ConfigurationPropertyController {
 
     private final ConfigurationPropertyService configurationPropertyService;

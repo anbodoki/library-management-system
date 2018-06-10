@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "atom/language-api/")
+@RequestMapping(path = "/atom/language-api/")
 public class LanguageController {
 
     private final LanguageService languageService;

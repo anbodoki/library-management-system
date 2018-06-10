@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "atom/resource-api/")
+@RequestMapping(path = "/atom/resource-api/")
 @PermissionCheck
 public class ResourceController {
 

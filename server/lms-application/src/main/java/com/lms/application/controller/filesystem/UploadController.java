@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 @RestController
-@RequestMapping(path = "filesystem/storage-api")
+@RequestMapping(path = "/filesystem/storage-api")
 public class UploadController {
 
     private final FileStorageService storageService;

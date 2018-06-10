@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "atom/category-api/")
+@RequestMapping(path = "/atom/category-api/")
 public class CategoryController {
 
     private final CategoryService categoryService;

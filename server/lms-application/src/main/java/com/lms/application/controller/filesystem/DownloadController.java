@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "application/upload-api")
+@RequestMapping(path = "/application/upload-api")
 public class DownloadController {
 
     private final FileStorageService storageService;

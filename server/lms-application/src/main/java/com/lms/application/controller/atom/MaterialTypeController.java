@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "atom/material-type-api/")
+@RequestMapping(path = "/atom/material-type-api/")
 @PermissionCheck
 public class MaterialTypeController {
 
