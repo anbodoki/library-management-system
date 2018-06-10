@@ -26,7 +26,7 @@ export class CategoryComponent implements OnInit {
               private categoriesService: CategoryService,
               private utils: Utils) {
     let ref = this;
-    this.accessService.containsCode('category_type_manage').then(function (response) {
+    this.accessService.containsCode('category_manage').then(function (response) {
       console.log(response);
       ref.isManage = response;
     });

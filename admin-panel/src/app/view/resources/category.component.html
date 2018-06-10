@@ -18,6 +18,9 @@
                    [fieldObject]="selectedCategory" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
                    alertText="Code must contain minimum 2 characters"></lms-input>
         <lms-textarea label="Description" fieldName="description" [fieldObject]="selectedCategory"></lms-textarea>
+        <lms-input label="Color" fieldName="color" [fieldObject]="selectedCategory"
+                   fieldType="color" [capRequired]="true"
+                   alertText="Cannot be empty"></lms-input>
 
       </div>
       <div class="modal-footer">
@@ -64,9 +67,9 @@
              (onPageChange)="changePage($event)"
 
   >
-    <lms-column header="ID" field="id"></lms-column>
-    <lms-column header="Name" field="name"></lms-column>
-    <lms-column header="Code" field="code"></lms-column>
+    <lms-column header="ID" field="id" filtered="number"></lms-column>
+    <lms-column header="Name" field="name" filtered="text"></lms-column>
+    <lms-column header="Code" field="code" filtered="text"></lms-column>
     <lms-column header="Description" field="description"></lms-column>
   </lms-table>
 
