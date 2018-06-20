@@ -7,6 +7,7 @@ import {LanguagesComponent} from "./view/resources/languages.component";
 import {ConfigurationPropertyComponent} from "./view/configuration/configuration-property.component";
 import {MaterialTypeComponent} from "./view/resources/materialtype.component";
 import {CategoryComponent} from "./view/resources/category.component";
+import {ResourceComponent} from "./view/resources/resource.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'configurationProperties', component: ConfigurationPropertyComponent},
   {path: 'materialTypes', component: MaterialTypeComponent},
   {path: 'categories', component: CategoryComponent},
+  {path: 'resources', component: ResourceComponent},
 ];
 
 @NgModule({

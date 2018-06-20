@@ -17,7 +17,7 @@ public interface ResourceService {
                                  String name,
                                  String author,
                                  String subName,
-                                 Integer edition,
+                                 String edition,
                                  String publisher,
                                  Date fromEditionDate, Date toEditionDate,
                                  String language,

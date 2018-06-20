@@ -1,0 +1,71 @@
+<lms-confirm-modal id="confirmModal" modalTitle="Confirmation" modalMessage="Are you sure you want to delete this resource?"
+                   (onOkClick)="onDeleteConfirmed()">
+</lms-confirm-modal>
+
+<div *ngIf="isManage" class="modal fade" data-backdrop="static" id="resourceModal" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Resource details</h4>
+      </div>
+      <div class="modal-body">
+
+        <lms-input label="Name" fieldName="name"
+                   [fieldObject]="selectedResource" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
+                   alertText="Name must contain minimum 2 characters"></lms-input>
+        <lms-input label="Author" fieldName="author"
+                   [fieldObject]="selectedResource" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
+                   alertText="Code must contain minimum 2 characters"></lms-input>
+
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="(selectedResource && selectedResource.id)" type="button" class="btn btn-danger left"
+                (click)="deleteResource()">Delete
+        </button>
+        <button *ngIf="(selectedResource && selectedResource.id)" type="button" class="btn btn-success"
+                (click)="updateResource()">Update
+        </button>
+        <button *ngIf="!(selectedResource && selectedResource.id)" type="button" class="btn btn-success"
+                (click)="saveResource()"
+                [disabled]="false">
+          Save
+        </button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="">
+  <div class="page-title">
+    <div class="title_left">
+      <h3>Resources
+        <small>Managing resources</small>
+      </h3>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <lms-table [items]="resources"
+             (rowDoubleClick)="showAddEditModal($event)"
+             (onAddButtonClick)="showAddModal($event)"
+             [addable]="isManage"
+             [editable]="isManage"
+             [searchable]="true"
+             [advanceFilter]="true"
+             (onFilteredClick)="filterClicked($event)"
+             (onTermSearch)="updateResourcesData($event)"
+             [pagination]="true"
+             [pageNum]="pageNum"
+             [reloadEvent]="loader"
+             (onPageChange)="changePage($event)"
+
+  >
+    <lms-column header="ID" field="id" filtered="number"></lms-column>
+    <lms-column header="Name" field="name" filtered="text"></lms-column>
+    <lms-column header="Author" field="author" filtered="text"></lms-column>
+  </lms-table>
+
+</div>

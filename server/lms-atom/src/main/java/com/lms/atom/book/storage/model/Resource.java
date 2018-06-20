@@ -20,7 +20,7 @@ public class Resource implements Serializable {
     private String name;
     private String author;
     private String subName;
-    private int edition;
+    private String edition;
     private String publisher;
     private Date editionDate;
     @ManyToOne
@@ -71,11 +71,11 @@ public class Resource implements Serializable {
         this.subName = subName;
     }
 
-    public int getEdition() {
+    public String getEdition() {
         return edition;
     }
 
-    public void setEdition(int edition) {
+    public void setEdition(String edition) {
         this.edition = edition;
     }
 

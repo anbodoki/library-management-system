@@ -11,7 +11,7 @@ public class ResourceFilteringRequest extends PagingRequest {
     private String name;
     private String author;
     private String subName;
-    private Integer edition;
+    private String edition;
     private String publisher;
     private Date fromEditionDate;
     private Date toEditionDate;
@@ -59,11 +59,11 @@ public class ResourceFilteringRequest extends PagingRequest {
         this.subName = subName;
     }
 
-    public Integer getEdition() {
+    public String getEdition() {
         return edition;
     }
 
-    public void setEdition(Integer edition) {
+    public void setEdition(String edition) {
         this.edition = edition;
     }
 

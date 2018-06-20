@@ -17,7 +17,7 @@ public class ResourceDTO implements Serializable {
     private String author;
     @NotNull
     private String subName;
-    private Integer edition;
+    private String edition;
     @NotNull
     private String publisher;
     @NotNull
@@ -72,11 +72,11 @@ public class ResourceDTO implements Serializable {
         this.subName = subName;
     }
 
-    public Integer getEdition() {
+    public String getEdition() {
         return edition;
     }
 
-    public void setEdition(Integer edition) {
+    public void setEdition(String edition) {
         this.edition = edition;
     }
 

@@ -39,6 +39,8 @@ import {CategoryService} from "./services/category.service";
 import {FormUploadComponent} from "./lms-components/lms-fields/lms-upload.component";
 import {LmsUploadModal} from "./lms-components/lms-fields/lms-upload-modal.component";
 import {UploadFileService} from "./services/upload-file.service";
+import {ResourceComponent} from "./view/resources/resource.component";
+import {ResourceService} from "./services/resource.service";
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import {UploadFileService} from "./services/upload-file.service";
     ConfigurationPropertyComponent,
     MaterialTypeComponent,
     CategoryComponent,
+    ResourceComponent,
     DashboardComponent,
     LMSColorPickerComponent,
     LMSCheckboxComponent,
@@ -87,7 +90,8 @@ import {UploadFileService} from "./services/upload-file.service";
     ConfigurationPropertyService,
     MaterialTypeService,
     CategoryService,
-    UploadFileService
+    UploadFileService,
+    ResourceService
   ],
   bootstrap: [AppComponent]
 })

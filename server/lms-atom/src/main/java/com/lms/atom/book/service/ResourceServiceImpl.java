@@ -46,7 +46,7 @@ public class ResourceServiceImpl implements ResourceService {
                                         String name,
                                         String author,
                                         String subName,
-                                        Integer edition,
+                                        String edition,
                                         String publisher,
                                         Date fromEditionDate, Date toEditionDate,
                                         String language,
