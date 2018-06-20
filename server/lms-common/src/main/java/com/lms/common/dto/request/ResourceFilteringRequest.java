@@ -15,17 +15,17 @@ public class ResourceFilteringRequest extends PagingRequest {
     private String publisher;
     private Date fromEditionDate;
     private Date toEditionDate;
-    private String language;
+    private Long languageId;
     private String isbn;
     private String udc;
     private String identifier;
     private ResourceTypeDTO resourceType;
-    private String materialTypeCode;
+    private Long materialTypeId;
     private Date fromCreationDate;
     private Date toCreationDate;
     private Date fromModificationDate;
     private Date toModificationDate;
-    private String categoryCode;
+    private Long categoryId;
 
     public Long getId() {
         return id;
@@ -91,14 +91,6 @@ public class ResourceFilteringRequest extends PagingRequest {
         this.toEditionDate = toEditionDate;
     }
 
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
     public String getIsbn() {
         return isbn;
     }
@@ -129,14 +121,6 @@ public class ResourceFilteringRequest extends PagingRequest {
 
     public void setResourceType(ResourceTypeDTO resourceType) {
         this.resourceType = resourceType;
-    }
-
-    public String getMaterialTypeCode() {
-        return materialTypeCode;
-    }
-
-    public void setMaterialTypeCode(String materialTypeCode) {
-        this.materialTypeCode = materialTypeCode;
     }
 
     public Date getFromCreationDate() {
@@ -171,11 +155,27 @@ public class ResourceFilteringRequest extends PagingRequest {
         this.toModificationDate = toModificationDate;
     }
 
-    public String getCategoryCode() {
-        return categoryCode;
+    public Long getLanguageId() {
+        return languageId;
     }
 
-    public void setCategoryCode(String categoryCode) {
-        this.categoryCode = categoryCode;
+    public void setLanguageId(Long languageId) {
+        this.languageId = languageId;
+    }
+
+    public Long getMaterialTypeId() {
+        return materialTypeId;
+    }
+
+    public void setMaterialTypeId(Long materialTypeId) {
+        this.materialTypeId = materialTypeId;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 }

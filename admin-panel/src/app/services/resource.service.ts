@@ -40,4 +40,8 @@ export class ResourceService {
     console.error('Error', error);
     return Promise.reject(error.message || error);
   }
+
+  getResourceTypes(): Promise<ActionResponseWithData<any>> {
+    return this.baseService.getAllByGet(this.url + "resource-types");
+  }
 }

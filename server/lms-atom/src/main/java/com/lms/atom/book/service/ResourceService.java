@@ -20,15 +20,15 @@ public interface ResourceService {
                                  String edition,
                                  String publisher,
                                  Date fromEditionDate, Date toEditionDate,
-                                 String language,
+                                 Long language,
                                  String isbn,
                                  String udc,
                                  String identifier,
                                  ResourceTypeDTO resourceType,
-                                 String materialTypeCode,
+                                 Long materialTypeCode,
                                  Date fromCreationDate, Date toCreationDate,
                                  Date fromModificationDate, Date toModificationDate,
-                                 String categoryCode,
+                                 Long categoryCode,
                                  int limit, int offset) throws Exception;
 
     ResourceDTO update(ResourceDTO resource) throws AtomException;

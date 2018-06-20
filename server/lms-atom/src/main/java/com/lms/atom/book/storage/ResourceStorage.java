@@ -60,15 +60,15 @@ public class ResourceStorage {
                                      String edition,
                                      String publisher,
                                      Date fromEditionDate, Date toEditionDate,
-                                     String language,
+                                     Long language,
                                      String isbn,
                                      String udc,
                                      String identifier,
                                      ResourceType resourceType,
-                                     String materialTypeCode,
+                                     Long materialTypeCode,
                                      Date fromCreationDate, Date toCreationDate,
                                      Date fromModificationDate, Date toModificationDate,
-                                     String categoryCode,
+                                     Long categoryCode,
                                      int limit, int offset) {
         StringBuilder builder = new StringBuilder();
         Map<String, Object> params = new HashMap<>();
@@ -105,7 +105,7 @@ public class ResourceStorage {
             params.put("toEditionDate", toEditionDate);
         }
         if (language != null) {
-            builder.append(" AND u.language.code = :language");
+            builder.append(" AND u.language.id = :language");
             params.put("language", language);
         }
         if (isbn != null) {
@@ -125,7 +125,7 @@ public class ResourceStorage {
             params.put("resourceType", resourceType);
         }
         if (materialTypeCode != null) {
-            builder.append(" AND u.materialType.code = :materialTypeCode");
+            builder.append(" AND u.materialType.id = :materialTypeCode");
             params.put("materialTypeCode", materialTypeCode);
         }
         if (fromCreationDate != null) {
@@ -145,7 +145,7 @@ public class ResourceStorage {
             params.put("toModificationDate", toModificationDate);
         }
         if (categoryCode != null) {
-            builder.append(" AND u.category.code = :categoryCode");
+            builder.append(" AND u.category.id = :categoryCode");
             params.put("categoryCode", categoryCode);
         }
         TypedQuery<Resource> q = em.createQuery("SELECT u FROM Resource u WHERE 1=1 " + builder.toString() + " ORDER BY u.id DESC", Resource.class);

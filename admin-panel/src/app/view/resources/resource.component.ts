@@ -5,6 +5,12 @@ import {AccessService} from "../../services/access.service";
 import {Utils} from "../../services/utils";
 import {Resource} from "../../model/resources/resource";
 import {ResourceService} from "../../services/resource.service";
+import {Language} from "../../model/resources/language";
+import {MaterialType} from "../../model/resources/materialtype";
+import {Category} from "../../model/resources/category";
+import {LanguageService} from "../../services/language.service";
+import {MaterialTypeService} from "../../services/materialtype.service";
+import {CategoryService} from "../../services/category.service";
 
 declare let jquery: any;
 declare let $: any;
@@ -21,13 +27,59 @@ export class ResourceComponent implements OnInit {
   pageNum: number;
   loader: PagingLoader = new PagingLoader(true, true);
   isManage: boolean;
+  languages: Language[];
+  resourceTypes: any[];
+  materialTypes: MaterialType[];
+  categories: Category[];
+
 
   constructor(private accessService: AccessService,
               private resourceService: ResourceService,
+              private languagesService: LanguageService,
+              private materialTypesService: MaterialTypeService,
+              private categoryService: CategoryService,
               private utils: Utils) {
     let ref = this;
     this.accessService.containsCode('resource_manage').then(function (response) {
       ref.isManage = response;
+    });
+    this.initLanguages("");
+    this.initMaterialTypes("");
+    this.initResourceTypes();
+    this.initCategories("");
+  }
+
+  initLanguages(query) {
+    let ref = this;
+    this.languagesService.findLanguages({query: query, limit: 10, offset: 0}).then(function (response) {
+      if (response.success) {
+        ref.languages = response.data.resultList;
+      }
+    });
+  }
+
+  initMaterialTypes(query) {
+    let ref = this;
+    this.materialTypesService.findMaterialTypes({query: query, limit: 10, offset: 0}).then(function (response) {
+      if (response.success) {
+        ref.materialTypes = response.data.resultList;
+      }
+    });
+  }
+
+  initResourceTypes() {
+    let ref = this;
+    this.resourceService.getResourceTypes().then(function (response) {
+      ref.resourceTypes = response.data;
+    });
+  }
+
+  initCategories(query) {
+    let ref = this;
+    this.categoryService.findCategories({query: query, limit: 10, offset: 0}).then(function (response) {
+      if (response.success) {
+        ref.categories = response.data.resultList;
+      }
     });
   }
 
@@ -50,6 +102,10 @@ export class ResourceComponent implements OnInit {
   }
 
   showAddEditModal(resource): void {
+    this.initLanguages("");
+    this.initMaterialTypes("");
+    this.initResourceTypes();
+    this.initCategories("");
     this.selectedResource = <Resource> JSON.parse(JSON.stringify(resource.row));
     this.utils.setPrevObj(JSON.stringify(resource.row));
     $("#resourceModal").modal("show");
@@ -71,6 +127,10 @@ export class ResourceComponent implements OnInit {
   }
 
   showAddModal($event: Event) {
+    this.initLanguages("");
+    this.initMaterialTypes("");
+    this.initResourceTypes();
+    this.initCategories("");
     this.selectedResource = new Resource();
     $("#resourceModal").modal("show");
   }

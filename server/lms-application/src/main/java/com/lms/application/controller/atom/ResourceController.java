@@ -42,15 +42,15 @@ public class ResourceController {
                 request.getEdition(),
                 request.getPublisher(),
                 request.getFromEditionDate(), request.getToEditionDate(),
-                request.getLanguage(),
+                request.getLanguageId(),
                 request.getIsbn(),
                 request.getUdc(),
                 request.getIdentifier(),
                 request.getResourceType(),
-                request.getMaterialTypeCode(),
+                request.getMaterialTypeId(),
                 request.getFromCreationDate(), request.getToCreationDate(),
                 request.getFromModificationDate(), request.getToModificationDate(),
-                request.getCategoryCode(),
+                request.getCategoryId(),
                 request.getLimit(), request.getOffset());
         return new ActionResponseWithData<>(result, true);
     }

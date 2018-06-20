@@ -39,6 +39,8 @@ public class Resource implements Serializable {
     @ManyToOne
     private Category category;
 
+    //TODO add quantity, lended books num
+
     public Long getId() {
         return id;
     }

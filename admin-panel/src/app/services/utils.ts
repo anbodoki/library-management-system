@@ -8,6 +8,7 @@ declare let $: any;
 export class Utils {
 
   datePickerConfig: {} = {format: "DD/MM/YYYY"};
+  datePickerConfigWithTime: {} = {format: "DD/MM/YYYY HH:mm"};
 
   prevObj: string;
 

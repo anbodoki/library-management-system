@@ -10,15 +10,15 @@ export class Resource {
   public edition: string;
   public publisher: string;
   public editionDate: any;
-  public language: Language;
   public pageNum: number;
   public isbn: string;
   public udc: string;
   public identifier: string;
-  public resourceType: string;
-  public materialType: MaterialType;
   public referenceURL: string;
   public creationDate: any;
   public modificationDate: any;
+  public resourceType: string;
+  public materialType: MaterialType;
+  public language: Language;
   public category: Category;
 }
