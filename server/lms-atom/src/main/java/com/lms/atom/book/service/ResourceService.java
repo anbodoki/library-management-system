@@ -40,4 +40,6 @@ public interface ResourceService {
     List<ComboObject> getResourceTypes();
 
     ResourceDTO getResourceById(Long id) throws AtomException;
+
+    long resourcesCount();
 }

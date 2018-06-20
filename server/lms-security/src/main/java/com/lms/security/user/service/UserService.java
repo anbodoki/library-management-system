@@ -26,4 +26,6 @@ public interface UserService {
     void deleteUser(long id) throws Exception;
 
     User getUserByUsername(String name);
+
+    long usersCount();
 }

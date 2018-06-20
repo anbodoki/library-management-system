@@ -156,4 +156,9 @@ public class ResourceServiceImpl implements ResourceService {
             throw new AtomException(Messages.get("resourceWithThisIdNotExists"));
         }
     }
+
+    @Override
+    public long resourcesCount() {
+        return repository.count();
+    }
 }

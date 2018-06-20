@@ -41,6 +41,7 @@ import {LmsUploadModal} from "./lms-components/lms-fields/lms-upload-modal.compo
 import {UploadFileService} from "./services/upload-file.service";
 import {ResourceComponent} from "./view/resources/resource.component";
 import {ResourceService} from "./services/resource.service";
+import {DashboardService} from "./services/dashboard.service";
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import {ResourceService} from "./services/resource.service";
     MaterialTypeService,
     CategoryService,
     UploadFileService,
-    ResourceService
+    ResourceService,
+    DashboardService
   ],
   bootstrap: [AppComponent]
 })
