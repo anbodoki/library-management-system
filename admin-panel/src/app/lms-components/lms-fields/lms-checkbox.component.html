@@ -13,7 +13,7 @@
          [checked]="fieldObject && fieldObject[fieldName]"
          (change)="fieldObject[fieldName] = $event.target.checked" [ngModel]="fieldObject[fieldName]" required #req="ngModel">
   <span class="required">{{label}}</span>
-  <small class="cap-alert" [hidden]="req.value==true || req.value==false">
+  <small class="lms-alert" [hidden]="req.value==true || req.value==false">
     {{alertText}}
   </small>
   <a *ngIf="removable" class="field-remove" (click)="fieldObject[fieldName] = null"><i class="fa fa-remove"></i></a>

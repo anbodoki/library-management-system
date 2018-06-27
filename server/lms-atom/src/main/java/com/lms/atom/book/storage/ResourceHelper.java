@@ -36,6 +36,8 @@ public class ResourceHelper {
         result.setCreationDate(resource.getCreationDate());
         result.setModificationDate(resource.getModificationDate());
         result.setCategory(CategoryHelper.fromEntity(resource.getCategory()));
+        resource.setQuantity(resource.getQuantity());
+        resource.setRentedQuantity(resource.getRentedQuantity());
         return result;
     }
 
@@ -62,6 +64,8 @@ public class ResourceHelper {
         result.setCreationDate(resource.getCreationDate());
         result.setModificationDate(resource.getModificationDate());
         result.setCategory(CategoryHelper.toEntity(resource.getCategory()));
+        resource.setQuantity(resource.getQuantity());
+        resource.setRentedQuantity(resource.getRentedQuantity());
         return result;
     }
 

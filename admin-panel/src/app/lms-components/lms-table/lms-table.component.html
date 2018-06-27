@@ -53,29 +53,33 @@
             <lms-dynamic-component *ngIf="column.filtered == 'dynamic-combo'" [values]="column.filteredOptions"
                                    [fieldObject]="filterRequest" fieldName="{{column.filteredFieldName}}"
                                    placeholder="{{'Select ' + column.header}}"
-                                   [returnFieldName]="column.filteredOptionValue" [showValue]="column.filteredOptionName"
-                                   [returnObject]="column.filteredOptionReturnObject" (onSearch)="column.onSearchedFunction($event)">
+                                   [returnFieldName]="column.filteredOptionValue"
+                                   [showValue]="column.filteredOptionName"
+                                   [returnObject]="column.filteredOptionReturnObject"
+                                   (onSearch)="column.onSearchedFunction($event)">
               <lms-dynamic-column *ngFor="let n of column.filteredOptionColumns" [field]="n"></lms-dynamic-column>
             </lms-dynamic-component>
           </div>
         </div>
-
-        <table id="datatable" class="table table-bordered">
-          <thead>
-          <tr>
-            <th *ngFor="let column of columns" [ngClass]="{'hide' : column.hidden}">{{column.header}}</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let item of items let i = index" (dblclick)="rowDoubleClicked(item)" (click)="rowClicked(item, i + 1)" [class]="'row_' + (i + 1)">
-            <td *ngFor="let column of columns" [ngClass]="{'hide' : column.hidden}">
-              <div *ngIf="!column.cellTemplate">{{item[column.field]}}</div>
-              <div *ngIf="column.cellTemplate" [ngTemplateOutlet]="column.cellTemplate"
-                   [ngTemplateOutletContext]="{column: column, item: item}"></div>
-            </td>
-          </tr>
-          </tbody>
-        </table>
+        <div style="overflow-x: scroll">
+          <table id="datatable" class="table table-bordered">
+            <thead>
+            <tr>
+              <th *ngFor="let column of columns" [ngClass]="{'hide' : column.hidden}">{{column.header}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of items let i = index" (dblclick)="rowDoubleClicked(item)"
+                (click)="rowClicked(item, i + 1)" [class]="'row_' + (i + 1)">
+              <td *ngFor="let column of columns" [ngClass]="{'hide' : column.hidden}">
+                <div *ngIf="!column.cellTemplate">{{item[column.field]}}</div>
+                <div *ngIf="column.cellTemplate" [ngTemplateOutlet]="column.cellTemplate"
+                     [ngTemplateOutletContext]="{column: column, item: item}"></div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
         <div class="dataTables_length">
           <div>Show <select #selectElem class="form-control"
                             (change)="setNewPageNumOptions(selectElem.value)">

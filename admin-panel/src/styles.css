@@ -841,3 +841,8 @@ article.comment {
 .cap-disabled {
   background-color: #eee
 }
+
+.cap-flex {
+  display: flex;
+  justify-content: space-between;
+}

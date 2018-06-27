@@ -37,7 +37,7 @@
           <lms-input [visible]="!(selectedUser && selectedUser.id)" label="Repeat Password" fieldName="passwordRepeated"
                      [fieldObject]="this"
                      fieldType="password"></lms-input>
-          <small class="cap-alert"
+          <small class="lms-alert"
                  [hidden]="!(selectedUser && selectedUser.id && (!selectedUser.password || !passwordRepeated || selectedUser.password != passwordRepeated) && (passwordRepeated && passwordRepeated.length > 1))">
             Passwords don't match
           </small>

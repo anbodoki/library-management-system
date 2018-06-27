@@ -112,15 +112,15 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public ResourceDTO save(ResourceDTO resource) throws AtomException {
         Resource old = repository.getByIdentifier(resource.getIdentifier());
-        if (old == null) {
+        if (old != null) {
             throw new AtomException(Messages.get("resourceWithThisIdentifierAlreadyExists"));
         }
         old = repository.getByIsbn(resource.getIsbn());
-        if (old == null) {
+        if (old != null) {
             throw new AtomException(Messages.get("resourceWithThisISBNAlreadyExists"));
         }
         old = repository.getByUdc(resource.getUdc());
-        if (old == null) {
+        if (old != null) {
             throw new AtomException(Messages.get("resourceWithThisUDCAlreadyExists"));
         }
         resource.setCreationDate(new Date());

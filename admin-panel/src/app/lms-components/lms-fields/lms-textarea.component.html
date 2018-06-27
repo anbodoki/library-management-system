@@ -4,7 +4,7 @@
             [ngModel]="fieldObject[fieldName]"
             (input)="fieldObject[fieldName] = $event.target.value"></textarea>
 
-  <small class="cap-alert" [hidden]="req.valid">
+  <small class="lms-alert" [hidden]="req.valid">
     {{alertText}}
   </small>
 </div>

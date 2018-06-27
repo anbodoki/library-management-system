@@ -38,8 +38,10 @@ public class Resource implements Serializable {
     private Date modificationDate;
     @ManyToOne
     private Category category;
-
-    //TODO add quantity, lended books num
+    @Column(columnDefinition = "bigint default 0")
+    private int quantity;
+    @Column(columnDefinition = "bigint default 0")
+    private int rentedQuantity;
 
     public Long getId() {
         return id;
@@ -183,5 +185,21 @@ public class Resource implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getRentedQuantity() {
+        return rentedQuantity;
+    }
+
+    public void setRentedQuantity(int rentedQuantity) {
+        this.rentedQuantity = rentedQuantity;
     }
 }

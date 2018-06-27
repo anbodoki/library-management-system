@@ -4,6 +4,7 @@ import com.lms.common.dto.atom.category.CategoryDTO;
 import com.lms.common.dto.atom.language.LanguageDTO;
 import com.lms.common.dto.atom.materialtype.MaterialTypeDTO;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
@@ -20,7 +21,6 @@ public class ResourceDTO implements Serializable {
     private String edition;
     @NotNull
     private String publisher;
-    @NotNull
     private Date editionDate;
     @NotNull
     private LanguageDTO language;
@@ -39,6 +39,8 @@ public class ResourceDTO implements Serializable {
     private Date creationDate;
     private Date modificationDate;
     private CategoryDTO category;
+    private int quantity;
+    private int rentedQuantity;
 
     public Long getId() {
         return id;
@@ -182,5 +184,21 @@ public class ResourceDTO implements Serializable {
 
     public void setCategory(CategoryDTO category) {
         this.category = category;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getRentedQuantity() {
+        return rentedQuantity;
+    }
+
+    public void setRentedQuantity(int rentedQuantity) {
+        this.rentedQuantity = rentedQuantity;
     }
 }

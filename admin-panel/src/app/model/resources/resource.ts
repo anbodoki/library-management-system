@@ -6,8 +6,8 @@ export class Resource {
   public id: number;
   public name: string;
   public author: string;
-  public subname: string;
-  public edition: string;
+  public subName: string;
+  public edition: number;
   public publisher: string;
   public editionDate: any;
   public pageNum: number;
@@ -21,4 +21,6 @@ export class Resource {
   public materialType: MaterialType;
   public language: Language;
   public category: Category;
+  public quantity: number;
+  public rentedQuantity: number;
 }

@@ -4,7 +4,7 @@
            pattern="{{capPattern}}" [value]="fieldObject[fieldName] !== undefined ? fieldObject[fieldName] : ''"
            [ngModel]="fieldObject[fieldName]"
            (input)="fieldObject[fieldName] = $event.target.value">
-    <small class="cap-alert" [hidden]="req.valid">
+    <small class="lms-alert" [hidden]="req.valid">
       {{alertText}}
     </small>
 </div>
@@ -20,7 +20,7 @@
            pattern="{{capPattern}}" [value]="fieldObject[fieldName] !== undefined ? fieldObject[fieldName] : ''"
            [ngModel]="fieldObject[fieldName]"
            (input)="fieldObject[fieldName] = $event.target.value">
-    <small class="cap-alert" [hidden]="req.valid">
+    <small class="lms-alert" [hidden]="req.valid">
       {{alertText}}</small>
 </div>
 

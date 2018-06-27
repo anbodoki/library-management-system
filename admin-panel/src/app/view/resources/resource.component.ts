@@ -14,6 +14,7 @@ import {CategoryService} from "../../services/category.service";
 
 declare let jquery: any;
 declare let $: any;
+declare let moment: any;
 
 @Component({
   selector: 'resource-list',
@@ -107,6 +108,7 @@ export class ResourceComponent implements OnInit {
     this.initResourceTypes();
     this.initCategories("");
     this.selectedResource = <Resource> JSON.parse(JSON.stringify(resource.row));
+    this.selectedResource.editionDate = moment(new Date(this.selectedResource.editionDate));
     this.utils.setPrevObj(JSON.stringify(resource.row));
     $("#resourceModal").modal("show");
   }
@@ -140,9 +142,12 @@ export class ResourceComponent implements OnInit {
       return;
     }
     let ref = this;
-    this.resourceService.create(this.selectedResource).then(function () {
-      $("#resourceModal").modal("hide");
-      ref.loader = ref.loader.load(true);
+    console.log(this.selectedResource);
+    this.resourceService.create(this.selectedResource).then(function (response) {
+      if (response.success) {
+        $("#resourceModal").modal("hide");
+        ref.loader = ref.loader.load(true);
+      }
     });
   }
 

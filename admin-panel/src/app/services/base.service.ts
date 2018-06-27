@@ -204,6 +204,7 @@ export class BaseService<T> {
   private handleError(error: any): Promise<any> {
     console.error('Error', error); // for demo purposes only
     if (error.status = 400) {
+      BaseService.hideLoader();
       $("#alertModal .modal .modal-body p").html(error.statusText);
       $("#alertModal .modal").modal("show")
     }
