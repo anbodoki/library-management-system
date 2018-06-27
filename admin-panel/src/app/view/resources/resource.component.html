@@ -145,7 +145,7 @@
     <lms-column header="Subname" field="subName" filtered="text"></lms-column>
     <lms-column header="Edition" field="edition" filtered="number"></lms-column>
     <lms-column header="Publisher" field="publisher" filtered="text"></lms-column>
-    <lms-column header="Edition date" field="editionDate">
+    <lms-column header="Edition date" field="editionDate" filtered="date">
       <ng-template #dataTableCell let-item="item">
         <span>{{item.editionDate | date:'dd/MM/yyyy' }}</span>
       </ng-template>
@@ -158,12 +158,12 @@
     <lms-column header="Identifier" field="identifier" filtered="text"></lms-column>
     <!-- TODO add reference URL -->
     <lms-column header="Identifier" field="identifier" filtered="text"></lms-column>
-    <lms-column header="Creation date" field="creationDate">
+    <lms-column header="Creation date" field="creationDate" filtered="date">
       <ng-template #dataTableCell let-item="item">
         <span>{{item.creationDate | date:'dd/MM/yyyy HH:mm' }}</span>
       </ng-template>
     </lms-column>
-    <lms-column header="Modification date" field="modificationDate">
+    <lms-column header="Modification date" field="modificationDate" filtered="date">
       <ng-template #dataTableCell let-item="item">
         <span>{{item.modificationDate | date:'dd/MM/yyyy HH:mm' }}</span>
       </ng-template>
