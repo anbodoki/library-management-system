@@ -16,6 +16,8 @@
         <module>lms-file-system</module>
         <module>lms-configuration</module>
         <module>lms-utils</module>
+        <module>lms-client</module>
+        <module>lms-client-api</module>
     </modules>
 
     <properties>

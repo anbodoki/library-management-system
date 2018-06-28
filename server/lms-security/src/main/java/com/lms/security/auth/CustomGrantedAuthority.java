@@ -11,9 +11,13 @@ public class CustomGrantedAuthority implements GrantedAuthority {
 
     private boolean active;
 
+    private AuthType authType;
+
     private Set<String> permissions;
 
     private User systemUser;
+
+    //TODO add client
 
     public CustomGrantedAuthority() {
     }
@@ -32,6 +36,14 @@ public class CustomGrantedAuthority implements GrantedAuthority {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public AuthType getAuthType() {
+        return authType;
+    }
+
+    public void setAuthType(AuthType authType) {
+        this.authType = authType;
     }
 
     public Set<String> getPermissions() {
