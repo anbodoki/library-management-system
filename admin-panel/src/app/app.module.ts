@@ -20,7 +20,6 @@ import {LMSCheckboxComponent} from "./lms-components/lms-fields/lms-checkbox.com
 import {LMSTreeCheckboxComponent} from "./lms-components/lms-fields/lms-tree-checkbox.component";
 import {LMSComboComponent} from "./lms-components/lms-fields/lms-combo.component";
 import {LMSDynamicComboColumnComponent} from "./lms-components/lms-fields/lms-dynamic-combo-column.component";
-import {LMSDynamicComboComponent} from "./lms-components/lms-fields/lms-dynamic-combo.component";
 import {LMSInputComponent} from "./lms-components/lms-fields/lms-input.component";
 import {LMSMultiCheckboxComponent} from "./lms-components/lms-fields/lms-multi-checkbox.component";
 import {LMSTextareaComponent} from "./lms-components/lms-fields/lms-textarea.component";
@@ -42,6 +41,9 @@ import {UploadFileService} from "./services/upload-file.service";
 import {ResourceComponent} from "./view/resources/resource.component";
 import {ResourceService} from "./services/resource.service";
 import {DashboardService} from "./services/dashboard.service";
+import {SchoolComponent} from "./view/client/school.component";
+import {SchoolService} from "./services/school.service";
+import {LmsDynamicComboComponent} from "./lms-components/lms-fields/lms-dynamic-combo.component";
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import {DashboardService} from "./services/dashboard.service";
     UsersComponent,
     RolesComponent,
     LanguagesComponent,
+    SchoolComponent,
     ConfigurationPropertyComponent,
     MaterialTypeComponent,
     CategoryComponent,
@@ -62,7 +65,7 @@ import {DashboardService} from "./services/dashboard.service";
     LMSTreeCheckboxComponent,
     LMSComboComponent,
     LMSDynamicComboColumnComponent,
-    LMSDynamicComboComponent,
+    LmsDynamicComboComponent,
     LMSInputComponent,
     LMSMultiCheckboxComponent,
     LMSTextareaComponent,
@@ -93,7 +96,8 @@ import {DashboardService} from "./services/dashboard.service";
     CategoryService,
     UploadFileService,
     ResourceService,
-    DashboardService
+    DashboardService,
+    SchoolService
   ],
   bootstrap: [AppComponent]
 })

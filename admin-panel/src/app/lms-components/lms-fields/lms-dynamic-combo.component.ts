@@ -19,7 +19,7 @@ import {LMSDynamicComboColumnComponent} from "./lms-dynamic-combo-column.compone
   templateUrl: 'lms-dynamic-combo.component.html',
 })
 
-export class LMSDynamicComboComponent implements OnChanges {
+export class LmsDynamicComboComponent implements OnChanges {
 
   @Input() values: any[];
   @Input() selectedObject: any;
@@ -58,7 +58,6 @@ export class LMSDynamicComboComponent implements OnChanges {
     }
     if (changes.selectedObject) {
       if (!this.selectedObject || (this.selectedObject && !this.selectedObject[this.showValue])) {
-        this.value = null;
         this.showAlert = this.capRequired;
       } else {
         this.showAlert = false;
@@ -96,14 +95,19 @@ export class LMSDynamicComboComponent implements OnChanges {
     } else {
       this.value = item;
     }
-
+    if (this.value) {
+      this.showAlert = false;
+    } else {
+      this.showAlert = this.capRequired;
+    }
     this.inside = false;
+    console.log(this.value);
   }
 
   handleClick(event) {
     let clickedComponent = event.target;
     this.inside = false;
-    if (clickedComponent == document.querySelectorAll('lms-dynamic-component .field-remove i')[0]) return;
+    if (clickedComponent == document.querySelectorAll('cap-dynamic-component .additional-input-button i')[0]) return;
     do {
       if (clickedComponent === this.elementRef.nativeElement) {
         this.inside = true;

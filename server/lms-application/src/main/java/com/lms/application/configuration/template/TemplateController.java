@@ -19,6 +19,7 @@ public class TemplateController {
             "/configurationProperties",
             "/materialTypes",
             "/resources",
+            "/schools",
             "/categories"})
     public String index() {
         return "forward:/index.html";

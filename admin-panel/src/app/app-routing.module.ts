@@ -8,6 +8,7 @@ import {ConfigurationPropertyComponent} from "./view/configuration/configuration
 import {MaterialTypeComponent} from "./view/resources/materialtype.component";
 import {CategoryComponent} from "./view/resources/category.component";
 import {ResourceComponent} from "./view/resources/resource.component";
+import {SchoolComponent} from "./view/client/school.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'materialTypes', component: MaterialTypeComponent},
   {path: 'categories', component: CategoryComponent},
   {path: 'resources', component: ResourceComponent},
+  {path: 'schools', component: SchoolComponent},
 ];
 
 @NgModule({

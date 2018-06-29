@@ -1,17 +1,20 @@
 <div *ngIf="fieldObject" class="m-bottom-5 rel">{{label}}
-  <input *ngIf="searchable" class="form-control" (input)="onSearched($event.target.value)" placeholder="{{placeholder}}"
+  <input *ngIf="searchable && capRequired" required class="form-control" (input)="onSearched($event.target.value)" placeholder="{{placeholder}}"
+         [value]="value" #req="ngModel" [ngModel]="value">
+  <input *ngIf="searchable && !capRequired" class="form-control" (input)="onSearched($event.target.value)" placeholder="{{placeholder}}"
          [value]="value">
   <div *ngIf="!searchable" class="form-control">
-    {{value}}
+    <span *ngIf="value">{{value}}</span>
+    <span *ngIf="!value && placeholder">{{placeholder}}</span>
   </div>
-  <a class="field-remove" (click)="fieldObject[fieldName] = null; value = null; inside = false"><i class="fa fa-remove"></i></a>
+  <a class="field-remove" (click)="fieldObject[fieldName] = null; value = null; inside = false; showAlert=capRequired"><i class="fa fa-remove"></i></a>
 
   <div *ngIf="inside" class="dynamic-combo-box">
     <div *ngFor="let item of values" class="dynamic-combo-option" (click)="chooseOption(item)">
       <span *ngFor="let column of columns; index as i">
         <span *ngIf="!column.colTemplate">{{item[column.field]}}</span>
         <span *ngIf="column.colTemplate" [ngTemplateOutlet]="column.colTemplate"
-             [ngTemplateOutletContext]="{column: column, item: item}"></span>
+              [ngTemplateOutletContext]="{column: column, item: item}"></span>
         <span *ngIf="i < columns.length - 1">-</span>
       </span>
       <div class="clearfix"></div>
