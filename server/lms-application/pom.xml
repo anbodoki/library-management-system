@@ -52,6 +52,11 @@
             <artifactId>lms-client-api</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.lms.client</groupId>
+            <artifactId>lms-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!--other-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
