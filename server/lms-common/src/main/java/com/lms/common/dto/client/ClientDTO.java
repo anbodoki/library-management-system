@@ -1,25 +1,21 @@
-package com.lms.client.client.storage.model;
+package com.lms.common.dto.client;
 
-import com.lms.client.school.storage.model.School;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-import javax.persistence.*;
+public class ClientDTO implements Serializable {
 
-@Entity
-@Table(name = "client")
-public class Client {
-
-    private static final long serialVersionUID = -3009157732242241606L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
+    @NotNull
     private String email;
     private String phone;
     private String imgUrl;
-    @ManyToOne
-    private School school;
+    @NotNull
+    private SchoolDTO school;
 
     public Long getId() {
         return id;
@@ -69,11 +65,11 @@ public class Client {
         this.imgUrl = imgUrl;
     }
 
-    public School getSchool() {
+    public SchoolDTO getSchool() {
         return school;
     }
 
-    public void setSchool(School school) {
+    public void setSchool(SchoolDTO school) {
         this.school = school;
     }
 }

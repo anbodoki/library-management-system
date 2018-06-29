@@ -1,25 +1,15 @@
-package com.lms.client.client.storage.model;
+package com.lms.common.dto.request;
 
-import com.lms.client.school.storage.model.School;
+import com.lms.common.dto.response.PagingRequest;
 
-import javax.persistence.*;
+public class ClientFilteringRequest extends PagingRequest {
 
-@Entity
-@Table(name = "client")
-public class Client {
-
-    private static final long serialVersionUID = -3009157732242241606L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
     private String phone;
-    private String imgUrl;
-    @ManyToOne
-    private School school;
+    private Long schoolId;
 
     public Long getId() {
         return id;
@@ -61,19 +51,11 @@ public class Client {
         this.phone = phone;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public Long getSchoolId() {
+        return schoolId;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-
-    public School getSchool() {
-        return school;
-    }
-
-    public void setSchool(School school) {
-        this.school = school;
+    public void setSchoolId(Long schoolId) {
+        this.schoolId = schoolId;
     }
 }

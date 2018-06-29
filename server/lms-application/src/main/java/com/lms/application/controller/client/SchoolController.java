@@ -1,4 +1,4 @@
-package com.lms.application.client;
+package com.lms.application.controller.client;
 
 import com.lms.application.security.PermissionCheck;
 import com.lms.client.school.service.SchoolService;
