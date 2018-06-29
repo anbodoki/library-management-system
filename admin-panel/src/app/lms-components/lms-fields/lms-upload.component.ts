@@ -33,12 +33,6 @@ export class FormUploadComponent implements OnInit {
     }
   }
 
-  // onCancelClicked() {
-  //   if (this.fieldObject && this.prevFieldObject && this.fieldObject[this.fieldName] != this.prevFieldObject[this.fieldName]) {
-  //     this.deleteFile(this.fieldObject[this.fieldName]);
-  //   }
-  // }
-
   upload() {
     this.currentFileUpload = this.selectedFiles.item(0);
     let ref = this;

@@ -63,21 +63,10 @@ export class LmsDynamicComboComponent implements OnChanges {
         this.showAlert = false;
       }
     }
-    // this code is commented because of error issues, when values list in empty values are hidden
-    // if (changes.values && (!this.values || (this.values && this.values.length <= 0))) {
-    //   this.value = null;
-    //   this.value = '';
-    //   this.showAlert = this.capRequired;
-    // }
   }
 
   onSearched(term) {
     this.onSearch.emit(term);
-    //same
-    // if ((!this.values || (this.values && this.values.length <= 0))) {
-    //   this.value = null;
-    //   this.showAlert = this.capRequired;
-    // }
   }
 
   chooseOption(item) {

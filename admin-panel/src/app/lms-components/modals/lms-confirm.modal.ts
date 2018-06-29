@@ -17,8 +17,4 @@ export class LMSConfirmModalComponent implements OnInit{
   private onOkClicked(event) {
       this.onOkClick.emit({ event });
   }
-
-  onCancelClicked() {
-
-  }
 }
