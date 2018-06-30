@@ -42,7 +42,7 @@ export class UserService {
   }
 
   logout() {
-    this.baseService.get("logout");
+    return this.baseService.post(this.usersUrl + "logout", null);
   }
 
   private handleError(error: any): Promise<any> {

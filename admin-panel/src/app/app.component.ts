@@ -3,6 +3,7 @@ import {UserService} from "./services/user.service";
 import {AccessService} from "./services/access.service";
 import {User} from "./model/security/user";
 import {Router} from "@angular/router";
+import {environment} from "../environments/environment";
 
 declare let jquery: any;
 declare let $: any;
@@ -35,6 +36,14 @@ export class AppComponent implements OnInit {
       }
     });
     this.errorTitle = "Alert";
+  }
+
+  logout() {
+    this.userService.logout().then(function (response) {
+      if (response.success) {
+        window.location.pathname = environment.contextPath + "login";
+      }
+    })
   }
 
   myInit(): void {

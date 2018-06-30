@@ -44,6 +44,8 @@ import {DashboardService} from "./services/dashboard.service";
 import {SchoolComponent} from "./view/client/school.component";
 import {SchoolService} from "./services/school.service";
 import {LmsDynamicComboComponent} from "./lms-components/lms-fields/lms-dynamic-combo.component";
+import {APP_BASE_HREF} from "@angular/common";
+import {environment} from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -97,7 +99,8 @@ import {LmsDynamicComboComponent} from "./lms-components/lms-fields/lms-dynamic-
     UploadFileService,
     ResourceService,
     DashboardService,
-    SchoolService
+    SchoolService,
+    {provide: APP_BASE_HREF, useValue : environment.contextPath }
   ],
   bootstrap: [AppComponent]
 })

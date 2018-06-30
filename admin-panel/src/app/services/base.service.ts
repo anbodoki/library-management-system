@@ -196,9 +196,21 @@ export class BaseService<T> {
       .catch(this.handleError);
   }
 
-  post(methodName, obj) {
+  post(methodName, obj): Promise<ActionResponse> {
+    this.showLoader();
     let ref = this;
-    this.http.post(methodName, obj, {headers: this.headers});
+    return this.http
+      .post(methodName, JSON.stringify(obj), {headers: this.headers})
+      .toPromise()
+      .then(function (response) {
+        if (!response['success']) {
+          $("#alertModal .modal .modal-body p").html(response['message']);
+          $("#alertModal .modal").modal("show")
+        }
+        BaseService.hideLoader();
+        return response as ActionResponse;
+      })
+      .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {

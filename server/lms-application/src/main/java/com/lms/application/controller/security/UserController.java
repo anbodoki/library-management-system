@@ -10,8 +10,14 @@ import com.lms.common.dto.security.UserDTO;
 import com.lms.security.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping(path = "/security/user-api/")
@@ -70,6 +76,15 @@ public class UserController {
     @PermissionCheck
     public ActionResponse deleteCustomer(@PathVariable long id) throws Exception {
         userService.deleteUser(id);
+        return new ActionResponse(true);
+    }
+
+    @RequestMapping(value = "logout", method = RequestMethod.POST)
+    public ActionResponse logoutPage(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
         return new ActionResponse(true);
     }
 }
