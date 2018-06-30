@@ -59,7 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public AuthenticationEntryPoint unauthorizedEntryPoint() {
         return (HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) -> {
             String url = request.getRequestURI();
-            if (url.startsWith(servletContext.getContextPath() + "/client/client-api/") || url.startsWith(servletContext.getContextPath() + "//client/client-api/")) {
+            if (url.startsWith(servletContext.getContextPath() + "/client/api/") || url.startsWith(servletContext.getContextPath() + "//client/api/")) {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             } else {
                 response.sendRedirect(servletContext.getContextPath() + "/login");

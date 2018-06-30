@@ -50,7 +50,7 @@ public class ClientStorage {
         return result;
     }
 
-    public ListResult<Client> find(Long id, String firstName, String lastName, String email, String phone, Long schoolId, int limit, int offset) {
+    public ListResult<Client> find(Long id, String firstName, String lastName, String email, String phone, Long schoolId, Boolean active, int limit, int offset) {
         StringBuilder builder = new StringBuilder();
         Map<String, Object> params = new HashMap<>();
         if (id != null) {
@@ -76,6 +76,10 @@ public class ClientStorage {
         if (schoolId != null) {
             builder.append(" AND u.school.id = :schoolId");
             params.put("schoolId", schoolId);
+        }
+        if (active != null) {
+            builder.append(" AND u.active = :active");
+            params.put("active", active);
         }
         TypedQuery<Client> q = em.createQuery("SELECT u FROM Client u WHERE 1=1 " + builder.toString() + " ORDER BY u.id DESC", Client.class);
         Query cq = em.createQuery("SELECT COUNT(u.id) FROM Client u WHERE 1=1 " + builder.toString());

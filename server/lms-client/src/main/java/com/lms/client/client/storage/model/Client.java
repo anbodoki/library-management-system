@@ -20,6 +20,8 @@ public class Client {
     private String imgUrl;
     @ManyToOne
     private School school;
+    @Column(columnDefinition = "boolean default false")
+    private boolean active;
 
     public Long getId() {
         return id;
@@ -75,5 +77,13 @@ public class Client {
 
     public void setSchool(School school) {
         this.school = school;
+    }
+
+    public boolean getActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

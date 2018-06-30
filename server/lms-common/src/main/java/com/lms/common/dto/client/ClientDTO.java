@@ -16,6 +16,7 @@ public class ClientDTO implements Serializable {
     private String imgUrl;
     @NotNull
     private SchoolDTO school;
+    private boolean active;
 
     public Long getId() {
         return id;
@@ -71,5 +72,13 @@ public class ClientDTO implements Serializable {
 
     public void setSchool(SchoolDTO school) {
         this.school = school;
+    }
+
+    public boolean getActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

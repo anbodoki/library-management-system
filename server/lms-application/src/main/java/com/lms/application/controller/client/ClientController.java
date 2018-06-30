@@ -38,7 +38,7 @@ public class ClientController {
     public ActionResponse find(@RequestBody ClientFilteringRequest filteringRequest) throws Exception {
         ListResult<ClientDTO> result = clientService.find(filteringRequest.getId(), filteringRequest.getFirstName(),
                 filteringRequest.getLastName(), filteringRequest.getEmail(), filteringRequest.getPhone(),
-                filteringRequest.getSchoolId(), filteringRequest.getLimit(), filteringRequest.getOffset());
+                filteringRequest.getSchoolId(), filteringRequest.getActive(), filteringRequest.getLimit(), filteringRequest.getOffset());
         return new ActionResponseWithData<>(result, true);
     }
 }

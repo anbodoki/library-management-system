@@ -10,6 +10,7 @@ public class ClientFilteringRequest extends PagingRequest {
     private String email;
     private String phone;
     private Long schoolId;
+    private Boolean active;
 
     public Long getId() {
         return id;
@@ -57,5 +58,13 @@ public class ClientFilteringRequest extends PagingRequest {
 
     public void setSchoolId(Long schoolId) {
         this.schoolId = schoolId;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }

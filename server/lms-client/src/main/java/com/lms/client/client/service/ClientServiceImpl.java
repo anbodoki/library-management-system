@@ -29,8 +29,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public ListResult<ClientDTO> find(Long id, String firstName, String lastName, String email, String phone, Long schoolId, int limit, int offset) throws Exception {
-        ListResult<Client> schools = storage.find(id, firstName, lastName, email, phone, schoolId, limit, offset);
+    public ListResult<ClientDTO> find(Long id, String firstName, String lastName, String email, String phone, Long schoolId, Boolean active, int limit, int offset) throws Exception {
+        ListResult<Client> schools = storage.find(id, firstName, lastName, email, phone, schoolId, active, limit, offset);
         ListResult<ClientDTO> result = schools.copy(ClientDTO.class);
         result.setResultList(ClientHelper.fromEntities(schools.getResultList()));
         return result;
