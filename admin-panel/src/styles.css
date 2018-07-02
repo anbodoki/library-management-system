@@ -846,3 +846,10 @@ article.comment {
   display: flex;
   justify-content: space-between;
 }
+
+.cap-checkbox {
+  background: #f3f3f3;
+  position: relative;
+  padding: 7px;
+  list-style: none;
+}
