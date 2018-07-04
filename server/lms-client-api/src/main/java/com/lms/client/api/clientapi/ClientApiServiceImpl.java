@@ -5,12 +5,17 @@ import com.lms.atom.book.storage.model.ResourceType;
 import com.lms.atom.category.service.CategoryService;
 import com.lms.atom.material.service.MaterialTypeService;
 import com.lms.atom.messages.Messages;
+import com.lms.client.client.service.ClientService;
+import com.lms.client.exception.ClientException;
+import com.lms.client.school.service.SchoolService;
 import com.lms.common.dto.atom.category.CategoryDTO;
 import com.lms.common.dto.atom.materialtype.MaterialTypeDTO;
 import com.lms.common.dto.atom.resource.ResourceDTO;
 import com.lms.common.dto.atom.resource.ResourceTypeDTO;
 import com.lms.common.dto.cleintapi.LightResource;
 import com.lms.common.dto.cleintapi.helper.LightResourceHelper;
+import com.lms.common.dto.client.ClientDTO;
+import com.lms.common.dto.client.SchoolDTO;
 import com.lms.common.dto.response.ComboObject;
 import com.lms.common.dto.response.ListResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +33,16 @@ public class ClientApiServiceImpl implements ClientApiService {
     private final ResourceService resourceService;
     private final CategoryService categoryService;
     private final MaterialTypeService materialTypeService;
+    private final ClientService clientService;
+    private final SchoolService schoolService;
 
     @Autowired
-    public ClientApiServiceImpl(ResourceService resourceService, CategoryService categoryService, MaterialTypeService materialTypeService) {
+    public ClientApiServiceImpl(ResourceService resourceService, CategoryService categoryService, MaterialTypeService materialTypeService, ClientService clientService, SchoolService schoolService) {
         this.resourceService = resourceService;
         this.categoryService = categoryService;
         this.materialTypeService = materialTypeService;
+        this.clientService = clientService;
+        this.schoolService = schoolService;
     }
 
     @Override
@@ -96,6 +105,34 @@ public class ClientApiServiceImpl implements ClientApiService {
     @Override
     public ListResult<MaterialTypeDTO> getMaterialTypes() throws Exception {
         return materialTypeService.find(null, -1, -1);
+    }
+
+    @Override
+    public ListResult<SchoolDTO> getSchools() throws Exception {
+        return schoolService.find(null, -1, -1);
+    }
+
+    @Override
+    public ClientDTO getClientById(Long id) throws Exception {
+        return clientService.getById(id);
+    }
+
+    @Override
+    public ClientDTO updateClient(Long clientId, String firstName, String lastName, String phone, Long schoolId) throws ClientException {
+        ClientDTO client = clientService.getById(clientId);
+        if (firstName != null) {
+            client.setFirstName(firstName);
+        }
+        if (lastName != null) {
+            client.setLastName(lastName);
+        }
+        if (phone != null) {
+            client.setPhone(phone);
+        }
+        if (schoolId != null) {
+            client.setSchool(schoolService.getById(schoolId));
+        }
+        return clientService.update(client);
     }
 
 }

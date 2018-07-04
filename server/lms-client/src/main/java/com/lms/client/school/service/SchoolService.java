@@ -1,5 +1,7 @@
 package com.lms.client.school.service;
 
+import com.lms.client.exception.ClientException;
+import com.lms.common.dto.client.ClientDTO;
 import com.lms.common.dto.client.SchoolDTO;
 import com.lms.common.dto.client.UniversityDTO;
 import com.lms.common.dto.response.ComboObject;
@@ -20,4 +22,6 @@ public interface SchoolService {
     void delete(Long id) throws Exception;
 
     List<ComboObject> getUniversities();
+
+    SchoolDTO getById(Long schoolId) throws ClientException;
 }

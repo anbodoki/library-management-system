@@ -4,7 +4,9 @@ import com.lms.application.security.PermissionCheck;
 import com.lms.client.api.clientapi.ClientApiService;
 import com.lms.common.dto.atom.resource.ResourceDTO;
 import com.lms.common.dto.cleintapi.ClientResourceFilteringRequest;
+import com.lms.common.dto.cleintapi.ClientUpdateRequest;
 import com.lms.common.dto.cleintapi.LightResource;
+import com.lms.common.dto.client.ClientDTO;
 import com.lms.common.dto.request.GeneralFilteringRequest;
 import com.lms.common.dto.request.ResourceFilteringRequest;
 import com.lms.common.dto.response.ActionResponse;
@@ -68,5 +70,23 @@ public class ClientApiController {
     @GetMapping(value = "get-material-types", produces = MediaType.APPLICATION_JSON_VALUE)
     public ActionResponse getMaterialTypes() throws Exception {
         return new ActionResponseWithData<>(service.getMaterialTypes(), true);
+    }
+
+    @GetMapping(value = "get-client/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ActionResponse getClientById(@PathVariable Long id) throws Exception {
+        return new ActionResponseWithData<>(service.getClientById(id), true);
+    }
+
+    @GetMapping(value = "get-schools", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ActionResponse getSchools() throws Exception {
+        return new ActionResponseWithData<>(service.getSchools(), true);
+    }
+
+    @PostMapping(value = "update-client", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ActionResponse find(@RequestBody ClientUpdateRequest clientUpdateRequest) throws Exception {
+        ClientDTO result = service.updateClient(clientUpdateRequest.getClientId(),
+                clientUpdateRequest.getFirstName(), clientUpdateRequest.getLastName(),
+                clientUpdateRequest.getPhone(), clientUpdateRequest.getSchoolId());
+        return new ActionResponseWithData<>(result, true);
     }
 }

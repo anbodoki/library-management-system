@@ -22,5 +22,10 @@
             <artifactId>lms-atom</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.lms.client</groupId>
+            <artifactId>lms-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

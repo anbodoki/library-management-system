@@ -1,5 +1,6 @@
 package com.lms.client.client.service;
 
+import com.lms.client.exception.ClientException;
 import com.lms.common.dto.client.ClientDTO;
 import com.lms.common.dto.response.ListResult;
 
@@ -12,4 +13,8 @@ public interface ClientService {
     ClientDTO activate(ClientDTO client) throws Exception;
 
     ClientDTO deactivate(ClientDTO client) throws Exception;
+
+    ClientDTO getById(Long id) throws ClientException;
+
+    ClientDTO update(ClientDTO client);
 }

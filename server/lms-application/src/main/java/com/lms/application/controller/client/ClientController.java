@@ -10,10 +10,7 @@ import com.lms.common.dto.response.ActionResponseWithData;
 import com.lms.common.dto.response.ListResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/client/client-api/")
@@ -55,5 +52,4 @@ public class ClientController {
         ClientDTO result = clientService.deactivate(client);
         return new ActionResponseWithData<>(result, true);
     }
-
 }

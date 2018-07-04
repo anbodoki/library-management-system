@@ -4,11 +4,15 @@ import com.lms.client.client.storage.ClientHelper;
 import com.lms.client.client.storage.ClientRepository;
 import com.lms.client.client.storage.ClientStorage;
 import com.lms.client.client.storage.model.Client;
+import com.lms.client.exception.ClientException;
+import com.lms.client.messages.Messages;
 import com.lms.common.dto.client.ClientDTO;
 import com.lms.common.dto.response.ListResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityNotFoundException;
 
 @Service
 @Transactional
@@ -53,5 +57,19 @@ public class ClientServiceImpl implements ClientService {
         curr.setActive(false);
         Client saved = repository.save(curr);
         return ClientHelper.fromEntity(saved);
+    }
+
+    @Override
+    public ClientDTO getById(Long id) throws ClientException {
+        try {
+            return ClientHelper.fromEntity(repository.getOne(id));
+        } catch (EntityNotFoundException e) {
+            throw new ClientException(Messages.get("clientWithThisIdNotExists"));
+        }
+    }
+
+    @Override
+    public ClientDTO update(ClientDTO client) {
+        return ClientHelper.fromEntity(repository.save(ClientHelper.toEntity(client)));
     }
 }

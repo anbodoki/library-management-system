@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,5 +70,14 @@ public class SchoolServiceImpl implements SchoolService {
             result.add(new ComboObject(userType.name(), Messages.get(University.class.getSimpleName() + "_" + userType.name())));
         }
         return result;
+    }
+
+    @Override
+    public SchoolDTO getById(Long schoolId) throws ClientException {
+        try {
+            return SchoolHelper.fromEntity(repository.getOne(schoolId));
+        } catch (EntityNotFoundException e) {
+            throw new ClientException(Messages.get("schoolWithThisIDAlreadyExists"));
+        }
     }
 }
