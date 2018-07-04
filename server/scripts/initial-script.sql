@@ -45,6 +45,8 @@ INSERT INTO lms_v1.api_url (id, url) VALUES (43, '/client/school-api/save');
 INSERT INTO lms_v1.api_url (id, url) VALUES (44, '/client/school-api/language/{id}');
 INSERT INTO lms_v1.api_url (id, url) VALUES (45, '/client/client-api/quick-find');
 INSERT INTO lms_v1.api_url (id, url) VALUES (46, '/client/client-api/find');
+INSERT INTO lms_v1.api_url (id, url) VALUES (47, '/client/client-api/activate');
+INSERT INTO lms_v1.api_url (id, url) VALUES (48, '/client/client-api/deactivate');
 
 -- privilege inserts
 INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (1, 'user_view', 'Security', 'User View');
@@ -128,6 +130,8 @@ INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (16, 44);
 -- client view
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (17, 45);
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (17, 46);
+INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (17, 47);
+INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (17, 48);
 
 -- user role
 INSERT INTO lms_v1.userrole (id, color, name) VALUES (1, '#fdad9e', 'role');

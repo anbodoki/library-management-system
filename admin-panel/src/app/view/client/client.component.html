@@ -1,0 +1,44 @@
+<div class="">
+  <div class="page-title">
+    <div class="title_left">
+      <h3>Clients
+        <small>Managing clients</small>
+      </h3>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <lms-table [items]="clients"
+             [addable]="false"
+             [searchable]="true"
+             [advanceFilter]="true"
+             (onFilteredClick)="filterClicked($event)"
+             (onTermSearch)="updateClientsData($event)"
+             [pagination]="true"
+             [pageNum]="pageNum"
+             [reloadEvent]="loader"
+             (onPageChange)="changePage($event)"
+
+  >
+    <lms-column header="ID" field="id" filtered="number"></lms-column>
+    <lms-column header="First Name" field="firstName" filtered="text"></lms-column>
+    <lms-column header="Last Name" field="lastName" filtered="text"></lms-column>
+    <lms-column header="Email" field="email" filtered="text"></lms-column>
+    <lms-column header="Phone" field="phone" filtered="text"></lms-column>
+    <lms-column header="School" field="school" filtered="dynamic-combo" [filteredOptions]="schools"
+                filteredFieldName="schoolId" filteredOptionName="name" filteredOptionValue="id"
+                [filteredOptionReturnObject]="false" [filteredOptionColumns]="['name']"
+                (onSearchFunction)="loadSchools($event)">
+      <ng-template #dataTableCell let-item="item">
+        <span *ngIf="item.school">{{item.school.name}}</span>
+      </ng-template>
+    </lms-column>
+    <lms-column header="Active" field="active" filtered="checkbox">
+      <ng-template #dataTableCell let-item="item">
+        <div *ngIf="item.active" class="text-center"><i class="fa fa-check-circle f-16 green lms-cursor" (click)="deactivate(item)"></i></div>
+        <div *ngIf="!item.active" class="text-center"><i class="fa fa-times-circle f-16 red lms-cursor" (click)="activate(item)"></i></div>
+      </ng-template>
+    </lms-column>
+  </lms-table>
+</div>

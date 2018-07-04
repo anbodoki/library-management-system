@@ -41,7 +41,7 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Override
     public ListResult<SchoolDTO> find(Long id, String name, UniversityDTO university, int limit, int offset) throws Exception {
-        ListResult<School> schools = storage.find(id, name, University.valueOf(university.name()), limit, offset);
+        ListResult<School> schools = storage.find(id, name, university != null ? University.valueOf(university.name()) : null, limit, offset);
         ListResult<SchoolDTO> result = schools.copy(SchoolDTO.class);
         result.setResultList(SchoolHelper.fromEntities(schools.getResultList()));
         return result;

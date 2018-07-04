@@ -46,6 +46,8 @@ import {SchoolService} from "./services/school.service";
 import {LmsDynamicComboComponent} from "./lms-components/lms-fields/lms-dynamic-combo.component";
 import {APP_BASE_HREF} from "@angular/common";
 import {environment} from "../environments/environment";
+import {ClientComponent} from "./view/client/client.component";
+import {ClientService} from "./services/client.service";
 
 @NgModule({
   declarations: [
@@ -60,6 +62,7 @@ import {environment} from "../environments/environment";
     ConfigurationPropertyComponent,
     MaterialTypeComponent,
     CategoryComponent,
+    ClientComponent,
     ResourceComponent,
     DashboardComponent,
     LMSColorPickerComponent,
@@ -99,6 +102,7 @@ import {environment} from "../environments/environment";
     UploadFileService,
     ResourceService,
     DashboardService,
+    ClientService,
     SchoolService,
     {provide: APP_BASE_HREF, useValue : environment.contextPath }
   ],

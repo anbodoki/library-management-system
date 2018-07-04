@@ -1,6 +1,7 @@
 package com.lms.client.client.service;
 
 import com.lms.client.client.storage.ClientHelper;
+import com.lms.client.client.storage.ClientRepository;
 import com.lms.client.client.storage.ClientStorage;
 import com.lms.client.client.storage.model.Client;
 import com.lms.common.dto.client.ClientDTO;
@@ -14,10 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class ClientServiceImpl implements ClientService {
 
     private final ClientStorage storage;
+    private final ClientRepository repository;
 
     @Autowired
-    public ClientServiceImpl(ClientStorage storage) {
+    public ClientServiceImpl(ClientStorage storage, ClientRepository repository) {
         this.storage = storage;
+        this.repository = repository;
     }
 
     @Override
@@ -34,5 +37,21 @@ public class ClientServiceImpl implements ClientService {
         ListResult<ClientDTO> result = schools.copy(ClientDTO.class);
         result.setResultList(ClientHelper.fromEntities(schools.getResultList()));
         return result;
+    }
+
+    @Override
+    public ClientDTO activate(ClientDTO client) throws Exception {
+        Client curr = repository.getOne(client.getId());
+        curr.setActive(true);
+        Client saved = repository.save(curr);
+        return ClientHelper.fromEntity(saved);
+    }
+
+    @Override
+    public ClientDTO deactivate(ClientDTO client) throws Exception {
+        Client curr = repository.getOne(client.getId());
+        curr.setActive(false);
+        Client saved = repository.save(curr);
+        return ClientHelper.fromEntity(saved);
     }
 }

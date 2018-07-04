@@ -19,6 +19,7 @@ public class TemplateController {
             "/configurationProperties",
             "/materialTypes",
             "/resources",
+            "/clients",
             "/schools",
             "/categories"})
     public String index() {

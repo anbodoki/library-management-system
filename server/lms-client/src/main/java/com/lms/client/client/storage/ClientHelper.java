@@ -21,6 +21,7 @@ public class ClientHelper {
         result.setPhone(client.getPhone());
         result.setImgUrl(client.getImgUrl());
         result.setSchool(SchoolHelper.fromEntity(client.getSchool()));
+        result.setActive(client.getActive());
         return result;
     }
 
@@ -36,6 +37,7 @@ public class ClientHelper {
         result.setPhone(client.getPhone());
         result.setImgUrl(client.getImgUrl());
         result.setSchool(SchoolHelper.toEntity(client.getSchool()));
+        result.setActive(client.getActive());
         return result;
     }
 

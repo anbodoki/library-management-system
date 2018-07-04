@@ -41,4 +41,19 @@ public class ClientController {
                 filteringRequest.getSchoolId(), filteringRequest.getActive(), filteringRequest.getLimit(), filteringRequest.getOffset());
         return new ActionResponseWithData<>(result, true);
     }
+
+    @PostMapping(value = "activate", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PermissionCheck
+    public ActionResponse activate(@RequestBody ClientDTO client) throws Exception {
+        ClientDTO result = clientService.activate(client);
+        return new ActionResponseWithData<>(result, true);
+    }
+
+    @PostMapping(value = "deactivate", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PermissionCheck
+    public ActionResponse deactivate(@RequestBody ClientDTO client) throws Exception {
+        ClientDTO result = clientService.deactivate(client);
+        return new ActionResponseWithData<>(result, true);
+    }
+
 }
