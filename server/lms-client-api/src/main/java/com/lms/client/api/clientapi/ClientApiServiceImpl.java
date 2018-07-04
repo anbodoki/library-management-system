@@ -72,6 +72,8 @@ public class ClientApiServiceImpl implements ClientApiService {
                 null, null,
                 null, null,
                 categoryCode,
+                null,
+                null,
                 limit, offset);
         ListResult<LightResource> result = resources.copy(LightResource.class);
         result.setResultList(LightResourceHelper.toLights(resources.getResultList()));
