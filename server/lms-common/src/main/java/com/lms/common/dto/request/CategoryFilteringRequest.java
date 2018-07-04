@@ -8,6 +8,7 @@ public class CategoryFilteringRequest extends PagingRequest {
     private String code;
     private String name;
     private String description;
+    private Boolean special;
 
     public Long getId() {
         return id;
@@ -39,5 +40,13 @@ public class CategoryFilteringRequest extends PagingRequest {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Boolean getSpecial() {
+        return special;
+    }
+
+    public void setSpecial(Boolean special) {
+        this.special = special;
     }
 }

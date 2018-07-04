@@ -21,6 +21,8 @@
         <lms-input label="Color" fieldName="color" [fieldObject]="selectedCategory"
                    fieldType="color" [capRequired]="true"
                    alertText="Cannot be empty"></lms-input>
+        <lms-checkbox [visible]="(selectedCategory && selectedCategory.id)" label="Special" fieldName="special"
+                      [fieldObject]="selectedCategory"></lms-checkbox>
 
       </div>
       <div class="modal-footer">
@@ -71,6 +73,12 @@
     <lms-column header="Name" field="name" filtered="text"></lms-column>
     <lms-column header="Code" field="code" filtered="text"></lms-column>
     <lms-column header="Description" field="description"></lms-column>
+    <lms-column header="Special" field="special" filtered="checkbox">
+      <ng-template #dataTableCell let-item="item">
+        <div *ngIf="item.special" class="text-center"><i class="fa fa-check-circle f-16 green"></i></div>
+        <div *ngIf="!item.special" class="text-center"><i class="fa fa-times-circle f-16 red"></i></div>
+      </ng-template>
+    </lms-column>
   </lms-table>
 
 </div>

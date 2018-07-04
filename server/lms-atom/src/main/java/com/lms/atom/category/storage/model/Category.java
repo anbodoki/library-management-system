@@ -16,6 +16,8 @@ public class Category implements Serializable {
     private String name;
     private String description;
     private String color;
+    @Column(columnDefinition = "boolean default false")
+    private boolean special;
 
     public Long getId() {
         return id;
@@ -55,5 +57,13 @@ public class Category implements Serializable {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public boolean getSpecial() {
+        return special;
+    }
+
+    public void setSpecial(boolean special) {
+        this.special = special;
     }
 }

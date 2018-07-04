@@ -36,8 +36,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public ListResult<CategoryDTO> find(Long id, String code, String name, String description, int limit, int offset) throws Exception {
-        ListResult<Category> materialTypes = storage.find(id, code, name, description, limit, offset);
+    public ListResult<CategoryDTO> find(Long id, String code, String name, String description, Boolean special, int limit, int offset) throws Exception {
+        ListResult<Category> materialTypes = storage.find(id, code, name, description, special, limit, offset);
         ListResult<CategoryDTO> result = materialTypes.copy(CategoryDTO.class);
         result.setResultList(CategoryHelper.fromEntities(materialTypes.getResultList()));
         return result;

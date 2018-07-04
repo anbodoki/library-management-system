@@ -35,7 +35,7 @@ public class CategoryController {
     @PermissionCheck
     public ActionResponse find(@RequestBody CategoryFilteringRequest request) throws Exception {
         ListResult<CategoryDTO> result = categoryService.find(request.getId(),
-                request.getCode(), request.getName(), request.getDescription(), request.getLimit(), request.getOffset());
+                request.getCode(), request.getName(), request.getDescription(), request.getSpecial(), request.getLimit(), request.getOffset());
         return new ActionResponseWithData<>(result, true);
     }
 

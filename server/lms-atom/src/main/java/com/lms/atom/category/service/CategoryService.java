@@ -8,7 +8,7 @@ public interface CategoryService {
 
     ListResult<CategoryDTO> find(String query, int limit, int offset) throws Exception;
 
-    ListResult<CategoryDTO> find(Long id, String code, String name, String description, int limit, int offset) throws Exception;
+    ListResult<CategoryDTO> find(Long id, String code, String name, String description, Boolean special, int limit, int offset) throws Exception;
 
     CategoryDTO update(CategoryDTO category) throws Exception;
 

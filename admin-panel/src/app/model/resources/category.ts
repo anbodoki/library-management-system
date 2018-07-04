@@ -4,4 +4,5 @@ export class Category {
   public code: string;
   public description: string;
   public color: string;
+  public active: boolean;
 }

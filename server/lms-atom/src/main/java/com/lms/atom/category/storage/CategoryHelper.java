@@ -18,6 +18,7 @@ public class CategoryHelper {
         result.setName(category.getName());
         result.setDescription(category.getDescription());
         result.setColor(category.getColor());
+        result.setSpecial(category.getSpecial());
         return result;
     }
 
@@ -31,6 +32,7 @@ public class CategoryHelper {
         result.setName(category.getName());
         result.setDescription(category.getDescription());
         result.setColor(category.getColor());
+        result.setSpecial(category.getSpecial());
         return result;
     }
 

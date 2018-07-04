@@ -14,6 +14,7 @@ public class CategoryDTO implements Serializable {
     private String description;
     @NotNull
     private String color;
+    private boolean special;
 
     public Long getId() {
         return id;
@@ -53,5 +54,13 @@ public class CategoryDTO implements Serializable {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public boolean getSpecial() {
+        return special;
+    }
+
+    public void setSpecial(boolean special) {
+        this.special = special;
     }
 }

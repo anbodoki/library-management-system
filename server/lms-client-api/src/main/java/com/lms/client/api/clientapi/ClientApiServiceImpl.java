@@ -23,14 +23,14 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ClientServiceApiImpl implements ClientApiService {
+public class ClientApiServiceImpl implements ClientApiService {
 
     private final ResourceService resourceService;
     private final CategoryService categoryService;
     private final MaterialTypeService materialTypeService;
 
     @Autowired
-    public ClientServiceApiImpl(ResourceService resourceService, CategoryService categoryService, MaterialTypeService materialTypeService) {
+    public ClientApiServiceImpl(ResourceService resourceService, CategoryService categoryService, MaterialTypeService materialTypeService) {
         this.resourceService = resourceService;
         this.categoryService = categoryService;
         this.materialTypeService = materialTypeService;
@@ -89,9 +89,8 @@ public class ClientServiceApiImpl implements ClientApiService {
     }
 
     @Override
-    public ListResult<CategoryDTO> getSpecialCategories() {
-        //TODO after category modification
-        return null;
+    public ListResult<CategoryDTO> getSpecialCategories() throws Exception {
+        return categoryService.find(null, null, null, null, true, -1, -1);
     }
 
     @Override

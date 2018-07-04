@@ -49,7 +49,7 @@ public class CategoryStorage {
         return result;
     }
 
-    public ListResult<Category> find(Long id, String code, String name, String description, int limit, int offset) {
+    public ListResult<Category> find(Long id, String code, String name, String description, Boolean special, int limit, int offset) {
         StringBuilder builder = new StringBuilder();
         Map<String, Object> params = new HashMap<>();
         if (id != null) {
@@ -67,6 +67,10 @@ public class CategoryStorage {
         if (description != null) {
             builder.append(" AND LOWER(u.description) LIKE LOWER(:description)");
             params.put("description", "%" + description + "%");
+        }
+        if (special != null) {
+            builder.append(" AND u.special = :special");
+            params.put("special", special);
         }
         TypedQuery<Category> q = em.createQuery("SELECT u FROM Category u WHERE 1=1 " + builder.toString() + " ORDER BY u.id DESC", Category.class);
         Query cq = em.createQuery("SELECT COUNT(u.id) FROM Category u WHERE 1=1 " + builder.toString());

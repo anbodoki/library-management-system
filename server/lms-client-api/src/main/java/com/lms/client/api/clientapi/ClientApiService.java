@@ -30,7 +30,7 @@ public interface ClientApiService {
 
     ListResult<CategoryDTO> getCategories() throws Exception;
 
-    ListResult<CategoryDTO> getSpecialCategories();
+    ListResult<CategoryDTO> getSpecialCategories() throws Exception;
 
     ListResult<MaterialTypeDTO> getMaterialTypes() throws Exception;
 }
