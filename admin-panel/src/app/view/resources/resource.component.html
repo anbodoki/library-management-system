@@ -3,6 +3,10 @@
                    (onOkClick)="onDeleteConfirmed()">
 </lms-confirm-modal>
 
+<lms-upload-modal [abilityToUpload]="isManage" [fieldObject]="selectedResource" fieldName="imageUrl"
+                  (uploadImageClick)="updateResource($event)"
+                  [prevFieldObject]="utils.getPrevObj()"></lms-upload-modal>
+
 <div *ngIf="isManage" class="modal fade" data-backdrop="static" id="resourceModal" role="dialog">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -42,9 +46,12 @@
                      alertText="UDC must contain 2-10 characters"></lms-input>
         </div>
         <div class="half-width">
-          <lms-input label="Quantity" fieldName="quantity" [capRequired]="true" [fieldObject]="selectedResource"
+          <lms-input label="ISSN" fieldName="issn" [capRequired]="true" [fieldObject]="selectedResource"
                      alertText="Must not be empty"
-                     fieldType="number"></lms-input>
+                     fieldType="text"></lms-input>
+          <lms-input label="Place" fieldName="place" [capRequired]="true" [fieldObject]="selectedResource"
+                     alertText="Must not be empty"
+                     fieldType="text"></lms-input>
           <lms-input label="Identifier" fieldName="identifier"
                      [fieldObject]="selectedResource" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
                      alertText="Identifier must contain minimum 2 characters"></lms-input>
@@ -139,6 +146,13 @@
              (onPageChange)="changePage($event)"
 
   >
+    <lms-column header="" field="imageUrl">
+      <ng-template #dataTableCell let-item="item">
+        <div class="user-profile img-square cap-pointer cap-hover" title="Upload Image" (click)="openImageModal(item)">
+          <img src="{{item.imageUrl}}" alt="NO IMAGE"></div>
+      </ng-template>
+    </lms-column>
+
     <lms-column header="ID" field="id" filtered="number"></lms-column>
     <lms-column header="Name" field="name" filtered="text"></lms-column>
     <lms-column header="Author" field="author" filtered="text"></lms-column>
@@ -153,10 +167,8 @@
     <lms-column header="Page count" field="pageNum" filtered="number"></lms-column>
     <lms-column header="ISBN" field="isbn" filtered="text"></lms-column>
     <lms-column header="UDC" field="udc" filtered="text"></lms-column>
-    <lms-column header="Quantity" field="quantity" filtered="number"></lms-column>
-    <lms-column header="Rented Quantity" field="rentedQuantity" filtered="number"></lms-column>
-    <lms-column header="Identifier" field="identifier" filtered="text"></lms-column>
-    <!-- TODO add reference URL -->
+    <lms-column header="Place" field="place" filtered="text"></lms-column>
+    <lms-column header="ISSN" field="issn" filtered="text"></lms-column>
     <lms-column header="Identifier" field="identifier" filtered="text"></lms-column>
     <lms-column header="Creation date" field="creationDate" filtered="date">
       <ng-template #dataTableCell let-item="item">

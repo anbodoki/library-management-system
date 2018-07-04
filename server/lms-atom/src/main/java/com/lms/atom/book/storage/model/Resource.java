@@ -42,6 +42,10 @@ public class Resource implements Serializable {
     private int quantity;
     @Column(columnDefinition = "bigint default 0")
     private int rentedQuantity;
+    private String issn;
+    private String place;
+    private String imageUrl;
+    private String resourceUrl;
 
     public Long getId() {
         return id;
@@ -201,5 +205,37 @@ public class Resource implements Serializable {
 
     public void setRentedQuantity(int rentedQuantity) {
         this.rentedQuantity = rentedQuantity;
+    }
+
+    public String getIssn() {
+        return issn;
+    }
+
+    public void setIssn(String issn) {
+        this.issn = issn;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getResourceUrl() {
+        return resourceUrl;
+    }
+
+    public void setResourceUrl(String resourceUrl) {
+        this.resourceUrl = resourceUrl;
     }
 }

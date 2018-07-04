@@ -69,6 +69,8 @@ public class ResourceStorage {
                                      Date fromCreationDate, Date toCreationDate,
                                      Date fromModificationDate, Date toModificationDate,
                                      Long categoryCode,
+                                     String issn,
+                                     String place,
                                      int limit, int offset) {
         StringBuilder builder = new StringBuilder();
         Map<String, Object> params = new HashMap<>();
@@ -147,6 +149,14 @@ public class ResourceStorage {
         if (categoryCode != null) {
             builder.append(" AND u.category.id = :categoryCode");
             params.put("categoryCode", categoryCode);
+        }
+        if (issn != null) {
+            builder.append(" AND u.issn = :issn");
+            params.put("issn", issn);
+        }
+        if (place != null) {
+            builder.append(" AND u.place = :place");
+            params.put("place", place);
         }
         TypedQuery<Resource> q = em.createQuery("SELECT u FROM Resource u WHERE 1=1 " + builder.toString() + " ORDER BY u.id DESC", Resource.class);
         Query cq = em.createQuery("SELECT COUNT(u.id) FROM Resource u WHERE 1=1 " + builder.toString());

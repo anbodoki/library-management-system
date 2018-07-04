@@ -36,8 +36,12 @@ public class ResourceHelper {
         result.setCreationDate(resource.getCreationDate());
         result.setModificationDate(resource.getModificationDate());
         result.setCategory(CategoryHelper.fromEntity(resource.getCategory()));
-        resource.setQuantity(resource.getQuantity());
-        resource.setRentedQuantity(resource.getRentedQuantity());
+        result.setQuantity(resource.getQuantity());
+        result.setRentedQuantity(resource.getRentedQuantity());
+        result.setIssn(resource.getIssn());
+        result.setPlace(resource.getPlace());
+        result.setImageUrl(resource.getImageUrl());
+        result.setResourceUrl(resource.getResourceUrl());
         return result;
     }
 
@@ -64,8 +68,12 @@ public class ResourceHelper {
         result.setCreationDate(resource.getCreationDate());
         result.setModificationDate(resource.getModificationDate());
         result.setCategory(CategoryHelper.toEntity(resource.getCategory()));
-        resource.setQuantity(resource.getQuantity());
-        resource.setRentedQuantity(resource.getRentedQuantity());
+        result.setQuantity(resource.getQuantity());
+        result.setRentedQuantity(resource.getRentedQuantity());
+        result.setIssn(resource.getIssn());
+        result.setPlace(resource.getPlace());
+        result.setImageUrl(resource.getImageUrl());
+        result.setResourceUrl(resource.getResourceUrl());
         return result;
     }
 

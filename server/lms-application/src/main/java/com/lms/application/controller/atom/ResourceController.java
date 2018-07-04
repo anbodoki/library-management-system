@@ -51,6 +51,8 @@ public class ResourceController {
                 request.getFromCreationDate(), request.getToCreationDate(),
                 request.getFromModificationDate(), request.getToModificationDate(),
                 request.getCategoryId(),
+                request.getIssn(),
+                request.getPlace(),
                 request.getLimit(), request.getOffset());
         return new ActionResponseWithData<>(result, true);
     }

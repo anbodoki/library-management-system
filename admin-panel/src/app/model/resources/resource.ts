@@ -23,4 +23,8 @@ export class Resource {
   public category: Category;
   public quantity: number;
   public rentedQuantity: number;
+  public issn: string;
+  public place: string;
+  public imageUrl: string;
+  public resourceUrl: string;
 }

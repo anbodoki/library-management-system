@@ -29,6 +29,8 @@ public interface ResourceService {
                                  Date fromCreationDate, Date toCreationDate,
                                  Date fromModificationDate, Date toModificationDate,
                                  Long categoryCode,
+                                 String issn,
+                                 String place,
                                  int limit, int offset) throws Exception;
 
     ResourceDTO update(ResourceDTO resource) throws AtomException;

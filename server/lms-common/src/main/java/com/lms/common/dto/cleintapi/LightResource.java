@@ -12,6 +12,7 @@ public class LightResource implements Serializable {
     private String edition;
     private String publisher;
     private Date editionDate;
+    private String imageUrl;
 
     public Long getId() {
         return id;
@@ -67,5 +68,13 @@ public class LightResource implements Serializable {
 
     public void setEditionDate(Date editionDate) {
         this.editionDate = editionDate;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

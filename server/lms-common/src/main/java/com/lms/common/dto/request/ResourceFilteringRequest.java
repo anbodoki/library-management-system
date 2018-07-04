@@ -26,6 +26,8 @@ public class ResourceFilteringRequest extends PagingRequest {
     private Date fromModificationDate;
     private Date toModificationDate;
     private Long categoryId;
+    private String issn;
+    private String place;
 
     public Long getId() {
         return id;
@@ -177,5 +179,21 @@ public class ResourceFilteringRequest extends PagingRequest {
 
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public String getIssn() {
+        return issn;
+    }
+
+    public void setIssn(String issn) {
+        this.issn = issn;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
     }
 }

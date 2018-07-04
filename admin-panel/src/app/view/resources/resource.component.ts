@@ -182,4 +182,10 @@ export class ResourceComponent implements OnInit {
       }
     );
   }
+
+  openImageModal(item) {
+    this.selectedResource = <Resource> JSON.parse(JSON.stringify(item));
+    this.utils.setPrevObj(JSON.stringify(item));
+    $("resource-list .uploadImageModal").modal("show");
+  }
 }
