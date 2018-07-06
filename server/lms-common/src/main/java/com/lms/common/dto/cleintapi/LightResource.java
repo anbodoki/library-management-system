@@ -1,5 +1,7 @@
 package com.lms.common.dto.cleintapi;
 
+import com.lms.common.dto.atom.category.CategoryDTO;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,6 +15,7 @@ public class LightResource implements Serializable {
     private String publisher;
     private Date editionDate;
     private String imageUrl;
+    private CategoryDTO category;
 
     public Long getId() {
         return id;
@@ -76,5 +79,13 @@ public class LightResource implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public CategoryDTO getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryDTO category) {
+        this.category = category;
     }
 }
