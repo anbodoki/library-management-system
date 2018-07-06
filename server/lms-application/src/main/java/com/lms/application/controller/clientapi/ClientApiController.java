@@ -3,6 +3,7 @@ package com.lms.application.controller.clientapi;
 import com.lms.application.security.PermissionCheck;
 import com.lms.client.api.clientapi.ClientApiService;
 import com.lms.common.dto.atom.resource.ResourceDTO;
+import com.lms.common.dto.cleintapi.AddRemoveFavouriteRequest;
 import com.lms.common.dto.cleintapi.ClientResourceFilteringRequest;
 import com.lms.common.dto.cleintapi.ClientUpdateRequest;
 import com.lms.common.dto.cleintapi.LightResource;
@@ -88,5 +89,22 @@ public class ClientApiController {
                 clientUpdateRequest.getFirstName(), clientUpdateRequest.getLastName(),
                 clientUpdateRequest.getPhone(), clientUpdateRequest.getSchoolId());
         return new ActionResponseWithData<>(result, true);
+    }
+
+    @PostMapping(value = "add-favourite", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ActionResponse addFavourite(@RequestBody AddRemoveFavouriteRequest request) throws Exception {
+        service.addFavorite(request.getClientId(), request.getResourceId());
+        return new ActionResponse(true);
+    }
+
+    @PostMapping(value = "remove-favourite", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ActionResponse removeFavourite(@RequestBody AddRemoveFavouriteRequest request) throws Exception {
+        service.removeFavorite(request.getClientId(), request.getResourceId());
+        return new ActionResponse(true);
+    }
+
+    @GetMapping(value = "get-client-favourite/{clientId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ActionResponse getClientFavourite(@PathVariable Long clientId) throws Exception {
+        return new ActionResponseWithData<>(service.getClientFavorite(clientId), true);
     }
 }

@@ -16,6 +16,7 @@ public class LightResource implements Serializable {
     private Date editionDate;
     private String imageUrl;
     private CategoryDTO category;
+    private boolean clientFavorite;
 
     public Long getId() {
         return id;
@@ -87,5 +88,13 @@ public class LightResource implements Serializable {
 
     public void setCategory(CategoryDTO category) {
         this.category = category;
+    }
+
+    public boolean getClientFavorite() {
+        return clientFavorite;
+    }
+
+    public void setClientFavorite(boolean clientFavorite) {
+        this.clientFavorite = clientFavorite;
     }
 }

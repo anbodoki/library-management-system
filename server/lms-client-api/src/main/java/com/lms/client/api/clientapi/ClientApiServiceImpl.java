@@ -6,7 +6,7 @@ import com.lms.atom.category.service.CategoryService;
 import com.lms.atom.material.service.MaterialTypeService;
 import com.lms.atom.messages.Messages;
 import com.lms.client.client.service.ClientService;
-import com.lms.client.exception.ClientException;
+import com.lms.client.favorite.service.FavoriteService;
 import com.lms.client.school.service.SchoolService;
 import com.lms.common.dto.atom.category.CategoryDTO;
 import com.lms.common.dto.atom.materialtype.MaterialTypeDTO;
@@ -35,14 +35,16 @@ public class ClientApiServiceImpl implements ClientApiService {
     private final MaterialTypeService materialTypeService;
     private final ClientService clientService;
     private final SchoolService schoolService;
+    private final FavoriteService favoriteService;
 
     @Autowired
-    public ClientApiServiceImpl(ResourceService resourceService, CategoryService categoryService, MaterialTypeService materialTypeService, ClientService clientService, SchoolService schoolService) {
+    public ClientApiServiceImpl(ResourceService resourceService, CategoryService categoryService, MaterialTypeService materialTypeService, ClientService clientService, SchoolService schoolService, FavoriteService favoriteService) {
         this.resourceService = resourceService;
         this.categoryService = categoryService;
         this.materialTypeService = materialTypeService;
         this.clientService = clientService;
         this.schoolService = schoolService;
+        this.favoriteService = favoriteService;
     }
 
     @Override
@@ -50,6 +52,7 @@ public class ClientApiServiceImpl implements ClientApiService {
         ListResult<ResourceDTO> resources = resourceService.find(query, limit, offset);
         ListResult<LightResource> result = resources.copy(LightResource.class);
         result.setResultList(LightResourceHelper.toLights(resources.getResultList()));
+        //TODO get client from security context and determine their favourite resources
         return null;
     }
 
@@ -77,12 +80,14 @@ public class ClientApiServiceImpl implements ClientApiService {
                 limit, offset);
         ListResult<LightResource> result = resources.copy(LightResource.class);
         result.setResultList(LightResourceHelper.toLights(resources.getResultList()));
+        //TODO get client from security context and determine their favourite resources
         return result;
     }
 
     @Override
     public ResourceDTO getResourceById(Long id) throws Exception {
         return resourceService.getResourceById(id);
+        //TODO get client from security context and determine their favourite resources
     }
 
     @Override
@@ -120,7 +125,7 @@ public class ClientApiServiceImpl implements ClientApiService {
     }
 
     @Override
-    public ClientDTO updateClient(Long clientId, String firstName, String lastName, String phone, Long schoolId) throws ClientException {
+    public ClientDTO updateClient(Long clientId, String firstName, String lastName, String phone, Long schoolId) throws Exception {
         ClientDTO client = clientService.getById(clientId);
         if (firstName != null) {
             client.setFirstName(firstName);
@@ -135,6 +140,21 @@ public class ClientApiServiceImpl implements ClientApiService {
             client.setSchool(schoolService.getById(schoolId));
         }
         return clientService.update(client);
+    }
+
+    @Override
+    public void addFavorite(Long clientId, Long resourceId) throws Exception {
+        favoriteService.addFavorite(clientId, resourceId);
+    }
+
+    @Override
+    public void removeFavorite(Long clientId, Long resourceId) throws Exception {
+        favoriteService.removeFavorite(clientId, resourceId);
+    }
+
+    @Override
+    public List<LightResource> getClientFavorite(Long clientId) throws Exception {
+        return LightResourceHelper.toLights(favoriteService.getClientFavorite(clientId));
     }
 
 }

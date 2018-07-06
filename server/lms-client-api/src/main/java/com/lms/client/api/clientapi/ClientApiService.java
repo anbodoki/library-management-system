@@ -1,5 +1,6 @@
 package com.lms.client.api.clientapi;
 
+import com.lms.client.api.exception.ClientApiException;
 import com.lms.client.exception.ClientException;
 import com.lms.common.dto.atom.category.CategoryDTO;
 import com.lms.common.dto.atom.materialtype.MaterialTypeDTO;
@@ -41,5 +42,11 @@ public interface ClientApiService {
 
     ClientDTO getClientById(Long id) throws Exception;
 
-    ClientDTO updateClient(Long clientId, String firstName, String lastName, String phone, Long schoolId) throws ClientException;
+    ClientDTO updateClient(Long clientId, String firstName, String lastName, String phone, Long schoolId) throws Exception;
+
+    void addFavorite(Long clientId, Long resourceId) throws Exception;
+
+    void removeFavorite(Long clientId, Long resourceId) throws Exception;
+
+    List<LightResource> getClientFavorite(Long clientId) throws Exception;
 }
