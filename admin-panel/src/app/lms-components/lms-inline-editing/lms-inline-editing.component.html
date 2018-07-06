@@ -1,0 +1,32 @@
+<div *ngFor="let item of items" class="lms-flex-aligned">
+  <div *ngFor="let column of columns">
+    <lms-input *ngIf="column.filtered == 'text' || column.filtered == 'number'" label="{{column.header}}" [fieldType]="column.filtered"
+               [fieldObject]="item" fieldName="{{column.field}}" [capPattern]="column.capPattern"
+               [capRequired]="column.capRequired" [alertText]="column.alertText"
+               placeholder="{{column.header}}"></lms-input>
+    <lms-checkbox *ngIf="column.filtered == 'checkbox'" [fieldObject]="item"
+                  fieldName="{{column.field}}" label="{{column.header}}" [removable]="true"
+                  [capRequired]="column.capRequired" [alertText]="column.alertText"></lms-checkbox>
+    <lms-combo *ngIf="column.filtered == 'combo'" label="{{column.header}}" [values]="column.filteredOptions"
+               [fieldObject]="item" fieldName="{{column.filteredFieldName}}"
+               placeholder="{{column.header ? 'Select ' + column.header : 'Select ' + column.field}}"
+               [optionLabel]="column.filteredOptionName" [optionValue]="column.filteredOptionValue"
+               [returnObject]="column.filteredOptionReturnObject" [capRequired]="column.capRequired"
+               [alertText]="column.alertText"></lms-combo>
+    <lms-dynamic-component *ngIf="column.filtered == 'dynamic-combo'" label="{{column.header}}" [values]="column.filteredOptions"
+                           [fieldObject]="item" fieldName="{{column.filteredFieldName}}"
+                           placeholder="{{'Select ' + column.header}}"
+                           [returnFieldName]="column.filteredOptionValue" [showValue]="column.filteredOptionName"
+                           [capRequired]="column.capRequired" [alertText]="column.alertText"
+                           [returnObject]="column.filteredOptionReturnObject"
+                           (onSearch)="column.onSearchedFunction($event)">
+      <lms-dynamic-column *ngFor="let n of column.filteredOptionColumns" [field]="n"></lms-dynamic-column>
+    </lms-dynamic-component>
+  </div>
+</div>
+<button type="button" class="btn btn-success"
+        (click)="onAddClicked()"><i class="fa fa-plus"></i>
+</button>
+<button type="button" class="btn btn-danger"
+        (click)="onRemoveClicked()"><i class="fa fa-minus"></i>
+</button>

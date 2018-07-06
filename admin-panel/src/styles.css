@@ -853,3 +853,22 @@ article.comment {
   padding: 7px;
   list-style: none;
 }
+
+.lms-flex-aligned {
+  display: flex;
+}
+
+.lms-flex-aligned > div {
+  margin-right: 2px;
+  width: 100%;
+}
+
+.lms-flex-aligned > lms-combo {
+  margin-right: 2px;
+  width: 100%;
+}
+
+.lms-flex-aligned > label {
+  margin-right: 2px;
+  width: 100%;
+}

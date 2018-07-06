@@ -48,6 +48,7 @@ import {APP_BASE_HREF} from "@angular/common";
 import {environment} from "../environments/environment";
 import {ClientComponent} from "./view/client/client.component";
 import {ClientService} from "./services/client.service";
+import {LMSInlineEditingComponent} from "./lms-components/lms-inline-editing/lms-inline-editing.component";
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import {ClientService} from "./services/client.service";
     LMSTableComponent,
     LMSColumnComponent,
     FormUploadComponent,
+    LMSInlineEditingComponent,
     LmsUploadModal
   ],
   imports: [
