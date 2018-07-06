@@ -22,6 +22,7 @@ public class ClientHelper {
         result.setImgUrl(client.getImgUrl());
         result.setSchool(SchoolHelper.fromEntity(client.getSchool()));
         result.setActive(client.getActive());
+        result.setImageUrl(client.getImageUrl());
         return result;
     }
 
@@ -38,6 +39,7 @@ public class ClientHelper {
         result.setImgUrl(client.getImgUrl());
         result.setSchool(SchoolHelper.toEntity(client.getSchool()));
         result.setActive(client.getActive());
+        result.setImageUrl(client.getImageUrl());
         return result;
     }
 

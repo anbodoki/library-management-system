@@ -22,6 +22,7 @@ public class Client {
     private School school;
     @Column(columnDefinition = "boolean default false")
     private boolean active;
+    private String imageUrl;
 
     public Long getId() {
         return id;
@@ -85,5 +86,13 @@ public class Client {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
