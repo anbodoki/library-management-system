@@ -69,7 +69,6 @@ public class ClientApiServiceImpl implements ClientApiService {
                 null,
                 null,
                 null,
-                null,
                 resourceType,
                 null,
                 null, null,

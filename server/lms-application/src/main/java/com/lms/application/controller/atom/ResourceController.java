@@ -45,7 +45,6 @@ public class ResourceController {
                 request.getLanguageId(),
                 request.getIsbn(),
                 request.getUdc(),
-                request.getIdentifier(),
                 request.getResourceType(),
                 request.getMaterialTypeId(),
                 request.getFromCreationDate(), request.getToCreationDate(),

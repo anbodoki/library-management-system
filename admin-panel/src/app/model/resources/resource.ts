@@ -13,7 +13,6 @@ export class Resource {
   public pageNum: number;
   public isbn: string;
   public udc: string;
-  public identifier: string;
   public referenceURL: string;
   public creationDate: any;
   public modificationDate: any;

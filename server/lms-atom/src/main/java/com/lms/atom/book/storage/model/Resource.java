@@ -28,7 +28,6 @@ public class Resource implements Serializable {
     private int pageNum;
     private String isbn;
     private String udc;
-    private String identifier; //რესურსის შიფრი ???
     @Enumerated(value = EnumType.STRING)
     private ResourceType resourceType;
     @ManyToOne
@@ -133,14 +132,6 @@ public class Resource implements Serializable {
 
     public void setUdc(String udc) {
         this.udc = udc;
-    }
-
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
     }
 
     public ResourceType getResourceType() {

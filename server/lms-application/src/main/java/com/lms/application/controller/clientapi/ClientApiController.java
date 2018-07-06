@@ -1,15 +1,12 @@
 package com.lms.application.controller.clientapi;
 
-import com.lms.application.security.PermissionCheck;
 import com.lms.client.api.clientapi.ClientApiService;
-import com.lms.common.dto.atom.resource.ResourceDTO;
 import com.lms.common.dto.cleintapi.AddRemoveFavouriteRequest;
 import com.lms.common.dto.cleintapi.ClientResourceFilteringRequest;
 import com.lms.common.dto.cleintapi.ClientUpdateRequest;
 import com.lms.common.dto.cleintapi.LightResource;
 import com.lms.common.dto.client.ClientDTO;
 import com.lms.common.dto.request.GeneralFilteringRequest;
-import com.lms.common.dto.request.ResourceFilteringRequest;
 import com.lms.common.dto.response.ActionResponse;
 import com.lms.common.dto.response.ActionResponseWithData;
 import com.lms.common.dto.response.ListResult;

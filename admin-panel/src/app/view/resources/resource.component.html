@@ -52,9 +52,6 @@
           <lms-input label="Place" fieldName="place" [capRequired]="true" [fieldObject]="selectedResource"
                      alertText="Must not be empty"
                      fieldType="text"></lms-input>
-          <lms-input label="Identifier" fieldName="identifier"
-                     [fieldObject]="selectedResource" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
-                     alertText="Identifier must contain minimum 2 characters"></lms-input>
           <lms-input label="Reference URL" fieldName="referenceURL"
                      [fieldObject]="selectedResource" fieldType="text"></lms-input>
           <lms-dynamic-component label="Resource Type" fieldName="resourceType" [fieldObject]="selectedResource"
@@ -169,7 +166,6 @@
     <lms-column header="UDC" field="udc" filtered="text"></lms-column>
     <lms-column header="Place" field="place" filtered="text"></lms-column>
     <lms-column header="ISSN" field="issn" filtered="text"></lms-column>
-    <lms-column header="Identifier" field="identifier" filtered="text"></lms-column>
     <lms-column header="Creation date" field="creationDate" filtered="date">
       <ng-template #dataTableCell let-item="item">
         <span>{{item.creationDate | date:'dd/MM/yyyy HH:mm' }}</span>

@@ -30,8 +30,6 @@ public class ResourceDTO implements Serializable {
     @NotNull
     private String udc;
     @NotNull
-    private String identifier; //რესურსის შიფრი ???
-    @NotNull
     private ResourceTypeDTO resourceType;
     @NotNull
     private MaterialTypeDTO materialType;
@@ -132,14 +130,6 @@ public class ResourceDTO implements Serializable {
 
     public void setUdc(String udc) {
         this.udc = udc;
-    }
-
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
     }
 
     public ResourceTypeDTO getResourceType() {

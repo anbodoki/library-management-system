@@ -63,7 +63,6 @@ public class ResourceStorage {
                                      Long language,
                                      String isbn,
                                      String udc,
-                                     String identifier,
                                      ResourceType resourceType,
                                      Long materialTypeCode,
                                      Date fromCreationDate, Date toCreationDate,
@@ -117,10 +116,6 @@ public class ResourceStorage {
         if (udc != null) {
             builder.append(" AND u.udc = :udc");
             params.put("udc", udc);
-        }
-        if (identifier != null) {
-            builder.append(" AND u.identifier = :identifier");
-            params.put("identifier", identifier);
         }
         if (resourceType != null) {
             builder.append(" AND u.resourceType = :resourceType");

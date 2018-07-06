@@ -23,7 +23,6 @@ public interface ResourceService {
                                  Long language,
                                  String isbn,
                                  String udc,
-                                 String identifier,
                                  ResourceTypeDTO resourceType,
                                  Long materialTypeCode,
                                  Date fromCreationDate, Date toCreationDate,

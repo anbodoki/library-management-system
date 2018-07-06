@@ -52,7 +52,6 @@ public class ResourceServiceImpl implements ResourceService {
                                         Long language,
                                         String isbn,
                                         String udc,
-                                        String identifier,
                                         ResourceTypeDTO resourceType,
                                         Long materialTypeCode,
                                         Date fromCreationDate, Date toCreationDate,
@@ -71,7 +70,6 @@ public class ResourceServiceImpl implements ResourceService {
                 language,
                 isbn,
                 udc,
-                identifier,
                 (resourceType == null ?  null : ResourceType.valueOf(resourceType.name())),
                 materialTypeCode,
                 fromCreationDate, toCreationDate,
@@ -93,11 +91,6 @@ public class ResourceServiceImpl implements ResourceService {
         } catch (EntityNotFoundException e) {
             throw new AtomException(Messages.get("resourceWithThisIDAlreadyExists"));
         }
-        if (!old.getIdentifier().equals(resource.getIdentifier())) {
-            if (repository.getByIdentifier(resource.getIdentifier()) != null) {
-                throw new AtomException(Messages.get("resourceWithThisIdentifierAlreadyExists"));
-            }
-        }
         if (!old.getIsbn().equals(resource.getIsbn())) {
             if (repository.getByIsbn(resource.getIsbn()) != null) {
                 throw new AtomException(Messages.get("resourceWithThisISBNAlreadyExists"));
@@ -115,11 +108,7 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public ResourceDTO save(ResourceDTO resource) throws AtomException {
-        Resource old = repository.getByIdentifier(resource.getIdentifier());
-        if (old != null) {
-            throw new AtomException(Messages.get("resourceWithThisIdentifierAlreadyExists"));
-        }
-        old = repository.getByIsbn(resource.getIsbn());
+        Resource old = repository.getByIsbn(resource.getIsbn());
         if (old != null) {
             throw new AtomException(Messages.get("resourceWithThisISBNAlreadyExists"));
         }

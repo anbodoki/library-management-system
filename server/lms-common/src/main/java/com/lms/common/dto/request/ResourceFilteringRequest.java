@@ -18,7 +18,6 @@ public class ResourceFilteringRequest extends PagingRequest {
     private Long languageId;
     private String isbn;
     private String udc;
-    private String identifier;
     private ResourceTypeDTO resourceType;
     private Long materialTypeId;
     private Date fromCreationDate;
@@ -107,14 +106,6 @@ public class ResourceFilteringRequest extends PagingRequest {
 
     public void setUdc(String udc) {
         this.udc = udc;
-    }
-
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
     }
 
     public ResourceTypeDTO getResourceType() {

@@ -29,7 +29,6 @@ public class ResourceHelper {
         result.setPageNum(resource.getPageNum());
         result.setIsbn(resource.getIsbn());
         result.setUdc(resource.getUdc());
-        result.setIdentifier(resource.getIdentifier());
         result.setResourceType(ResourceTypeDTO.valueOf(resource.getResourceType().name()));
         result.setMaterialType(MaterialTypeHelper.fromEntity(resource.getMaterialType()));
         result.setReferenceURL(resource.getReferenceURL());
@@ -61,7 +60,6 @@ public class ResourceHelper {
         result.setPageNum(resource.getPageNum());
         result.setIsbn(resource.getIsbn());
         result.setUdc(resource.getUdc());
-        result.setIdentifier(resource.getIdentifier());
         result.setResourceType(ResourceType.valueOf(resource.getResourceType().name()));
         result.setMaterialType(MaterialTypeHelper.toEntity(resource.getMaterialType()));
         result.setReferenceURL(resource.getReferenceURL());
