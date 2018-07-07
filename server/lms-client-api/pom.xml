@@ -27,5 +27,10 @@
             <artifactId>lms-client</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.lms.configuration</groupId>
+            <artifactId>lms-configuration</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

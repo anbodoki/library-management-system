@@ -96,6 +96,9 @@ public class ConfigurationPropertyServiceImpl implements ConfigurationPropertySe
         ConfigurationProperty property = ConfigurationPropertiesCache.get(code);
         if (property == null) {
             property = storage.get(code);
+            if (property == null) {
+                return null;
+            }
             setOriginalValue(property);
             ConfigurationPropertiesCache.put(property);
             return property;

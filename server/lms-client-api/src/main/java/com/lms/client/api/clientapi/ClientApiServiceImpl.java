@@ -18,6 +18,9 @@ import com.lms.common.dto.client.ClientDTO;
 import com.lms.common.dto.client.SchoolDTO;
 import com.lms.common.dto.response.ComboObject;
 import com.lms.common.dto.response.ListResult;
+import com.lms.configuration.cache.ConfigurationPropertyCodes;
+import com.lms.configuration.properties.service.ConfigurationPropertyService;
+import com.lms.configuration.properties.storage.model.ConfigurationProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,21 +33,25 @@ import java.util.List;
 @Transactional
 public class ClientApiServiceImpl implements ClientApiService {
 
+    public static String URL = "http://localhost:8080";
+
     private final ResourceService resourceService;
     private final CategoryService categoryService;
     private final MaterialTypeService materialTypeService;
     private final ClientService clientService;
     private final SchoolService schoolService;
     private final FavoriteService favoriteService;
+    private final ConfigurationPropertyService configurationPropertyService;
 
     @Autowired
-    public ClientApiServiceImpl(ResourceService resourceService, CategoryService categoryService, MaterialTypeService materialTypeService, ClientService clientService, SchoolService schoolService, FavoriteService favoriteService) {
+    public ClientApiServiceImpl(ResourceService resourceService, CategoryService categoryService, MaterialTypeService materialTypeService, ClientService clientService, SchoolService schoolService, FavoriteService favoriteService, ConfigurationPropertyService configurationPropertyService) {
         this.resourceService = resourceService;
         this.categoryService = categoryService;
         this.materialTypeService = materialTypeService;
         this.clientService = clientService;
         this.schoolService = schoolService;
         this.favoriteService = favoriteService;
+        this.configurationPropertyService = configurationPropertyService;
     }
 
     @Override
@@ -53,7 +60,14 @@ public class ClientApiServiceImpl implements ClientApiService {
         ListResult<LightResource> result = resources.copy(LightResource.class);
         result.setResultList(LightResourceHelper.toLights(resources.getResultList()));
         //TODO get client from security context and determine their favourite resources
-        return null;
+        ConfigurationProperty configurationProperty = configurationPropertyService.get(ConfigurationPropertyCodes.SERVER_BASE_URL);
+        if (configurationProperty != null) {
+            URL = configurationProperty.getStringValue();
+        }
+        for (LightResource lightResource : result.getResultList()) {
+            lightResource.setImageUrl(URL + lightResource.getImageUrl());
+        }
+        return result;
     }
 
     @Override
@@ -79,14 +93,26 @@ public class ClientApiServiceImpl implements ClientApiService {
                 limit, offset);
         ListResult<LightResource> result = resources.copy(LightResource.class);
         result.setResultList(LightResourceHelper.toLights(resources.getResultList()));
-        //TODO get client from security context and determine their favourite resources
+        ConfigurationProperty configurationProperty = configurationPropertyService.get(ConfigurationPropertyCodes.SERVER_BASE_URL);
+        if (configurationProperty != null) {
+            URL = configurationProperty.getStringValue();
+        }
+        for (LightResource lightResource : result.getResultList()) {
+            lightResource.setImageUrl(URL + lightResource.getImageUrl());
+        }
         return result;
     }
 
     @Override
     public ResourceDTO getResourceById(Long id) throws Exception {
-        return resourceService.getResourceById(id);
+        ResourceDTO resourceById = resourceService.getResourceById(id);
+        ConfigurationProperty configurationProperty = configurationPropertyService.get(ConfigurationPropertyCodes.SERVER_BASE_URL);
+        if (configurationProperty != null) {
+            URL = configurationProperty.getStringValue();
+        }
+        resourceById.setImageUrl(URL + resourceById.getImageUrl());
         //TODO get client from security context and determine their favourite resources
+        return resourceById;
     }
 
     @Override
