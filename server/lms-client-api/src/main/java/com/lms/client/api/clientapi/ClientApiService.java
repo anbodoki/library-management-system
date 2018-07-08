@@ -25,7 +25,7 @@ public interface ClientApiService {
                                    String publisher,
                                    Date fromEditionDate, Date toEditionDate,
                                    ResourceTypeDTO resourceType,
-                                   Long categoryCode,
+                                   List<Long> categoryIds,
                                    int limit, int offset) throws Exception;
 
     ResourceDTO getResourceById(Long id) throws Exception;

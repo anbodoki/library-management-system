@@ -40,7 +40,7 @@ public class ClientApiController {
                 request.getPublisher(),
                 request.getFromEditionDate(), request.getToEditionDate(),
                 request.getResourceType(),
-                request.getCategoryId(),
+                request.getCategoryIds(),
                 request.getLimit(), request.getOffset());
         return new ActionResponseWithData<>(result, true);
     }

@@ -32,6 +32,25 @@ public interface ResourceService {
                                  String place,
                                  int limit, int offset) throws Exception;
 
+    ListResult<ResourceDTO> findSpecial(Long id,
+                                 String name,
+                                 String author,
+                                 String subName,
+                                 String edition,
+                                 String publisher,
+                                 Date fromEditionDate, Date toEditionDate,
+                                 Long language,
+                                 String isbn,
+                                 String udc,
+                                 ResourceTypeDTO resourceType,
+                                 Long materialTypeCode,
+                                 Date fromCreationDate, Date toCreationDate,
+                                 Date fromModificationDate, Date toModificationDate,
+                                 List<Long> categoryIds,
+                                 String issn,
+                                 String place,
+                                 int limit, int offset) throws Exception;
+
     ResourceDTO update(ResourceDTO resource) throws AtomException;
 
     ResourceDTO save(ResourceDTO resource) throws AtomException;

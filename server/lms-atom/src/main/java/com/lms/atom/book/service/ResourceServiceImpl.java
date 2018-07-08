@@ -84,6 +84,48 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
+    public ListResult<ResourceDTO> findSpecial(Long id,
+                                        String name,
+                                        String author,
+                                        String subName,
+                                        String edition,
+                                        String publisher,
+                                        Date fromEditionDate, Date toEditionDate,
+                                        Long language,
+                                        String isbn,
+                                        String udc,
+                                        ResourceTypeDTO resourceType,
+                                        Long materialTypeCode,
+                                        Date fromCreationDate, Date toCreationDate,
+                                        Date fromModificationDate, Date toModificationDate,
+                                        List<Long> categoryIds,
+                                        String issn,
+                                        String place,
+                                        int limit, int offset) throws Exception {
+        ListResult<Resource> materialTypes = storage.findSpecial(id,
+                name,
+                author,
+                subName,
+                edition,
+                publisher,
+                fromEditionDate, toEditionDate,
+                language,
+                isbn,
+                udc,
+                (resourceType == null ?  null : ResourceType.valueOf(resourceType.name())),
+                materialTypeCode,
+                fromCreationDate, toCreationDate,
+                fromModificationDate, toModificationDate,
+                categoryIds,
+                issn,
+                place,
+                limit, offset);
+        ListResult<ResourceDTO> result = materialTypes.copy(ResourceDTO.class);
+        result.setResultList(ResourceHelper.fromEntities(materialTypes.getResultList()));
+        return result;
+    }
+
+    @Override
     public ResourceDTO update(ResourceDTO resource) throws AtomException {
         Resource old;
         try {

@@ -4,6 +4,7 @@ import com.lms.common.dto.atom.resource.ResourceTypeDTO;
 import com.lms.common.dto.response.PagingRequest;
 
 import java.util.Date;
+import java.util.List;
 
 public class ClientResourceFilteringRequest extends PagingRequest {
 
@@ -14,7 +15,7 @@ public class ClientResourceFilteringRequest extends PagingRequest {
     private Date fromEditionDate;
     private Date toEditionDate;
     private ResourceTypeDTO resourceType;
-    private Long categoryId;
+    private List<Long> categoryIds;
 
     public Long getId() {
         return id;
@@ -72,11 +73,11 @@ public class ClientResourceFilteringRequest extends PagingRequest {
         this.resourceType = resourceType;
     }
 
-    public Long getCategoryId() {
-        return categoryId;
+    public List<Long> getCategoryIds() {
+        return categoryIds;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategoryIds(List<Long> categoryIds) {
+        this.categoryIds = categoryIds;
     }
 }

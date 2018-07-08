@@ -59,21 +59,15 @@ public class ClientApiServiceImpl implements ClientApiService {
         ListResult<ResourceDTO> resources = resourceService.find(query, limit, offset);
         ListResult<LightResource> result = resources.copy(LightResource.class);
         result.setResultList(LightResourceHelper.toLights(resources.getResultList()));
+        setProperImageURL(result.getResultList());
         //TODO get client from security context and determine their favourite resources
-        ConfigurationProperty configurationProperty = configurationPropertyService.get(ConfigurationPropertyCodes.SERVER_BASE_URL);
-        if (configurationProperty != null) {
-            URL = configurationProperty.getStringValue();
-        }
-        for (LightResource lightResource : result.getResultList()) {
-            lightResource.setImageUrl(URL + lightResource.getImageUrl());
-        }
         return result;
     }
 
     @Override
     public ListResult<LightResource> find(Long id, String name, String author, String publisher, Date fromEditionDate, Date toEditionDate,
-                                          ResourceTypeDTO resourceType, Long categoryCode, int limit, int offset) throws Exception {
-        ListResult<ResourceDTO> resources = resourceService.find(id,
+                                          ResourceTypeDTO resourceType, List<Long> categoryIds, int limit, int offset) throws Exception {
+        ListResult<ResourceDTO> resources = resourceService.findSpecial(id,
                 name,
                 author,
                 null,
@@ -87,30 +81,26 @@ public class ClientApiServiceImpl implements ClientApiService {
                 null,
                 null, null,
                 null, null,
-                categoryCode,
+                categoryIds,
                 null,
                 null,
                 limit, offset);
         ListResult<LightResource> result = resources.copy(LightResource.class);
         result.setResultList(LightResourceHelper.toLights(resources.getResultList()));
-        ConfigurationProperty configurationProperty = configurationPropertyService.get(ConfigurationPropertyCodes.SERVER_BASE_URL);
-        if (configurationProperty != null) {
-            URL = configurationProperty.getStringValue();
-        }
-        for (LightResource lightResource : result.getResultList()) {
-            lightResource.setImageUrl(URL + lightResource.getImageUrl());
-        }
+        setProperImageURL(result.getResultList());
         return result;
     }
 
     @Override
     public ResourceDTO getResourceById(Long id) throws Exception {
         ResourceDTO resourceById = resourceService.getResourceById(id);
-        ConfigurationProperty configurationProperty = configurationPropertyService.get(ConfigurationPropertyCodes.SERVER_BASE_URL);
-        if (configurationProperty != null) {
-            URL = configurationProperty.getStringValue();
+        if (resourceById.getImageUrl() != null) {
+            ConfigurationProperty configurationProperty = configurationPropertyService.get(ConfigurationPropertyCodes.SERVER_BASE_URL);
+            if (configurationProperty != null) {
+                URL = configurationProperty.getStringValue();
+            }
+            resourceById.setImageUrl(URL + resourceById.getImageUrl());
         }
-        resourceById.setImageUrl(URL + resourceById.getImageUrl());
         //TODO get client from security context and determine their favourite resources
         return resourceById;
     }
@@ -180,6 +170,18 @@ public class ClientApiServiceImpl implements ClientApiService {
     @Override
     public List<LightResource> getClientFavorite(Long clientId) throws Exception {
         return LightResourceHelper.toLights(favoriteService.getClientFavorite(clientId));
+    }
+
+    private void setProperImageURL(List<LightResource> resources) {
+        ConfigurationProperty configurationProperty = configurationPropertyService.get(ConfigurationPropertyCodes.SERVER_BASE_URL);
+        if (configurationProperty != null) {
+            URL = configurationProperty.getStringValue();
+        }
+        for (LightResource lightResource : resources) {
+            if (lightResource.getImageUrl() != null) {
+                lightResource.setImageUrl(URL + lightResource.getImageUrl());
+            }
+        }
     }
 
 }
