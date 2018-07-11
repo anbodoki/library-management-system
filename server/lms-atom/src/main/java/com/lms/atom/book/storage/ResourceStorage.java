@@ -262,7 +262,7 @@ public class ResourceStorage {
             builder.append(" AND u.toModificationDate <= :toModificationDate");
             params.put("toModificationDate", toModificationDate);
         }
-        if (categoryIds != null) {
+        if (categoryIds != null && !categoryIds.isEmpty()) {
             builder.append(" AND u.category.id IN :categoryIds");
             params.put("categoryIds", categoryIds);
         }
