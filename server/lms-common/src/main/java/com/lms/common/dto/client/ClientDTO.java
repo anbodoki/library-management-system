@@ -14,7 +14,6 @@ public class ClientDTO implements Serializable {
     private String email;
     private String phone;
     private String imgUrl;
-    @NotNull
     private SchoolDTO school;
     private boolean active;
     private String imageUrl;

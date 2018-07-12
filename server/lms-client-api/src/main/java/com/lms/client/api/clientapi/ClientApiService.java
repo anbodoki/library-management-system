@@ -49,4 +49,6 @@ public interface ClientApiService {
     void removeFavorite(Long clientId, Long resourceId) throws Exception;
 
     List<LightResource> getClientFavorite(Long clientId) throws Exception;
+
+    ClientDTO getAuthorizedUser(String token) throws ClientException;
 }

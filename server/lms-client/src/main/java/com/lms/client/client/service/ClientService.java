@@ -21,4 +21,6 @@ public interface ClientService {
     ClientDTO getByEmail(String email);
 
     ClientDTO save(ClientDTO client);
+
+    ClientDTO getAuthorizedClient() throws ClientException;
 }

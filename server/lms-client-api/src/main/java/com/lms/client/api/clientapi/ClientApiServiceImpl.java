@@ -6,6 +6,7 @@ import com.lms.atom.category.service.CategoryService;
 import com.lms.atom.material.service.MaterialTypeService;
 import com.lms.atom.messages.Messages;
 import com.lms.client.client.service.ClientService;
+import com.lms.client.exception.ClientException;
 import com.lms.client.favorite.service.FavoriteService;
 import com.lms.client.school.service.SchoolService;
 import com.lms.common.dto.atom.category.CategoryDTO;
@@ -170,6 +171,11 @@ public class ClientApiServiceImpl implements ClientApiService {
     @Override
     public List<LightResource> getClientFavorite(Long clientId) throws Exception {
         return LightResourceHelper.toLights(favoriteService.getClientFavorite(clientId));
+    }
+
+    @Override
+    public ClientDTO getAuthorizedUser(String token) throws ClientException {
+        return clientService.getAuthorizedClient();
     }
 
     private void setProperImageURL(List<LightResource> resources) {

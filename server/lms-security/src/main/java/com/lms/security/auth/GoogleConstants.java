@@ -2,9 +2,8 @@ package com.lms.security.auth;
 
 public class GoogleConstants {
 
-    public static final long EXPIRATION_TIME = 864_000_000; // 10 days
-    public static final long DISTRIBUTION_EXPIRATION_TIME = 86_400_000; // 1 day
-    public static final String SECRET = "aTNXkVG94M3ICl0uAm0l0ta8wIQQJc";
-    public static final String TOKEN_PREFIX = "Bearer";
     public static final String HEADER_STRING = "Token";
+    public static final String FREEUNI_DOMAIN = "freeuni.edu.ge";
+    public static final String AGRUNI_DOMAIN = "agruni.edu.ge";
+    public static final String GOOGLE_APP_ID = "1036785699602-pmspv33ekqjtqbk8t41j1l7lqnm30orh.apps.googleusercontent.com";
 }

@@ -24,13 +24,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.List;
 
 @Component
 public class TokenAuthenticationFilter extends GenericFilterBean {
 
     private final ClientService clientService;
-    private static final String CLIENT_ID = "1036785699602-pmspv33ekqjtqbk8t41j1l7lqnm30orh.apps.googleusercontent.com";
     private static final HttpTransport TRANSPORT = new NetHttpTransport();
 
     @Autowired
@@ -47,13 +45,14 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
         final String accessToken = httpRequest.getHeader(GoogleConstants.HEADER_STRING);
         if (accessToken != null) {
             GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(TRANSPORT, JacksonFactory.getDefaultInstance())
-                    .setAudience(Collections.singletonList(CLIENT_ID))
+                    .setAudience(Collections.singletonList(GoogleConstants.GOOGLE_APP_ID))
                     .build();
             try {
                 GoogleIdToken idToken = verifier.verify(accessToken);
                 if (idToken != null) {
                     Payload payload = idToken.getPayload();
-                    if (!payload.getHostedDomain().equals("freeuni.edu.ge") && !payload.getHostedDomain().equals("agruni.edu.ge")) {
+                    if (!payload.getHostedDomain().equals(GoogleConstants.FREEUNI_DOMAIN)
+                            && !payload.getHostedDomain().equals(GoogleConstants.AGRUNI_DOMAIN)) {
                         SecurityContextHolder.clearContext();
                         chain.doFilter(request, response);
                         return;

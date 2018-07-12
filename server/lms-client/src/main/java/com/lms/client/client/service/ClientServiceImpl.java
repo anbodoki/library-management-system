@@ -9,7 +9,9 @@ import com.lms.client.messages.Messages;
 import com.lms.common.dto.client.ClientDTO;
 import com.lms.common.dto.response.ListResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
@@ -85,5 +87,15 @@ public class ClientServiceImpl implements ClientService {
             return ClientHelper.fromEntity(repository.save(ClientHelper.toEntity(client)));
         }
         return byEmail;
+    }
+
+    @Override
+    public ClientDTO getAuthorizedClient() throws ClientException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Client client = repository.findByEmail(authentication.getName());
+        if (client == null) {
+            throw new ClientException(Messages.get("clientNotExists"));
+        }
+        return ClientHelper.fromEntity(client);
     }
 }
