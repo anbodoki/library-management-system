@@ -38,6 +38,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             role.setPermissions(getPermissions(user.getRoles()));
             role.setSystemUser(user);
             role.setAuthType(AuthType.SYSTEM_USER);
+            role.setAuthority("ROLE_" + AuthType.SYSTEM_USER.name());
             return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), Collections.singletonList(role));
         } else {
             throw new UsernameNotFoundException("User is not active");

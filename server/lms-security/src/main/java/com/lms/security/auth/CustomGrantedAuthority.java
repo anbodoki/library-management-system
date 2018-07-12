@@ -1,5 +1,6 @@
 package com.lms.security.auth;
 
+import com.lms.client.client.storage.model.Client;
 import com.lms.security.user.storage.model.User;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -17,7 +18,7 @@ public class CustomGrantedAuthority implements GrantedAuthority {
 
     private User systemUser;
 
-    //TODO add client
+    private Client client;
 
     public CustomGrantedAuthority() {
     }
@@ -65,5 +66,13 @@ public class CustomGrantedAuthority implements GrantedAuthority {
 
     public void setSystemUser(User systemUser) {
         this.systemUser = systemUser;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

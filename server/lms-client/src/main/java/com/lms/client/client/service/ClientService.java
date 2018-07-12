@@ -17,4 +17,8 @@ public interface ClientService {
     ClientDTO getById(Long id) throws ClientException;
 
     ClientDTO update(ClientDTO client);
+
+    ClientDTO getByEmail(String email);
+
+    ClientDTO save(ClientDTO client);
 }

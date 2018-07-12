@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -25,11 +26,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final CustomUserDetailsService userDetailsService;
     private final ServletContext servletContext;
+    private final TokenAuthenticationFilter tokenAuthenticationFilter;
+    private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
     @Autowired
-    public SecurityConfiguration(CustomUserDetailsService userDetailsService, ServletContext servletContext) {
+    public SecurityConfiguration(CustomUserDetailsService userDetailsService, ServletContext servletContext, TokenAuthenticationFilter tokenAuthenticationFilter, CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler) {
         this.userDetailsService = userDetailsService;
         this.servletContext = servletContext;
+        this.tokenAuthenticationFilter = tokenAuthenticationFilter;
+        this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
     }
 
     @Override
@@ -40,11 +45,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/bower_components/**", "/client/api/**", "/application/upload-api/**", "/*.css", "/main.css", "/fonts/**", "/images/**", "/*.woff", "/*.ttf", "/*.woff2",
+                .antMatchers("/bower_components/**", "/application/upload-api/**", "/*.css", "/main.css", "/fonts/**", "/images/**", "/*.woff", "/*.ttf", "/*.woff2",
                         "/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/client/api/**").hasRole(AuthType.CLIENT.name())
+                .antMatchers("/application/upload-api/**").hasAnyRole(AuthType.CLIENT.name(), AuthType.SYSTEM_USER.name())
+                .anyRequest().hasRole(AuthType.SYSTEM_USER.name())
                 .and()
                 .formLogin()
+                .successHandler(customAuthenticationSuccessHandler)
                 .loginPage("/login")
                 .defaultSuccessUrl("/", true)
                 .permitAll()
@@ -58,6 +66,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutSuccessUrl("/");
+
+        http.addFilterBefore(tokenAuthenticationFilter, BasicAuthenticationFilter.class);
     }
 
     @Bean

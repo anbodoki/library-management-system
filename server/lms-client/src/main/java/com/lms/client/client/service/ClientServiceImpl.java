@@ -72,4 +72,18 @@ public class ClientServiceImpl implements ClientService {
     public ClientDTO update(ClientDTO client) {
         return ClientHelper.fromEntity(repository.save(ClientHelper.toEntity(client)));
     }
+
+    @Override
+    public ClientDTO getByEmail(String email) {
+        return ClientHelper.fromEntity(repository.findByEmail(email));
+    }
+
+    @Override
+    public ClientDTO save(ClientDTO client) {
+        ClientDTO byEmail = getByEmail(client.getEmail());
+        if (byEmail == null) {
+            return ClientHelper.fromEntity(repository.save(ClientHelper.toEntity(client)));
+        }
+        return byEmail;
+    }
 }
