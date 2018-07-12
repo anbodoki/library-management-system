@@ -1,6 +1,5 @@
 package com.lms.client.favorite.storage;
 
-import com.lms.client.client.storage.model.Client;
 import com.lms.client.exception.ClientException;
 import com.lms.client.favorite.storage.model.Favorite;
 import com.lms.client.messages.Messages;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.security.acl.LastOwnerException;
 import java.util.List;
 
 @Repository

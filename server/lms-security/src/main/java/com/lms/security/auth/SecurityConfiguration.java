@@ -48,7 +48,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/bower_components/**", "/application/upload-api/**", "/*.css", "/main.css", "/fonts/**", "/images/**", "/*.woff", "/*.ttf", "/*.woff2",
                         "/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**").permitAll()
                 .antMatchers("/client/api/**").hasRole(AuthType.CLIENT.name())
-                .antMatchers("/application/upload-api/**").hasAnyRole(AuthType.CLIENT.name(), AuthType.SYSTEM_USER.name())
                 .anyRequest().hasRole(AuthType.SYSTEM_USER.name())
                 .and()
                 .formLogin()
