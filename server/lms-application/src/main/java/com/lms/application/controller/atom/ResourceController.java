@@ -2,6 +2,7 @@ package com.lms.application.controller.atom;
 
 import com.lms.application.security.PermissionCheck;
 import com.lms.atom.book.service.ResourceService;
+import com.lms.common.dto.atom.resource.ResourceCopyDTO;
 import com.lms.common.dto.atom.resource.ResourceDTO;
 import com.lms.common.dto.request.GeneralFilteringRequest;
 import com.lms.common.dto.request.ResourceFilteringRequest;
@@ -84,5 +85,18 @@ public class ResourceController {
     @PermissionCheck
     public ActionResponse findByUsername(@PathVariable Long id) throws Exception {
         return new ActionResponseWithData<>(resourceService.getResourceById(id), true);
+    }
+
+    @PostMapping(value = "add-resource-copy")
+    @PermissionCheck
+    public ActionResponse addResourceCopy(@RequestBody @Validated ResourceCopyDTO resourceCopy) throws Exception {
+        return new ActionResponseWithData<>(resourceService.addResourceCopy(resourceCopy), true);
+    }
+
+    @DeleteMapping(value = "resource-copy/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PermissionCheck
+    public ActionResponse removeResourceCopy(@PathVariable long id) throws Exception {
+        resourceService.removeResourceCopy(id);
+        return new ActionResponse(true);
     }
 }

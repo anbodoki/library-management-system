@@ -7,6 +7,7 @@ import com.lms.atom.material.storage.model.MaterialType;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "resource")

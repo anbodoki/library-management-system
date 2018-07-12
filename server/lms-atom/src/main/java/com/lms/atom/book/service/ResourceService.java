@@ -1,6 +1,7 @@
 package com.lms.atom.book.service;
 
 import com.lms.atom.exception.AtomException;
+import com.lms.common.dto.atom.resource.ResourceCopyDTO;
 import com.lms.common.dto.atom.resource.ResourceDTO;
 import com.lms.common.dto.atom.resource.ResourceTypeDTO;
 import com.lms.common.dto.response.ComboObject;
@@ -62,4 +63,10 @@ public interface ResourceService {
     ResourceDTO getResourceById(Long id) throws AtomException;
 
     long resourcesCount();
+
+    ResourceCopyDTO addResourceCopy(ResourceCopyDTO resourceCopy) throws AtomException;
+
+    void removeResourceCopy(Long resourceCopyId);
+
+    ResourceCopyDTO getResourceCopyByIdentifier(String identifier);
 }

@@ -1,12 +1,12 @@
 package com.lms.atom.book.service;
 
-import com.lms.atom.book.storage.ResourceHelper;
-import com.lms.atom.book.storage.ResourceRepository;
-import com.lms.atom.book.storage.ResourceStorage;
+import com.lms.atom.book.storage.*;
 import com.lms.atom.book.storage.model.Resource;
+import com.lms.atom.book.storage.model.ResourceCopy;
 import com.lms.atom.book.storage.model.ResourceType;
 import com.lms.atom.exception.AtomException;
 import com.lms.atom.messages.Messages;
+import com.lms.common.dto.atom.resource.ResourceCopyDTO;
 import com.lms.common.dto.atom.resource.ResourceDTO;
 import com.lms.common.dto.atom.resource.ResourceTypeDTO;
 import com.lms.common.dto.response.ComboObject;
@@ -26,11 +26,13 @@ public class ResourceServiceImpl implements ResourceService {
 
     private final ResourceStorage storage;
     private final ResourceRepository repository;
+    private final ResourceCopyRepository copyRepository;
 
     @Autowired
-    public ResourceServiceImpl(ResourceStorage storage, ResourceRepository repository) {
+    public ResourceServiceImpl(ResourceStorage storage, ResourceRepository repository, ResourceCopyRepository copyRepository) {
         this.storage = storage;
         this.repository = repository;
+        this.copyRepository = copyRepository;
     }
 
     @Override
@@ -195,5 +197,24 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public long resourcesCount() {
         return repository.count();
+    }
+
+    @Override
+    public ResourceCopyDTO addResourceCopy(ResourceCopyDTO resourceCopy) throws AtomException {
+        ResourceCopy byIdentifier = copyRepository.findByIdentifier(resourceCopy.getIdentifier());
+        if (byIdentifier != null) {
+            throw new AtomException(Messages.get("resourceCopyWithThisIdentifierAlreadyExistsInSystem"));
+        }
+        return ResourceCopyHelper.fromEntity(copyRepository.save(ResourceCopyHelper.toEntity(resourceCopy)));
+    }
+
+    @Override
+    public void removeResourceCopy(Long resourceCopyId) {
+        copyRepository.delete(resourceCopyId);
+    }
+
+    @Override
+    public ResourceCopyDTO getResourceCopyByIdentifier(String identifier) {
+        return ResourceCopyHelper.fromEntity(copyRepository.findByIdentifier(identifier));
     }
 }
