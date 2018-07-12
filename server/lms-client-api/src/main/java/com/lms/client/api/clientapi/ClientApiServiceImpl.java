@@ -61,7 +61,7 @@ public class ClientApiServiceImpl implements ClientApiService {
         ListResult<LightResource> result = resources.copy(LightResource.class);
         result.setResultList(LightResourceHelper.toLights(resources.getResultList()));
         setProperImageURL(result.getResultList());
-        //TODO get client from security context and determine their favourite resources
+        setFavourites(result.getResultList());
         return result;
     }
 
@@ -89,6 +89,7 @@ public class ClientApiServiceImpl implements ClientApiService {
         ListResult<LightResource> result = resources.copy(LightResource.class);
         result.setResultList(LightResourceHelper.toLights(resources.getResultList()));
         setProperImageURL(result.getResultList());
+        setFavourites(result.getResultList());
         return result;
     }
 
@@ -102,7 +103,10 @@ public class ClientApiServiceImpl implements ClientApiService {
             }
             resourceById.setImageUrl(URL + resourceById.getImageUrl());
         }
-        //TODO get client from security context and determine their favourite resources
+        List<Long> favoriteIds = favoriteService.getClintFavoriteIds();
+        if (favoriteIds.contains(resourceById.getId())) {
+            resourceById.setClientFavorite(true);
+        }
         return resourceById;
     }
 
@@ -159,18 +163,23 @@ public class ClientApiServiceImpl implements ClientApiService {
     }
 
     @Override
-    public void addFavorite(Long clientId, Long resourceId) throws Exception {
-        favoriteService.addFavorite(clientId, resourceId);
+    public void addFavorite(Long resourceId) throws Exception {
+        favoriteService.addFavorite(resourceId);
     }
 
     @Override
-    public void removeFavorite(Long clientId, Long resourceId) throws Exception {
-        favoriteService.removeFavorite(clientId, resourceId);
+    public void removeFavorite(Long resourceId) throws Exception {
+        favoriteService.removeFavorite(resourceId);
     }
 
     @Override
-    public List<LightResource> getClientFavorite(Long clientId) throws Exception {
-        return LightResourceHelper.toLights(favoriteService.getClientFavorite(clientId));
+    public List<LightResource> getClientFavorite() throws Exception {
+        List<LightResource> result = LightResourceHelper.toLights(favoriteService.getClientFavorite());
+        setProperImageURL(result);
+        for (LightResource lightResource : result) {
+            lightResource.setClientFavorite(true);
+        }
+        return result;
     }
 
     @Override
@@ -190,4 +199,12 @@ public class ClientApiServiceImpl implements ClientApiService {
         }
     }
 
+    private void setFavourites(List<LightResource> resources) {
+        List<Long> favoriteIds = favoriteService.getClintFavoriteIds();
+        for (LightResource lightResource : resources) {
+            if (favoriteIds.contains(lightResource.getId())) {
+                lightResource.setClientFavorite(true);
+            }
+        }
+    }
 }

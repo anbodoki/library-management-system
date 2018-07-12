@@ -112,20 +112,20 @@ public class ClientApiController {
     @PostMapping(value = "add-favourite", produces = MediaType.APPLICATION_JSON_VALUE)
     @ClientPermissionCheck
     public ActionResponse addFavourite(@RequestBody AddRemoveFavouriteRequest request) throws Exception {
-        service.addFavorite(request.getClientId(), request.getResourceId());
+        service.addFavorite(request.getResourceId());
         return new ActionResponse(true);
     }
 
     @PostMapping(value = "remove-favourite", produces = MediaType.APPLICATION_JSON_VALUE)
     @ClientPermissionCheck
     public ActionResponse removeFavourite(@RequestBody AddRemoveFavouriteRequest request) throws Exception {
-        service.removeFavorite(request.getClientId(), request.getResourceId());
+        service.removeFavorite(request.getResourceId());
         return new ActionResponse(true);
     }
 
-    @GetMapping(value = "get-client-favourite/{clientId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "get-client-favourite", produces = MediaType.APPLICATION_JSON_VALUE)
     @ClientPermissionCheck
-    public ActionResponse getClientFavourite(@PathVariable Long clientId) throws Exception {
-        return new ActionResponseWithData<>(service.getClientFavorite(clientId), true);
+    public ActionResponse getClientFavourite() throws Exception {
+        return new ActionResponseWithData<>(service.getClientFavorite(), true);
     }
 }

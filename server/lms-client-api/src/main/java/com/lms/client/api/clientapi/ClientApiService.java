@@ -44,11 +44,11 @@ public interface ClientApiService {
 
     ClientDTO updateClient(Long clientId, String firstName, String lastName, String phone, Long schoolId) throws Exception;
 
-    void addFavorite(Long clientId, Long resourceId) throws Exception;
+    void addFavorite(Long resourceId) throws Exception;
 
-    void removeFavorite(Long clientId, Long resourceId) throws Exception;
+    void removeFavorite(Long resourceId) throws Exception;
 
-    List<LightResource> getClientFavorite(Long clientId) throws Exception;
+    List<LightResource> getClientFavorite() throws Exception;
 
     ClientDTO getAuthorizedUser(String token) throws ClientException;
 }

@@ -4,16 +4,7 @@ import java.io.Serializable;
 
 public class AddRemoveFavouriteRequest implements Serializable {
 
-    private Long clientId;
     private Long resourceId;
-
-    public Long getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
-    }
 
     public Long getResourceId() {
         return resourceId;

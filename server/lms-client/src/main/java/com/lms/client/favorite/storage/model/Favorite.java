@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "language")
 public class Favorite {
 
     private static final long serialVersionUID = -3009157732242241607L;

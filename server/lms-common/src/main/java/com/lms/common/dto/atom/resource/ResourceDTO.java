@@ -43,6 +43,7 @@ public class ResourceDTO implements Serializable {
     private String place;
     private String imageUrl;
     private String resourceUrl;
+    private boolean clientFavorite;
 
     public Long getId() {
         return id;
@@ -226,5 +227,13 @@ public class ResourceDTO implements Serializable {
 
     public void setResourceUrl(String resourceUrl) {
         this.resourceUrl = resourceUrl;
+    }
+
+    public boolean getClientFavorite() {
+        return clientFavorite;
+    }
+
+    public void setClientFavorite(boolean clientFavorite) {
+        this.clientFavorite = clientFavorite;
     }
 }

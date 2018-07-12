@@ -9,9 +9,11 @@ import java.util.List;
 
 public interface FavoriteService {
 
-    void addFavorite(Long clientId, Long resourceId) throws Exception;
+    void addFavorite(Long resourceId) throws Exception;
 
-    void removeFavorite(Long clientId, Long resourceId) throws ClientException;
+    void removeFavorite(Long resourceId) throws ClientException;
 
-    List<ResourceDTO> getClientFavorite(Long clientId) throws ClientException;
+    List<ResourceDTO> getClientFavorite() throws ClientException;
+
+    List<Long> getClintFavoriteIds();
 }

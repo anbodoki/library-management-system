@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.security.acl.LastOwnerException;
 import java.util.List;
 
 @Repository
@@ -35,6 +36,13 @@ public class FavoriteStorage {
     public List<Favorite> getFavourites(Long clientId) throws ClientException {
         TypedQuery<Favorite> query = em.createQuery(
                 "SELECT f FROM Favorite f WHERE f.client.id = :clientId", Favorite.class);
+        query.setParameter("clientId", clientId);
+        return query.getResultList();
+    }
+
+    public List<Long> getClintFavoriteIds(Long clientId) {
+        TypedQuery<Long> query = em.createQuery(
+                "SELECT f.resource.id FROM Favorite f WHERE f.client.id = :clientId", Long.class);
         query.setParameter("clientId", clientId);
         return query.getResultList();
     }
