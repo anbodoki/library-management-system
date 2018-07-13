@@ -10,6 +10,7 @@ public class ResourceBorrowDTO implements Serializable {
     private Long clientId;
     private Date borrowTime;
     private Date returnTime;
+    private Date scheduledReturnTime;
     private boolean critical;
 
     public Long getId() {
@@ -50,6 +51,14 @@ public class ResourceBorrowDTO implements Serializable {
 
     public void setReturnTime(Date returnTime) {
         this.returnTime = returnTime;
+    }
+
+    public Date getScheduledReturnTime() {
+        return scheduledReturnTime;
+    }
+
+    public void setScheduledReturnTime(Date scheduledReturnTime) {
+        this.scheduledReturnTime = scheduledReturnTime;
     }
 
     public boolean getCritical() {

@@ -19,6 +19,7 @@ public class ResourceBorrowHelper {
         result.setClientId(borrow.getClientId());
         result.setBorrowTime(borrow.getBorrowTime());
         result.setReturnTime(borrow.getReturnTime());
+        result.setScheduledReturnTime(borrow.getScheduledReturnTime());
         result.setCritical(borrow.getCritical());
         return result;
     }
@@ -33,6 +34,7 @@ public class ResourceBorrowHelper {
         result.setClientId(borrow.getClientId());
         result.setBorrowTime(borrow.getBorrowTime());
         result.setReturnTime(borrow.getReturnTime());
+        result.setScheduledReturnTime(borrow.getScheduledReturnTime());
         result.setCritical(borrow.getCritical());
         return result;
     }
