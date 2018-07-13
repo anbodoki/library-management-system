@@ -2,9 +2,14 @@ package com.lms.application.controller.atom;
 
 import com.lms.application.security.PermissionCheck;
 import com.lms.atom.book.service.ResourceService;
+import com.lms.atom.borrow.service.ResourceBorrowService;
+import com.lms.atom.borrow.storage.model.ResourceBorrow;
+import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.atom.resource.ResourceCopyDTO;
 import com.lms.common.dto.atom.resource.ResourceDTO;
+import com.lms.common.dto.request.ClientResourceCopyHistoryRequest;
 import com.lms.common.dto.request.GeneralFilteringRequest;
+import com.lms.common.dto.request.ResourceCopyHistoryRequest;
 import com.lms.common.dto.request.ResourceFilteringRequest;
 import com.lms.common.dto.response.ActionResponse;
 import com.lms.common.dto.response.ActionResponseWithData;
@@ -20,10 +25,12 @@ import org.springframework.web.bind.annotation.*;
 public class ResourceController {
 
     private final ResourceService resourceService;
+    private final ResourceBorrowService resourceBorrowService;
 
     @Autowired
-    public ResourceController(ResourceService resourceService) {
+    public ResourceController(ResourceService resourceService, ResourceBorrowService resourceBorrowService) {
         this.resourceService = resourceService;
+        this.resourceBorrowService = resourceBorrowService;
     }
 
     @PostMapping(value = "quick-find", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -98,5 +105,19 @@ public class ResourceController {
     public ActionResponse removeResourceCopy(@PathVariable long id) throws Exception {
         resourceService.removeResourceCopy(id);
         return new ActionResponse(true);
+    }
+
+    @PostMapping(value = "get-resource-copy-borrow-history", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PermissionCheck
+    public ActionResponse getResourceBorrowHistory(@RequestBody ResourceCopyHistoryRequest request) throws Exception {
+        ListResult<ResourceBorrowDTO> result = resourceBorrowService.getResourceCopyHistory(request.getIdentifier(), request.getLimit(), request.getOffset());
+        return new ActionResponseWithData<>(result, true);
+    }
+
+    @PostMapping(value = "get-client-resource-copy-borrow-history", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PermissionCheck
+    public ActionResponse getResourceBorrowHistory(@RequestBody ClientResourceCopyHistoryRequest request) throws Exception {
+        ListResult<ResourceBorrowDTO> result = resourceBorrowService.getClientResourceBorrow(request.getClientId(), request.getCurrent(), request.getLimit(), request.getOffset());
+        return new ActionResponseWithData<>(result, true);
     }
 }

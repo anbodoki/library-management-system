@@ -2,6 +2,7 @@ package com.lms.client.api.clientapi;
 
 import com.lms.atom.book.service.ResourceService;
 import com.lms.atom.book.storage.model.ResourceType;
+import com.lms.atom.borrow.service.ResourceBorrowService;
 import com.lms.atom.category.service.CategoryService;
 import com.lms.atom.material.service.MaterialTypeService;
 import com.lms.atom.messages.Messages;
@@ -11,6 +12,7 @@ import com.lms.client.favorite.service.FavoriteService;
 import com.lms.client.school.service.SchoolService;
 import com.lms.common.dto.atom.category.CategoryDTO;
 import com.lms.common.dto.atom.materialtype.MaterialTypeDTO;
+import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.atom.resource.ResourceDTO;
 import com.lms.common.dto.atom.resource.ResourceTypeDTO;
 import com.lms.common.dto.cleintapi.LightResource;
@@ -43,9 +45,10 @@ public class ClientApiServiceImpl implements ClientApiService {
     private final SchoolService schoolService;
     private final FavoriteService favoriteService;
     private final ConfigurationPropertyService configurationPropertyService;
+    private final ResourceBorrowService resourceBorrowService;
 
     @Autowired
-    public ClientApiServiceImpl(ResourceService resourceService, CategoryService categoryService, MaterialTypeService materialTypeService, ClientService clientService, SchoolService schoolService, FavoriteService favoriteService, ConfigurationPropertyService configurationPropertyService) {
+    public ClientApiServiceImpl(ResourceService resourceService, CategoryService categoryService, MaterialTypeService materialTypeService, ClientService clientService, SchoolService schoolService, FavoriteService favoriteService, ConfigurationPropertyService configurationPropertyService, ResourceBorrowService resourceBorrowService) {
         this.resourceService = resourceService;
         this.categoryService = categoryService;
         this.materialTypeService = materialTypeService;
@@ -53,6 +56,7 @@ public class ClientApiServiceImpl implements ClientApiService {
         this.schoolService = schoolService;
         this.favoriteService = favoriteService;
         this.configurationPropertyService = configurationPropertyService;
+        this.resourceBorrowService = resourceBorrowService;
     }
 
     @Override
@@ -62,6 +66,7 @@ public class ClientApiServiceImpl implements ClientApiService {
         result.setResultList(LightResourceHelper.toLights(resources.getResultList()));
         setProperImageURL(result.getResultList());
         setFavourites(result.getResultList());
+        //TODO set client critical
         return result;
     }
 
@@ -90,6 +95,7 @@ public class ClientApiServiceImpl implements ClientApiService {
         result.setResultList(LightResourceHelper.toLights(resources.getResultList()));
         setProperImageURL(result.getResultList());
         setFavourites(result.getResultList());
+        //TODO set client critical
         return result;
     }
 
@@ -107,6 +113,7 @@ public class ClientApiServiceImpl implements ClientApiService {
         if (favoriteIds.contains(resourceById.getId())) {
             resourceById.setClientFavorite(true);
         }
+        //TODO set client critical
         return resourceById;
     }
 
@@ -179,12 +186,18 @@ public class ClientApiServiceImpl implements ClientApiService {
         for (LightResource lightResource : result) {
             lightResource.setClientFavorite(true);
         }
+        //TODO set client critical
         return result;
     }
 
     @Override
     public ClientDTO getAuthorizedUser(String token) throws ClientException {
         return clientService.getAuthorizedClient();
+    }
+
+    @Override
+    public ListResult<ResourceBorrowDTO> getClientResourceBorrow(Long clientId, boolean current, int limit, int offset) {
+        return resourceBorrowService.getClientResourceBorrow(clientId, current, limit, offset);
     }
 
     private void setProperImageURL(List<LightResource> resources) {

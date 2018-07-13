@@ -17,6 +17,7 @@ public class LightResource implements Serializable {
     private String imageUrl;
     private CategoryDTO category;
     private boolean clientFavorite;
+    private boolean clientCritical;
 
     public Long getId() {
         return id;
@@ -96,5 +97,13 @@ public class LightResource implements Serializable {
 
     public void setClientFavorite(boolean clientFavorite) {
         this.clientFavorite = clientFavorite;
+    }
+
+    public boolean getClientCritical() {
+        return clientCritical;
+    }
+
+    public void setClientCritical(boolean clientCritical) {
+        this.clientCritical = clientCritical;
     }
 }

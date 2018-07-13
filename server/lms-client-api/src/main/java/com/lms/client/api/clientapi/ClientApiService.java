@@ -4,6 +4,7 @@ import com.lms.client.api.exception.ClientApiException;
 import com.lms.client.exception.ClientException;
 import com.lms.common.dto.atom.category.CategoryDTO;
 import com.lms.common.dto.atom.materialtype.MaterialTypeDTO;
+import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.atom.resource.ResourceDTO;
 import com.lms.common.dto.atom.resource.ResourceTypeDTO;
 import com.lms.common.dto.cleintapi.LightResource;
@@ -51,4 +52,6 @@ public interface ClientApiService {
     List<LightResource> getClientFavorite() throws Exception;
 
     ClientDTO getAuthorizedUser(String token) throws ClientException;
+
+    ListResult<ResourceBorrowDTO> getClientResourceBorrow(Long clientId, boolean current, int limit, int offset);
 }

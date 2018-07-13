@@ -1,12 +1,15 @@
 package com.lms.application.controller.clientapi;
 
 import com.lms.application.security.ClientPermissionCheck;
+import com.lms.application.security.PermissionCheck;
 import com.lms.client.api.clientapi.ClientApiService;
+import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.cleintapi.AddRemoveFavouriteRequest;
 import com.lms.common.dto.cleintapi.ClientResourceFilteringRequest;
 import com.lms.common.dto.cleintapi.ClientUpdateRequest;
 import com.lms.common.dto.cleintapi.LightResource;
 import com.lms.common.dto.client.ClientDTO;
+import com.lms.common.dto.request.ClientResourceCopyHistoryRequest;
 import com.lms.common.dto.request.GeneralFilteringRequest;
 import com.lms.common.dto.response.ActionResponse;
 import com.lms.common.dto.response.ActionResponseWithData;
@@ -127,5 +130,12 @@ public class ClientApiController {
     @ClientPermissionCheck
     public ActionResponse getClientFavourite() throws Exception {
         return new ActionResponseWithData<>(service.getClientFavorite(), true);
+    }
+
+    @PostMapping(value = "get-client-resource-copy-borrow-history", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ClientPermissionCheck
+    public ActionResponse getResourceBorrowHistory(@RequestBody ClientResourceCopyHistoryRequest request) throws Exception {
+        ListResult<ResourceBorrowDTO> result = service.getClientResourceBorrow(request.getClientId(), request.getCurrent(), request.getLimit(), request.getOffset());
+        return new ActionResponseWithData<>(result, true);
     }
 }
