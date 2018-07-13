@@ -36,7 +36,7 @@ import java.util.List;
 @Transactional
 public class ClientApiServiceImpl implements ClientApiService {
 
-    public static String URL = "http://localhost:8080";
+    public static String DEFAULT_URL = "http://localhost:8080";
 
     private final ResourceService resourceService;
     private final CategoryService categoryService;
@@ -66,7 +66,6 @@ public class ClientApiServiceImpl implements ClientApiService {
         result.setResultList(LightResourceHelper.toLights(resources.getResultList()));
         setProperImageURL(result.getResultList());
         setFavourites(result.getResultList());
-        //TODO set client critical
         return result;
     }
 
@@ -95,7 +94,6 @@ public class ClientApiServiceImpl implements ClientApiService {
         result.setResultList(LightResourceHelper.toLights(resources.getResultList()));
         setProperImageURL(result.getResultList());
         setFavourites(result.getResultList());
-        //TODO set client critical
         return result;
     }
 
@@ -105,15 +103,14 @@ public class ClientApiServiceImpl implements ClientApiService {
         if (resourceById.getImageUrl() != null) {
             ConfigurationProperty configurationProperty = configurationPropertyService.get(ConfigurationPropertyCodes.SERVER_BASE_URL);
             if (configurationProperty != null) {
-                URL = configurationProperty.getStringValue();
+                DEFAULT_URL = configurationProperty.getStringValue();
             }
-            resourceById.setImageUrl(URL + resourceById.getImageUrl());
+            resourceById.setImageUrl(DEFAULT_URL + resourceById.getImageUrl());
         }
         List<Long> favoriteIds = favoriteService.getClintFavoriteIds();
         if (favoriteIds.contains(resourceById.getId())) {
             resourceById.setClientFavorite(true);
         }
-        //TODO set client critical
         return resourceById;
     }
 
@@ -203,11 +200,11 @@ public class ClientApiServiceImpl implements ClientApiService {
     private void setProperImageURL(List<LightResource> resources) {
         ConfigurationProperty configurationProperty = configurationPropertyService.get(ConfigurationPropertyCodes.SERVER_BASE_URL);
         if (configurationProperty != null) {
-            URL = configurationProperty.getStringValue();
+            DEFAULT_URL = configurationProperty.getStringValue();
         }
         for (LightResource lightResource : resources) {
             if (lightResource.getImageUrl() != null) {
-                lightResource.setImageUrl(URL + lightResource.getImageUrl());
+                lightResource.setImageUrl(DEFAULT_URL + lightResource.getImageUrl());
             }
         }
     }

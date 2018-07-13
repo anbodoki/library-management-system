@@ -40,7 +40,6 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
             throws IOException, ServletException {
         final HttpServletRequest httpRequest = (HttpServletRequest) request;
-        final HttpServletResponse httpResponse = (HttpServletResponse) response;
 
         final String accessToken = httpRequest.getHeader(GoogleConstants.HEADER_STRING);
         if (accessToken != null) {
@@ -62,13 +61,13 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
                     String email = payload.getEmail();
                     ClientDTO client = clientService.getByEmail(email);
                     if (client == null) {
-                        String name = (String) payload.get("given_name");
-                        String pictureUrl = (String) payload.get("picture");
-                        String familyName = (String) payload.get("family_name");
+                        String firstName = (String) payload.get("given_name");
+                        String imageURL = (String) payload.get("picture");
+                        String lastName = (String) payload.get("family_name");
                         client = new ClientDTO();
-                        client.setImageUrl(pictureUrl);
-                        client.setFirstName(name);
-                        client.setLastName(familyName);
+                        client.setImageUrl(imageURL);
+                        client.setFirstName(firstName);
+                        client.setLastName(lastName);
                         client.setEmail(email);
                         client.setActive(true);
                         client = clientService.save(client);
