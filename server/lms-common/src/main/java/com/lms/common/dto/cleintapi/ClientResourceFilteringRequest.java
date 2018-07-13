@@ -16,6 +16,7 @@ public class ClientResourceFilteringRequest extends PagingRequest {
     private Date toEditionDate;
     private ResourceTypeDTO resourceType;
     private List<Long> categoryIds;
+    private Long languageId;
 
     public Long getId() {
         return id;
@@ -79,5 +80,13 @@ public class ClientResourceFilteringRequest extends PagingRequest {
 
     public void setCategoryIds(List<Long> categoryIds) {
         this.categoryIds = categoryIds;
+    }
+
+    public Long getLanguageId() {
+        return languageId;
+    }
+
+    public void setLanguageId(Long languageId) {
+        this.languageId = languageId;
     }
 }

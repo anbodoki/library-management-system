@@ -57,6 +57,7 @@ public class ClientApiController {
                 request.getFromEditionDate(), request.getToEditionDate(),
                 request.getResourceType(),
                 request.getCategoryIds(),
+                request.getLanguageId(),
                 request.getLimit(), request.getOffset());
         return new ActionResponseWithData<>(result, true);
     }

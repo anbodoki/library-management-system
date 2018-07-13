@@ -27,6 +27,8 @@ import com.lms.configuration.cache.ConfigurationPropertyCodes;
 import com.lms.configuration.properties.service.ConfigurationPropertyService;
 import com.lms.configuration.properties.storage.model.ConfigurationProperty;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -75,7 +77,7 @@ public class ClientApiServiceImpl implements ClientApiService {
 
     @Override
     public ListResult<LightResource> find(Long id, String name, String author, String publisher, Date fromEditionDate, Date toEditionDate,
-                                          ResourceTypeDTO resourceType, List<Long> categoryIds, int limit, int offset) throws Exception {
+                                          ResourceTypeDTO resourceType, List<Long> categoryIds, Long languageId, int limit, int offset) throws Exception {
         ListResult<ResourceDTO> resources = resourceService.findSpecial(id,
                 name,
                 author,
@@ -83,7 +85,7 @@ public class ClientApiServiceImpl implements ClientApiService {
                 null,
                 publisher,
                 fromEditionDate, toEditionDate,
-                null,
+                languageId,
                 null,
                 null,
                 resourceType,
@@ -187,7 +189,6 @@ public class ClientApiServiceImpl implements ClientApiService {
         for (LightResource lightResource : result) {
             lightResource.setClientFavorite(true);
         }
-        //TODO set client critical
         return result;
     }
 
@@ -198,7 +199,9 @@ public class ClientApiServiceImpl implements ClientApiService {
 
     @Override
     public ListResult<ResourceBorrowDTO> getClientResourceBorrow(Long clientId, boolean current, int limit, int offset) {
-        return resourceBorrowService.getClientResourceBorrow(clientId, current, limit, offset);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        ClientDTO client = clientService.getByEmail(authentication.getName());
+        return resourceBorrowService.getClientResourceBorrow(client.getId(), current, limit, offset);
     }
 
     @Override
