@@ -4,6 +4,7 @@ import com.lms.atom.book.service.ResourceService;
 import com.lms.atom.book.storage.model.ResourceType;
 import com.lms.atom.borrow.service.ResourceBorrowService;
 import com.lms.atom.category.service.CategoryService;
+import com.lms.atom.language.service.LanguageService;
 import com.lms.atom.material.service.MaterialTypeService;
 import com.lms.atom.messages.Messages;
 import com.lms.client.client.service.ClientService;
@@ -11,6 +12,7 @@ import com.lms.client.exception.ClientException;
 import com.lms.client.favorite.service.FavoriteService;
 import com.lms.client.school.service.SchoolService;
 import com.lms.common.dto.atom.category.CategoryDTO;
+import com.lms.common.dto.atom.language.LanguageDTO;
 import com.lms.common.dto.atom.materialtype.MaterialTypeDTO;
 import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.atom.resource.ResourceDTO;
@@ -46,9 +48,10 @@ public class ClientApiServiceImpl implements ClientApiService {
     private final FavoriteService favoriteService;
     private final ConfigurationPropertyService configurationPropertyService;
     private final ResourceBorrowService resourceBorrowService;
+    private final LanguageService languageService;
 
     @Autowired
-    public ClientApiServiceImpl(ResourceService resourceService, CategoryService categoryService, MaterialTypeService materialTypeService, ClientService clientService, SchoolService schoolService, FavoriteService favoriteService, ConfigurationPropertyService configurationPropertyService, ResourceBorrowService resourceBorrowService) {
+    public ClientApiServiceImpl(ResourceService resourceService, CategoryService categoryService, MaterialTypeService materialTypeService, ClientService clientService, SchoolService schoolService, FavoriteService favoriteService, ConfigurationPropertyService configurationPropertyService, ResourceBorrowService resourceBorrowService, LanguageService languageService) {
         this.resourceService = resourceService;
         this.categoryService = categoryService;
         this.materialTypeService = materialTypeService;
@@ -57,6 +60,7 @@ public class ClientApiServiceImpl implements ClientApiService {
         this.favoriteService = favoriteService;
         this.configurationPropertyService = configurationPropertyService;
         this.resourceBorrowService = resourceBorrowService;
+        this.languageService = languageService;
     }
 
     @Override
@@ -195,6 +199,11 @@ public class ClientApiServiceImpl implements ClientApiService {
     @Override
     public ListResult<ResourceBorrowDTO> getClientResourceBorrow(Long clientId, boolean current, int limit, int offset) {
         return resourceBorrowService.getClientResourceBorrow(clientId, current, limit, offset);
+    }
+
+    @Override
+    public ListResult<LanguageDTO> getLanguages() throws Exception {
+        return languageService.find(null, -1, -1);
     }
 
     private void setProperImageURL(List<LightResource> resources) {

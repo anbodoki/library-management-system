@@ -103,6 +103,12 @@ public class ClientApiController {
         return new ActionResponseWithData<>(service.getSchools(), true);
     }
 
+    @GetMapping(value = "get-languages", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ClientPermissionCheck
+    public ActionResponse getLanguages() throws Exception {
+        return new ActionResponseWithData<>(service.getLanguages(), true);
+    }
+
     @PostMapping(value = "update-client", produces = MediaType.APPLICATION_JSON_VALUE)
     @ClientPermissionCheck
     public ActionResponse find(@RequestBody ClientUpdateRequest clientUpdateRequest) throws Exception {
