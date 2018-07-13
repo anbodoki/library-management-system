@@ -3,6 +3,7 @@ package com.lms.client.client.storage.model;
 import com.lms.client.school.storage.model.School;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "client")
@@ -23,6 +24,8 @@ public class Client {
     @Column(columnDefinition = "boolean default false")
     private boolean active;
     private String imageUrl;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Card> cards;
 
     public Long getId() {
         return id;
@@ -94,5 +97,13 @@ public class Client {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public List<Card> getCards() {
+        return cards;
+    }
+
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
     }
 }

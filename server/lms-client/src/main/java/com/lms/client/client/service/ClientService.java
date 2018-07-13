@@ -23,4 +23,6 @@ public interface ClientService {
     ClientDTO save(ClientDTO client);
 
     ClientDTO getAuthorizedClient() throws ClientException;
+
+    ClientDTO getClientForCard(String identifier);
 }

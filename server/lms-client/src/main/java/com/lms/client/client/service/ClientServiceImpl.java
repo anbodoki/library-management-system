@@ -98,4 +98,9 @@ public class ClientServiceImpl implements ClientService {
         }
         return ClientHelper.fromEntity(client);
     }
+
+    @Override
+    public ClientDTO getClientForCard(String identifier) {
+        return ClientHelper.fromEntity(storage.getClientForCard(identifier));
+    }
 }

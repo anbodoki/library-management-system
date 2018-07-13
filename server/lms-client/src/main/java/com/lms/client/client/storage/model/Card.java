@@ -1,4 +1,4 @@
-package com.lms.client.card.storage.model;
+package com.lms.client.client.storage.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

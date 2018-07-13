@@ -2,6 +2,7 @@ package com.lms.common.dto.client;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 public class ClientDTO implements Serializable {
 
@@ -17,6 +18,7 @@ public class ClientDTO implements Serializable {
     private SchoolDTO school;
     private boolean active;
     private String imageUrl;
+    private List<CardDTO> cards;
 
     public Long getId() {
         return id;
@@ -88,5 +90,13 @@ public class ClientDTO implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public List<CardDTO> getCards() {
+        return cards;
+    }
+
+    public void setCards(List<CardDTO> cards) {
+        this.cards = cards;
     }
 }

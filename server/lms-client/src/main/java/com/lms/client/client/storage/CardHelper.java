@@ -1,6 +1,6 @@
-package com.lms.client.card.storage;
+package com.lms.client.client.storage;
 
-import com.lms.client.card.storage.model.Card;
+import com.lms.client.client.storage.model.Card;
 import com.lms.common.dto.client.CardDTO;
 
 import java.util.ArrayList;

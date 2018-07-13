@@ -101,4 +101,9 @@ public class ClientStorage {
         result.setPageNum(MathUtils.calculatePageNum(result.getCount(), result.getLimit()));
         return result;
     }
+
+    public Client getClientForCard(String identifier) {
+        return em.createQuery("SELECT c FROM Client c WHERE EXISTS (SELECT cr FROM c.cards cr WHERE cr.identifier = :identifier)", Client.class)
+                .setParameter("identifier", identifier).getSingleResult();
+    }
 }

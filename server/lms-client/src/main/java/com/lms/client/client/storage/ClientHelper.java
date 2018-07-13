@@ -23,6 +23,7 @@ public class ClientHelper {
         result.setSchool(SchoolHelper.fromEntity(client.getSchool()));
         result.setActive(client.getActive());
         result.setImageUrl(client.getImageUrl());
+        result.setCards(CardHelper.fromEntities(client.getCards()));
         return result;
     }
 
@@ -40,6 +41,7 @@ public class ClientHelper {
         result.setSchool(SchoolHelper.toEntity(client.getSchool()));
         result.setActive(client.getActive());
         result.setImageUrl(client.getImageUrl());
+        result.setCards(CardHelper.toEntities(client.getCards()));
         return result;
     }
 
