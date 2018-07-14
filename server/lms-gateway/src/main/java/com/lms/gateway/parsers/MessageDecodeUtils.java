@@ -18,10 +18,10 @@ public class MessageDecodeUtils {
         if (!MessageDecodeUtils.syncByteIsPresent(msg)) {
             return null;
         }
-        if (!MessageDecodeUtils.checkCRC(msg)) {
-            return null;
-        }
-        return getPacket(msg.substring(0, msg.lastIndexOf(ProtocolConfig.MSG_DELIMITER)));
+//        if (!MessageDecodeUtils.checkCRC(msg)) {
+//            return null;
+//        }
+        return getPacket(msg.substring(1, msg.lastIndexOf(ProtocolConfig.MSG_DELIMITER)));
     }
 
     public static String getStringFromBytes(ByteBuf msg) {
@@ -52,25 +52,23 @@ public class MessageDecodeUtils {
 
     private static Packet getPacket(String data) throws ParseException {
         String[] split = data.split(ProtocolConfig.MSG_DELIMITER);
-        if (split.length < 5) {
+        if (split.length < 3) {
             return null;
         }
         Packet packet = new Packet();
         packet.setMessageType(MessageType.valueOf(split[0].charAt(0)));
         packet.setMessageStatus(MessageStatus.valueOf(split[1].charAt(0)));
         packet.setDate(formatter.parse(split[2]));
-        if (split.length > 5) {
-            switch (packet.getMessageType()) {
-                case SUBMIT:
-                    packet.setMessageData(buildSubmitMessageData(split[3]));
-                    break;
-                case CHECK_BOOK:
-                    packet.setMessageData(buildCheckBookMessageData(split[3]));
-                    break;
-                case CHECK_CLIENT:
-                    packet.setMessageData(buildCheckClientMessageData(split[3]));
-                    break;
-            }
+        switch (packet.getMessageType()) {
+            case SUBMIT:
+                packet.setMessageData(buildSubmitMessageData(split[3]));
+                break;
+            case CHECK_BOOK:
+                packet.setMessageData(buildCheckBookMessageData(split[3]));
+                break;
+            case CHECK_CLIENT:
+                packet.setMessageData(buildCheckClientMessageData(split[3]));
+                break;
         }
         return packet;
     }

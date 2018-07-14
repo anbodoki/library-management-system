@@ -30,11 +30,11 @@ public class DeviceMessageHandlerFactoryImpl extends DeviceMessageHandlerFactory
     }
 
     @Override
-    public String processSubmit(String bookId, String clientId, Date date) {
-        ResourceBorrowDTO resourceBorrow = resourceBorrowService.get(bookId, clientId);
+    public String processSubmit(String bookId, String clientId, Date date) throws Exception {
+        ClientDTO clientForCard = clientService.getClientForCard(clientId);
+        ResourceBorrowDTO resourceBorrow = resourceBorrowService.get(bookId, clientForCard.getId());
         if (resourceBorrow == null) {
             ResourceBorrowDTO result = new ResourceBorrowDTO();
-            ClientDTO clientForCard = clientService.getClientForCard(clientId);
             result.setClientId(clientForCard.getId());
             result.setResourceCopy(resourceService.getResourceCopyByIdentifier(bookId));
             result.setBorrowTime(new Date());
@@ -58,7 +58,7 @@ public class DeviceMessageHandlerFactoryImpl extends DeviceMessageHandlerFactory
     }
 
     @Override
-    public String processCheckClient(String clientCardId) {
+    public String processCheckClient(String clientCardId) throws Exception {
         ClientDTO clientForCard = clientService.getClientForCard(clientCardId);
         if (clientForCard == null) {
             return Messages.get("clientNotExists");

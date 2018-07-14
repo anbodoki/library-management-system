@@ -11,5 +11,5 @@ public interface ResourceBorrowService {
 
     ListResult<ResourceBorrowDTO> getResourceCopyHistory(String identifier, int limit, int offset);
 
-    ResourceBorrowDTO get(String bookId, String clientId);
+    ResourceBorrowDTO get(String bookId, Long clientId) throws Exception;
 }

@@ -28,6 +28,7 @@ public class DeviceSession {
                         channel.close();
                         break;
                 }
+                break;
             case CHECK_BOOK:
                 switch (packet.getMessageStatus()) {
                     case IN_PROGRESS:
@@ -37,6 +38,7 @@ public class DeviceSession {
                         channel.close();
                         break;
                 }
+                break;
             case SUBMIT:
                 switch (packet.getMessageStatus()) {
                     case IN_PROGRESS:
@@ -46,37 +48,62 @@ public class DeviceSession {
                         channel.close();
                         break;
                 }
+                break;
         }
     }
 
     private void processSubmit(Packet packet) {
-        RequestSubmitMessageData messageData = (RequestSubmitMessageData) packet.getMessageData();
-        String response = deviceMessageHandlerFactory.processSubmit(messageData.getBookId(), messageData.getClientId(), messageData.getDate());
-        ResponseSubmitMessageData result = new ResponseSubmitMessageData();
-        result.setData(response);
-        packet.setDate(new Date());
-        packet.setMessageData(result);
-        channel.writeAndFlush(packet);
+        try {
+            RequestSubmitMessageData messageData = (RequestSubmitMessageData) packet.getMessageData();
+            String response = deviceMessageHandlerFactory.processSubmit(messageData.getBookId(), messageData.getClientId(), messageData.getDate());
+            ResponseSubmitMessageData result = new ResponseSubmitMessageData();
+            result.setData(response);
+            packet.setDate(new Date());
+            packet.setMessageData(result);
+            packet.setMessageStatus(MessageStatus.OK);
+            channel.writeAndFlush(packet);
+        } catch (Exception e) {
+            packet.setMessageData(new ErrorResponseData());
+            packet.setDate(new Date());
+            packet.setMessageStatus(MessageStatus.ERROR);
+            channel.writeAndFlush(packet);
+        }
     }
 
     private void processCheckBook(Packet packet) {
-        RequestCheckBookMessageData messageData = (RequestCheckBookMessageData) packet.getMessageData();
-        String response = deviceMessageHandlerFactory.processCheckBook(messageData.getBookIdentifier());
-        ResponseCheckBookMessageData result = new ResponseCheckBookMessageData();
-        result.setData(response);
-        packet.setDate(new Date());
-        packet.setMessageData(result);
-        channel.writeAndFlush(packet);
+        try {
+            RequestCheckBookMessageData messageData = (RequestCheckBookMessageData) packet.getMessageData();
+            String response = deviceMessageHandlerFactory.processCheckBook(messageData.getBookIdentifier());
+            ResponseCheckBookMessageData result = new ResponseCheckBookMessageData();
+            result.setData(response);
+            packet.setDate(new Date());
+            packet.setMessageData(result);
+            packet.setMessageStatus(MessageStatus.OK);
+            channel.writeAndFlush(packet);
+        } catch (Exception e) {
+            packet.setMessageData(new ErrorResponseData());
+            packet.setDate(new Date());
+            packet.setMessageStatus(MessageStatus.ERROR);
+            channel.writeAndFlush(packet);
+        }
     }
 
     private void processCheckClient(Packet packet) {
-        RequestCheckClientMessageData messageData = (RequestCheckClientMessageData) packet.getMessageData();
-        String response = deviceMessageHandlerFactory.processCheckClient(messageData.getClientCardId());
-        ResponseCheckClientMessageData result = new ResponseCheckClientMessageData();
-        result.setData(response);
-        packet.setDate(new Date());
-        packet.setMessageData(result);
-        channel.writeAndFlush(packet);
+        try {
+            RequestCheckClientMessageData messageData = (RequestCheckClientMessageData) packet.getMessageData();
+            String response = deviceMessageHandlerFactory.processCheckClient(messageData.getClientCardId());
+            ResponseCheckClientMessageData result = new ResponseCheckClientMessageData();
+            result.setData(response);
+            packet.setDate(new Date());
+            packet.setMessageStatus(MessageStatus.OK);
+            packet.setMessageData(result);
+            channel.writeAndFlush(packet);
+        } catch (Exception e) {
+            packet.setMessageData(new ErrorResponseData());
+            packet.setDate(new Date());
+            packet.setMessageStatus(MessageStatus.ERROR);
+            channel.writeAndFlush(packet);
+        }
     }
 
     public Channel getChannel() {

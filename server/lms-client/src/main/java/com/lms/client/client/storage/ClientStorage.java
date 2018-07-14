@@ -5,10 +5,7 @@ import com.lms.common.dto.response.ListResult;
 import com.lms.utils.MathUtils;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,11 +99,11 @@ public class ClientStorage {
         return result;
     }
 
-    public Client getClientForCard(String identifier) {
+    public Client getClientForCard(String identifier) throws Exception{
         try {
             return em.createQuery("SELECT c FROM Client c WHERE EXISTS (SELECT cr FROM c.cards cr WHERE cr.identifier = :identifier)", Client.class)
                     .setParameter("identifier", identifier).getSingleResult();
-        } catch (Exception e) {
+        } catch (NoResultException e) {
             return null;
         }
     }

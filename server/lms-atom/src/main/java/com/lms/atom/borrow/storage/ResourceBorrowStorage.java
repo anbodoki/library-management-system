@@ -6,10 +6,7 @@ import com.lms.common.dto.response.ListResult;
 import com.lms.utils.MathUtils;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.util.List;
 
 @Repository
@@ -69,15 +66,15 @@ public class ResourceBorrowStorage {
         return result;
     }
 
-    public ResourceBorrow get(String bookId, String clientId) {
+    public ResourceBorrow get(String bookId, Long clientId) throws Exception{
         try {
             return em.createQuery("SELECT r FROM ResourceBorrow r WHERE " +
                     "r.resourceCopy.identifier = :bookId " +
                     "AND r.clientId = :clientId " +
-                    "AND r.returnTime IS NULL", ResourceBorrow.class)
+                    "AND r.returnTime IS NULL ORDER BY r.borrowTime DESC", ResourceBorrow.class)
                     .setParameter("bookId", bookId)
                     .setParameter("clientId", clientId).getSingleResult();
-        } catch (Exception e) {
+        } catch (NoResultException e) {
             return null;
         }
     }

@@ -100,7 +100,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public ClientDTO getClientForCard(String identifier) {
+    public ClientDTO getClientForCard(String identifier) throws Exception {
         return ClientHelper.fromEntity(storage.getClientForCard(identifier));
     }
 }

@@ -24,5 +24,5 @@ public interface ClientService {
 
     ClientDTO getAuthorizedClient() throws ClientException;
 
-    ClientDTO getClientForCard(String identifier);
+    ClientDTO getClientForCard(String identifier) throws Exception;
 }

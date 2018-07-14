@@ -45,7 +45,7 @@ public class ResourceBorrowServiceImpl implements ResourceBorrowService {
     }
 
     @Override
-    public ResourceBorrowDTO get(String bookId, String clientId) {
+    public ResourceBorrowDTO get(String bookId, Long clientId) throws Exception {
         return ResourceBorrowHelper.fromEntity(storage.get(bookId, clientId));
     }
 }
