@@ -1,3 +1,3 @@
 
 def send_message(request_message):
-    pass
+    return '*b&o&date&book name by author&crc16'
