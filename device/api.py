@@ -15,3 +15,7 @@ def get_user_info(user_id):
 
 def submit_book_request(user_id, book_id):
     pass
+
+
+if __name__ == '__main__':
+    get_book_info('123')
