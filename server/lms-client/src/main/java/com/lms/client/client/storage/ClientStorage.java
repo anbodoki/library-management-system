@@ -103,7 +103,11 @@ public class ClientStorage {
     }
 
     public Client getClientForCard(String identifier) {
-        return em.createQuery("SELECT c FROM Client c WHERE EXISTS (SELECT cr FROM c.cards cr WHERE cr.identifier = :identifier)", Client.class)
-                .setParameter("identifier", identifier).getSingleResult();
+        try {
+            return em.createQuery("SELECT c FROM Client c WHERE EXISTS (SELECT cr FROM c.cards cr WHERE cr.identifier = :identifier)", Client.class)
+                    .setParameter("identifier", identifier).getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

@@ -2,10 +2,12 @@ package com.lms.atom.gateway;
 
 import com.lms.atom.book.service.ResourceService;
 import com.lms.atom.borrow.service.ResourceBorrowService;
+import com.lms.atom.messages.Messages;
 import com.lms.client.client.service.ClientService;
+import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
+import com.lms.common.dto.atom.resource.ResourceCopyDTO;
+import com.lms.common.dto.client.ClientDTO;
 import com.lms.gateway.DeviceMessageHandlerFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,8 +17,6 @@ import java.util.Date;
 @Service
 @Transactional
 public class DeviceMessageHandlerFactoryImpl extends DeviceMessageHandlerFactory {
-
-    private Logger logger = LoggerFactory.getLogger(DeviceMessageHandlerFactoryImpl.class);
 
     private final ResourceBorrowService resourceBorrowService;
     private final ResourceService resourceService;
@@ -30,17 +30,39 @@ public class DeviceMessageHandlerFactoryImpl extends DeviceMessageHandlerFactory
     }
 
     @Override
-	public String processSubmit(String bookId, String clientId, Date date) {
-		return null;
-	}
+    public String processSubmit(String bookId, String clientId, Date date) {
+        ResourceBorrowDTO resourceBorrow = resourceBorrowService.get(bookId, clientId);
+        if (resourceBorrow == null) {
+            ResourceBorrowDTO result = new ResourceBorrowDTO();
+            ClientDTO clientForCard = clientService.getClientForCard(clientId);
+            result.setClientId(clientForCard.getId());
+            result.setResourceCopy(resourceService.getResourceCopyByIdentifier(bookId));
+            result.setBorrowTime(new Date());
+            result.setScheduledReturnTime(date);
+            resourceBorrowService.updateResourceBorrow(result);
+            return Messages.get("successfullyBorrowed");
+        } else {
+            resourceBorrow.setReturnTime(new Date());
+            resourceBorrowService.updateResourceBorrow(resourceBorrow);
+            return Messages.get("successfullyReturned");
+        }
+    }
 
-	@Override
-	public String processCheckBook(String bookIdentifier) {
-		return null;
-	}
+    @Override
+    public String processCheckBook(String bookIdentifier) {
+        ResourceCopyDTO resourceCopyByIdentifier = resourceService.getResourceCopyByIdentifier(bookIdentifier);
+        if (resourceCopyByIdentifier == null) {
+            return Messages.get("bookNotExists");
+        }
+        return resourceCopyByIdentifier.getResource().getName() + " by " + resourceCopyByIdentifier.getResource().getAuthor();
+    }
 
-	@Override
-	public String processCheckClient(String clientCardId) {
-		return null;
-	}
+    @Override
+    public String processCheckClient(String clientCardId) {
+        ClientDTO clientForCard = clientService.getClientForCard(clientCardId);
+        if (clientForCard == null) {
+            return Messages.get("clientNotExists");
+        }
+        return clientForCard.getFirstName() + " " + clientForCard.getLastName();
+    }
 }

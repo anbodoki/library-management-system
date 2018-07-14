@@ -4,10 +4,11 @@ import com.lms.atom.book.storage.model.Resource;
 import com.lms.client.client.storage.model.Client;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Favorite {
+public class Favorite implements Serializable {
 
     private static final long serialVersionUID = -3009157732242241607L;
 

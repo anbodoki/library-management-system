@@ -10,4 +10,6 @@ public interface ResourceBorrowService {
     ListResult<ResourceBorrowDTO> getClientResourceBorrow(Long clientId, boolean current, int limit, int offset);
 
     ListResult<ResourceBorrowDTO> getResourceCopyHistory(String identifier, int limit, int offset);
+
+    ResourceBorrowDTO get(String bookId, String clientId);
 }

@@ -30,7 +30,7 @@ public class GatewayServerManager {
     private Integer serverPort = 15000;
     private Integer groupThreadNumber = 25;
     private Integer executorThreadNumber = 25;
-    private Integer idleStateTimeout = 60;
+    private Integer idleStateTimeout = 60 * 5;
 
     @Autowired
     public GatewayServerManager(ConfigurationPropertyService configurationPropertyService, DeviceMessageHandlerFactoryImpl deviceMessageHandlerFactory) {

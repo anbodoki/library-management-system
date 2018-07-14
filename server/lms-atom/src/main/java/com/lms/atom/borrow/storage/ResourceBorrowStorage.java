@@ -1,6 +1,7 @@
 package com.lms.atom.borrow.storage;
 
 import com.lms.atom.borrow.storage.model.ResourceBorrow;
+import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.response.ListResult;
 import com.lms.utils.MathUtils;
 import org.springframework.stereotype.Repository;
@@ -66,5 +67,18 @@ public class ResourceBorrowStorage {
         result.setCount((Long) count.getSingleResult());
         result.setPageNum(MathUtils.calculatePageNum(result.getCount(), result.getLimit()));
         return result;
+    }
+
+    public ResourceBorrow get(String bookId, String clientId) {
+        try {
+            return em.createQuery("SELECT r FROM ResourceBorrow r WHERE " +
+                    "r.resourceCopy.identifier = :bookId " +
+                    "AND r.clientId = :clientId " +
+                    "AND r.returnTime IS NULL", ResourceBorrow.class)
+                    .setParameter("bookId", bookId)
+                    .setParameter("clientId", clientId).getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

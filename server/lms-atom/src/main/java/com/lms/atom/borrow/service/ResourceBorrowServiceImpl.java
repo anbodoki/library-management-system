@@ -43,4 +43,9 @@ public class ResourceBorrowServiceImpl implements ResourceBorrowService {
         result.setResultList(ResourceBorrowHelper.fromEntities(borrows.getResultList()));
         return result;
     }
+
+    @Override
+    public ResourceBorrowDTO get(String bookId, String clientId) {
+        return ResourceBorrowHelper.fromEntity(storage.get(bookId, clientId));
+    }
 }
