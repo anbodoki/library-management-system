@@ -2,13 +2,14 @@ from datetime import datetime
 from abc import abstractmethod
 from abc import ABC
 
+SYNC_BYTE = '*'
 
 class InvalidMessageException(Exception):
     pass
 
 
 class Message(ABC):
-    start_byte = '*'
+
     msg_type = None
     msg_status = 'i'
     date = None
@@ -21,9 +22,10 @@ class Message(ABC):
 
     def __bytes__(self):
         seq = (self.msg_type, self.msg_status, self.date.strftime('%m/%d/%Y %X'), self.msg_data, self.crc16)
-        return (self.start_byte + '&'.join(seq)).encode()
+        return (SYNC_BYTE + '&'.join(seq)).encode()
 
     def from_bytes(self, data):
+        data = data.decode()
         self.validate_sync_byte(data[0])
         try:
             self.msg_type, self.msg_status, self.date, self.msg_data, self.crc16 = data[1:].split('&')
@@ -31,7 +33,8 @@ class Message(ABC):
             raise InvalidMessageException("Invalid message")
 
     def validate_sync_byte(self, sync_byte):
-        if sync_byte != self.start_byte: raise InvalidMessageException("Invalid sync byte")
+        if sync_byte != SYNC_BYTE:
+            raise InvalidMessageException("Invalid sync byte")
 
 
 class GetBookInfoMessage(Message):
