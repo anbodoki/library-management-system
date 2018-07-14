@@ -6,4 +6,4 @@ def generate_getBookInfo_message(book_id):
 
 
 def parse_getBookInfo_response(response):
-    return GetBookInfoResponse.from_bytes(response)
+    return GetBookInfoResponse(response).from_bytes(response)
