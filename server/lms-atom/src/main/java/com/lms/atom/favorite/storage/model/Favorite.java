@@ -1,4 +1,4 @@
-package com.lms.client.favorite.storage.model;
+package com.lms.atom.favorite.storage.model;
 
 import com.lms.atom.book.storage.model.Resource;
 import com.lms.client.client.storage.model.Client;
