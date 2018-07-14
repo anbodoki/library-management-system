@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
                 "com.lms.configuration",
                 "com.lms.client",
                 "com.lms.client.api",
+                "com.lms.gateway",
                 "com.lms.application"
         })
 @EnableJpaRepositories(basePackages =
