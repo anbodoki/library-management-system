@@ -74,3 +74,16 @@ SUBMIT {
 2. Identify client using RFID
 3. Check client on server
 4. Sumbit take or return to server
+
+##### CRC algorithm
+```
+public static String calculateCRC(String input) {
+    int result = 0;
+    int secret = 9988;
+    result += start;
+    for (int i = 0; i < input.length(); i++) {
+        result += input.charAt(i);
+    }
+    return Integer.toHexString(0x10000 | result).substring(1).toUpperCase();
+}
+```
