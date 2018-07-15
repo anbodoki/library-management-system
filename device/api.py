@@ -1,4 +1,5 @@
 from message_converter import generate_getBookInfo_message, parse_getBookInfo_response
+
 from tcp_client import send_message
 
 
@@ -18,4 +19,4 @@ def submit_book_request(user_id, book_id):
 
 
 if __name__ == '__main__':
-    get_book_info('123')
+    book_info = get_book_info('111')
