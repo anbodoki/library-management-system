@@ -27,4 +27,7 @@ while True:
         conn.send(b'*b&o&date&book name by author&crc16')
         print("send data:", b'*b&o&date&book name by author&crc16')
 
+    if msg_type == 'c':
+        conn.send(b'*c&o&date&client name&crc16')
+        print("send data:", b'*c&o&date&client name&crc16')
     # conn.close()
