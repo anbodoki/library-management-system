@@ -2,6 +2,15 @@ from datetime import datetime
 from abc import ABC
 from enum import Enum
 
+class MessageType(Enum):
+    CHECK_BOOK = 'b'
+    CHECK_CLIENT = 'c'
+    SUBMIT = 's'
+
+class MessageStatus(Enum):
+    OK = 'o'
+    ERROR = 'e'
+    IN_PROGRESS = 'i'
 
 SYNC_BYTE = '*'
 
@@ -12,7 +21,7 @@ class InvalidMessageException(Exception):
 class Message(ABC):
 
     msg_type = None
-    msg_status = 'i'
+    msg_status = MessageStatus.IN_PROGRESS
     date = None
     msg_data = None
     crc16 = '12345'
@@ -51,7 +60,7 @@ class GetBookInfoMessage(Message):
     def __init__(self, book_id):
         super().__init__(book_id)
         self.book_id = book_id
-        self.msg_type = 'b'
+        self.msg_type = MessageType.CHECK_BOOK
 
 
 class GetBookInfoResponse(Message):
@@ -67,7 +76,7 @@ class GetBookInfoResponse(Message):
         print(self.msg_data, self.date)
 
     def validate_msg_type(self):
-        if self.msg_type == 'b':
+        if self.msg_type == MessageType.CHECK_BOOK:
             raise InvalidMessageException("Invalid message type")
 
 
