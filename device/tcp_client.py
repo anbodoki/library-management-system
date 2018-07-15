@@ -9,8 +9,11 @@ MESSAGE = "Hello, World!"
 def send_message(request_message):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((TCP_IP, TCP_PORT))
+    print('vagzavni mesijs: ', request_message)
     s.send(request_message)
+    print('gavagzavne mesiji: ', request_message)
     data = s.recv(BUFFER_SIZE)
-    s.close()
+    print('mivige mesiji: ', data)
+    # s.close()
     # return '*b&o&date&book name by author&crc16'
     return data
