@@ -10,10 +10,6 @@ def get_book_info(book_id):
     return book_info
 
 
-def get_user_info(user_id):
-    pass
-
-
 def submit_book_request(user_id, book_id):
     pass
 
