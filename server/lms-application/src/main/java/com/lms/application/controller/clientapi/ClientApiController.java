@@ -1,8 +1,8 @@
 package com.lms.application.controller.clientapi;
 
 import com.lms.application.security.ClientPermissionCheck;
-import com.lms.application.security.PermissionCheck;
 import com.lms.client.api.clientapi.ClientApiService;
+import com.lms.common.dto.atom.notification.NotificationDTO;
 import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.cleintapi.AddRemoveFavouriteRequest;
 import com.lms.common.dto.cleintapi.ClientResourceFilteringRequest;
@@ -14,6 +14,7 @@ import com.lms.common.dto.request.GeneralFilteringRequest;
 import com.lms.common.dto.response.ActionResponse;
 import com.lms.common.dto.response.ActionResponseWithData;
 import com.lms.common.dto.response.ListResult;
+import com.lms.common.dto.response.PagingRequest;
 import com.lms.security.auth.GoogleConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -144,5 +145,26 @@ public class ClientApiController {
     public ActionResponse getResourceBorrowHistory(@RequestBody ClientResourceCopyHistoryRequest request) throws Exception {
         ListResult<ResourceBorrowDTO> result = service.getClientResourceBorrow(request.getClientId(), request.getCurrent(), request.getLimit(), request.getOffset());
         return new ActionResponseWithData<>(result, true);
+    }
+
+    @PostMapping(value = "get-notifications", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ClientPermissionCheck
+    public ActionResponse getNotifications(@RequestBody PagingRequest request) throws Exception {
+        ListResult<NotificationDTO> result = service.getNotificationsForClient(request.getLimit(), request.getOffset());
+        return new ActionResponseWithData<>(result, true);
+    }
+
+    @PostMapping(value = "mark-as-seen")
+    @ClientPermissionCheck
+    public ActionResponse markAsSeen() throws Exception {
+        service.markAsSeen();
+        return new ActionResponse(true);
+    }
+
+    @PostMapping(value = "mark-as-read/{notificationId}")
+    @ClientPermissionCheck
+    public ActionResponse markAsRead(@PathVariable Long notificationId) throws Exception {
+        service.markAsRead(notificationId);
+        return new ActionResponse(true);
     }
 }

@@ -3,6 +3,7 @@ package com.lms.client.api.clientapi;
 import com.lms.common.dto.atom.category.CategoryDTO;
 import com.lms.common.dto.atom.language.LanguageDTO;
 import com.lms.common.dto.atom.materialtype.MaterialTypeDTO;
+import com.lms.common.dto.atom.notification.NotificationDTO;
 import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.atom.resource.ResourceDTO;
 import com.lms.common.dto.atom.resource.ResourceTypeDTO;
@@ -56,4 +57,10 @@ public interface ClientApiService {
     ListResult<ResourceBorrowDTO> getClientResourceBorrow(Long clientId, boolean current, int limit, int offset);
 
     ListResult<LanguageDTO> getLanguages() throws Exception;
+
+    ListResult<NotificationDTO> getNotificationsForClient(int limit, int offset);
+
+    void markAsSeen();
+
+    void markAsRead(Long notificationId);
 }
