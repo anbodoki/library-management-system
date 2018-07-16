@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/client/api/")
+//TODO validate body
 public class ClientApiController {
 
     private final ClientApiService service;

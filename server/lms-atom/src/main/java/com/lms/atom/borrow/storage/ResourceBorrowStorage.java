@@ -1,7 +1,6 @@
 package com.lms.atom.borrow.storage;
 
 import com.lms.atom.borrow.storage.model.ResourceBorrow;
-import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.response.ListResult;
 import com.lms.utils.MathUtils;
 import org.springframework.stereotype.Repository;
@@ -34,6 +33,7 @@ public class ResourceBorrowStorage {
             query.setMaxResults(limit);
         }
         query.setParameter("clientId", clientId);
+        count.setParameter("clientId", clientId);
         List<ResourceBorrow> resultList = query.getResultList();
         ListResult<ResourceBorrow> result = new ListResult<>();
         result.setResultList(resultList);
@@ -55,6 +55,7 @@ public class ResourceBorrowStorage {
             query.setMaxResults(limit);
         }
         query.setParameter("identifier", identifier);
+        count.setParameter("identifier", identifier);
         List<ResourceBorrow> resultList = query.getResultList();
         ListResult<ResourceBorrow> result = new ListResult<>();
         result.setResultList(resultList);
