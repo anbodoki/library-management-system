@@ -18,8 +18,3 @@ def get_client_info(client_card_id):
 
 def submit_book_request(user_id, book_id):
     pass
-
-
-if __name__ == '__main__':
-    book_info = get_book_info('111')
-    client_info = get_client_info('222')
