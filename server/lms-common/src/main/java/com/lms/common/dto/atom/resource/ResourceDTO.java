@@ -3,6 +3,7 @@ package com.lms.common.dto.atom.resource;
 import com.lms.common.dto.atom.category.CategoryDTO;
 import com.lms.common.dto.atom.language.LanguageDTO;
 import com.lms.common.dto.atom.materialtype.MaterialTypeDTO;
+import com.lms.common.dto.atom.notification.NotificationDTO;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
@@ -44,7 +45,7 @@ public class ResourceDTO implements Serializable {
     private String imageUrl;
     private String resourceUrl;
     private boolean clientFavorite;
-    private boolean clientCritical;
+    private NotificationDTO notification;
 
     public Long getId() {
         return id;
@@ -238,11 +239,11 @@ public class ResourceDTO implements Serializable {
         this.clientFavorite = clientFavorite;
     }
 
-    public boolean getClientCritical() {
-        return clientCritical;
+    public NotificationDTO getNotification() {
+        return notification;
     }
 
-    public void setClientCritical(boolean clientCritical) {
-        this.clientCritical = clientCritical;
+    public void setNotification(NotificationDTO notification) {
+        this.notification = notification;
     }
 }
