@@ -167,4 +167,11 @@ public class ClientApiController {
         service.markAsRead(notificationId);
         return new ActionResponse(true);
     }
+
+    @PostMapping(value = "logout")
+    @ClientPermissionCheck
+    public ActionResponse logout() throws Exception {
+        service.logout();
+        return new ActionResponse(true);
+    }
 }

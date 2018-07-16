@@ -63,4 +63,6 @@ public interface ClientApiService {
     void markAsSeen();
 
     void markAsRead(Long notificationId);
+
+    void logout();
 }

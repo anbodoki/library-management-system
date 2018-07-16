@@ -232,6 +232,11 @@ public class ClientApiServiceImpl implements ClientApiService {
         notificationService.markAsRead(notificationId);
     }
 
+    @Override
+    public void logout() {
+        SecurityContextHolder.clearContext();
+    }
+
     private void setProperImageURL(List<LightResource> resources) {
         ConfigurationProperty configurationProperty = configurationPropertyService.get(ConfigurationPropertyCodes.SERVER_BASE_URL);
         if (configurationProperty != null) {
