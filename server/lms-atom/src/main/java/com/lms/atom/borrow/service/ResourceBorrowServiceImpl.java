@@ -1,10 +1,14 @@
 package com.lms.atom.borrow.service;
 
+import com.lms.atom.book.service.ResourceService;
+import com.lms.atom.borrow.BorrowConcurrencyHelper;
 import com.lms.atom.borrow.storage.ResourceBorrowHelper;
 import com.lms.atom.borrow.storage.ResourceBorrowRepository;
 import com.lms.atom.borrow.storage.ResourceBorrowStorage;
 import com.lms.atom.borrow.storage.model.ResourceBorrow;
+import com.lms.atom.exception.AtomException;
 import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
+import com.lms.common.dto.atom.resource.ResourceDTO;
 import com.lms.common.dto.response.ListResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,16 +20,33 @@ public class ResourceBorrowServiceImpl implements ResourceBorrowService {
 
     private final ResourceBorrowRepository repository;
     private final ResourceBorrowStorage storage;
+    private final ResourceService resourceService;
 
     @Autowired
-    public ResourceBorrowServiceImpl(ResourceBorrowRepository repository, ResourceBorrowStorage storage) {
+    public ResourceBorrowServiceImpl(ResourceBorrowRepository repository, ResourceBorrowStorage storage, ResourceService resourceService) {
         this.repository = repository;
         this.storage = storage;
+        this.resourceService = resourceService;
     }
 
     @Override
-    public ResourceBorrowDTO updateResourceBorrow(ResourceBorrowDTO borrow) {
-        return ResourceBorrowHelper.fromEntity(repository.save(ResourceBorrowHelper.toEntity(borrow)));
+    public ResourceBorrowDTO updateResourceBorrow(ResourceBorrowDTO borrow) throws AtomException {
+        ResourceBorrowDTO resourceBorrowDTO = ResourceBorrowHelper.fromEntity(repository.save(ResourceBorrowHelper.toEntity(borrow)));
+        ResourceDTO resourceById = resourceService.getResourceById(borrow.getResourceCopy().getResource().getId());
+        try {
+            BorrowConcurrencyHelper.lock(resourceById.getId());
+            if (borrow.getReturnTime() == null) {
+                resourceById.setQuantity(resourceById.getQuantity() - 1);
+                resourceById.setRentedQuantity(resourceById.getRentedQuantity() + 1);
+            } else {
+                resourceById.setQuantity(resourceById.getQuantity() + 1);
+                resourceById.setRentedQuantity(resourceById.getRentedQuantity() - 1);
+            }
+            resourceService.update(resourceById);
+            return resourceBorrowDTO;
+        } finally {
+            BorrowConcurrencyHelper.unlock(resourceById.getId());
+        }
     }
 
     @Override

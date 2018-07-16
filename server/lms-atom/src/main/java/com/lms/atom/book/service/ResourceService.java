@@ -66,7 +66,7 @@ public interface ResourceService {
 
     ResourceCopyDTO addResourceCopy(ResourceCopyDTO resourceCopy) throws AtomException;
 
-    void removeResourceCopy(Long resourceCopyId);
+    void removeResourceCopy(Long resourceCopyId) throws AtomException;
 
     ResourceCopyDTO getResourceCopyByIdentifier(String identifier);
 }

@@ -4,6 +4,7 @@ import com.lms.atom.book.storage.*;
 import com.lms.atom.book.storage.model.Resource;
 import com.lms.atom.book.storage.model.ResourceCopy;
 import com.lms.atom.book.storage.model.ResourceType;
+import com.lms.atom.borrow.BorrowConcurrencyHelper;
 import com.lms.atom.exception.AtomException;
 import com.lms.atom.messages.Messages;
 import com.lms.common.dto.atom.resource.ResourceCopyDTO;
@@ -205,11 +206,29 @@ public class ResourceServiceImpl implements ResourceService {
         if (byIdentifier != null) {
             throw new AtomException(Messages.get("resourceCopyWithThisIdentifierAlreadyExistsInSystem"));
         }
-        return ResourceCopyHelper.fromEntity(copyRepository.save(ResourceCopyHelper.toEntity(resourceCopy)));
+        ResourceCopyDTO resourceCopyDTO = ResourceCopyHelper.fromEntity(copyRepository.save(ResourceCopyHelper.toEntity(resourceCopy)));
+        ResourceDTO resourceById = getResourceById(resourceCopyDTO.getResource().getId());
+        try {
+            BorrowConcurrencyHelper.lock(resourceById.getId());
+            resourceById.setQuantity(resourceById.getQuantity() + 1);
+            repository.save(ResourceHelper.toEntity(resourceById));
+        } finally {
+            BorrowConcurrencyHelper.unlock(resourceById.getId());
+        }
+        return resourceCopyDTO;
     }
 
     @Override
-    public void removeResourceCopy(Long resourceCopyId) {
+    public void removeResourceCopy(Long resourceCopyId) throws AtomException {
+        ResourceCopy one = copyRepository.getOne(resourceCopyId);
+        ResourceDTO resourceById = getResourceById(one.getId());
+        try {
+            BorrowConcurrencyHelper.lock(resourceById.getId());
+            resourceById.setQuantity(resourceById.getQuantity() - 1);
+            repository.save(ResourceHelper.toEntity(resourceById));
+        } finally {
+            BorrowConcurrencyHelper.unlock(resourceById.getId());
+        }
         copyRepository.delete(resourceCopyId);
     }
 
