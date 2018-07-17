@@ -25,7 +25,7 @@ public class NotificationStorage {
         Query cq = em.createQuery("SELECT COUNT(n.id) FROM Notification n WHERE " +
                 "n.clientId = :clientId " +
                 "AND n.seen = :seen " +
-                "AND n.read = :read", Notification.class)
+                "AND n.read = :read")
                 .setParameter("clientId", clientId)
                 .setParameter("seen", false)
                 .setParameter("read", false);
