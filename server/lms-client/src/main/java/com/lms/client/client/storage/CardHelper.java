@@ -17,6 +17,7 @@ public class CardHelper {
         result.setName(card.getName());
         result.setIdentifier(card.getIdentifier());
         result.setCreationDate(card.getCreationDate());
+        result.setActive(card.getActive());
         return result;
     }
 
@@ -29,6 +30,7 @@ public class CardHelper {
         result.setName(card.getName());
         result.setIdentifier(card.getIdentifier());
         result.setCreationDate(card.getCreationDate());
+        result.setActive(card.getActive());
         return result;
     }
 

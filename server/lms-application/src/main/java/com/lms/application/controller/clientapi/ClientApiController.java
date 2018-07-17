@@ -162,9 +162,9 @@ public class ClientApiController {
         return new ActionResponse(true);
     }
 
-    @PostMapping(value = "mark-as-read/{notificationId}")
+    @GetMapping(value = "mark-as-read/{notificationId}")
     @ClientPermissionCheck
-    public ActionResponse markAsRead(@PathVariable Long notificationId) throws Exception {
+    public ActionResponse markAsRead(@PathVariable long notificationId) throws Exception {
         service.markAsRead(notificationId);
         return new ActionResponse(true);
     }
@@ -173,6 +173,25 @@ public class ClientApiController {
     @ClientPermissionCheck
     public ActionResponse logout() throws Exception {
         service.logout();
+        return new ActionResponse(true);
+    }
+
+    @GetMapping(value = "activate-card/{cardId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ClientPermissionCheck
+    public ActionResponse activateCard(@PathVariable long cardId) throws Exception {
+        return new ActionResponseWithData<>(service.activateCard(cardId), true);
+    }
+
+    @GetMapping(value = "deactivate-card/{cardId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ClientPermissionCheck
+    public ActionResponse deactivateCard(@PathVariable long cardId) throws Exception {
+        return new ActionResponseWithData<>(service.deactivateCard(cardId), true);
+    }
+
+    @DeleteMapping(value = "delete-card/{cardId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ClientPermissionCheck
+    public ActionResponse deleteCard(@PathVariable long cardId) throws Exception {
+        service.deleteCard(cardId);
         return new ActionResponse(true);
     }
 }

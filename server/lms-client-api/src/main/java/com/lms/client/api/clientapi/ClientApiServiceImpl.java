@@ -21,6 +21,7 @@ import com.lms.common.dto.atom.resource.ResourceDTO;
 import com.lms.common.dto.atom.resource.ResourceTypeDTO;
 import com.lms.common.dto.cleintapi.LightResource;
 import com.lms.common.dto.cleintapi.helper.LightResourceHelper;
+import com.lms.common.dto.client.CardDTO;
 import com.lms.common.dto.client.ClientDTO;
 import com.lms.common.dto.client.SchoolDTO;
 import com.lms.common.dto.response.ComboObject;
@@ -241,6 +242,21 @@ public class ClientApiServiceImpl implements ClientApiService {
     @Override
     public void logout() {
         SecurityContextHolder.clearContext();
+    }
+
+    @Override
+    public CardDTO activateCard(Long cardId) throws Exception {
+        return clientService.activateCard(cardId);
+    }
+
+    @Override
+    public CardDTO deactivateCard(Long cardId) throws Exception {
+        return clientService.deactivateCard(cardId);
+    }
+
+    @Override
+    public void deleteCard(Long cardId) throws Exception {
+        clientService.deleteCard(cardId);
     }
 
     private void setProperImageURL(List<LightResource> resources) {

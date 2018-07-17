@@ -27,7 +27,7 @@ public class GatewayServerManager {
     private final ConfigurationPropertyService configurationPropertyService;
 
     private Integer gatewayServerStartDelay = 20;
-    private Integer serverPort = 15000;
+    private Integer serverPort = 14002;
     private Integer groupThreadNumber = 25;
     private Integer executorThreadNumber = 25;
     private Integer idleStateTimeout = 60 * 5;

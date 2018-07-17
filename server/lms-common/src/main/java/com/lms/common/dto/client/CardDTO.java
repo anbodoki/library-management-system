@@ -9,6 +9,7 @@ public class CardDTO implements Serializable {
     private String name;
     private String identifier;
     private Date creationDate;
+    private boolean active;
 
     public Long getId() {
         return id;
@@ -40,5 +41,13 @@ public class CardDTO implements Serializable {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public boolean getActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

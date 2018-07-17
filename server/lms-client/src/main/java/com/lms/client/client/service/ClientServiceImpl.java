@@ -1,11 +1,11 @@
 package com.lms.client.client.service;
 
-import com.lms.client.client.storage.ClientHelper;
-import com.lms.client.client.storage.ClientRepository;
-import com.lms.client.client.storage.ClientStorage;
+import com.lms.client.client.storage.*;
+import com.lms.client.client.storage.model.Card;
 import com.lms.client.client.storage.model.Client;
 import com.lms.client.exception.ClientException;
 import com.lms.client.messages.Messages;
+import com.lms.common.dto.client.CardDTO;
 import com.lms.common.dto.client.ClientDTO;
 import com.lms.common.dto.response.ListResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +22,13 @@ public class ClientServiceImpl implements ClientService {
 
     private final ClientStorage storage;
     private final ClientRepository repository;
+    private final CardRepository cardRepository;
 
     @Autowired
-    public ClientServiceImpl(ClientStorage storage, ClientRepository repository) {
+    public ClientServiceImpl(ClientStorage storage, ClientRepository repository, CardRepository cardRepository) {
         this.storage = storage;
         this.repository = repository;
+        this.cardRepository = cardRepository;
     }
 
     @Override
@@ -72,6 +74,13 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientDTO update(ClientDTO client) {
+        if (client.getCards() != null) {
+            for (CardDTO card : client.getCards()) {
+                if (card.getId() == 0) {
+                    card.setActive(true);
+                }
+            }
+        }
         return ClientHelper.fromEntity(repository.save(ClientHelper.toEntity(client)));
     }
 
@@ -102,5 +111,28 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public ClientDTO getClientForCard(String identifier) throws Exception {
         return ClientHelper.fromEntity(storage.getClientForCard(identifier));
+    }
+
+    @Override
+    public CardDTO activateCard(Long cardId) throws Exception {
+        Card card = cardRepository.getOne(cardId);
+        if (card != null) {
+            card.setActive(true);
+        }
+        return CardHelper.fromEntity(cardRepository.save(card));
+    }
+
+    @Override
+    public CardDTO deactivateCard(Long cardId)throws Exception {
+        Card card = cardRepository.getOne(cardId);
+        if (card != null) {
+            card.setActive(false);
+        }
+        return CardHelper.fromEntity(cardRepository.save(card));
+    }
+
+    @Override
+    public void deleteCard(Long cardId) throws Exception {
+        cardRepository.delete(cardId);
     }
 }
