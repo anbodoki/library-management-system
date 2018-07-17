@@ -16,6 +16,7 @@ import com.lms.common.dto.atom.category.CategoryDTO;
 import com.lms.common.dto.atom.language.LanguageDTO;
 import com.lms.common.dto.atom.materialtype.MaterialTypeDTO;
 import com.lms.common.dto.atom.notification.NotificationDTO;
+import com.lms.common.dto.atom.notification.NotificationResponse;
 import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.atom.resource.ResourceDTO;
 import com.lms.common.dto.atom.resource.ResourceTypeDTO;
@@ -225,8 +226,11 @@ public class ClientApiServiceImpl implements ClientApiService {
     }
 
     @Override
-    public ListResult<NotificationDTO> getNotificationsForClient(int limit, int offset) {
-        return notificationService.getNotificationsForClient(limit, offset);
+    public NotificationResponse getNotificationsForClient(int limit, int offset) {
+        NotificationResponse response = new NotificationResponse();
+        response.setNotifications(notificationService.getNotificationsForClient(limit, offset));
+        response.setCount(notificationService.getUnseenNotificationsCount());
+        return response;
     }
 
     @Override

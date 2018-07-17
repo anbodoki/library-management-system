@@ -4,6 +4,7 @@ import com.lms.common.dto.atom.category.CategoryDTO;
 import com.lms.common.dto.atom.language.LanguageDTO;
 import com.lms.common.dto.atom.materialtype.MaterialTypeDTO;
 import com.lms.common.dto.atom.notification.NotificationDTO;
+import com.lms.common.dto.atom.notification.NotificationResponse;
 import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.atom.resource.ResourceDTO;
 import com.lms.common.dto.atom.resource.ResourceTypeDTO;
@@ -59,7 +60,7 @@ public interface ClientApiService {
 
     ListResult<LanguageDTO> getLanguages() throws Exception;
 
-    ListResult<NotificationDTO> getNotificationsForClient(int limit, int offset);
+    NotificationResponse getNotificationsForClient(int limit, int offset);
 
     void markAsSeen();
 

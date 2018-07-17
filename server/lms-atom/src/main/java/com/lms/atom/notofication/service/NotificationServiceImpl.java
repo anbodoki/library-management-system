@@ -54,6 +54,13 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
+    public Long getUnseenNotificationsCount() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        ClientDTO client = clientService.getByEmail(authentication.getName());
+        return storage.getUnseenNotificationsCount(client.getId());
+    }
+
+    @Override
     public void markAsSeen() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         ClientDTO client = clientService.getByEmail(authentication.getName());

@@ -9,6 +9,8 @@ public interface NotificationService {
 
     ListResult<NotificationDTO> getNotificationsForClient(int limit, int offset);
 
+    Long getUnseenNotificationsCount();
+
     void markAsSeen();
 
     void markAsRead(Long notificationId);

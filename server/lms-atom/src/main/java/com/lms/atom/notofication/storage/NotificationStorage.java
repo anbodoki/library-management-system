@@ -16,19 +16,11 @@ public class NotificationStorage {
 
     public ListResult<Notification> getNotificationsForClient(Long clientId, int limit, int offset) {
         TypedQuery<Notification> q = em.createQuery("SELECT n FROM Notification n WHERE " +
-                "n.clientId = :clientId " +
-                "AND n.seen = :seen " +
-                "AND n.read = :read ORDER BY n.creationDate DESC", Notification.class)
-                .setParameter("clientId", clientId)
-                .setParameter("seen", false)
-                .setParameter("read", false);
+                "n.clientId = :clientId ORDER BY n.creationDate DESC", Notification.class)
+                .setParameter("clientId", clientId);
         Query cq = em.createQuery("SELECT COUNT(n.id) FROM Notification n WHERE " +
-                "n.clientId = :clientId " +
-                "AND n.seen = :seen " +
-                "AND n.read = :read")
-                .setParameter("clientId", clientId)
-                .setParameter("seen", false)
-                .setParameter("read", false);
+                "n.clientId = :clientId ")
+                .setParameter("clientId", clientId);
         if (!(limit == -1 && offset == -1)) {
             q.setFirstResult(offset);
             q.setMaxResults(limit);
@@ -42,6 +34,15 @@ public class NotificationStorage {
         result.setCount((Long) cq.getSingleResult());
         result.setPageNum(MathUtils.calculatePageNum(result.getCount(), result.getLimit()));
         return result;
+    }
+
+    public Long getUnseenNotificationsCount(Long clientId) {
+        Query cq = em.createQuery("SELECT COUNT(n.id) FROM Notification n WHERE " +
+                "n.clientId = :clientId " +
+                "AND n.seen = :seen ")
+                .setParameter("clientId", clientId)
+                .setParameter("seen", false);
+        return (Long) cq.getSingleResult();
     }
 
     public void markAsSeen(Long clientId) {

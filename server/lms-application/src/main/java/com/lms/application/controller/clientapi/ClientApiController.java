@@ -3,6 +3,7 @@ package com.lms.application.controller.clientapi;
 import com.lms.application.security.ClientPermissionCheck;
 import com.lms.client.api.clientapi.ClientApiService;
 import com.lms.common.dto.atom.notification.NotificationDTO;
+import com.lms.common.dto.atom.notification.NotificationResponse;
 import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.cleintapi.AddRemoveFavouriteRequest;
 import com.lms.common.dto.cleintapi.ClientResourceFilteringRequest;
@@ -151,7 +152,7 @@ public class ClientApiController {
     @PostMapping(value = "get-notifications", produces = MediaType.APPLICATION_JSON_VALUE)
     @ClientPermissionCheck
     public ActionResponse getNotifications(@RequestBody PagingRequest request) throws Exception {
-        ListResult<NotificationDTO> result = service.getNotificationsForClient(request.getLimit(), request.getOffset());
+        NotificationResponse result = service.getNotificationsForClient(request.getLimit(), request.getOffset());
         return new ActionResponseWithData<>(result, true);
     }
 
