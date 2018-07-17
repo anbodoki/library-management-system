@@ -4,6 +4,8 @@ import com.lms.atom.exception.AtomException;
 import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.response.ListResult;
 
+import java.util.List;
+
 public interface ResourceBorrowService {
 
     ResourceBorrowDTO updateResourceBorrow(ResourceBorrowDTO borrow) throws AtomException;
@@ -13,4 +15,8 @@ public interface ResourceBorrowService {
     ListResult<ResourceBorrowDTO> getResourceCopyHistory(String identifier, int limit, int offset);
 
     ResourceBorrowDTO get(String bookId, Long clientId) throws Exception;
+
+    List<ResourceBorrowDTO> getLateResourceBorrows();
+
+    List<ResourceBorrowDTO> getTwoDayLeftResourceBorrows();
 }

@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class ResourceBorrowServiceImpl implements ResourceBorrowService {
@@ -68,5 +70,20 @@ public class ResourceBorrowServiceImpl implements ResourceBorrowService {
     @Override
     public ResourceBorrowDTO get(String bookId, Long clientId) throws Exception {
         return ResourceBorrowHelper.fromEntity(storage.get(bookId, clientId));
+    }
+
+    @Override
+    public List<ResourceBorrowDTO> getLateResourceBorrows() {
+        List<ResourceBorrowDTO> resourceBorrows = ResourceBorrowHelper.fromEntities(storage.getLateResourceBorrows());
+        for (ResourceBorrowDTO resourceBorrow : resourceBorrows) {
+            resourceBorrow.setCritical(true);
+            repository.save(ResourceBorrowHelper.toEntity(resourceBorrow));
+        }
+        return resourceBorrows;
+    }
+
+    @Override
+    public List<ResourceBorrowDTO> getTwoDayLeftResourceBorrows() {
+        return ResourceBorrowHelper.fromEntities(storage.getTwoDayLeftResourceBorrows());
     }
 }

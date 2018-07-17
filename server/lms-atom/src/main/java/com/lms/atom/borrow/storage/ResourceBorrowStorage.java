@@ -1,11 +1,15 @@
 package com.lms.atom.borrow.storage;
 
 import com.lms.atom.borrow.storage.model.ResourceBorrow;
+import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.response.ListResult;
+import com.lms.utils.DateUtils;
 import com.lms.utils.MathUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -75,6 +79,37 @@ public class ResourceBorrowStorage {
                     "AND r.returnTime IS NULL ORDER BY r.borrowTime DESC", ResourceBorrow.class)
                     .setParameter("bookId", bookId)
                     .setParameter("clientId", clientId).getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public List<ResourceBorrow> getLateResourceBorrows() {
+        try {
+            List<ResourceBorrow> result = new ArrayList<>();
+            List<ResourceBorrow> list = em.createQuery("SELECT r FROM ResourceBorrow r WHERE " +
+                    "r.returnTime IS NULL ORDER BY r.borrowTime DESC", ResourceBorrow.class).getResultList();
+            for (ResourceBorrow resourceBorrow : list) {
+                if (resourceBorrow.getScheduledReturnTime().before(new Date()))
+                    result.add(resourceBorrow);
+            }
+            return result;
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public List<ResourceBorrow> getTwoDayLeftResourceBorrows() {
+        try {
+            List<ResourceBorrow> result = new ArrayList<>();
+            List<ResourceBorrow> list = em.createQuery("SELECT r FROM ResourceBorrow r WHERE " +
+                    "r.returnTime IS NULL ORDER BY r.borrowTime DESC", ResourceBorrow.class).getResultList();
+            for (ResourceBorrow resourceBorrow : list) {
+                if (DateUtils.truncateTime(DateUtils.shiftDay(resourceBorrow.getScheduledReturnTime(), -2))
+                        .before(new Date()))
+                    result.add(resourceBorrow);
+            }
+            return result;
         } catch (NoResultException e) {
             return null;
         }
