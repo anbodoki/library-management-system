@@ -209,7 +209,13 @@ public class ClientApiServiceImpl implements ClientApiService {
     public ListResult<ResourceBorrowDTO> getClientResourceBorrow(Long clientId, boolean current, int limit, int offset) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         ClientDTO client = clientService.getByEmail(authentication.getName());
-        return resourceBorrowService.getClientResourceBorrow(client.getId(), current, limit, offset);
+        ListResult<ResourceBorrowDTO> result = resourceBorrowService.getClientResourceBorrow(client.getId(), current, limit, offset);
+        List<ResourceDTO> resources = new ArrayList<>();
+        for (ResourceBorrowDTO resourceBorrow : result.getResultList()) {
+            resources.add(resourceBorrow.getResourceCopy().getResource());
+        }
+        setProperImageURLResource(resources);
+        return result;
     }
 
     @Override
@@ -243,6 +249,18 @@ public class ClientApiServiceImpl implements ClientApiService {
             DEFAULT_URL = configurationProperty.getStringValue();
         }
         for (LightResource lightResource : resources) {
+            if (lightResource.getImageUrl() != null) {
+                lightResource.setImageUrl(DEFAULT_URL + lightResource.getImageUrl());
+            }
+        }
+    }
+
+    private void setProperImageURLResource(List<ResourceDTO> resources) {
+        ConfigurationProperty configurationProperty = configurationPropertyService.get(ConfigurationPropertyCodes.SERVER_BASE_URL);
+        if (configurationProperty != null) {
+            DEFAULT_URL = configurationProperty.getStringValue();
+        }
+        for (ResourceDTO lightResource : resources) {
             if (lightResource.getImageUrl() != null) {
                 lightResource.setImageUrl(DEFAULT_URL + lightResource.getImageUrl());
             }
