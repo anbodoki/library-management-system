@@ -39,6 +39,13 @@ public class ClientController {
         return new ActionResponseWithData<>(result, true);
     }
 
+    @PostMapping(value = "update", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PermissionCheck
+    public ActionResponse update(@RequestBody ClientDTO client) throws Exception {
+        ClientDTO result = clientService.update(client);
+        return new ActionResponseWithData<>(result, true);
+    }
+
     @PostMapping(value = "activate", produces = MediaType.APPLICATION_JSON_VALUE)
     @PermissionCheck
     public ActionResponse activate(@RequestBody ClientDTO client) throws Exception {

@@ -22,6 +22,10 @@ export class ClientService {
     return this.baseService.getAllByParams(this.clientsUrl + "quick-find", request);
   }
 
+  update(client: Client): Promise<ActionResponse> {
+    return this.baseService.post(this.clientsUrl + "update", client);
+  }
+
   activate(client: Client): Promise<ActionResponse> {
     return this.baseService.post(this.clientsUrl + "activate", client);
   }

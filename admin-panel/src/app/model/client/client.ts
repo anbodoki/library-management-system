@@ -1,4 +1,5 @@
 import {School} from "./school";
+import {Card} from "./card";
 
 export class Client {
   public id: number;
@@ -9,4 +10,5 @@ export class Client {
   public imageUrl: string;
   public active: boolean;
   public school: School;
+  public cards: Card[] = [];
 }

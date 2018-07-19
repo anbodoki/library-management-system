@@ -10,8 +10,8 @@ import com.lms.common.dto.client.ClientDTO;
 import com.lms.common.dto.response.ListResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Service;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
@@ -76,7 +76,7 @@ public class ClientServiceImpl implements ClientService {
     public ClientDTO update(ClientDTO client) {
         if (client.getCards() != null) {
             for (CardDTO card : client.getCards()) {
-                if (card.getId() == 0) {
+                if (card.getId() == null) {
                     card.setActive(true);
                 }
             }
