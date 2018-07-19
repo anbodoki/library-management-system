@@ -114,12 +114,15 @@ public class ClientApiServiceImpl implements ClientApiService {
     @Override
     public ResourceDTO getResourceById(Long id) throws Exception {
         ResourceDTO resourceById = resourceService.getResourceById(id);
+        ConfigurationProperty configurationProperty = configurationPropertyService.get(ConfigurationPropertyCodes.SERVER_BASE_URL);
+        if (configurationProperty != null) {
+            DEFAULT_URL = configurationProperty.getStringValue();
+        }
         if (resourceById.getImageUrl() != null) {
-            ConfigurationProperty configurationProperty = configurationPropertyService.get(ConfigurationPropertyCodes.SERVER_BASE_URL);
-            if (configurationProperty != null) {
-                DEFAULT_URL = configurationProperty.getStringValue();
-            }
             resourceById.setImageUrl(DEFAULT_URL + resourceById.getImageUrl());
+        }
+        if (resourceById.getResourceUrl() != null) {
+            resourceById.setResourceUrl(DEFAULT_URL + resourceById.getResourceUrl());
         }
         List<Long> favoriteIds = favoriteService.getClintFavoriteIds();
         if (favoriteIds.contains(resourceById.getId())) {
