@@ -181,6 +181,15 @@ ul.pagination {
   width: 100%;
 }
 
+.cap-tabs {
+  margin-top: 3px;
+  margin-left: 3px;
+}
+
+.cap-tabs li {
+  cursor: pointer;
+}
+
 .half-width {
   width: calc(50% - 10px);
 }

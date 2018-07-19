@@ -7,10 +7,7 @@ import com.lms.atom.borrow.storage.model.ResourceBorrow;
 import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.atom.resource.ResourceCopyDTO;
 import com.lms.common.dto.atom.resource.ResourceDTO;
-import com.lms.common.dto.request.ClientResourceCopyHistoryRequest;
-import com.lms.common.dto.request.GeneralFilteringRequest;
-import com.lms.common.dto.request.ResourceCopyHistoryRequest;
-import com.lms.common.dto.request.ResourceFilteringRequest;
+import com.lms.common.dto.request.*;
 import com.lms.common.dto.response.ActionResponse;
 import com.lms.common.dto.response.ActionResponseWithData;
 import com.lms.common.dto.response.ListResult;
@@ -100,11 +97,24 @@ public class ResourceController {
         return new ActionResponseWithData<>(resourceService.addResourceCopy(resourceCopy), true);
     }
 
+    @PostMapping(value = "update-resource-copy")
+    @PermissionCheck
+    public ActionResponse updateResourceCopy(@RequestBody @Validated ResourceCopyDTO resourceCopy) throws Exception {
+        return new ActionResponseWithData<>(resourceService.update(resourceCopy), true);
+    }
+
     @DeleteMapping(value = "resource-copy/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @PermissionCheck
     public ActionResponse removeResourceCopy(@PathVariable long id) throws Exception {
         resourceService.removeResourceCopy(id);
         return new ActionResponse(true);
+    }
+
+    @PostMapping(value = "get-resource-copies", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PermissionCheck
+    public ActionResponse getResourcesCopies(@RequestBody ResourceCopyForResourceRequest request) throws Exception {
+        ListResult<ResourceCopyDTO> result = resourceService.getResourcesCopies(request.getResourceId(), request.getQuery(), request.getLimit(), request.getOffset());
+        return new ActionResponseWithData<>(result, true);
     }
 
     @PostMapping(value = "get-resource-copy-borrow-history", produces = MediaType.APPLICATION_JSON_VALUE)

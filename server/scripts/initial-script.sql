@@ -52,6 +52,8 @@ INSERT INTO lms_v1.api_url (id, url) VALUES (50, '/atom/resource-api/resource-co
 INSERT INTO lms_v1.api_url (id, url) VALUES (51, '/atom/resource-api/get-resource-copy-borrow-history');
 INSERT INTO lms_v1.api_url (id, url) VALUES (52, '/atom/resource-api/get-client-resource-copy-borrow-history');
 INSERT INTO lms_v1.api_url (id, url) VALUES (53, '/client/client-api/update');
+INSERT INTO lms_v1.api_url (id, url) VALUES (54, '/atom/resource-api/get-resource-copies');
+INSERT INTO lms_v1.api_url (id, url) VALUES (55, '/atom/resource-api/update-resource-copy');
 
 -- privilege inserts
 INSERT INTO lms_v1.privilege (id, code, group_name, name) VALUES (1, 'user_view', 'Security', 'User View');
@@ -108,6 +110,8 @@ INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (8, 49);
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (8, 50);
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (8, 51);
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (8, 52);
+INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (8, 54);
+INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (8, 55);
 -- language view
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (9, 24);
 INSERT INTO lms_v1.privilege_urls (privilege_id, urls_id) VALUES (9, 25);

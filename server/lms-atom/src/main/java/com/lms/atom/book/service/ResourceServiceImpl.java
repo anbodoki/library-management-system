@@ -28,12 +28,14 @@ public class ResourceServiceImpl implements ResourceService {
     private final ResourceStorage storage;
     private final ResourceRepository repository;
     private final ResourceCopyRepository copyRepository;
+    private final ResourceCopyStorage copyStorage;
 
     @Autowired
-    public ResourceServiceImpl(ResourceStorage storage, ResourceRepository repository, ResourceCopyRepository copyRepository) {
+    public ResourceServiceImpl(ResourceStorage storage, ResourceRepository repository, ResourceCopyRepository copyRepository, ResourceCopyStorage copyStorage) {
         this.storage = storage;
         this.repository = repository;
         this.copyRepository = copyRepository;
+        this.copyStorage = copyStorage;
     }
 
     @Override
@@ -219,9 +221,14 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
+    public ResourceCopyDTO update(ResourceCopyDTO resourceCopy) throws AtomException {
+        return ResourceCopyHelper.fromEntity(copyRepository.save(ResourceCopyHelper.toEntity(resourceCopy)));
+    }
+
+    @Override
     public void removeResourceCopy(Long resourceCopyId) throws AtomException {
         ResourceCopy one = copyRepository.getOne(resourceCopyId);
-        ResourceDTO resourceById = getResourceById(one.getId());
+        ResourceDTO resourceById = getResourceById(one.getResource().getId());
         try {
             BorrowConcurrencyHelper.lock(resourceById.getId());
             resourceById.setQuantity(resourceById.getQuantity() - 1);
@@ -235,5 +242,13 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public ResourceCopyDTO getResourceCopyByIdentifier(String identifier) {
         return ResourceCopyHelper.fromEntity(copyRepository.findByIdentifier(identifier));
+    }
+
+    @Override
+    public ListResult<ResourceCopyDTO> getResourcesCopies(long resourceId, String query, int limit, int offset) {
+        ListResult<ResourceCopy> materialTypes = copyStorage.getResourcesCopies(resourceId, query, limit, offset);
+        ListResult<ResourceCopyDTO> result = materialTypes.copy(ResourceCopyDTO.class);
+        result.setResultList(ResourceCopyHelper.fromEntities(materialTypes.getResultList()));
+        return result;
     }
 }

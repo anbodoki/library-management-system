@@ -11,6 +11,8 @@ import {Category} from "../../model/resources/category";
 import {LanguageService} from "../../services/language.service";
 import {MaterialTypeService} from "../../services/materialtype.service";
 import {CategoryService} from "../../services/category.service";
+import {ResourceCopyService} from "../../services/resourcecopy.service";
+import {ResourceCopy} from "../../model/resources/resourcecopy";
 
 declare let jquery: any;
 declare let $: any;
@@ -33,11 +35,17 @@ export class ResourceComponent implements OnInit {
   materialTypes: MaterialType[];
   categories: Category[];
 
+  resourceCopies: ResourceCopy[];
+  selectedResourceCopy: ResourceCopy;
+  copyQuery: string;
+  coyPageNum: number;
+  copyLoader: PagingLoader = new PagingLoader(true, true);
 
   constructor(private accessService: AccessService,
               private resourceService: ResourceService,
               private languagesService: LanguageService,
               private materialTypesService: MaterialTypeService,
+              private resourceCopyService: ResourceCopyService,
               private categoryService: CategoryService,
               private utils: Utils) {
     let ref = this;
@@ -110,6 +118,8 @@ export class ResourceComponent implements OnInit {
     this.selectedResource = <Resource> JSON.parse(JSON.stringify(resource.row));
     this.selectedResource.editionDate = moment(new Date(this.selectedResource.editionDate));
     this.utils.setPrevObj(JSON.stringify(resource.row));
+    this.utils.showContent("resourceDetails");
+    this.getResourceCopies(10, 0);
     $("#resourceModal").modal("show");
   }
 
@@ -134,6 +144,7 @@ export class ResourceComponent implements OnInit {
     this.initResourceTypes();
     this.initCategories("");
     this.selectedResource = new Resource();
+    this.utils.showContent("resourceDetails");
     $("#resourceModal").modal("show");
   }
 
@@ -165,8 +176,16 @@ export class ResourceComponent implements OnInit {
     this.query = searchedTerm;
   }
 
+  updateResourcesCopyData(searchedTerm) {
+    this.copyQuery = searchedTerm;
+  }
+
   changePage(pageInfo) {
     this.getResources(pageInfo.limit, (pageInfo.page) * pageInfo.limit);
+  }
+
+  changePageCopy(pageInfo) {
+    this.getResourceCopies(pageInfo.limit, (pageInfo.page) * pageInfo.limit);
   }
 
   filterClicked(request) {
@@ -187,5 +206,60 @@ export class ResourceComponent implements OnInit {
     this.selectedResource = <Resource> JSON.parse(JSON.stringify(item));
     this.utils.setPrevObj(JSON.stringify(item));
     $("resource-list .uploadImageModal").modal("show");
+  }
+
+  getResourceCopies(limit, offset) {
+    let ref = this;
+    this.resourceCopyService.findResourceCopies({resourceId: this.selectedResource.id, query: this.copyQuery, limit: limit, offset: offset}).then(function (response) {
+      if (response.success) {
+        ref.resourceCopies = response.data.resultList;
+      }
+    });
+  }
+
+  showCopyAddEditModal(resource): void {
+    this.selectedResourceCopy = <ResourceCopy> JSON.parse(JSON.stringify(resource.row));
+    this.utils.setPrevObj(JSON.stringify(resource.row));
+    $("#resourceCopyModal").modal("show");
+  }
+
+  updateCopyResource() {
+    if (!this.utils.formIsValid('#resourceCopyModal')) {
+      return;
+    }
+    let ref = this;
+    this.resourceCopyService.update(this.selectedResourceCopy).then(function () {
+      $("#resourceCopyModal").modal("hide");
+      ref.copyLoader = ref.copyLoader.load(false);
+    });
+  }
+
+  showCopyAddModal($event: Event) {
+    this.selectedResourceCopy = new ResourceCopy();
+    $("#resourceCopyModal").modal("show");
+  }
+
+  deleteCopyResource() {
+    let ref = this;
+    this.resourceCopyService.delete(this.selectedResourceCopy.id).then(function (response) {
+      if (response.success) {
+        $("#resourceCopyModal").modal("hide");
+        ref.copyLoader = ref.copyLoader.load(true);
+      }
+    });
+  }
+
+  saveCopyResource() {
+    if (!this.utils.formIsValid('#resourceCopyModal')) {
+      return;
+    }
+    let ref = this;
+    this.selectedResourceCopy.resource = this.selectedResource;
+    this.resourceCopyService.create(this.selectedResourceCopy).then(function (response) {
+      if (response.success) {
+        $("#resourceCopyModal").modal("hide");
+        ref.copyLoader = ref.copyLoader.load(true);
+      }
+    });
   }
 }
