@@ -19,18 +19,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/atom/resource-borrow-api/")
 public class ResourceBorrowController {
 
+    private final ResourceBorrowService service;
+
     @Autowired
-    private ResourceBorrowService service;
+    public ResourceBorrowController(ResourceBorrowService service) {
+        this.service = service;
+    }
 
     @PostMapping(value = "quick-find", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PermissionCheck
     public ActionResponse find(@RequestBody GeneralFilteringRequest generalFilteringRequest) throws Exception {
         ListResult<ResourceBorrowDTO> result = service.find(generalFilteringRequest.getQuery(), generalFilteringRequest.getLimit(), generalFilteringRequest.getOffset());
         return new ActionResponseWithData<>(result, true);
     }
 
     @PostMapping(value = "find", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PermissionCheck
     public ActionResponse find(@RequestBody ResourceBorrowFilteringRequest request) throws Exception {
         ListResult<ResourceBorrowDTO> result = service.find(request.getIdentifier(),
                 request.getIsbn(),
