@@ -872,3 +872,13 @@ article.comment {
   margin-right: 2px;
   width: 100%;
 }
+
+.inline-checkbox > div {
+  margin-top: 20px;
+}
+
+.inline-remove-btn {
+  height: 33px;
+  margin-top: 20px;
+}
+

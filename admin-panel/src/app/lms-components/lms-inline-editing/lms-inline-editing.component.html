@@ -1,10 +1,16 @@
-<div *ngFor="let item of items" class="lms-flex-aligned">
+<div class="btn-group" role="group">
+  <button type="button" class="btn btn-success" (click)="onAddClicked()"><i
+    class="fa fa-plus-circle toolbar-button-icon"></i>Add
+  </button>
+
+</div>
+<div *ngFor="let item of items let i = index" [attr.data-index]="i" class="lms-flex-aligned">
   <div *ngFor="let column of columns">
     <lms-input *ngIf="column.filtered == 'text' || column.filtered == 'number'" label="{{column.header}}" [fieldType]="column.filtered"
                [fieldObject]="item" fieldName="{{column.field}}" [capPattern]="column.capPattern"
                [capRequired]="column.capRequired" [alertText]="column.alertText"
                placeholder="{{column.header}}"></lms-input>
-    <lms-checkbox *ngIf="column.filtered == 'checkbox'" [fieldObject]="item"
+    <lms-checkbox *ngIf="column.filtered == 'checkbox'" [fieldObject]="item" class="inline-checkbox"
                   fieldName="{{column.field}}" label="{{column.header}}" [removable]="true"
                   [capRequired]="column.capRequired" [alertText]="column.alertText"></lms-checkbox>
     <lms-combo *ngIf="column.filtered == 'combo'" label="{{column.header}}" [values]="column.filteredOptions"
@@ -23,10 +29,7 @@
       <lms-dynamic-column *ngFor="let n of column.filteredOptionColumns" [field]="n"></lms-dynamic-column>
     </lms-dynamic-component>
   </div>
+  <button type="button" class="btn btn-danger inline-remove-btn"
+          (click)="onRemoveClicked(i)"><i class="fa fa-minus"></i>
+  </button>
 </div>
-<button type="button" class="btn btn-success"
-        (click)="onAddClicked()"><i class="fa fa-plus"></i>
-</button>
-<button type="button" class="btn btn-danger"
-        (click)="onRemoveClicked()"><i class="fa fa-minus"></i>
-</button>
