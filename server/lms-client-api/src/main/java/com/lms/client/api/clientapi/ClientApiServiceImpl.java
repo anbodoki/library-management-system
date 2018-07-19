@@ -77,6 +77,7 @@ public class ClientApiServiceImpl implements ClientApiService {
         ListResult<LightResource> result = resources.copy(LightResource.class);
         result.setResultList(LightResourceHelper.toLights(resources.getResultList()));
         setProperImageURL(result.getResultList());
+        setProperResourceURL(result.getResultList());
         setFavourites(result.getResultList());
         return result;
     }
@@ -105,6 +106,7 @@ public class ClientApiServiceImpl implements ClientApiService {
         ListResult<LightResource> result = resources.copy(LightResource.class);
         result.setResultList(LightResourceHelper.toLights(resources.getResultList()));
         setProperImageURL(result.getResultList());
+        setProperResourceURL(result.getResultList());
         setFavourites(result.getResultList());
         return result;
     }
@@ -196,6 +198,7 @@ public class ClientApiServiceImpl implements ClientApiService {
     public List<LightResource> getClientFavorite() throws Exception {
         List<LightResource> result = LightResourceHelper.toLights(favoriteService.getClientFavorite());
         setProperImageURL(result);
+        setProperResourceURL(result);
         for (LightResource lightResource : result) {
             lightResource.setClientFavorite(true);
         }
@@ -217,6 +220,7 @@ public class ClientApiServiceImpl implements ClientApiService {
             resources.add(resourceBorrow.getResourceCopy().getResource());
         }
         setProperImageURLResource(resources);
+        setProperResourceURLResource(resources);
         return result;
     }
 
@@ -283,6 +287,30 @@ public class ClientApiServiceImpl implements ClientApiService {
         for (ResourceDTO lightResource : resources) {
             if (lightResource.getImageUrl() != null) {
                 lightResource.setImageUrl(DEFAULT_URL + lightResource.getImageUrl());
+            }
+        }
+    }
+
+    private void setProperResourceURL(List<LightResource> resources) {
+        ConfigurationProperty configurationProperty = configurationPropertyService.get(ConfigurationPropertyCodes.SERVER_BASE_URL);
+        if (configurationProperty != null) {
+            DEFAULT_URL = configurationProperty.getStringValue();
+        }
+        for (LightResource lightResource : resources) {
+            if (lightResource.getResourceUrl() != null) {
+                lightResource.setResourceUrl(DEFAULT_URL + lightResource.getResourceUrl());
+            }
+        }
+    }
+
+    private void setProperResourceURLResource(List<ResourceDTO> resources) {
+        ConfigurationProperty configurationProperty = configurationPropertyService.get(ConfigurationPropertyCodes.SERVER_BASE_URL);
+        if (configurationProperty != null) {
+            DEFAULT_URL = configurationProperty.getStringValue();
+        }
+        for (ResourceDTO lightResource : resources) {
+            if (lightResource.getResourceUrl() != null) {
+                lightResource.setResourceUrl(DEFAULT_URL + lightResource.getResourceUrl());
             }
         }
     }

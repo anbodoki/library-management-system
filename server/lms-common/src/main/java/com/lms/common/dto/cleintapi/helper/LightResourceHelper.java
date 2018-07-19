@@ -31,6 +31,7 @@ public class LightResourceHelper {
         result.setEdition(resource.getEdition());
         result.setPublisher(resource.getPublisher());
         result.setImageUrl(resource.getImageUrl());
+        result.setResourceUrl(resource.getResourceUrl());
         result.setEditionDate(resource.getEditionDate());
         result.setCategory(resource.getCategory());
         return result;

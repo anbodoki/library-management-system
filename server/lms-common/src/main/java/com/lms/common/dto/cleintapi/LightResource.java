@@ -15,6 +15,7 @@ public class LightResource implements Serializable {
     private String publisher;
     private Date editionDate;
     private String imageUrl;
+    private String resourceUrl;
     private CategoryDTO category;
     private boolean clientFavorite;
     private boolean clientCritical;
@@ -81,6 +82,14 @@ public class LightResource implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getResourceUrl() {
+        return resourceUrl;
+    }
+
+    public void setResourceUrl(String resourceUrl) {
+        this.resourceUrl = resourceUrl;
     }
 
     public CategoryDTO getCategory() {
