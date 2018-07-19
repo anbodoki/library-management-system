@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -85,5 +86,29 @@ public class ResourceBorrowServiceImpl implements ResourceBorrowService {
     @Override
     public List<ResourceBorrowDTO> getTwoDayLeftResourceBorrows() {
         return ResourceBorrowHelper.fromEntities(storage.getTwoDayLeftResourceBorrows());
+    }
+
+    @Override
+    public ListResult<ResourceBorrowDTO> find(String query, int limit, int offset) {
+        ListResult<ResourceBorrow> borrows = storage.find(query, limit, offset);
+        ListResult<ResourceBorrowDTO> result = borrows.copy(ResourceBorrowDTO.class);
+        result.setResultList(ResourceBorrowHelper.fromEntities(borrows.getResultList()));
+        return result;
+    }
+
+    @Override
+    public ListResult<ResourceBorrowDTO> find(String identifier, String isbn, String clientId,
+                                              Date fromBorrowTime, Date toBorrowTime,
+                                              Date fromReturnTime, Date toReturnTime,
+                                              Date fromScheduledTime, Date toScheduledTime,
+                                              Boolean critical, int limit, int offset) {
+        ListResult<ResourceBorrow> borrows = storage.find(identifier, isbn, clientId,
+                fromBorrowTime, toBorrowTime,
+                fromReturnTime, toReturnTime,
+                fromScheduledTime, toScheduledTime,
+                critical, limit, offset);
+        ListResult<ResourceBorrowDTO> result = borrows.copy(ResourceBorrowDTO.class);
+        result.setResultList(ResourceBorrowHelper.fromEntities(borrows.getResultList()));
+        return result;
     }
 }

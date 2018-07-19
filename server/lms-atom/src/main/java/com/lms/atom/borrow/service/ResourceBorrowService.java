@@ -4,6 +4,7 @@ import com.lms.atom.exception.AtomException;
 import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.response.ListResult;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ResourceBorrowService {
@@ -19,4 +20,12 @@ public interface ResourceBorrowService {
     List<ResourceBorrowDTO> getLateResourceBorrows();
 
     List<ResourceBorrowDTO> getTwoDayLeftResourceBorrows();
+
+    ListResult<ResourceBorrowDTO> find(String query, int limit, int offset);
+
+    ListResult<ResourceBorrowDTO> find(String identifier, String isbn, String clientId,
+                                       Date fromBorrowTime, Date toBorrowTime,
+                                       Date fromReturnTime, Date toReturnTime,
+                                       Date fromScheduledTime, Date toScheduledTime,
+                                       Boolean critical, int limit, int offset);
 }

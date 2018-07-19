@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/atom/resource-api/")
-@PermissionCheck
 public class ResourceController {
 
     private final ResourceService resourceService;
