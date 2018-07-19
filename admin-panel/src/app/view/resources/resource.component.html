@@ -7,6 +7,10 @@
                   (uploadImageClick)="updateResource($event)"
                   [prevFieldObject]="utils.getPrevObj()"></lms-upload-modal>
 
+<lms-upload-modal [abilityToUpload]="isManage" [fieldObject]="selectedResource" fieldName="resourceUrl" [fileType]="true"
+                  (uploadImageClick)="updateResource($event)"
+                  [prevFieldObject]="utils.getPrevObj()"></lms-upload-modal>
+
 <div *ngIf="isManage" class="modal fade" data-backdrop="static" id="resourceModal" role="dialog">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -207,8 +211,15 @@
   >
     <lms-column header="" field="imageUrl">
       <ng-template #dataTableCell let-item="item">
-        <div class="user-profile img-square cap-pointer cap-hover" title="Upload Image" (click)="openImageModal(item)">
+        <div class="user-profile img-square lms-pointer lms-hover" title="Upload Image" (click)="openImageModal(item)">
           <img src="{{item.imageUrl}}" alt="NO IMAGE"></div>
+      </ng-template>
+    </lms-column>
+    <lms-column header="" field="resourceUrl">
+      <ng-template #dataTableCell let-item="item">
+        <div class="user-profile img-square lms-pointer lms-hover" title="Upload Image" (click)="openFilesModal(item)">
+          <i [ngClass]="{'green' : (item && item.resourceUrl), 'red' : !(item && item.resourceUrl)}"  class="fa fa-book f-20"></i>
+        </div>
       </ng-template>
     </lms-column>
 

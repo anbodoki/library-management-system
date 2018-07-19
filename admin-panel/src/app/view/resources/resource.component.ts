@@ -208,6 +208,12 @@ export class ResourceComponent implements OnInit {
     $("resource-list .uploadImageModal").modal("show");
   }
 
+  openFilesModal(item) {
+    this.selectedResource = <Resource> JSON.parse(JSON.stringify(item));
+    this.utils.setPrevObj(JSON.stringify(item));
+    $("resource-list .uploadFileModal").modal("show");
+  }
+
   getResourceCopies(limit, offset) {
     let ref = this;
     this.resourceCopyService.findResourceCopies({resourceId: this.selectedResource.id, query: this.copyQuery, limit: limit, offset: offset}).then(function (response) {

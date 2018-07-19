@@ -15,6 +15,7 @@ export class LmsUploadModal {
   @Input() fieldName: string;
   @Input() prevFieldObject: any;
   @Input() abilityToUpload: boolean = true;
+  @Input() fileType: boolean = false;
 
   @Output() uploadImageClick = new EventEmitter();
 
@@ -27,7 +28,11 @@ export class LmsUploadModal {
       this.deleteFile(this.fieldObject[this.fieldName]);
       this.fieldObject[this.fieldName] = this.prevFieldObject[this.fieldName];
     }
-    $(".uploadImageModal").modal("hide");
+    if (this.fileType) {
+      $(".uploadFileModal").modal("hide");
+    } else {
+      $(".uploadImageModal").modal("hide");
+    }
   }
 
   deleteFile(prevImage) {
@@ -35,7 +40,11 @@ export class LmsUploadModal {
   }
 
   saveImage() {
-    $(".uploadImageModal").modal("hide");
     this.uploadImageClick.emit();
+    if (this.fileType) {
+      $(".uploadFileModal").modal("hide");
+    } else {
+      $(".uploadImageModal").modal("hide");
+    }
   }
 }
