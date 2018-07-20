@@ -8,7 +8,7 @@ public class ResourceBorrowFilteringRequest extends PagingRequest {
 
     private String identifier;
     private String isbn;
-    private String clientId;
+    private Long clientId;
     private Date fromBorrowTime;
     private Date toBorrowTime;
     private Date fromReturnTime;
@@ -33,11 +33,11 @@ public class ResourceBorrowFilteringRequest extends PagingRequest {
         this.isbn = isbn;
     }
 
-    public String getClientId() {
+    public Long getClientId() {
         return clientId;
     }
 
-    public void setClientId(String clientId) {
+    public void setClientId(Long clientId) {
         this.clientId = clientId;
     }
 

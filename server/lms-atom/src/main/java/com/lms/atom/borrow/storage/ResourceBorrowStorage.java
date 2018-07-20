@@ -143,7 +143,7 @@ public class ResourceBorrowStorage {
         return result;
     }
 
-    public ListResult<ResourceBorrow> find(String identifier, String isbn, String clientId,
+    public ListResult<ResourceBorrow> find(String identifier, String isbn, Long clientId,
                                            Date fromBorrowTime, Date toBorrowTime,
                                            Date fromReturnTime, Date toReturnTime,
                                            Date fromScheduledTime, Date toScheduledTime,

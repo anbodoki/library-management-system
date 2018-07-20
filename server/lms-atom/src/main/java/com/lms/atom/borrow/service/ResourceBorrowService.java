@@ -23,7 +23,7 @@ public interface ResourceBorrowService {
 
     ListResult<ResourceBorrowDTO> find(String query, int limit, int offset);
 
-    ListResult<ResourceBorrowDTO> find(String identifier, String isbn, String clientId,
+    ListResult<ResourceBorrowDTO> find(String identifier, String isbn, Long clientId,
                                        Date fromBorrowTime, Date toBorrowTime,
                                        Date fromReturnTime, Date toReturnTime,
                                        Date fromScheduledTime, Date toScheduledTime,

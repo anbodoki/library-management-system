@@ -97,7 +97,7 @@ public class ResourceBorrowServiceImpl implements ResourceBorrowService {
     }
 
     @Override
-    public ListResult<ResourceBorrowDTO> find(String identifier, String isbn, String clientId,
+    public ListResult<ResourceBorrowDTO> find(String identifier, String isbn, Long clientId,
                                               Date fromBorrowTime, Date toBorrowTime,
                                               Date fromReturnTime, Date toReturnTime,
                                               Date fromScheduledTime, Date toScheduledTime,

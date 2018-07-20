@@ -8,3 +8,63 @@
     <div class="count green">{{resourcesCount}}</div>
   </div>
 </div>
+
+<div class="">
+  <div class="page-title">
+    <div class="title_left">
+      <h3>Monitoring
+        <small>resources </small>
+      </h3>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <lms-table [items]="borrows"
+             [editable]="true"
+             [addable]="false"
+             [searchable]="true"
+             [advanceFilter]="true"
+             (onFilteredClick)="filterClicked($event)"
+             (onTermSearch)="updateResourcesData($event)"
+             [pagination]="true"
+             [pageNum]="pageNum"
+             [reloadEvent]="loader"
+             (onPageChange)="changePage($event)"
+
+  >
+    <lms-column header="Identifier" field="identifier" filtered="text">
+      <ng-template #dataTableCell let-item="item">
+        <span>{{item.resourceCopy.identifier}}</span>
+      </ng-template>
+    </lms-column>
+    <lms-column header="ISBN" field="isbn" filtered="text">
+      <ng-template #dataTableCell let-item="item">
+        <span>{{item.resourceCopy.resource.isbn}}</span>
+      </ng-template>
+    </lms-column>
+    <lms-column header="Client ID" field="clientId" filtered="number"></lms-column>
+    <lms-column header="Borrow time" field="borrowTime" filtered="date">
+      <ng-template #dataTableCell let-item="item">
+        <span>{{item.borrowTime | date:'dd/MM/yyyy HH:mm' }}</span>
+      </ng-template>
+    </lms-column>
+    <lms-column header="Return time" field="returnTime" filtered="date">
+      <ng-template #dataTableCell let-item="item">
+        <span>{{item.returnTime | date:'dd/MM/yyyy HH:mm' }}</span>
+      </ng-template>
+    </lms-column>
+    <lms-column header="Scheduled return time" field="scheduledTime" filtered="date">
+      <ng-template #dataTableCell let-item="item">
+        <span>{{item.scheduledReturnTime | date:'dd/MM/yyyy HH:mm' }}</span>
+      </ng-template>
+    </lms-column>
+    <lms-column header="Critical" field="critical" filtered="checkbox">
+      <ng-template #dataTableCell let-item="item">
+        <div *ngIf="!item.critical" class="text-center"><i class="fa fa-check-circle f-16 green lms-cursor"></i></div>
+        <div *ngIf="item.critical" class="text-center"><i class="fa fa-times-circle f-16 red lms-cursor"></i></div>
+      </ng-template>
+    </lms-column>
+  </lms-table>
+</div>
+
