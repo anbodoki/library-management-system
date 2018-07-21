@@ -53,8 +53,10 @@
             },
             submit() {
                 BooksService.getBookInfo(this.bookId).then(res => {
-                    console.log(res);
-                });
+                    this.$emit('bookInfoUpdated', res);
+                }).catch(err => {
+                    this.$emit('error', err, 'error');
+                })
             }
         }
     }

@@ -9,7 +9,8 @@
 </head>
 <body>
 <div id="app">
-    <chosen-book></chosen-book>
+    <keyboard v-if="activeState === state.main" @bookInfoUpdated="updateBookInfo" @error="activateResponseStatusMessage"></keyboard>
+    <chosen-book v-else-if="activeState === state.bookInfo" :bookInfo="bookInfo" @confirmBook="bookConfirmed" @declineBook="backToMainScreen"></chosen-book>
 </div>
 <script src="bundle.js"></script>
 </body>

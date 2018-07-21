@@ -1,11 +1,11 @@
 <template>
     <div class="wrapper">
         <div class="chosen-book-container">
-            <p>Sherlock Holmes by A.C. Doyle</p>
+            <p>{{bookInfo}}</p>
 
             <div class="next-previous-buttons">
                 <button class="cancel btn">Cancel</button>
-                <button class="okay disabled btn">Ok</button>
+                <button class="okay btn">Ok</button>
             </div>
         </div>
     </div>
@@ -14,7 +14,17 @@
 
 <script>
     export default {
-        name: "ChosenBook"
+        name: "ChosenBook",
+        props: ['bookInfo'],
+        methods: {
+            confirmBook() {
+                this.$emit('bookConfirmed')
+            },
+
+            declineBook() {
+                this.$emit('backToMainScreen')
+            }
+        }
     }
 </script>
 
