@@ -8,6 +8,8 @@ import {ActionResponseWithData} from "../model/response/action-response-with-dat
 import {ListResult} from "../model/response/list-result";
 import {MaterialType} from "../model/resources/materialtype";
 import {ResourceBorrow} from "../model/resources/resourceborrow";
+import {Language} from "../model/resources/language";
+import {Mail} from "../model/client/mail";
 
 @Injectable()
 export class ResourceBorrowService {

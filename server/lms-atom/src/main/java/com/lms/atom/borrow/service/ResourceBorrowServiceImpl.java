@@ -7,8 +7,13 @@ import com.lms.atom.borrow.storage.ResourceBorrowRepository;
 import com.lms.atom.borrow.storage.ResourceBorrowStorage;
 import com.lms.atom.borrow.storage.model.ResourceBorrow;
 import com.lms.atom.exception.AtomException;
+import com.lms.atom.notofication.mail.EmailService;
+import com.lms.client.client.service.ClientService;
+import com.lms.client.exception.ClientException;
+import com.lms.common.dto.atom.SendMailRequest;
 import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.atom.resource.ResourceDTO;
+import com.lms.common.dto.client.ClientDTO;
 import com.lms.common.dto.response.ListResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,12 +29,16 @@ public class ResourceBorrowServiceImpl implements ResourceBorrowService {
     private final ResourceBorrowRepository repository;
     private final ResourceBorrowStorage storage;
     private final ResourceService resourceService;
+    private final EmailService emailService;
+    private final ClientService clientService;
 
     @Autowired
-    public ResourceBorrowServiceImpl(ResourceBorrowRepository repository, ResourceBorrowStorage storage, ResourceService resourceService) {
+    public ResourceBorrowServiceImpl(ResourceBorrowRepository repository, ResourceBorrowStorage storage, ResourceService resourceService, EmailService emailService, ClientService clientService) {
         this.repository = repository;
         this.storage = storage;
         this.resourceService = resourceService;
+        this.emailService = emailService;
+        this.clientService = clientService;
     }
 
     @Override
@@ -110,5 +119,13 @@ public class ResourceBorrowServiceImpl implements ResourceBorrowService {
         ListResult<ResourceBorrowDTO> result = borrows.copy(ResourceBorrowDTO.class);
         result.setResultList(ResourceBorrowHelper.fromEntities(borrows.getResultList()));
         return result;
+    }
+
+    @Override
+    public void sendMail(SendMailRequest request) throws Exception {
+        ClientDTO byId = clientService.getById(request.getClientId());
+        if (byId != null) {
+            emailService.sendMail(byId.getEmail(), request.getSubject(), request.getMessage());
+        }
     }
 }

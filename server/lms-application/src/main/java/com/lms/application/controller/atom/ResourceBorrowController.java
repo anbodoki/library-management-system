@@ -1,6 +1,7 @@
 package com.lms.application.controller.atom;
 
 import com.lms.atom.borrow.service.ResourceBorrowService;
+import com.lms.common.dto.atom.SendMailRequest;
 import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.request.GeneralFilteringRequest;
 import com.lms.common.dto.request.ResourceBorrowFilteringRequest;
@@ -9,6 +10,7 @@ import com.lms.common.dto.response.ActionResponseWithData;
 import com.lms.common.dto.response.ListResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,5 +47,11 @@ public class ResourceBorrowController {
                 request.getCritical(),
                 request.getLimit(), request.getOffset());
         return new ActionResponseWithData<>(result, true);
+    }
+
+    @PostMapping(value = "send-mail")
+    public ActionResponse sendMail(@RequestBody @Validated SendMailRequest request) throws Exception {
+        service.sendMail(request);
+        return new ActionResponse( true);
     }
 }

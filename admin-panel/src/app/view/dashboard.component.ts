@@ -2,12 +2,17 @@ import {Component, OnInit} from "@angular/core";
 import {DashboardService} from "../services/dashboard.service";
 import {UserService} from "../services/user.service";
 import {AccessService} from "../services/access.service";
-import {School} from "../model/client/school";
 import {Client} from "../model/client/client";
 import {PagingLoader} from "../model/loader";
 import {ResourceBorrow} from "../model/resources/resourceborrow";
 import {ResourceBorrowService} from "../services/resourceborrow.service";
 import {GeneralFilterRequest} from "../model/request/general-filter-request";
+import {Mail} from "../model/client/mail";
+import {Utils} from "../services/utils";
+import {MailService} from "../services/mail.service";
+
+declare let jquery: any;
+declare let $: any;
 
 @Component({
   selector: "dashboard",
@@ -19,6 +24,7 @@ export class DashboardComponent implements OnInit {
   userCount: number;
   resourcesCount: number;
   loaded: boolean = false;
+  mail: Mail;
 
   borrows: ResourceBorrow[];
   selectedResourceBorrow: Client;
@@ -32,9 +38,11 @@ export class DashboardComponent implements OnInit {
 
   constructor(private dashboardService: DashboardService,
               private userService: UserService,
+              private utils: Utils,
+              private mailService: MailService,
               private resourceBorrowService: ResourceBorrowService,
               private accessService: AccessService) {
-    let ref =this;
+    let ref = this;
     if (!this.accessService.getPrivileges()) {
       this.userService.getUser().then(function (response) {
         if (response.success) {
@@ -81,5 +89,23 @@ export class DashboardComponent implements OnInit {
 
   filterClicked(request) {
     this.getFilteredResourceBorrows(request);
+  }
+
+  sendMail(clientId) {
+    console.log("");
+    this.mail = new Mail();
+    this.mail.clientId = clientId;
+    $("#sendMailModal").modal("show");
+  }
+
+  sendMailToServer() {
+    if (!this.utils.formIsValid('#sendMailModal')) {
+      return;
+    }
+    let ref = this;
+    this.mailService.sendMail(this.mail).then(function () {
+      $("#sendMailModal").modal("hide");
+      ref.loader = ref.loader.load(true);
+    });
   }
 }

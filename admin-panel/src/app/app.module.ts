@@ -51,6 +51,7 @@ import {ClientService} from "./services/client.service";
 import {LMSInlineEditingComponent} from "./lms-components/lms-inline-editing/lms-inline-editing.component";
 import {ResourceCopyService} from "./services/resourcecopy.service";
 import {ResourceBorrowService} from "./services/resourceborrow.service";
+import {MailService} from "./services/mail.service";
 
 @NgModule({
   declarations: [
@@ -108,6 +109,7 @@ import {ResourceBorrowService} from "./services/resourceborrow.service";
     DashboardService,
     ClientService,
     ResourceCopyService,
+    MailService,
     ResourceBorrowService,
     SchoolService,
     {provide: APP_BASE_HREF, useValue : environment.contextPath }

@@ -1,6 +1,8 @@
 package com.lms.atom.borrow.service;
 
 import com.lms.atom.exception.AtomException;
+import com.lms.client.exception.ClientException;
+import com.lms.common.dto.atom.SendMailRequest;
 import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.response.ListResult;
 
@@ -28,4 +30,6 @@ public interface ResourceBorrowService {
                                        Date fromReturnTime, Date toReturnTime,
                                        Date fromScheduledTime, Date toScheduledTime,
                                        Boolean critical, int limit, int offset);
+
+    void sendMail(SendMailRequest request) throws Exception;
 }
