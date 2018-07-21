@@ -1,6 +1,6 @@
-from message_converter import generate_getBookInfo_message, parse_getBookInfo_response, generate_getClientInfo_message
-from message_converter import parse_getClientInfo_response, generate_submit_message
-from tcp_client import send_message
+from lib.message_converter import generate_getBookInfo_message, parse_getBookInfo_response, \
+    generate_getClientInfo_message, parse_getClientInfo_response, generate_submit_message, parse_submit_response
+from lib.tcp_client import send_message
 
 
 def get_book_info(book_id):
