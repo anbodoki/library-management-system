@@ -14,6 +14,5 @@ def send_message(request_message):
     print('gavagzavne mesiji: ', request_message)
     data = s.recv(BUFFER_SIZE)
     print('mivige mesiji: ', data)
-    # s.close()
-    # return '*b&o&date&book name by author&crc16'
+    s.close()
     return data

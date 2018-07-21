@@ -1,5 +1,5 @@
-from messages import GetBookInfoMessage, GetBookInfoResponse, GetClientInfoMessage, GetClientInfoResponse, \
-    GetSubmitMessage
+from lib.messages import GetBookInfoMessage, GetBookInfoResponse, GetClientInfoMessage, GetClientInfoResponse, \
+    GetSubmitMessage, GetSubmitResponse
 
 
 def generate_getBookInfo_message(book_id):
