@@ -1,7 +1,7 @@
 <template>
 
     <div class="book-page">
-        <div class="book-page-top">
+        <div class="book-page- top">
             <div class="book-cover-image">
                 <div class="book-cover" style="background-image: url('/dist/imgs/images/sherlock.jpg')"></div>
                 <div class="download-book">
@@ -26,7 +26,7 @@
 
         </div>
     </div>
-    
+
 </template>
 
 <script>

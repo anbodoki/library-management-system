@@ -8,6 +8,7 @@
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
+  line-height: 1.6;
 }
 
 input {
@@ -33,7 +34,11 @@ input {
 
 .wrapper {
   width: 100%;
-  background-color: #e3e3e3;
+  background-color: #f5f5f5;
+  min-height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .phone {
     //max-width: 600px;
     margin: 40px auto 0 auto;
@@ -156,6 +161,37 @@ input {
           margin-top: 30px;
           color: white;
           font-size: 20px;
+        }
+      }
+    }
+  }
+
+  .chosen-book-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    p{
+      font-size: 40px;
+      margin-top: 0;
+    }
+    .next-previous-buttons{
+      .btn{
+        padding: 15px 40px;
+        font-size: 20px;
+        color: white;
+        border: 1px solid #e3e3e3;
+        margin: 0 10px;
+        border-radius: 3px;
+        &.cancel{
+          background-color: #cc0000;
+        }
+        &.okay{
+          background-color: darkgreen;
+
+          &.disabled{
+            opacity: 0.5;
+          }
         }
       }
     }

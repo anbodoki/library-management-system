@@ -1,7 +1,10 @@
 <template>
     <div class="main-header">
         <nav class="main-header-nav flex-center-vertically">
-            <img class="main-header-logo" src="http://freeuni.edu.ge/sites/default/themes/freeuni/images/logo_freeuni_ka.png" alt="თავისუფალი უნივერსიტეტი">
+            <div class="left flex-center-vertically">
+                <img class="main-header-logo" src="/dist/imgs/logo_freeuni_ka.png" alt="თავისუფალი უნივერსიტეტი">
+                <div class="divider vertical"></div>
+            </div>
             <ul class="main-header-menu">
                 <li class="main-header-menu-item flex-center-vertically btn">
                     <span class="text-primary-light">ნოთიფიკაციები</span>
