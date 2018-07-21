@@ -2,6 +2,7 @@ package com.lms.atom.gateway;
 
 import com.lms.atom.book.service.ResourceService;
 import com.lms.atom.borrow.service.ResourceBorrowService;
+import com.lms.atom.exception.AtomException;
 import com.lms.atom.messages.Messages;
 import com.lms.client.client.service.ClientService;
 import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
@@ -34,18 +35,26 @@ public class DeviceMessageHandlerFactoryImpl extends DeviceMessageHandlerFactory
         ClientDTO clientForCard = clientService.getClientForCard(clientId);
         ResourceBorrowDTO resourceBorrow = resourceBorrowService.get(bookId, clientForCard.getId());
         if (resourceBorrow == null) {
-            ResourceBorrowDTO result = new ResourceBorrowDTO();
-            result.setClientId(clientForCard.getId());
-            result.setResourceCopy(resourceService.getResourceCopyByIdentifier(bookId));
-            result.setBorrowTime(new Date());
-            result.setScheduledReturnTime(date);
-            resourceBorrowService.updateResourceBorrow(result);
-            return Messages.get("successfullyBorrowed");
+            return createBorrow(clientForCard, bookId, date);
         } else {
-            resourceBorrow.setReturnTime(new Date());
-            resourceBorrowService.updateResourceBorrow(resourceBorrow);
-            return Messages.get("successfullyReturned");
+            if (resourceBorrow.getReturnTime() == null) {
+                resourceBorrow.setReturnTime(new Date());
+                resourceBorrowService.updateResourceBorrow(resourceBorrow);
+                return Messages.get("successfullyReturned");
+            } else {
+                return createBorrow(clientForCard, bookId, date);
+            }
         }
+    }
+
+    private String createBorrow(ClientDTO clientForCard, String bookId, Date date) throws AtomException {
+        ResourceBorrowDTO result = new ResourceBorrowDTO();
+        result.setClientId(clientForCard.getId());
+        result.setResourceCopy(resourceService.getResourceCopyByIdentifier(bookId));
+        result.setBorrowTime(new Date());
+        result.setScheduledReturnTime(date);
+        resourceBorrowService.updateResourceBorrow(result);
+        return Messages.get("successfullyBorrowed");
     }
 
     @Override
