@@ -17,8 +17,8 @@ def get_client_info(client_card_id):
     return client_info
 
 
-def submit_book_request(client_card_id, book_id):
-    request_message = generate_submit_message(client_card_id, book_id)
+def submit_book_request(client_card_id, book_id, date):
+    request_message = generate_submit_message(client_card_id, book_id, date)
     response = send_message(request_message)
     client_info = parse_submit_response(response)
     return client_info
