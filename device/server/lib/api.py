@@ -21,4 +21,8 @@ def submit_book_request(client_card_id, book_id, date):
     request_message = generate_submit_message(client_card_id, book_id, date)
     response = send_message(request_message)
     client_info = parse_submit_response(response)
+<<<<<<< HEAD
     return client_info
+=======
+    return client_info
+>>>>>>> server
