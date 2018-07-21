@@ -16,8 +16,8 @@ def init_extensions():
 
 
 def init_resources():
-    api.add_resource(BookInfo, '/books/<string:book_id>/info')
-    api.add_resource(ClientInfo, '/clients/<string:client_id>/info')
+    api.add_resource(BookInfo, '/books/<string:book_id>')
+    api.add_resource(ClientInfo, '/clients/<string:client_id>')
     api.add_resource(BookSubmissions, '/booksubmissions')
 
 

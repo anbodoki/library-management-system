@@ -2,17 +2,21 @@ from datetime import datetime
 from abc import ABC
 from enum import Enum
 
+
 class MessageType():
     CHECK_BOOK = 'b'
     CHECK_CLIENT = 'c'
     SUBMIT = 's'
+
 
 class MessageStatus():
     OK = 'o'
     ERROR = 'e'
     IN_PROGRESS = 'i'
 
+
 SYNC_BYTE = '*'
+
 
 class InvalidMessageException(Exception):
     pass

@@ -20,8 +20,8 @@ def parse_getClientInfo_response(response):
     info_response.from_bytes(response)
     return info_response
 
-def generate_submit_message(client_card_id, book_id):
-    return bytes(GetSubmitMessage(client_card_id, book_id))
+def generate_submit_message(client_card_id, book_id, date):
+    return bytes(GetSubmitMessage(client_card_id, book_id, date))
 
 def parse_submit_response(response):
     info_response = GetSubmitResponse(response)
