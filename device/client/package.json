@@ -1,10 +1,10 @@
 {
-  "name": "LMS device client",
+  "name": "LMS-device-client",
   "version": "1.0.0",
   "description": "Device client front",
   "main": "index.html",
   "scripts": {
-    "dev": "webpack-dev-server",
+    "dev": "webpack-dev-server  --open --inline --hot",
     "prod": "NODE_ENV=productio ",
     "prodSafe": "webpack -p"
   },

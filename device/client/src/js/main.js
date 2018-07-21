@@ -8,9 +8,11 @@ import '../index.html';
 //
 import Vue from 'vue';
 
-import helloComponent from './components/hello.vue';
-Vue.component('hello-component', helloComponent);
+import Keyboard from './components/Keyboard.vue';
 
 const app = new Vue({
     el: '#app',
+    components: {
+        Keyboard
+    }
 });
