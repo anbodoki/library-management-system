@@ -10,7 +10,7 @@
                            class="number-input" id="numberInput" value=""
                            placeholder="Enter Book ID"/>
 
-                    <button class="submit-btn" type="submit">Submit</button>
+                    <button class="submit-btn" type="submit" @click.prevent="submit()">Submit</button>
                 </div>
 
                 <!-- ## keyboard -->
@@ -24,7 +24,6 @@
                             <img src="https://image.flaticon.com/icons/svg/61/61167.svg" width="30"
                                  height="30" alt="Left Arrow free icon"
                                  title="Left Arrow free icon"></i></span>
-
                     </div>
                 </div>
             </div>
@@ -35,6 +34,8 @@
 </template>
 
 <script>
+    import {BooksService} from "../resource";
+
     export default {
         name: "Keyboard",
         data() {
@@ -50,6 +51,11 @@
             deleteNumber() {
                 this.bookId = this.bookId.slice(0, -1);
             },
+            submit() {
+                BooksService.getBookInfo(this.bookId).then(res => {
+                    console.log(res);
+                });
+            }
         }
     }
 
