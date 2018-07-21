@@ -53,8 +53,10 @@
             },
             submit() {
                 BooksService.getBookInfo(this.bookId).then(res => {
+                    console.log('keyboard success', res);
                     this.$emit('bookInfoUpdated', res);
                 }).catch(err => {
+                    console.log('keyboard error', err)
                     this.$emit('error', err, 'error');
                 })
             }

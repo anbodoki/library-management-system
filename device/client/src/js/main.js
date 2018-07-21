@@ -41,6 +41,7 @@ const app = new Vue({
         },
 
         activateResponseStatusMessage(msg, status) {
+            console.log('activate response msg', msg, status);
             this.response.responseMsg = msg;
             this.response.status = status;
             this.responseStatusVisible = true;
