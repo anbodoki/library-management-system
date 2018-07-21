@@ -105,9 +105,25 @@ class GetClientInfoResponse(Message):
             raise InvalidMessageException("Invalid message type")
 
 
-class SubmitMessage(Message):
-
+class GetSubmitMessage(Message):
     def __init__(self, book_id, client_card_id, date):
         message_data = ('@').join((book_id, client_card_id, date))
         super().__init__(message_data)
         self.msg_type = MessageType.SUBMIT
+
+
+class GetSubmitResponse(Message):
+
+    def __init__(self, response):
+        super().__init__(response)
+        self.response = response
+
+    def from_bytes(self, data):
+        print(data)
+        super().from_bytes(data)
+        self.validate_msg_type()
+        print(self.msg_data, self.date)
+
+    def validate_msg_type(self):
+        if self.msg_type != MessageType.SUBMIT:
+            raise InvalidMessageException("Invalid message type")
