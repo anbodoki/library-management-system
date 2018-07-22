@@ -62,6 +62,13 @@ public class DeviceSession {
             packet.setMessageStatus(MessageStatus.OK);
             channel.writeAndFlush(packet);
         } catch (Exception e) {
+            if (e instanceof GatewayException) {
+                packet.setMessageData(new ErrorResponseData(((GatewayException) e).getErrorCode()));
+                packet.setDate(new Date());
+                packet.setMessageStatus(MessageStatus.ERROR);
+                channel.writeAndFlush(packet);
+                return;
+            }
             packet.setMessageData(new ErrorResponseData());
             packet.setDate(new Date());
             packet.setMessageStatus(MessageStatus.ERROR);

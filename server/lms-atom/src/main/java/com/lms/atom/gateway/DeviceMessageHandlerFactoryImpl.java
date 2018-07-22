@@ -40,6 +40,9 @@ public class DeviceMessageHandlerFactoryImpl extends DeviceMessageHandlerFactory
             return createBorrow(clientForCard, bookId, date);
         } else {
             if (resourceBorrow.getReturnTime() == null) {
+                if (!resourceBorrow.getClientId().equals(clientForCard.getId())) {
+                    throw new GatewayException(Messages.get("cannotReturnBook"));
+                }
                 resourceBorrow.setReturnTime(new Date());
                 resourceBorrowService.updateResourceBorrow(resourceBorrow);
                 return Messages.get("successfullyReturned");
