@@ -4,8 +4,8 @@
             <p>{{bookInfo}}</p>
 
             <div class="next-previous-buttons">
-                <button class="cancel btn">Cancel</button>
-                <button class="okay btn">Ok</button>
+                <button class="cancel btn" @click="declineBook">Cancel</button>
+                <button class="okay btn" @click="confirmBook">Ok</button>
             </div>
         </div>
     </div>
@@ -15,14 +15,14 @@
 <script>
     export default {
         name: "ChosenBook",
-        props: ['bookInfo'],
+        props: ['book-info'],
         methods: {
             confirmBook() {
-                this.$emit('bookConfirmed')
+                this.$emit('book-confirmed')
             },
 
             declineBook() {
-                this.$emit('backToMainScreen')
+                this.$emit('book-declined')
             }
         }
     }

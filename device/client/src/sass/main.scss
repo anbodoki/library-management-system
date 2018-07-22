@@ -5,6 +5,14 @@
   }
 }
 
+html, body {
+  height: 100%;
+}
+
+#app {
+  height: 100%;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
@@ -17,7 +25,7 @@ input {
   font-weight: 400;
   &.number-input {
     width: 100%;
-    max-width: 250px;
+    max-width: 320px;
     height: 55px;
     line-height: 55px;
     text-align: center;
@@ -36,6 +44,7 @@ input {
   width: 100%;
   background-color: #f5f5f5;
   min-height: 600px;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -166,30 +175,30 @@ input {
     }
   }
 
-  .chosen-book-container{
+  .chosen-book-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    p{
+    p {
       font-size: 40px;
       margin-top: 0;
     }
-    .next-previous-buttons{
-      .btn{
+    .next-previous-buttons {
+      .btn {
         padding: 15px 40px;
         font-size: 20px;
         color: white;
         border: 1px solid #e3e3e3;
         margin: 0 10px;
         border-radius: 3px;
-        &.cancel{
+        &.cancel {
           background-color: #cc0000;
         }
-        &.okay{
+        &.okay {
           background-color: darkgreen;
 
-          &.disabled{
+          &.disabled {
             opacity: 0.5;
           }
         }

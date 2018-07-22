@@ -10,6 +10,8 @@ import Vue from 'vue';
 
 import Keyboard from './components/Keyboard.vue';
 import ChosenBook from './components/ChosenBook.vue';
+import ResponseStatusMessage from "./components/ResponseStatusMessage";
+
 
 const app = new Vue({
     el: '#app',
@@ -22,15 +24,16 @@ const app = new Vue({
                 date: 1,
             },
             activeState: 0,
-            responseStatusVisible: false,
+            responseStatusVisible: true,
             response: {
-                responseMsg: '',
+                message: '',
                 status: ''
             }
         }
     },
     methods: {
         updateBookInfo(bookInfo) {
+            console.log('book info updated', bookInfo);
             this.bookInfo = bookInfo;
             this.activeState = this.state.bookInfo;
         },
@@ -42,7 +45,7 @@ const app = new Vue({
 
         activateResponseStatusMessage(msg, status) {
             console.log('activate response msg', msg, status);
-            this.response.responseMsg = msg;
+            this.response.message = msg;
             this.response.status = status;
             this.responseStatusVisible = true;
             setTimeout(() => {
@@ -51,7 +54,7 @@ const app = new Vue({
         },
 
         deactivateResponseStatusMessage() {
-            this.response.responseMsg = '';
+            this.response.message = '';
             this.response.status = '';
             this.responseStatusVisible = false;
         },
@@ -62,6 +65,7 @@ const app = new Vue({
     },
     components: {
         Keyboard,
-        ChosenBook
+        ChosenBook,
+        ResponseStatusMessage
     }
 });
