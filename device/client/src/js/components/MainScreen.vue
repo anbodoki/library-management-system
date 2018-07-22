@@ -38,14 +38,11 @@
             submit() {
                 BooksService.getBookInfo(this.bookId).then(res => {
                     console.log('keyboard success', res);
-                    if (res === 'Book not exits') {
-                        this.$emit('error', res, 'error');
-                    } else {
-                        this.$emit('book-info-updated', res);
-                    }
+                    this.$emit('book-info-updated', this.bookId, res.message, res.status);
                 }).catch(err => {
-                    console.log('keyboard error', err);
-                    this.$emit('error', err, 'error');
+                    console.log('keyboard error', err.response);
+                    if (err.response.status == 404)
+                        this.$emit('error', err.response.data.message, 'error');
                 })
             }
         },

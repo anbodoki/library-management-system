@@ -1,4 +1,3 @@
-
 //import styles
 import '../sass/main.scss';
 
@@ -13,6 +12,7 @@ import ChosenBook from './components/ChosenBook.vue';
 import ResponseStatusMessage from "./components/ResponseStatusMessage";
 import CardRead from './components/CardRead.vue';
 import DatePicker from "./components/DatePicker";
+import {BooksService} from "./resource";
 
 const app = new Vue({
     el: '#app',
@@ -24,13 +24,15 @@ const app = new Vue({
                 card: 2,
                 date: 3,
             },
-            activeState: 2,
+            activeState: 0,
             responseStatusVisible: false,
             client: {
                 bookId: '',
+                bookName: '',
                 cardId: '',
                 date: null,
-                name: ''
+                name: '',
+                action: 'returned'
             },
             response: {
                 message: '',
@@ -39,9 +41,11 @@ const app = new Vue({
         }
     },
     methods: {
-        updateBookInfo(bookInfo) {
-            console.log('book info updated', bookInfo);
-            this.client.bookId = bookInfo;
+        updateBookInfo(bookId, bookName, action) {
+            this.client.bookId = bookId;
+            this.client.bookName = bookName;
+            console.log('action? ', action)
+            this.client.action = action;
             this.activeState = this.state.bookInfo;
         },
 
@@ -70,26 +74,47 @@ const app = new Vue({
             this.activeState = this.state.main;
         },
 
-        bookSuccessfullyReturned(cardId, clientName) {
+        submit() {
+            BooksService.submit(this.client.cardId, this.client.bookId, this.client.date).then(res => {
+                this.activateResponseStatusMessage("Book successfully " + this.client.action, 'success');
+            }).catch(err => {
+                this.activateResponseStatusMessage("Couldn't make action", 'error');
+            });
+            this.backToMainScreen();
+            this.clearAll();
+        },
+
+        clientSuccessfullyIdentified(cardId, clientName) {
             this.client.name = clientName;
             this.client.cardId = cardId;
-            this.submit();
-        },
-
-        submit() {
-            this.activateResponseStatusMessage("Book successfully Returned", 'success');
-            this.backToMainScreen();
-        },
-
-        clientSuccessfullyIdentified(cardId, clientName, action) {
-            if (action === 'r') {
-                this.bookSuccessfullyReturned();
+            console.log('action', this.client.action);
+            if (this.client.action === 'returned') {
+                this.submit();
             } else {
-                this.client.name = clientName;
-                this.client.cardId = cardId;
                 this.activeState = this.state.date
             }
         },
+
+        dateSubmitted(date) {
+            this.client.date = date;
+            this.submit()
+        },
+
+        clearAll() {
+            this.activeState = 0;
+            this.client = {
+                bookId: '',
+                bookName: '',
+                cardId: '',
+                date: null,
+                name: '',
+                action: 'returned'
+            };
+            this.response = {
+                message: '',
+                status: ''
+            }
+        }
     },
     components: {
         ResponseStatusMessage,

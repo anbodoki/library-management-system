@@ -37,36 +37,35 @@
                 ClientService.initiateCardReader().then(() => {
                     this.getCardTimer = setInterval(() => {
                         ClientService.getCardId().then( res => {
-                            this.validateClient(res);
+                            console.log("shemodixar aq???", res);
                             clearInterval(this.getCardTimer);
+                            this.validateClient(res.card_id);
                         }).catch((err) => {
-                            this.$emit('error', err, 'error');
+                            // this.$emit('error', 'Card not identified' , 'error');
                         });
                     }, 1000);
                 });
             },
 
             validateClient(cardId) {
-                ClientService.validateClient(cardId).then(clientName => {
-                    console.log('Validate client success', clientName);
-                    this.$emit('client-successfully-identified', cardId, clientName);
+                ClientService.validateClient(cardId).then(clientInfo => {
+                    console.log('Validate client success', clientInfo.client_name);
+                    this.$emit('client-successfully-identified', cardId, clientInfo.client_name);
                 }).catch(err => {
                     console.log('Validate client error', err);
-                    this.$emit('error', err, 'error');
+                    this.$emit('error', 'Client not identified', 'error');
                     this.initiateCardReader();
                 });
             },
 
             cancelClicked() {
                 clearInterval(this.getCardTimer);
+                this.$emit('cancel-clicked')
             },
 
             beforeDestroy() {
                 clearInterval(this.getCardTimer);
             },
-
-            success() {
-            }
         }
     }
 </script>

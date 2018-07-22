@@ -104,6 +104,8 @@ class GetClientInfoResponse(Message):
 
 class GetSubmitMessage(Message):
     def __init__(self, client_card_id, book_id, date):
+        if not date:
+            date = "null"
         message_data = ('@').join((book_id, client_card_id, date))
         super().__init__(message_data)
         self.msg_type = MessageType.SUBMIT

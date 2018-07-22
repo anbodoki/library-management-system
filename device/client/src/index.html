@@ -14,19 +14,20 @@
               v-on:error="activateResponseStatusMessage"></main-screen>
 
     <chosen-book v-else-if="activeState === state.bookInfo"
-                 :book-info="client.bookId"
+                 :book-info="client.bookName"
                  v-on:book-confirmed="bookConfirmed"
                  v-on:book-declined="backToMainScreen"></chosen-book>
 
     <card-read v-else-if="activeState === state.card"
                v-on:error="activateResponseStatusMessage"
+               v-on:cancel-clicked="backToMainScreen"
                v-on:client-successfully-identified="clientSuccessfullyIdentified"></card-read>
 
-    <date-picker v-else-if="activeState === state.date"></date-picker>
+    <date-picker v-else-if="activeState === state.date" :client-name="client.name"
+                 v-on:date-submitted="dateSubmitted"></date-picker>
 
     <response-status-message v-if="responseStatusVisible"
                              :client-name="client.name"
-                             v-on:book-successfully-returned="bookSuccessfullyReturned"
                              v-on:close-response-status-msg="deactivateResponseStatusMessage"
                              :response="response"></response-status-message>
 </div>
