@@ -1,11 +1,10 @@
 package com.lms.gateway;
 
+import com.lms.gateway.exception.GatewayException;
 import com.lms.gateway.model.*;
 import io.netty.channel.Channel;
 
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class DeviceSession {
 
@@ -81,6 +80,11 @@ public class DeviceSession {
             packet.setMessageStatus(MessageStatus.OK);
             channel.writeAndFlush(packet);
         } catch (Exception e) {
+            if (e instanceof GatewayException) {
+                packet.setMessageData(new ErrorResponseData(e.getMessage()));
+                packet.setDate(new Date());
+                packet.setMessageStatus(MessageStatus.ERROR);
+            }
             packet.setMessageData(new ErrorResponseData());
             packet.setDate(new Date());
             packet.setMessageStatus(MessageStatus.ERROR);
@@ -99,6 +103,11 @@ public class DeviceSession {
             packet.setMessageData(result);
             channel.writeAndFlush(packet);
         } catch (Exception e) {
+            if (e instanceof GatewayException) {
+                packet.setMessageData(new ErrorResponseData(e.getMessage()));
+                packet.setDate(new Date());
+                packet.setMessageStatus(MessageStatus.ERROR);
+            }
             packet.setMessageData(new ErrorResponseData());
             packet.setDate(new Date());
             packet.setMessageStatus(MessageStatus.ERROR);

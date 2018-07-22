@@ -4,6 +4,13 @@ public class ErrorResponseData implements MessageData {
 
     private String data = "Happened unexpected error, please return book";
 
+    public ErrorResponseData() {
+    }
+
+    public ErrorResponseData(String message) {
+        this.data = message;
+    }
+
     public String getData() {
         return data;
     }

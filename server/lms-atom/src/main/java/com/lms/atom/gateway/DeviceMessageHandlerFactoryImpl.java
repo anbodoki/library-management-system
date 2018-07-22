@@ -10,6 +10,7 @@ import com.lms.common.dto.atom.resource.ResourceCopyDTO;
 import com.lms.common.dto.client.ClientDTO;
 import com.lms.gateway.DeviceMessageHandlerFactory;
 import com.lms.gateway.ProtocolConfig;
+import com.lms.gateway.exception.GatewayException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,7 +63,7 @@ public class DeviceMessageHandlerFactoryImpl extends DeviceMessageHandlerFactory
     public String processCheckBook(String bookIdentifier) throws Exception {
         ResourceCopyDTO resourceCopyByIdentifier = resourceService.getResourceCopyByIdentifier(bookIdentifier);
         if (resourceCopyByIdentifier == null) {
-            return Messages.get("bookNotExists");
+            throw new GatewayException(Messages.get("bookNotExists"));
         }
         ResourceBorrowDTO resourceBorrow = resourceBorrowService.get(bookIdentifier, null);
         if (resourceBorrow == null) {
@@ -80,7 +81,7 @@ public class DeviceMessageHandlerFactoryImpl extends DeviceMessageHandlerFactory
     public String processCheckClient(String clientCardId) throws Exception {
         ClientDTO clientForCard = clientService.getClientForCard(clientCardId);
         if (clientForCard == null) {
-            return Messages.get("clientNotExists");
+            throw new GatewayException(Messages.get("clientNotExists"));
         }
         return clientForCard.getFirstName() + " " + clientForCard.getLastName();
     }
