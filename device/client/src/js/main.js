@@ -8,7 +8,7 @@ import '../index.html';
 //
 import Vue from 'vue';
 
-import Keyboard from './components/Keyboard.vue';
+import MainScreen from "./components/MainScreen";
 import ChosenBook from './components/ChosenBook.vue';
 import ResponseStatusMessage from "./components/ResponseStatusMessage";
 import CardRead from './components/CardRead.vue';
@@ -24,7 +24,7 @@ const app = new Vue({
                 card: 2,
                 date: 3,
             },
-            activeState: 2,
+            activeState: 0,
             responseStatusVisible: false,
             client: {
                 bookId: '',
@@ -93,9 +93,9 @@ const app = new Vue({
     },
     components: {
         ResponseStatusMessage,
+        MainScreen,
         ChosenBook,
         DatePicker,
-        Keyboard,
         CardRead
     }
 });
