@@ -207,4 +207,22 @@ input {
       }
     }
   }
+
+  .place-card-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .arrow-left{
+      width: 0;
+      height: 0;
+      border-top: 20px solid transparent;
+      border-bottom: 20px solid transparent;
+
+      border-right:20px solid black;
+    }
+    p{
+      font-size: 40px;
+      margin-left: 20px;
+    }
+  }
 }

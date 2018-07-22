@@ -11,6 +11,7 @@ import Vue from 'vue';
 import Keyboard from './components/Keyboard.vue';
 import ChosenBook from './components/ChosenBook.vue';
 import ResponseStatusMessage from "./components/ResponseStatusMessage";
+import CardRead from './components/CardRead.vue';
 
 
 const app = new Vue({
@@ -24,7 +25,7 @@ const app = new Vue({
                 date: 1,
             },
             activeState: 0,
-            responseStatusVisible: true,
+            responseStatusVisible: false,
             response: {
                 message: '',
                 status: ''
@@ -65,7 +66,8 @@ const app = new Vue({
     },
     components: {
         Keyboard,
+        ResponseStatusMessage,
         ChosenBook,
-        ResponseStatusMessage
+        CardRead
     }
 });
