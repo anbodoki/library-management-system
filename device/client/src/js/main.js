@@ -10,6 +10,7 @@ import Vue from 'vue';
 
 import Keyboard from './components/Keyboard.vue';
 import ChosenBook from './components/ChosenBook.vue';
+import CardRead from './components/CardRead.vue';
 
 const app = new Vue({
     el: '#app',
@@ -62,6 +63,7 @@ const app = new Vue({
     },
     components: {
         Keyboard,
-        ChosenBook
+        ChosenBook,
+        CardRead
     }
 });
