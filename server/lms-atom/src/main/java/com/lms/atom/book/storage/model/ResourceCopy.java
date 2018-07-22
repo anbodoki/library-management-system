@@ -1,10 +1,12 @@
 package com.lms.atom.book.storage.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "resourcecopy")
-public class ResourceCopy {
+public class ResourceCopy implements Serializable {
+
     private static final long serialVersionUID = -3009157732242241607L;
 
     @Id

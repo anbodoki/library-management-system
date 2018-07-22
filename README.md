@@ -47,7 +47,7 @@ CHECK_BOOK {
     device ->  *b&i&date&book_id&crc16
                *b&o&date&book name by author&crc16 <- server
                                                    OR
-               *b&e&date&book_id&crc16             <- server
+               *b&e&date&error_message&crc16             <- server
 }
 ```
 ```
@@ -55,17 +55,17 @@ CHECK_CLIENT {
     device ->  *c&i&date&client_card_id&crc16
                *c&o&date&client name&crc16    <- server
                                               OR
-               *c&e&date&client_card_id&crc16 <- server
+               *c&e&date&error_message&crc16 <- server
 }
 ```
 ```
 SUBMIT {
-    device ->  *s&i&date&book_id:client_card_id&crc16
+    device ->  *s&i&date&book_id@client_card_id@date&crc16
                *s&o&date&successfully taken&crc16     <- server
                                                       OR
                *s&o&date&successfully returned&crc16  <- server
                                                       OR
-               *s&e&date&book_id:client_card_id&crc16 <- server
+               *s&e&date&error_messsage&crc16 <- server
 }
 ```
 
@@ -74,3 +74,16 @@ SUBMIT {
 2. Identify client using RFID
 3. Check client on server
 4. Sumbit take or return to server
+
+##### CRC algorithm
+```
+public static String calculateCRC(String input) {
+    int result = 0;
+    int secret = 9988;
+    result += start;
+    for (int i = 0; i < input.length(); i++) {
+        result += input.charAt(i);
+    }
+    return Integer.toHexString(0x10000 | result).substring(1).toUpperCase();
+}
+```

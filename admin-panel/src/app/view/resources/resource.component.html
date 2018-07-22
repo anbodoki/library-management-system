@@ -7,6 +7,10 @@
                   (uploadImageClick)="updateResource($event)"
                   [prevFieldObject]="utils.getPrevObj()"></lms-upload-modal>
 
+<lms-upload-modal [abilityToUpload]="isManage" [fieldObject]="selectedResource" fieldName="resourceUrl" [fileType]="true"
+                  (uploadImageClick)="updateResource($event)"
+                  [prevFieldObject]="utils.getPrevObj()"></lms-upload-modal>
+
 <div *ngIf="isManage" class="modal fade" data-backdrop="static" id="resourceModal" role="dialog">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -14,90 +18,118 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Resource details</h4>
       </div>
-      <div *ngIf="selectedResource" class="modal-body cap-flex">
-        <div class="half-width">
-          <lms-input label="Name" fieldName="name"
-                     [fieldObject]="selectedResource" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
-                     alertText="Name must contain minimum 2 characters"></lms-input>
-          <lms-input label="Author" fieldName="author"
-                     [fieldObject]="selectedResource" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
-                     alertText="Author must contain minimum 2 characters"></lms-input>
-          <lms-input label="Subname" fieldName="subName"
-                     [fieldObject]="selectedResource" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
-                     alertText="Subname must contain minimum 2 characters"></lms-input>
-          <lms-input label="Edition" fieldName="edition"
-                     [fieldObject]="selectedResource" fieldType="number" capPattern="^.{1,50}$" [capRequired]="true"
-                     alertText="Edition must contain minimum 1 character"></lms-input>
-          <lms-input label="Publisher" fieldName="publisher"
-                     [fieldObject]="selectedResource" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
-                     alertText="Publisher must contain minimum 2 characters"></lms-input>
-          <div class="w-100 m-bottom-5">Edition date
-            <dp-date-picker theme="dp-material" [(ngModel)]="selectedResource.editionDate"
-                            [config]="utils.datePickerConfig"></dp-date-picker>
+      <ul class="cap-tabs nav nav-tabs">
+        <li id="resourceDetails" class="nav-item active">
+          <a class="nav-link">Details</a>
+        </li>
+        <li *ngIf="selectedResource && selectedResource.id" id="resourceCopies" class="nav-item">
+          <a class="nav-link">Copies</a>
+        </li>
+      </ul>
+      <div *ngIf="selectedResource" class="modal-body">
+        <div id="tab-content-resourceDetails" class="cap-flex">
+          <div class="half-width">
+            <lms-input label="Name" fieldName="name"
+                       [fieldObject]="selectedResource" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
+                       alertText="Name must contain minimum 2 characters"></lms-input>
+            <lms-input label="Author" fieldName="author"
+                       [fieldObject]="selectedResource" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
+                       alertText="Author must contain minimum 2 characters"></lms-input>
+            <lms-input label="Subname" fieldName="subName"
+                       [fieldObject]="selectedResource" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
+                       alertText="Subname must contain minimum 2 characters"></lms-input>
+            <lms-input label="Edition" fieldName="edition"
+                       [fieldObject]="selectedResource" fieldType="number" capPattern="^.{1,50}$" [capRequired]="true"
+                       alertText="Edition must contain minimum 1 character"></lms-input>
+            <lms-input label="Publisher" fieldName="publisher"
+                       [fieldObject]="selectedResource" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
+                       alertText="Publisher must contain minimum 2 characters"></lms-input>
+            <div class="w-100 m-bottom-5">Edition date
+              <dp-date-picker theme="dp-material" [(ngModel)]="selectedResource.editionDate"
+                              [config]="utils.datePickerConfig"></dp-date-picker>
+            </div>
+            <lms-input label="Page count" fieldName="pageNum" [capRequired]="true" [fieldObject]="selectedResource"
+                       alertText="Must not be empty"
+                       fieldType="number"></lms-input>
+            <lms-input label="ISBN" fieldName="isbn"
+                       [fieldObject]="selectedResource" fieldType="text" capPattern="^.{13}$" [capRequired]="true"
+                       alertText="ISBN must contain 13 characters"></lms-input>
+            <lms-input label="UDC" fieldName="udc"
+                       [fieldObject]="selectedResource" fieldType="text" capPattern="^.{2,10}$" [capRequired]="true"
+                       alertText="UDC must contain 2-10 characters"></lms-input>
           </div>
-          <lms-input label="Page count" fieldName="pageNum" [capRequired]="true" [fieldObject]="selectedResource"
-                     alertText="Must not be empty"
-                     fieldType="number"></lms-input>
-          <lms-input label="ISBN" fieldName="isbn"
-                     [fieldObject]="selectedResource" fieldType="text" capPattern="^.{13}$" [capRequired]="true"
-                     alertText="ISBN must contain 13 characters"></lms-input>
-          <lms-input label="UDC" fieldName="udc"
-                     [fieldObject]="selectedResource" fieldType="text" capPattern="^.{2,10}$" [capRequired]="true"
-                     alertText="UDC must contain 2-10 characters"></lms-input>
+          <div class="half-width">
+            <lms-input label="ISSN" fieldName="issn" [capRequired]="true" [fieldObject]="selectedResource"
+                       alertText="Must not be empty"
+                       fieldType="text"></lms-input>
+            <lms-input label="Place" fieldName="place" [capRequired]="true" [fieldObject]="selectedResource"
+                       alertText="Must not be empty"
+                       fieldType="text"></lms-input>
+            <lms-input label="Reference URL" fieldName="referenceURL"
+                       [fieldObject]="selectedResource" fieldType="text"></lms-input>
+            <lms-dynamic-component label="Resource Type" fieldName="resourceType" [fieldObject]="selectedResource"
+                                   [searchable]="false"
+                                   [values]="resourceTypes" returnFieldName="id"
+                                   [selectedObject]="selectedResource.resourceType"
+                                   [returnObject]="false">
+              <lms-dynamic-column field="name">
+                <ng-template #dynamicComboColumn let-item="item">
+                  <span *ngIf="item.id == 'PRINTED'"><i class="fa fa-book"></i> {{item.name}}</span>
+                  <span *ngIf="item.id == 'E_BOOK'"><i class="fa fa-file-pdf-o"></i> {{item.name}}</span>
+                </ng-template>
+              </lms-dynamic-column>
+            </lms-dynamic-component>
+            <lms-dynamic-component label="Material Type" [values]="materialTypes"
+                                   (onSearch)="initMaterialTypes($event)" fieldName="materialType"
+                                   [selectedObject]="selectedResource.materialType"
+                                   [fieldObject]="selectedResource" showValue="name" returnFieldName="id"
+                                   [capRequired]="true"
+                                   alertText="Cannot be empty"
+                                   [returnObject]="true">
+              <lms-dynamic-column field="id"></lms-dynamic-column>
+              <lms-dynamic-column field="name"></lms-dynamic-column>
+            </lms-dynamic-component>
+            <lms-dynamic-component label="Language" [values]="languages"
+                                   (onSearch)="initLanguages($event)" fieldName="language"
+                                   [selectedObject]="selectedResource.language"
+                                   [fieldObject]="selectedResource" showValue="name" returnFieldName="id"
+                                   [capRequired]="true"
+                                   alertText="Cannot be empty"
+                                   [returnObject]="true">
+              <lms-dynamic-column field="id"></lms-dynamic-column>
+              <lms-dynamic-column field="name"></lms-dynamic-column>
+            </lms-dynamic-component>
+            <lms-dynamic-component label="Category" [values]="categories"
+                                   (onSearch)="initCategories($event)" fieldName="category"
+                                   [selectedObject]="selectedResource.category"
+                                   [fieldObject]="selectedResource" showValue="name" returnFieldName="id"
+                                   [capRequired]="true"
+                                   alertText="Cannot be empty"
+                                   [returnObject]="true">
+              <lms-dynamic-column field="id"></lms-dynamic-column>
+              <lms-dynamic-column field="name"></lms-dynamic-column>
+            </lms-dynamic-component>
+          </div>
         </div>
-        <div class="half-width">
-          <lms-input label="ISSN" fieldName="issn" [capRequired]="true" [fieldObject]="selectedResource"
-                     alertText="Must not be empty"
-                     fieldType="text"></lms-input>
-          <lms-input label="Place" fieldName="place" [capRequired]="true" [fieldObject]="selectedResource"
-                     alertText="Must not be empty"
-                     fieldType="text"></lms-input>
-          <lms-input label="Reference URL" fieldName="referenceURL"
-                     [fieldObject]="selectedResource" fieldType="text"></lms-input>
-          <lms-dynamic-component label="Resource Type" fieldName="resourceType" [fieldObject]="selectedResource"
-                                 [searchable]="false"
-                                 [values]="resourceTypes" returnFieldName="id"
-                                 [selectedObject]="selectedResource.resourceType"
-                                 [returnObject]="false">
-            <lms-dynamic-column field="name">
-              <ng-template #dynamicComboColumn let-item="item">
-                <span *ngIf="item.id == 'PRINTED'"><i class="fa fa-book"></i> {{item.name}}</span>
-                <span *ngIf="item.id == 'E_BOOK'"><i class="fa fa-file-pdf-o"></i> {{item.name}}</span>
-              </ng-template>
-            </lms-dynamic-column>
-          </lms-dynamic-component>
-          <lms-dynamic-component label="Material Type" [values]="materialTypes"
-                                 (onSearch)="initMaterialTypes($event)" fieldName="materialType"
-                                 [selectedObject]="selectedResource.materialType"
-                                 [fieldObject]="selectedResource" showValue="name" returnFieldName="id"
-                                 [capRequired]="true"
-                                 alertText="Cannot be empty"
-                                 [returnObject]="true">
-            <lms-dynamic-column field="id"></lms-dynamic-column>
-            <lms-dynamic-column field="name"></lms-dynamic-column>
-          </lms-dynamic-component>
-          <lms-dynamic-component label="Language" [values]="languages"
-                                 (onSearch)="initLanguages($event)" fieldName="language"
-                                 [selectedObject]="selectedResource.language"
-                                 [fieldObject]="selectedResource" showValue="name" returnFieldName="id"
-                                 [capRequired]="true"
-                                 alertText="Cannot be empty"
-                                 [returnObject]="true">
-            <lms-dynamic-column field="id"></lms-dynamic-column>
-            <lms-dynamic-column field="name"></lms-dynamic-column>
-          </lms-dynamic-component>
-          <lms-dynamic-component label="Category" [values]="categories"
-                                 (onSearch)="initCategories($event)" fieldName="category"
-                                 [selectedObject]="selectedResource.category"
-                                 [fieldObject]="selectedResource" showValue="name" returnFieldName="id"
-                                 [capRequired]="true"
-                                 alertText="Cannot be empty"
-                                 [returnObject]="true">
-            <lms-dynamic-column field="id"></lms-dynamic-column>
-            <lms-dynamic-column field="name"></lms-dynamic-column>
-          </lms-dynamic-component>
-        </div>
+        <div *ngIf="selectedResource && selectedResource.id" id="tab-content-resourceCopies" class="hide">
+          <lms-table [items]="resourceCopies"
+                     (rowDoubleClick)="showCopyAddEditModal($event)"
+                     (onAddButtonClick)="showCopyAddModal($event)"
+                     [addable]="isManage"
+                     [editable]="isManage"
+                     [searchable]="true"
+                     (onTermSearch)="updateResourcesCopyData($event)"
+                     [pagination]="true"
+                     [pageNum]="coyPageNum"
+                     [reloadEvent]="copyLoader"
+                     (onPageChange)="changePageCopy($event)"
 
+          >
+            <lms-column header="ID" field="id"></lms-column>
+            <lms-column header="Name" field="name"></lms-column>
+            <lms-column header="Identifier" field="identifier"></lms-column>
+          </lms-table>
+        </div>
       </div>
       <div class="modal-footer">
         <button *ngIf="(selectedResource && selectedResource.id)" type="button" class="btn btn-danger left"
@@ -108,6 +140,40 @@
         </button>
         <button *ngIf="!(selectedResource && selectedResource.id)" type="button" class="btn btn-success"
                 (click)="saveResource()"
+                [disabled]="false">
+          Save
+        </button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isManage" class="modal fade" data-backdrop="static" id="resourceCopyModal" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Resource copy details</h4>
+      </div>
+      <div class="modal-body">
+
+        <lms-input label="Name" fieldName="name"
+                   [fieldObject]="selectedResourceCopy" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
+                   alertText="Name must contain minimum 2 characters"></lms-input>
+        <lms-input label="Identifier" fieldName="identifier"
+                   [fieldObject]="selectedResourceCopy" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
+                   alertText="Code must contain minimum 2 characters"></lms-input>
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="(selectedResourceCopy && selectedResourceCopy.id)" type="button" class="btn btn-danger left"
+                (click)="deleteCopyResource()">Delete
+        </button>
+        <button *ngIf="(selectedResourceCopy && selectedResourceCopy.id)" type="button" class="btn btn-success"
+                (click)="updateCopyResource()">Update
+        </button>
+        <button *ngIf="!(selectedResourceCopy && selectedResourceCopy.id)" type="button" class="btn btn-success"
+                (click)="saveCopyResource()"
                 [disabled]="false">
           Save
         </button>
@@ -145,8 +211,15 @@
   >
     <lms-column header="" field="imageUrl">
       <ng-template #dataTableCell let-item="item">
-        <div class="user-profile img-square cap-pointer cap-hover" title="Upload Image" (click)="openImageModal(item)">
+        <div class="user-profile img-square lms-pointer lms-hover" title="Upload Image" (click)="openImageModal(item)">
           <img src="{{item.imageUrl}}" alt="NO IMAGE"></div>
+      </ng-template>
+    </lms-column>
+    <lms-column header="" field="resourceUrl">
+      <ng-template #dataTableCell let-item="item">
+        <div class="user-profile img-square lms-pointer lms-hover" title="Upload Image" (click)="openFilesModal(item)">
+          <i [ngClass]="{'green' : (item && item.resourceUrl), 'red' : !(item && item.resourceUrl)}"  class="fa fa-book f-20"></i>
+        </div>
       </ng-template>
     </lms-column>
 
@@ -154,18 +227,12 @@
     <lms-column header="Name" field="name" filtered="text"></lms-column>
     <lms-column header="Author" field="author" filtered="text"></lms-column>
     <lms-column header="Subname" field="subName" filtered="text"></lms-column>
-    <lms-column header="Edition" field="edition" filtered="number"></lms-column>
-    <lms-column header="Publisher" field="publisher" filtered="text"></lms-column>
     <lms-column header="Edition date" field="editionDate" filtered="date">
       <ng-template #dataTableCell let-item="item">
         <span>{{item.editionDate | date:'dd/MM/yyyy' }}</span>
       </ng-template>
     </lms-column>
-    <lms-column header="Page count" field="pageNum" filtered="number"></lms-column>
     <lms-column header="ISBN" field="isbn" filtered="text"></lms-column>
-    <lms-column header="UDC" field="udc" filtered="text"></lms-column>
-    <lms-column header="Place" field="place" filtered="text"></lms-column>
-    <lms-column header="ISSN" field="issn" filtered="text"></lms-column>
     <lms-column header="Creation date" field="creationDate" filtered="date">
       <ng-template #dataTableCell let-item="item">
         <span>{{item.creationDate | date:'dd/MM/yyyy HH:mm' }}</span>

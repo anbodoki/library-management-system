@@ -18,6 +18,7 @@
         <module>lms-utils</module>
         <module>lms-client</module>
         <module>lms-client-api</module>
+        <module>lms-gateway</module>
     </modules>
 
     <properties>
@@ -37,6 +38,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+            <version>2.0.1.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -6,8 +6,10 @@ import java.util.Date;
 public class CardDTO implements Serializable {
 
     private Long id;
+    private String name;
     private String identifier;
     private Date creationDate;
+    private boolean active;
 
     public Long getId() {
         return id;
@@ -15,6 +17,14 @@ public class CardDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getIdentifier() {
@@ -31,5 +41,13 @@ public class CardDTO implements Serializable {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public boolean getActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

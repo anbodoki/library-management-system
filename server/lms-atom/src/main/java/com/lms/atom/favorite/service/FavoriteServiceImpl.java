@@ -1,13 +1,13 @@
-package com.lms.client.favorite.service;
+package com.lms.atom.favorite.service;
 
 import com.lms.atom.book.service.ResourceService;
 import com.lms.atom.book.storage.ResourceHelper;
+import com.lms.atom.favorite.storage.FavoriteRepository;
+import com.lms.atom.favorite.storage.FavoriteStorage;
+import com.lms.atom.favorite.storage.model.Favorite;
 import com.lms.client.client.service.ClientService;
 import com.lms.client.client.storage.ClientHelper;
 import com.lms.client.exception.ClientException;
-import com.lms.client.favorite.storage.FavoriteRepository;
-import com.lms.client.favorite.storage.FavoriteStorage;
-import com.lms.client.favorite.storage.model.Favorite;
 import com.lms.common.dto.atom.resource.ResourceDTO;
 import com.lms.common.dto.client.ClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;

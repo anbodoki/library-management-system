@@ -1,5 +1,8 @@
-<div *ngIf="fieldObject && fieldObject[fieldName]" class="m-bottom-5 image-thumbnail">
+<div *ngIf="fieldObject && fieldObject[fieldName] && !fileType" class="m-bottom-5 image-thumbnail lms-pointer">
   <img *ngIf="(fieldObject && fieldObject[fieldName])" src="{{fieldObject[fieldName]}}"/>
+</div>
+<div *ngIf="fieldObject && fieldObject[fieldName] && fileType" class="lms-pointer m-bottom-5 text-center">
+  <a href="{{fieldObject[fieldName]}}"><i class="fa fa-eye f-20"></i> View File</a>
 </div>
 <div class="cap-flex">
   <label class="btn btn-default">

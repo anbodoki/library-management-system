@@ -16,6 +16,7 @@ export class FormUploadComponent implements OnInit {
   @Input() fieldObject: any;
   @Input() fieldName: string;
   @Input() prevFieldObject: any;
+  @Input() fileType: boolean = false;
 
   constructor(private uploadService: UploadFileService) {
   }
@@ -26,10 +27,14 @@ export class FormUploadComponent implements OnInit {
   selectFile(event) {
     const file = event.target.files.item(0);
 
-    if (file.type.match('image.*')) {
-      this.selectedFiles = event.target.files;
+    if (!this.fileType) {
+      if (file.type.match('image.*')) {
+        this.selectedFiles = event.target.files;
+      } else {
+        alert('invalid format!');
+      }
     } else {
-      alert('invalid format!');
+      this.selectedFiles = event.target.files;
     }
   }
 

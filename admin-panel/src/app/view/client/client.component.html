@@ -1,3 +1,30 @@
+<div class="modal fade" data-backdrop="static" id="cardsModal" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cards</h4>
+      </div>
+      <div class="modal-body">
+        <lms-inline *ngIf="selectedClient && selectedClient.id" [items]="selectedClient.cards"
+                    [fieldObject]="selectedClient" fieldName="cards" [addable]="true">
+          <lms-column header="Name" field="name" filtered="text"></lms-column>
+          <lms-column header="Identifier" field="identifier" filtered="text"></lms-column>
+          <lms-column header="Active" field="active" filtered="checkbox"></lms-column>
+        </lms-inline>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success"
+                (click)="updateCards()"
+                [disabled]="false">
+          Save
+        </button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="">
   <div class="page-title">
     <div class="title_left">
@@ -10,6 +37,8 @@
   <div class="clearfix"></div>
 
   <lms-table [items]="clients"
+             [editable]="true"
+             (rowDoubleClick)="showCardsModal($event)"
              [addable]="false"
              [searchable]="true"
              [advanceFilter]="true"
@@ -36,8 +65,10 @@
     </lms-column>
     <lms-column header="Active" field="active" filtered="checkbox">
       <ng-template #dataTableCell let-item="item">
-        <div *ngIf="item.active" class="text-center"><i class="fa fa-check-circle f-16 green lms-cursor" (click)="deactivate(item)"></i></div>
-        <div *ngIf="!item.active" class="text-center"><i class="fa fa-times-circle f-16 red lms-cursor" (click)="activate(item)"></i></div>
+        <div *ngIf="item.active" class="text-center"><i class="fa fa-check-circle f-16 green lms-cursor"
+                                                        (click)="deactivate(item)"></i></div>
+        <div *ngIf="!item.active" class="text-center"><i class="fa fa-times-circle f-16 red lms-cursor"
+                                                         (click)="activate(item)"></i></div>
       </ng-template>
     </lms-column>
   </lms-table>

@@ -7,6 +7,7 @@ import {ActionResponse} from "../model/response/action-response";
 import {ActionResponseWithData} from "../model/response/action-response-with-data";
 import {ListResult} from "../model/response/list-result";
 import {Resource} from "../model/resources/resource";
+import {ResourceCopy} from "../model/resources/resourcecopy";
 
 @Injectable()
 export class ResourceService {

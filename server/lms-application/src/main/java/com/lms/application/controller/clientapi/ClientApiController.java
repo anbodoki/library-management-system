@@ -1,8 +1,9 @@
 package com.lms.application.controller.clientapi;
 
 import com.lms.application.security.ClientPermissionCheck;
-import com.lms.application.security.PermissionCheck;
 import com.lms.client.api.clientapi.ClientApiService;
+import com.lms.common.dto.atom.notification.NotificationDTO;
+import com.lms.common.dto.atom.notification.NotificationResponse;
 import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.cleintapi.AddRemoveFavouriteRequest;
 import com.lms.common.dto.cleintapi.ClientResourceFilteringRequest;
@@ -14,6 +15,7 @@ import com.lms.common.dto.request.GeneralFilteringRequest;
 import com.lms.common.dto.response.ActionResponse;
 import com.lms.common.dto.response.ActionResponseWithData;
 import com.lms.common.dto.response.ListResult;
+import com.lms.common.dto.response.PagingRequest;
 import com.lms.security.auth.GoogleConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/client/api/")
+//TODO validate body
 public class ClientApiController {
 
     private final ClientApiService service;
@@ -144,5 +147,52 @@ public class ClientApiController {
     public ActionResponse getResourceBorrowHistory(@RequestBody ClientResourceCopyHistoryRequest request) throws Exception {
         ListResult<ResourceBorrowDTO> result = service.getClientResourceBorrow(request.getClientId(), request.getCurrent(), request.getLimit(), request.getOffset());
         return new ActionResponseWithData<>(result, true);
+    }
+
+    @PostMapping(value = "get-notifications", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ClientPermissionCheck
+    public ActionResponse getNotifications(@RequestBody PagingRequest request) throws Exception {
+        NotificationResponse result = service.getNotificationsForClient(request.getLimit(), request.getOffset());
+        return new ActionResponseWithData<>(result, true);
+    }
+
+    @PostMapping(value = "mark-as-seen")
+    @ClientPermissionCheck
+    public ActionResponse markAsSeen() throws Exception {
+        service.markAsSeen();
+        return new ActionResponse(true);
+    }
+
+    @GetMapping(value = "mark-as-read/{notificationId}")
+    @ClientPermissionCheck
+    public ActionResponse markAsRead(@PathVariable long notificationId) throws Exception {
+        service.markAsRead(notificationId);
+        return new ActionResponse(true);
+    }
+
+    @PostMapping(value = "logout")
+    @ClientPermissionCheck
+    public ActionResponse logout() throws Exception {
+        service.logout();
+        return new ActionResponse(true);
+    }
+
+    @GetMapping(value = "activate-card/{cardId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ClientPermissionCheck
+    public ActionResponse activateCard(@PathVariable long cardId) throws Exception {
+        return new ActionResponseWithData<>(service.activateCard(cardId), true);
+    }
+
+    @GetMapping(value = "deactivate-card/{cardId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ClientPermissionCheck
+    public ActionResponse deactivateCard(@PathVariable long cardId) throws Exception {
+        return new ActionResponseWithData<>(service.deactivateCard(cardId), true);
+    }
+
+    @DeleteMapping(value = "delete-card/{cardId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ClientPermissionCheck
+    public ActionResponse deleteCard(@PathVariable long cardId) throws Exception {
+        service.deleteCard(cardId);
+        return new ActionResponse(true);
     }
 }

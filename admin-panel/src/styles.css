@@ -181,6 +181,15 @@ ul.pagination {
   width: 100%;
 }
 
+.cap-tabs {
+  margin-top: 3px;
+  margin-left: 3px;
+}
+
+.cap-tabs li {
+  cursor: pointer;
+}
+
 .half-width {
   width: calc(50% - 10px);
 }
@@ -872,3 +881,13 @@ article.comment {
   margin-right: 2px;
   width: 100%;
 }
+
+.inline-checkbox > div {
+  margin-top: 20px;
+}
+
+.inline-remove-btn {
+  height: 33px;
+  margin-top: 20px;
+}
+

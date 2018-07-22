@@ -34,9 +34,9 @@ export class LMSInlineEditingComponent implements OnChanges {
     this.items.push(obj);
   }
 
-  onRemoveClicked() {
-    this.items.pop();
+  onRemoveClicked(index) {
+    console.log(index);
+    this.items.splice(index, 1);
   }
-
 
 }

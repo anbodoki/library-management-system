@@ -1,7 +1,7 @@
-package com.lms.client.favorite.storage;
+package com.lms.atom.favorite.storage;
 
+import com.lms.atom.favorite.storage.model.Favorite;
 import com.lms.client.exception.ClientException;
-import com.lms.client.favorite.storage.model.Favorite;
 import com.lms.client.messages.Messages;
 import org.springframework.stereotype.Repository;
 

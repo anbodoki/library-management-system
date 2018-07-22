@@ -3,10 +3,13 @@ package com.lms.client.api.clientapi;
 import com.lms.common.dto.atom.category.CategoryDTO;
 import com.lms.common.dto.atom.language.LanguageDTO;
 import com.lms.common.dto.atom.materialtype.MaterialTypeDTO;
+import com.lms.common.dto.atom.notification.NotificationDTO;
+import com.lms.common.dto.atom.notification.NotificationResponse;
 import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.atom.resource.ResourceDTO;
 import com.lms.common.dto.atom.resource.ResourceTypeDTO;
 import com.lms.common.dto.cleintapi.LightResource;
+import com.lms.common.dto.client.CardDTO;
 import com.lms.common.dto.client.ClientDTO;
 import com.lms.common.dto.client.SchoolDTO;
 import com.lms.common.dto.response.ComboObject;
@@ -56,4 +59,18 @@ public interface ClientApiService {
     ListResult<ResourceBorrowDTO> getClientResourceBorrow(Long clientId, boolean current, int limit, int offset);
 
     ListResult<LanguageDTO> getLanguages() throws Exception;
+
+    NotificationResponse getNotificationsForClient(int limit, int offset);
+
+    void markAsSeen();
+
+    void markAsRead(Long notificationId);
+
+    void logout();
+
+    CardDTO activateCard(Long cardId) throws Exception;
+
+    CardDTO deactivateCard(Long cardId) throws Exception;
+
+    void deleteCard(Long cardId) throws Exception;
 }

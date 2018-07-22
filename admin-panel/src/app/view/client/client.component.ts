@@ -5,6 +5,7 @@ import {Client} from "../../model/client/client";
 import {ClientService} from "../../services/client.service";
 import {SchoolService} from "../../services/school.service";
 import {School} from "../../model/client/school";
+import {Utils} from "../../services/utils";
 
 declare let jquery: any;
 declare let $: any;
@@ -17,12 +18,14 @@ declare let $: any;
 export class ClientComponent implements OnInit {
   clients: Client[];
   schools: School[];
+  selectedClient: Client;
   query: string;
   pageNum: number;
   loader: PagingLoader = new PagingLoader(true, true);
 
   constructor(private clientService: ClientService,
-              private schoolService: SchoolService) {
+              private schoolService: SchoolService,
+              private utils: Utils) {
     this.loadSchools("")
   }
 
@@ -38,6 +41,27 @@ export class ClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  showCardsModal(client) {
+    this.selectedClient = <Client> JSON.parse(JSON.stringify(client.row));
+    this.utils.setPrevObj(JSON.stringify(client.row));
+    $("#cardsModal").modal("show");
+  }
+
+  onSelect(client: Client): void {
+    this.selectedClient = client;
+  }
+
+  updateCards() {
+    if (!this.utils.formIsValid('#cardsModal')) {
+      return;
+    }
+    let ref = this;
+    this.clientService.update(this.selectedClient).then(function () {
+      $("#cardsModal").modal("hide");
+      ref.loader = ref.loader.load(false);
+    });
   }
 
   changePage(pageInfo) {

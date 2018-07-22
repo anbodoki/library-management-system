@@ -14,8 +14,10 @@ public class CardHelper {
         }
         Card result = new Card();
         result.setId(card.getId());
+        result.setName(card.getName());
         result.setIdentifier(card.getIdentifier());
         result.setCreationDate(card.getCreationDate());
+        result.setActive(card.getActive());
         return result;
     }
 
@@ -25,8 +27,10 @@ public class CardHelper {
         }
         CardDTO result = new CardDTO();
         result.setId(card.getId());
+        result.setName(card.getName());
         result.setIdentifier(card.getIdentifier());
         result.setCreationDate(card.getCreationDate());
+        result.setActive(card.getActive());
         return result;
     }
 

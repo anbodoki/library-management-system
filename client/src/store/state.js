@@ -11,5 +11,20 @@ export default {
             title: 'User Experience Design',
             author: 'Wouter de Bres',
             imageUrl: '/dist/imgs/gandi.jpg'
+        },
+        {
+            title: 'User Experience Design',
+            author: 'Wouter de Bres',
+            imageUrl: '/dist/imgs/gandi.jpg'
+        },
+        {
+            title: 'User Experience Design',
+            author: 'Wouter de Bres',
+            imageUrl: '/dist/imgs/gandi.jpg'
+        },
+        {
+            title: 'User Experience Design',
+            author: 'Wouter de Bres',
+            imageUrl: '/dist/imgs/gandi.jpg'
         }],
 };

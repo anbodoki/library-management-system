@@ -1,6 +1,7 @@
 package com.lms.client.client.service;
 
 import com.lms.client.exception.ClientException;
+import com.lms.common.dto.client.CardDTO;
 import com.lms.common.dto.client.ClientDTO;
 import com.lms.common.dto.response.ListResult;
 
@@ -24,5 +25,11 @@ public interface ClientService {
 
     ClientDTO getAuthorizedClient() throws ClientException;
 
-    ClientDTO getClientForCard(String identifier);
+    ClientDTO getClientForCard(String identifier) throws Exception;
+
+    CardDTO activateCard(Long cardId) throws Exception;
+
+    CardDTO deactivateCard(Long cardId) throws Exception;
+
+    void deleteCard(Long cardId) throws Exception;
 }
