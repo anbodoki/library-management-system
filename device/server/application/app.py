@@ -1,9 +1,9 @@
 import sys
 
-from application.api.card_reader.card_reader_api import CardRead
 
 sys.path.append('./..')
 
+from application.api.card_reader.card_reader_api import CardRead
 from application.api.book_submission.book_submission_api import BookSubmissions
 from application.api.client.client_api import CardInfo
 from application.api.book.book_api import BookInfo
