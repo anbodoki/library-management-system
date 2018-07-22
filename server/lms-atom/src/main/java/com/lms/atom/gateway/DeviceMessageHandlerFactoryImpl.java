@@ -9,6 +9,7 @@ import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.atom.resource.ResourceCopyDTO;
 import com.lms.common.dto.client.ClientDTO;
 import com.lms.gateway.DeviceMessageHandlerFactory;
+import com.lms.gateway.ProtocolConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,12 +59,21 @@ public class DeviceMessageHandlerFactoryImpl extends DeviceMessageHandlerFactory
     }
 
     @Override
-    public String processCheckBook(String bookIdentifier) {
+    public String processCheckBook(String bookIdentifier) throws Exception {
         ResourceCopyDTO resourceCopyByIdentifier = resourceService.getResourceCopyByIdentifier(bookIdentifier);
         if (resourceCopyByIdentifier == null) {
             return Messages.get("bookNotExists");
         }
-        return resourceCopyByIdentifier.getResource().getName() + " by " + resourceCopyByIdentifier.getResource().getAuthor();
+        ResourceBorrowDTO resourceBorrow = resourceBorrowService.get(bookIdentifier, null);
+        if (resourceBorrow == null) {
+            return resourceCopyByIdentifier.getResource().getName()
+                    + " by "
+                    + resourceCopyByIdentifier.getResource().getAuthor() + ProtocolConfig.MSG_DATA_DELIMITER + "b";
+        } else {
+            return resourceCopyByIdentifier.getResource().getName()
+                    + " by "
+                    + resourceCopyByIdentifier.getResource().getAuthor() + ProtocolConfig.MSG_DATA_DELIMITER + "r";
+        }
     }
 
     @Override

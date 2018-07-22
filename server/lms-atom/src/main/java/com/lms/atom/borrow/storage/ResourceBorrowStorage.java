@@ -71,6 +71,16 @@ public class ResourceBorrowStorage {
     }
 
     public ResourceBorrow get(String bookId, Long clientId) throws Exception{
+        if (clientId == null) {
+            try {
+                return em.createQuery("SELECT r FROM ResourceBorrow r WHERE " +
+                        "r.resourceCopy.identifier = :bookId " +
+                        "AND r.returnTime IS NULL ORDER BY r.borrowTime DESC", ResourceBorrow.class)
+                        .setParameter("bookId", bookId).getSingleResult();
+            } catch (NoResultException e) {
+                return null;
+            }
+        }
         try {
             return em.createQuery("SELECT r FROM ResourceBorrow r WHERE " +
                     "r.resourceCopy.identifier = :bookId " +

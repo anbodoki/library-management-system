@@ -78,7 +78,7 @@ public class MessageDecodeUtils {
         String[] split = data.split(ProtocolConfig.MSG_DATA_DELIMITER);
         result.setBookId(split[0]);
         result.setClientId(split[1]);
-        if (split.length > 2) {
+        if (split.length > 2 && !split[2].equals("null")) {
             result.setDate(formatter.parse(split[2]));
         }
         return result;
