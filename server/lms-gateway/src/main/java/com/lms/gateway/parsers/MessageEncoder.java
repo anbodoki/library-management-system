@@ -4,6 +4,7 @@ import com.lms.gateway.model.Packet;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
+import io.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +17,7 @@ public class MessageEncoder extends MessageToByteEncoder {
         if (msg instanceof Packet) {
             String message = MessageEncodeUtils.buildMessage((Packet) msg);
             logger.info("Send : " + message);
-            out.writeBytes(message.getBytes());
+            out.writeBytes(message.getBytes(CharsetUtil.UTF_8));
         }
     }
 }
