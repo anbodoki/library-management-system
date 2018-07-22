@@ -45,10 +45,13 @@ Message status {
 ```
 CHECK_BOOK {
     device ->  *b&i&date&book_id&crc16
-               *b&o&date&book name by author&crc16 <- server
+               *b&o&date&book name by author@r&crc16 <- server
                                                    OR
-               *b&e&date&error_message&crc16             <- server
+               *b&o&date&book name by author@b&crc16 <- server
+                                                   OR
+               *b&e&date&error_message&crc16         <- server
 }
+'r' and 'b' defines it is borrow or returning of book
 ```
 ```
 CHECK_CLIENT {
