@@ -891,3 +891,8 @@ article.comment {
   margin-top: 20px;
 }
 
+.table-general-style {
+  overflow-x: scroll;
+  width: 100%;
+}
+
