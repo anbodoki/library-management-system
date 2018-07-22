@@ -9,10 +9,26 @@
 </head>
 <body>
 <div id="app">
-    <keyboard v-if="activeState === state.main" v-on:book-info-updated="updateBookInfo" v-on:error="activateResponseStatusMessage"></keyboard>
-    <chosen-book v-else-if="activeState === state.bookInfo" :book-info="bookInfo" v-on:book-confirmed="bookConfirmed" v-on:book-declined="backToMainScreen"></chosen-book>
+    <keyboard v-if="activeState === state.main"
+              v-on:book-info-updated="updateBookInfo"
+              v-on:error="activateResponseStatusMessage"></keyboard>
 
-    <response-status-message v-if="responseStatusVisible" :response="response" v-on:close-response-status-msg="deactivateResponseStatusMessage"></response-status-message>
+    <chosen-book v-else-if="activeState === state.bookInfo"
+                 :book-info="client.bookId"
+                 v-on:book-confirmed="bookConfirmed"
+                 v-on:book-declined="backToMainScreen"></chosen-book>
+
+    <card-read v-else-if="activeState === state.card"
+               v-on:error="activateResponseStatusMessage"
+               v-on:client-successfully-identified="clientSuccessfullyIdentified"></card-read>
+
+    <date-picker></date-picker>
+
+    <response-status-message v-if="responseStatusVisible"
+                             :client-name="client.name"
+                             v-on:book-successfully-returned="bookSuccessfullyReturned"
+                             v-on:close-response-status-msg="deactivateResponseStatusMessage"
+                             :response="response"></response-status-message>
 </div>
 <script src="bundle.js"></script>
 </body>

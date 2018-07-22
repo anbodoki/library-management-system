@@ -2,14 +2,26 @@
     <div class="wrapper">
         <div class="place-card-container">
             <div class="arrow-left"></div>
-            <p>Please place your card left</p>
+            <p>Please place your card</p>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "CardRead"
+        name: "CardRead",
+        data() {
+            return {
+                cardId: '',
+                clientName: '',
+                action: ''
+            }
+        },
+        methods: {
+            success() {
+                this.$emit('client-successfully-identified', this.cardId, this.clientName, this.action);
+            }
+        }
     }
 </script>
 

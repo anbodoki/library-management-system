@@ -1,6 +1,7 @@
 <template>
     <div class="wrapper response-status-msg" :class="response.status">
         <div class="chosen-book-container">
+            <p v-if="clientName">{{clientName}}</p>
             <p>{{response.message}}</p>
 
             <div class="next-previous-buttons">
@@ -14,7 +15,7 @@
 <script>
     export default {
         name: "ResponseStatusMessage",
-        props: ['response'],
+        props: ['response', 'client-name'],
         methods: {
             close() {
                 this.$emit('close-response-status-msg');
