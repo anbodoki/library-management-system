@@ -103,7 +103,7 @@ public class ClientStorage {
         try {
             return em.createQuery("SELECT c FROM Client c WHERE EXISTS (SELECT cr FROM c.cards cr WHERE cr.identifier = :identifier)", Client.class)
                     .setParameter("identifier", identifier).getSingleResult();
-        } catch (NoResultException e) {
+        } catch (Exception e) {
             return null;
         }
     }

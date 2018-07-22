@@ -81,9 +81,11 @@ public class DeviceSession {
             channel.writeAndFlush(packet);
         } catch (Exception e) {
             if (e instanceof GatewayException) {
-                packet.setMessageData(new ErrorResponseData(e.getMessage()));
+                packet.setMessageData(new ErrorResponseData(((GatewayException) e).getErrorCode()));
                 packet.setDate(new Date());
                 packet.setMessageStatus(MessageStatus.ERROR);
+                channel.writeAndFlush(packet);
+                return;
             }
             packet.setMessageData(new ErrorResponseData());
             packet.setDate(new Date());
@@ -104,9 +106,11 @@ public class DeviceSession {
             channel.writeAndFlush(packet);
         } catch (Exception e) {
             if (e instanceof GatewayException) {
-                packet.setMessageData(new ErrorResponseData(e.getMessage()));
+                packet.setMessageData(new ErrorResponseData(((GatewayException) e).getErrorCode()));
                 packet.setDate(new Date());
                 packet.setMessageStatus(MessageStatus.ERROR);
+                channel.writeAndFlush(packet);
+                return;
             }
             packet.setMessageData(new ErrorResponseData());
             packet.setDate(new Date());
