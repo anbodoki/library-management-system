@@ -42,21 +42,16 @@ class Message(ABC):
         data = data.decode()
         try:
             self.msg_type, self.msg_status, self.date, self.msg_data, self.crc16 = data[1:].split('&')
-            self.validate_message(data)
         except Exception as e:
             raise InvalidMessageException("Invalid message")
+        self.validate_message(data)
 
     def validate_message(self, message):
         self.validate_sync_byte(message[0])
-        self.validate_msg_status()
 
     def validate_sync_byte(self, sync_byte):
         if sync_byte != SYNC_BYTE:
             raise InvalidMessageException("Invalid sync byte")
-
-    def validate_msg_status(self):
-        if self.msg_status == 'e':
-            raise InvalidMessageException("Server error: " + self.msg_data)
 
 
 class GetBookInfoMessage(Message):
@@ -74,10 +69,10 @@ class GetBookInfoResponse(Message):
         self.response = response
 
     def from_bytes(self, data):
-        print(data)
         super().from_bytes(data)
         self.validate_msg_type()
-        print(self.msg_data, self.date)
+        if self.msg_status != 'e':
+            self.msg_data, self.action = self.msg_data.split('@')
 
     def validate_msg_type(self):
         if self.msg_type != MessageType.CHECK_BOOK:
@@ -99,10 +94,8 @@ class GetClientInfoResponse(Message):
         self.client_info = client_info
 
     def from_bytes(self, data):
-        print('Client info response: ', data)
         super().from_bytes(data)
         self.validate_msg_type()
-        print('Client info response parsed: ', self.msg_data, self.date)
 
     def validate_msg_type(self):
         if self.msg_type != MessageType.CHECK_CLIENT:
@@ -110,7 +103,7 @@ class GetClientInfoResponse(Message):
 
 
 class GetSubmitMessage(Message):
-    def __init__(self, book_id, client_card_id, date):
+    def __init__(self, client_card_id, book_id, date):
         message_data = ('@').join((book_id, client_card_id, date))
         super().__init__(message_data)
         self.msg_type = MessageType.SUBMIT
@@ -123,10 +116,8 @@ class GetSubmitResponse(Message):
         self.response = response
 
     def from_bytes(self, data):
-        print(data)
         super().from_bytes(data)
         self.validate_msg_type()
-        print(self.msg_data, self.date)
 
     def validate_msg_type(self):
         if self.msg_type != MessageType.SUBMIT:

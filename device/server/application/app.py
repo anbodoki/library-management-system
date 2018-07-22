@@ -1,10 +1,11 @@
 import sys
 
+from application.api.card_reader.card_reader_api import CardRead
 
 sys.path.append('./..')
 
 from application.api.book_submission.book_submission_api import BookSubmissions
-from application.api.client.client_api import ClientInfo
+from application.api.client.client_api import CardInfo
 from application.api.book.book_api import BookInfo
 
 from application.extensions import api, cors
@@ -18,7 +19,8 @@ def init_extensions():
 
 def init_resources():
     api.add_resource(BookInfo, '/api/books/<string:book_id>')
-    api.add_resource(ClientInfo, '/api/clients/<string:client_id>')
+    api.add_resource(CardInfo, '/api/cards/<string:card_id>')
+    api.add_resource(CardRead, '/api/cardread')
     api.add_resource(BookSubmissions, '/api/booksubmissions')
 
 

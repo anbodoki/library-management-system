@@ -10,8 +10,8 @@ def get_book_info(book_id):
     return book_info
 
 
-def get_client_info(client_card_id):
-    request_message = generate_getClientInfo_message(client_card_id)
+def get_card_info(card_id):
+    request_message = generate_getClientInfo_message(card_id)
     response = send_message(request_message)
     client_info = parse_getClientInfo_response(response)
     return client_info

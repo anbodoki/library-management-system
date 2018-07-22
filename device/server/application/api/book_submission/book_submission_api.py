@@ -8,4 +8,5 @@ class BookSubmissions(Resource):
 
     def post(self):
         data = book_submission_request_body_parser.parse_args()
-        return submit_book_request(data['client_id'], data['book_id'], data['date']).msg_data
+        book_request_response = submit_book_request(data['client_id'], data['book_id'], data['date'])
+        return {"message": book_request_response.msg_data}

@@ -4,7 +4,7 @@ from flask_restful import reqparse
 
 
 def date_validator(d):
-    datetime.strptime(d, '%Y-%m-%dT%H:%M:%S')
+    datetime.strptime(d, '%d/%m/%Y %H:%M:%S')
     return d
 
 
