@@ -212,7 +212,7 @@
     <lms-column header="" field="imageUrl">
       <ng-template #dataTableCell let-item="item">
         <div class="user-profile img-square lms-pointer lms-hover" title="Upload Image" (click)="openImageModal(item)">
-          <img src="{{item.imageUrl}}" alt="NO IMAGE"></div>
+          <img src="{{item.imageUrl ? item.imageUrl : '/assets/default.png'}}"></div>
       </ng-template>
     </lms-column>
     <lms-column header="" field="resourceUrl">
