@@ -7,10 +7,14 @@
 
 html, body {
   height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
 }
 
 #app {
   height: 100%;
+  padding: 10px;
 }
 
 body {
@@ -42,15 +46,14 @@ input {
 
 .wrapper {
   width: 100%;
-  background-color: #f5f5f5;
-  min-height: 600px;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #f5f5f5;
   .phone {
     //max-width: 600px;
-    margin: 40px auto 0 auto;
+    margin: 0 auto 0 auto;
     position: relative;
     span.title {
       font-weight: 700;
@@ -60,14 +63,13 @@ input {
     }
     .phone-container {
       width: 100%;
-      margin-top: 30px;
       display: flex;
       justify-content: center;
       align-items: center;
       .keyboard {
         width: 350px;
         margin-left: 2%;
-        margin-top: 40px;
+        margin-top: 30px;
         .number {
           width: 100%;
           font-size: 0;
