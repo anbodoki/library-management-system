@@ -9,9 +9,9 @@
 </head>
 <body>
 <div id="app">
-    <keyboard v-if="activeState === state.main"
+    <main-screen v-if="activeState === state.main"
               v-on:book-info-updated="updateBookInfo"
-              v-on:error="activateResponseStatusMessage"></keyboard>
+              v-on:error="activateResponseStatusMessage"></main-screen>
 
     <chosen-book v-else-if="activeState === state.bookInfo"
                  :book-info="client.bookId"
@@ -22,7 +22,7 @@
                v-on:error="activateResponseStatusMessage"
                v-on:client-successfully-identified="clientSuccessfullyIdentified"></card-read>
 
-    <date-picker></date-picker>
+    <date-picker v-else-if="activeState === state.date"></date-picker>
 
     <response-status-message v-if="responseStatusVisible"
                              :client-name="client.name"
