@@ -7,7 +7,7 @@
                            class="number-input" id="numberInput" value=""
                            placeholder="Enter days"/>
 
-                    <button class="submit-btn" type="submit" @click.prevent="submit()">Submit</button>
+                    <button class="submit-btn" type="submit" @click.prevent="submit">Submit</button>
                 </div>
 
                 <keyboard v-on:number-click="numberClick" v-on:delete-number="deleteNumber"></keyboard>
@@ -35,6 +35,10 @@
                 this.dateCount = this.dateCount.slice(0, -1);
             },
             submit() {
+                let date = new Date();
+                date = date.setDate(date.getDate() + parseInt(this.dateCount));
+                // date.setDate(date.getDay() + this.dateCount);
+                this.$emit('date-submitted', date)
             }
         },
         components: {

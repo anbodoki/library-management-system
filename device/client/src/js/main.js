@@ -24,7 +24,7 @@ const app = new Vue({
                 card: 2,
                 date: 3,
             },
-            activeState: 0,
+            activeState: 2,
             responseStatusVisible: false,
             client: {
                 bookId: '',
