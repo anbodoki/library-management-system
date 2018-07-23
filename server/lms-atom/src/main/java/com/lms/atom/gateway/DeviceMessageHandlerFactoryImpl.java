@@ -35,7 +35,7 @@ public class DeviceMessageHandlerFactoryImpl extends DeviceMessageHandlerFactory
     @Override
     public String processSubmit(String bookId, String clientId, Date date) throws Exception {
         ClientDTO clientForCard = clientService.getClientForCard(clientId);
-        ResourceBorrowDTO resourceBorrow = resourceBorrowService.get(bookId, clientForCard.getId());
+        ResourceBorrowDTO resourceBorrow = resourceBorrowService.get(bookId, null);
         if (resourceBorrow == null) {
             return createBorrow(clientForCard, bookId, date);
         } else {
