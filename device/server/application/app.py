@@ -1,6 +1,5 @@
 import sys
 
-
 sys.path.append('./..')
 
 from application.api.card_reader.card_reader_api import CardRead
@@ -14,7 +13,15 @@ from application.flask_app import app
 
 def init_extensions():
     api.init_app(app)
-    cors.init_app(app, resources={r"/api/*": {"origins": "*"}})
+    # cors.init_app(app, resources={r"/api/*": {"origins": "*"}})
+
+
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    return response
 
 
 def init_resources():

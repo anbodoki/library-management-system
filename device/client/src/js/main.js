@@ -40,6 +40,11 @@ const app = new Vue({
             }
         }
     },
+    computed: {
+        lastStep() {
+            return (this.activeState == this.state.date ||  this.activeState == this.state.card)
+        }
+    },
     methods: {
         updateBookInfo(bookId, bookName, action) {
             this.client.bookId = bookId;
@@ -65,9 +70,11 @@ const app = new Vue({
         },
 
         deactivateResponseStatusMessage() {
-            this.response.message = '';
             this.response.status = '';
+            this.response.message = '';
             this.responseStatusVisible = false;
+            if (this.lastStep)
+                this.clearAll();
         },
 
         backToMainScreen() {
@@ -81,7 +88,6 @@ const app = new Vue({
                 this.activateResponseStatusMessage("Couldn't make action", 'error');
             });
             this.backToMainScreen();
-            this.clearAll();
         },
 
         clientSuccessfullyIdentified(cardId, clientName) {
