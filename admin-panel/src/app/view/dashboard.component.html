@@ -89,7 +89,7 @@
         <div *ngIf="item.critical" class="text-center"><i class="fa fa-times-circle f-16 red "></i></div>
       </ng-template>
     </lms-column>
-    <lms-column header="Send mail" field="mail" filtered="checkbox">
+    <lms-column header="Send mail" field="mail">
       <ng-template #dataTableCell let-item="item">
         <div class="text-center"><i class="fa fa-mail-reply f-16 green lms-cursor" (click)="sendMail(item.clientId)"></i></div>
       </ng-template>
