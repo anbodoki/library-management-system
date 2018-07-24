@@ -19,6 +19,7 @@
         <module>lms-client</module>
         <module>lms-client-api</module>
         <module>lms-gateway</module>
+        <module>lms-data-integration</module>
     </modules>
 
     <properties>
