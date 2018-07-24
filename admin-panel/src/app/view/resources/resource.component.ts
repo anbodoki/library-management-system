@@ -116,7 +116,6 @@ export class ResourceComponent implements OnInit {
     this.initResourceTypes();
     this.initCategories("");
     this.selectedResource = <Resource> JSON.parse(JSON.stringify(resource.row));
-    this.selectedResource.editionDate = moment(new Date(this.selectedResource.editionDate));
     this.utils.setPrevObj(JSON.stringify(resource.row));
     this.utils.showContent("resourceDetails");
     this.getResourceCopies(10, 0);

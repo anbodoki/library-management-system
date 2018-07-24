@@ -44,10 +44,9 @@
             <lms-input label="Publisher" fieldName="publisher"
                        [fieldObject]="selectedResource" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
                        alertText="Publisher must contain minimum 2 characters"></lms-input>
-            <div class="w-100 m-bottom-5">Edition date
-              <dp-date-picker theme="dp-material" [(ngModel)]="selectedResource.editionDate"
-                              [config]="utils.datePickerConfig"></dp-date-picker>
-            </div>
+            <lms-input label="Edition Year" fieldName="editionYear"
+                       [fieldObject]="selectedResource" fieldType="text" capPattern="^.{4,6}$" [capRequired]="true"
+                       alertText="Edition year must contain minimum 4 characters"></lms-input>
             <lms-input label="Page count" fieldName="pageNum" [capRequired]="true" [fieldObject]="selectedResource"
                        alertText="Must not be empty"
                        fieldType="number"></lms-input>
@@ -227,11 +226,7 @@
     <lms-column header="Name" field="name" filtered="text"></lms-column>
     <lms-column header="Author" field="author" filtered="text"></lms-column>
     <lms-column header="Subname" field="subName" filtered="text"></lms-column>
-    <lms-column header="Edition date" field="editionDate" filtered="date">
-      <ng-template #dataTableCell let-item="item">
-        <span>{{item.editionDate | date:'dd/MM/yyyy' }}</span>
-      </ng-template>
-    </lms-column>
+    <lms-column header="Edition Year" field="editionYear" filtered="text"></lms-column>
     <lms-column header="ISBN" field="isbn" filtered="text"></lms-column>
     <lms-column header="Creation date" field="creationDate" filtered="date">
       <ng-template #dataTableCell let-item="item">

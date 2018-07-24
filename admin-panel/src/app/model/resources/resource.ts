@@ -9,7 +9,7 @@ export class Resource {
   public subName: string;
   public edition: number;
   public publisher: string;
-  public editionDate: any;
+  public editionYear: string;
   public pageNum: number;
   public isbn: string;
   public udc: string;
