@@ -230,22 +230,22 @@
     <lms-column header="ISBN" field="isbn" filtered="text"></lms-column>
     <lms-column header="Creation date" field="creationDate" filtered="date">
       <ng-template #dataTableCell let-item="item">
-        <span>{{item.creationDate | date:'dd/MM/yyyy HH:mm' }}</span>
+        <span>{{item.creationDate | date:'dd/MM/yyyy' }}</span>
       </ng-template>
     </lms-column>
     <lms-column header="Modification date" field="modificationDate" filtered="date">
       <ng-template #dataTableCell let-item="item">
-        <span>{{item.modificationDate | date:'dd/MM/yyyy HH:mm' }}</span>
+        <span>{{item.modificationDate | date:'dd/MM/yyyy' }}</span>
       </ng-template>
     </lms-column>
     <lms-column header="Resource type" field="resourceType" filtered="combo" [filteredOptions]="resourceTypes"
                 filteredFieldName="resourceType" filteredOptionName="name" filteredOptionValue="id"
                 [filteredOptionReturnObject]="false">
       <ng-template #dataTableCell let-item="item">
-        <span *ngIf="item.status && item.status == 'PRINTED' "><span class="cap-tag"
-                                                                     style="background: #00ea96; color: white">{{item.status}}</span></span>
-        <span *ngIf="item.status && item.status == 'E_BOOK' "><span class="cap-tag"
-                                                                    style="background: #de3626; color: white">{{item.status}}</span></span>
+        <span *ngIf="item.resourceType && item.resourceType == 'PRINTED' "><span class="cap-tag"
+                                                                     style="background: #00ea96; color: white">{{item.resourceType}}</span></span>
+        <span *ngIf="item.resourceType && item.resourceType == 'E_BOOK' "><span class="cap-tag"
+                                                                    style="background: #de3626; color: white">{{item.resourceType}}</span></span>
       </ng-template>
     </lms-column>
     <lms-column header="Material type" field="materialType" filtered="dynamic-combo" [filteredOptions]="materialTypes"
@@ -253,7 +253,7 @@
                 [filteredOptionReturnObject]="false" [filteredOptionColumns]="['code', 'name']"
                 (onSearchFunction)="initMaterialTypes($event)">
       <ng-template #dataTableCell let-item="item">
-        <span *ngIf="item.materialType">{{item.materialType.code + ' - ' + item.materialType.name}}</span>
+        <span *ngIf="item.materialType">{{item.materialType.name}}</span>
       </ng-template>
     </lms-column>
     <lms-column header="Language" field="language" filtered="dynamic-combo" [filteredOptions]="languages"
@@ -261,7 +261,7 @@
                 [filteredOptionReturnObject]="false" [filteredOptionColumns]="['code', 'name']"
                 (onSearchFunction)="initLanguages($event)">
       <ng-template #dataTableCell let-item="item">
-        <span *ngIf="item.language">{{item.language.code + ' - ' + item.language.name}}</span>
+        <span *ngIf="item.language">{{item.language.name}}</span>
       </ng-template>
     </lms-column>
     <lms-column header="Category" field="category" filtered="dynamic-combo" [filteredOptions]="categories"
@@ -269,7 +269,7 @@
                 [filteredOptionReturnObject]="false" [filteredOptionColumns]="['code', 'name']"
                 (onSearchFunction)="initCategories($event)">
       <ng-template #dataTableCell let-item="item">
-        <span *ngIf="item.category">{{item.category.code + ' - ' + item.category.name}}</span>
+        <span *ngIf="item.category">{{item.category.name}}</span>
       </ng-template>
     </lms-column>
   </lms-table>
