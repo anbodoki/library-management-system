@@ -6,6 +6,11 @@ public class InitialData implements Serializable {
 
     private long userCount;
     private long resourcesCount;
+    private long clientsCount;
+    private long copiesCounts;
+    private long borrowedResourcesCount;
+    private long criticalCount;
+
 
     public long getUserCount() {
         return userCount;
@@ -21,5 +26,37 @@ public class InitialData implements Serializable {
 
     public void setResourcesCount(long resourcesCount) {
         this.resourcesCount = resourcesCount;
+    }
+
+    public long getClientsCount() {
+        return clientsCount;
+    }
+
+    public void setClientsCount(long clientsCount) {
+        this.clientsCount = clientsCount;
+    }
+
+    public long getCopiesCounts() {
+        return copiesCounts;
+    }
+
+    public void setCopiesCounts(long copiesCounts) {
+        this.copiesCounts = copiesCounts;
+    }
+
+    public long getBorrowedResourcesCount() {
+        return borrowedResourcesCount;
+    }
+
+    public void setBorrowedResourcesCount(long borrowedResourcesCount) {
+        this.borrowedResourcesCount = borrowedResourcesCount;
+    }
+
+    public long getCriticalCount() {
+        return criticalCount;
+    }
+
+    public void setCriticalCount(long criticalCount) {
+        this.criticalCount = criticalCount;
     }
 }

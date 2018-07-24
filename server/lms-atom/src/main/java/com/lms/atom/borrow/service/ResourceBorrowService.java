@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface ResourceBorrowService {
 
-    ResourceBorrowDTO updateResourceBorrow(ResourceBorrowDTO borrow) throws AtomException;
+    ResourceBorrowDTO updateResourceBorrow(ResourceBorrowDTO borrow) throws Exception;
 
     ListResult<ResourceBorrowDTO> getClientResourceBorrow(Long clientId, boolean current, int limit, int offset);
 
@@ -29,7 +29,11 @@ public interface ResourceBorrowService {
                                        Date fromBorrowTime, Date toBorrowTime,
                                        Date fromReturnTime, Date toReturnTime,
                                        Date fromScheduledTime, Date toScheduledTime,
-                                       Boolean critical, int limit, int offset);
+                                       Boolean critical, Boolean notReturned, int limit, int offset);
 
     void sendMail(SendMailRequest request) throws Exception;
+
+    long getBorrowedResourcesCount();
+
+    long getCriticalCount();
 }

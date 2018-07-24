@@ -45,6 +45,7 @@ public class ResourceBorrowController {
                 request.getFromScheduledTime(),
                 request.getToScheduledTime(),
                 request.getCritical(),
+                request.getNotReturned(),
                 request.getLimit(), request.getOffset());
         return new ActionResponseWithData<>(result, true);
     }

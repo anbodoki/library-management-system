@@ -4,8 +4,61 @@
     <div class="count green">{{userCount}}</div>
   </div>
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top"><i class="fa fa-user"> </i> Total Clients</span>
+    <div class="count green">{{clientsCount}}</div>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
     <span class="count_top"><i class="fa fa-book"> </i> Total Resources</span>
     <div class="count green">{{resourcesCount}}</div>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top"><i class="fa fa-list"> </i> Total Copies</span>
+    <div class="count green">{{copiesCounts}}</div>
+  </div>
+</div>
+
+
+<div class="col-md-6 col-sm-6 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2>Resources<small>Borrowed VS Total</small></h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+        <li><a class="close-link"><i class="fa fa-close"></i></a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div *ngIf="loaded" class="x_content">
+      <canvas baseChart
+              [data]="borrowPieChartData"
+              [labels]="borrowChartLabels"
+              chartType="pie"
+              [colors]="borrowCharColors"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6 col-sm-6 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2>Borrowed Resources<small>Critical VS Not Critical</small></h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+        <li><a class="close-link"><i class="fa fa-close"></i></a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div *ngIf="loaded" class="x_content">
+      <canvas baseChart
+              [data]="criticalPieChartData"
+              [labels]="criticalChartLabels"
+              [colors]="criticalCharColors"
+              chartType="doughnut"></canvas>
+    </div>
   </div>
 </div>
 
@@ -19,10 +72,9 @@
       <div class="modal-body">
 
         <lms-input label="Subject" fieldName="subject"
-                   [fieldObject]="mail" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
-                   alertText="Name must contain minimum 2 characters"></lms-input>
+                   [fieldObject]="mail" fieldType="text" [capRequired]="true"></lms-input>
         <lms-textarea label="Message" fieldName="message"
-                   [fieldObject]="mail" [capRequired]="true"></lms-textarea>
+                      [fieldObject]="mail" [capRequired]="true"></lms-textarea>
 
       </div>
       <div class="modal-footer">
@@ -37,7 +89,7 @@
   <div class="page-title">
     <div class="title_left">
       <h3>Monitoring
-        <small>resources </small>
+        <small>resources</small>
       </h3>
     </div>
   </div>
@@ -85,15 +137,17 @@
     </lms-column>
     <lms-column header="Critical" field="critical" filtered="checkbox">
       <ng-template #dataTableCell let-item="item">
-        <div *ngIf="!item.critical" class="text-center"><i class="fa fa-check-circle f-16 green"></i></div>
-        <div *ngIf="item.critical" class="text-center"><i class="fa fa-times-circle f-16 red "></i></div>
+        <div *ngIf="!item.critical" class="text-center"><span class="green">Not critical</span></div>
+        <div *ngIf="item.critical" class="text-center"><span class="red ">Critical</span></div>
       </ng-template>
     </lms-column>
     <lms-column header="Send mail" field="mail">
       <ng-template #dataTableCell let-item="item">
-        <div class="text-center"><i class="fa fa-mail-reply f-16 green lms-cursor" (click)="sendMail(item.clientId)"></i></div>
+        <div class="text-center"><i class="fa fa-mail-reply f-16 green lms-cursor"
+                                    (click)="sendMail(item.clientId)"></i></div>
       </ng-template>
     </lms-column>
+    <lms-column header="Not Returned" field="notReturned" filtered="checkbox" [hidden]="true"></lms-column>
   </lms-table>
 </div>
 

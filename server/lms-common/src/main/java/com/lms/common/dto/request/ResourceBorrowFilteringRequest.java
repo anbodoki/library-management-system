@@ -16,6 +16,7 @@ public class ResourceBorrowFilteringRequest extends PagingRequest {
     private Date fromScheduledTime;
     private Date toScheduledTime;
     private Boolean critical;
+    private Boolean notReturned;
 
     public String getIdentifier() {
         return identifier;
@@ -95,5 +96,13 @@ public class ResourceBorrowFilteringRequest extends PagingRequest {
 
     public void setCritical(Boolean critical) {
         this.critical = critical;
+    }
+
+    public Boolean getNotReturned() {
+        return notReturned;
+    }
+
+    public void setNotReturned(Boolean notReturned) {
+        this.notReturned = notReturned;
     }
 }

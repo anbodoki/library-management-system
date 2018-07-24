@@ -77,4 +77,6 @@ public interface ResourceService {
     ResourceCopyDTO getResourceCopyByIdentifier(String identifier);
 
     ListResult<ResourceCopyDTO> getResourcesCopies(long resourceId, String query, int limit, int offset);
+
+    long getCopiesCount();
 }

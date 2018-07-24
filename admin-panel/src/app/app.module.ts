@@ -52,6 +52,7 @@ import {LMSInlineEditingComponent} from "./lms-components/lms-inline-editing/lms
 import {ResourceCopyService} from "./services/resourcecopy.service";
 import {ResourceBorrowService} from "./services/resourceborrow.service";
 import {MailService} from "./services/mail.service";
+import {ChartsModule} from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import {MailService} from "./services/mail.service";
     HttpClientModule,
     AppRoutingModule,
     DpDatePickerModule,
-    CustomFormsModule
+    CustomFormsModule,
+    ChartsModule
   ],
   providers: [
     BaseService,

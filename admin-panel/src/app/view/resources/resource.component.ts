@@ -13,6 +13,7 @@ import {MaterialTypeService} from "../../services/materialtype.service";
 import {CategoryService} from "../../services/category.service";
 import {ResourceCopyService} from "../../services/resourcecopy.service";
 import {ResourceCopy} from "../../model/resources/resourcecopy";
+import {environment} from "../../../environments/environment";
 
 declare let jquery: any;
 declare let $: any;
@@ -56,6 +57,10 @@ export class ResourceComponent implements OnInit {
     this.initMaterialTypes("");
     this.initResourceTypes();
     this.initCategories("");
+  }
+
+  getDefaultIconUrl() {
+      return environment.srcPref + '/assets/default.png';
   }
 
   initLanguages(query) {

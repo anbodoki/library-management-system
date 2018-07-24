@@ -52,7 +52,7 @@ public class DeviceMessageHandlerFactoryImpl extends DeviceMessageHandlerFactory
         }
     }
 
-    private String createBorrow(ClientDTO clientForCard, String bookId, Date date) throws AtomException {
+    private String createBorrow(ClientDTO clientForCard, String bookId, Date date) throws Exception {
         ResourceBorrowDTO result = new ResourceBorrowDTO();
         result.setClientId(clientForCard.getId());
         result.setResourceCopy(resourceService.getResourceCopyByIdentifier(bookId));

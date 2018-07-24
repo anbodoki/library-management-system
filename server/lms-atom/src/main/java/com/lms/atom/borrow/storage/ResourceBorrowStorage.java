@@ -157,7 +157,7 @@ public class ResourceBorrowStorage {
                                            Date fromBorrowTime, Date toBorrowTime,
                                            Date fromReturnTime, Date toReturnTime,
                                            Date fromScheduledTime, Date toScheduledTime,
-                                           Boolean critical, int limit, int offset) {
+                                           Boolean critical, Boolean notReturned, int limit, int offset) {
         StringBuilder builder = new StringBuilder();
         Map<String, Object> params = new HashMap<>();
         if (fromBorrowTime != null) {
@@ -199,6 +199,13 @@ public class ResourceBorrowStorage {
         if (critical != null) {
             builder.append(" AND u.critical = :critical");
             params.put("critical", critical);
+        }
+        if (notReturned != null) {
+            if (notReturned) {
+                builder.append(" AND u.returnTime is NULL");
+            } else {
+                builder.append(" AND u.returnTime is not NULL");
+            }
         }
         TypedQuery<ResourceBorrow> q = em.createQuery("SELECT u FROM ResourceBorrow u WHERE 1=1 " + builder.toString() + " ORDER BY u.id DESC", ResourceBorrow.class);
         Query cq = em.createQuery("SELECT COUNT(u.id) FROM ResourceBorrow u WHERE 1=1 " + builder.toString());

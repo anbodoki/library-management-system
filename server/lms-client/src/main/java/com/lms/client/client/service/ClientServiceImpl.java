@@ -135,4 +135,9 @@ public class ClientServiceImpl implements ClientService {
     public void deleteCard(Long cardId) throws Exception {
         cardRepository.delete(cardId);
     }
+
+    @Override
+    public long getClientCount() {
+        return repository.count();
+    }
 }

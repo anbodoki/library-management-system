@@ -35,7 +35,7 @@ public class DataIntegrationService {
         this.languageService = languageService;
     }
 
-    @PostConstruct
+//    @PostConstruct
     public void postConstruct() throws Exception {
         Map<DataLine, List<String>> read = DataParser.read();
         if (read == null) {

@@ -6,10 +6,8 @@ import com.lms.atom.borrow.storage.ResourceBorrowHelper;
 import com.lms.atom.borrow.storage.ResourceBorrowRepository;
 import com.lms.atom.borrow.storage.ResourceBorrowStorage;
 import com.lms.atom.borrow.storage.model.ResourceBorrow;
-import com.lms.atom.exception.AtomException;
 import com.lms.atom.notofication.mail.EmailService;
 import com.lms.client.client.service.ClientService;
-import com.lms.client.exception.ClientException;
 import com.lms.common.dto.atom.SendMailRequest;
 import com.lms.common.dto.atom.resource.ResourceBorrowDTO;
 import com.lms.common.dto.atom.resource.ResourceDTO;
@@ -42,7 +40,7 @@ public class ResourceBorrowServiceImpl implements ResourceBorrowService {
     }
 
     @Override
-    public ResourceBorrowDTO updateResourceBorrow(ResourceBorrowDTO borrow) throws AtomException {
+    public ResourceBorrowDTO updateResourceBorrow(ResourceBorrowDTO borrow) throws Exception {
         ResourceBorrowDTO resourceBorrowDTO = ResourceBorrowHelper.fromEntity(repository.save(ResourceBorrowHelper.toEntity(borrow)));
         ResourceDTO resourceById = resourceService.getResourceById(borrow.getResourceCopy().getResource().getId());
         try {
@@ -54,7 +52,7 @@ public class ResourceBorrowServiceImpl implements ResourceBorrowService {
                 resourceById.setQuantity(resourceById.getQuantity() + 1);
                 resourceById.setRentedQuantity(resourceById.getRentedQuantity() - 1);
             }
-            resourceService.update(resourceById);
+            resourceService.justSave(resourceById);
             return resourceBorrowDTO;
         } finally {
             BorrowConcurrencyHelper.unlock(resourceById.getId());
@@ -110,12 +108,12 @@ public class ResourceBorrowServiceImpl implements ResourceBorrowService {
                                               Date fromBorrowTime, Date toBorrowTime,
                                               Date fromReturnTime, Date toReturnTime,
                                               Date fromScheduledTime, Date toScheduledTime,
-                                              Boolean critical, int limit, int offset) {
+                                              Boolean critical, Boolean notReturned, int limit, int offset) {
         ListResult<ResourceBorrow> borrows = storage.find(identifier, isbn, clientId,
                 fromBorrowTime, toBorrowTime,
                 fromReturnTime, toReturnTime,
                 fromScheduledTime, toScheduledTime,
-                critical, limit, offset);
+                critical, notReturned, limit, offset);
         ListResult<ResourceBorrowDTO> result = borrows.copy(ResourceBorrowDTO.class);
         result.setResultList(ResourceBorrowHelper.fromEntities(borrows.getResultList()));
         return result;
@@ -127,5 +125,15 @@ public class ResourceBorrowServiceImpl implements ResourceBorrowService {
         if (byId != null) {
             emailService.sendMail(byId.getEmail(), request.getSubject(), request.getMessage());
         }
+    }
+
+    @Override
+    public long getBorrowedResourcesCount() {
+        return repository.countByReturnTimeIsNull();
+    }
+
+    @Override
+    public long getCriticalCount() {
+        return repository.countByCriticalIsTrue();
     }
 }

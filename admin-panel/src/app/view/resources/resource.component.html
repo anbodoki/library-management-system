@@ -209,7 +209,7 @@
     <lms-column header="" field="imageUrl">
       <ng-template #dataTableCell let-item="item">
         <div class="user-profile img-square lms-pointer lms-hover" title="Upload Image" (click)="openImageModal(item)">
-          <img src="{{item.imageUrl ? item.imageUrl : environment.srcPref + '/assets/default.png'}}"></div>
+          <img src="{{item.imageUrl ? item.imageUrl : getDefaultIconUrl()}}"></div>
       </ng-template>
     </lms-column>
     <lms-column header="" field="resourceUrl">
@@ -223,29 +223,8 @@
     <lms-column header="ID" field="id" filtered="number"></lms-column>
     <lms-column header="Name" field="name" filtered="text"></lms-column>
     <lms-column header="Author" field="author" filtered="text"></lms-column>
-    <lms-column header="Subname" field="subName" filtered="text"></lms-column>
     <lms-column header="Edition Year" field="editionYear" filtered="text"></lms-column>
     <lms-column header="ISBN" field="isbn" filtered="text"></lms-column>
-    <lms-column header="Creation date" field="creationDate" filtered="date">
-      <ng-template #dataTableCell let-item="item">
-        <span>{{item.creationDate | date:'dd/MM/yyyy' }}</span>
-      </ng-template>
-    </lms-column>
-    <lms-column header="Modification date" field="modificationDate" filtered="date">
-      <ng-template #dataTableCell let-item="item">
-        <span>{{item.modificationDate | date:'dd/MM/yyyy' }}</span>
-      </ng-template>
-    </lms-column>
-    <lms-column header="Resource type" field="resourceType" filtered="combo" [filteredOptions]="resourceTypes"
-                filteredFieldName="resourceType" filteredOptionName="name" filteredOptionValue="id"
-                [filteredOptionReturnObject]="false">
-      <ng-template #dataTableCell let-item="item">
-        <span *ngIf="item.resourceType && item.resourceType == 'PRINTED' "><span class="cap-tag"
-                                                                     style="background: #00ea96; color: white">{{item.resourceType}}</span></span>
-        <span *ngIf="item.resourceType && item.resourceType == 'E_BOOK' "><span class="cap-tag"
-                                                                    style="background: #de3626; color: white">{{item.resourceType}}</span></span>
-      </ng-template>
-    </lms-column>
     <lms-column header="Material type" field="materialType" filtered="dynamic-combo" [filteredOptions]="materialTypes"
                 filteredFieldName="materialTypeId" filteredOptionName="name" filteredOptionValue="id"
                 [filteredOptionReturnObject]="false" [filteredOptionColumns]="['code', 'name']"
@@ -268,6 +247,26 @@
                 (onSearchFunction)="initCategories($event)">
       <ng-template #dataTableCell let-item="item">
         <span *ngIf="item.category">{{item.category.name}}</span>
+      </ng-template>
+    </lms-column>
+    <lms-column header="Creation date" field="creationDate" filtered="date">
+      <ng-template #dataTableCell let-item="item">
+        <span>{{item.creationDate | date:'dd/MM/yyyy' }}</span>
+      </ng-template>
+    </lms-column>
+    <lms-column header="Modification date" field="modificationDate" filtered="date">
+      <ng-template #dataTableCell let-item="item">
+        <span>{{item.modificationDate | date:'dd/MM/yyyy' }}</span>
+      </ng-template>
+    </lms-column>
+    <lms-column header="Resource type" field="resourceType" filtered="combo" [filteredOptions]="resourceTypes"
+                filteredFieldName="resourceType" filteredOptionName="name" filteredOptionValue="id"
+                [filteredOptionReturnObject]="false">
+      <ng-template #dataTableCell let-item="item">
+        <span *ngIf="item.resourceType && item.resourceType == 'PRINTED' "><span class="lms-tag"
+                                                                                 style="background: #00ea96; color: white">{{item.resourceType}}</span></span>
+        <span *ngIf="item.resourceType && item.resourceType == 'E_BOOK' "><span class="lms-tag"
+                                                                                style="background: #de3626; color: white">{{item.resourceType}}</span></span>
       </ng-template>
     </lms-column>
   </lms-table>

@@ -32,4 +32,6 @@ public interface ClientService {
     CardDTO deactivateCard(Long cardId) throws Exception;
 
     void deleteCard(Long cardId) throws Exception;
+
+    long getClientCount();
 }

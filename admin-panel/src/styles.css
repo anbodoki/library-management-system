@@ -30,6 +30,15 @@
   font-weight: normal;
 }
 
+.additional-input-button {
+  cursor: pointer;
+  color: #575757;
+  position: absolute;
+  right: 5px;
+  bottom: 10px;
+}
+
+
 .modal.in .modal-dialog {
   -webkit-transform: translate(0, 0);
   -o-transform: translate(0, 0);

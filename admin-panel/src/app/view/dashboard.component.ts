@@ -23,6 +23,10 @@ export class DashboardComponent implements OnInit {
 
   userCount: number;
   resourcesCount: number;
+  clientsCount: number;
+  copiesCounts: number;
+  borrowedResourcesCount: number;
+  criticalCount: number;
   loaded: boolean = false;
   mail: Mail;
 
@@ -31,6 +35,20 @@ export class DashboardComponent implements OnInit {
   query: string;
   pageNum: number;
   loader: PagingLoader = new PagingLoader(true, true);
+
+  public borrowChartLabels: string[] = [];
+  public borrowPieChartData: number[] = [];
+  public borrowCharColors: any[] = [
+    {
+      backgroundColor: ["#FF7360", "#6FC8CE", "#29b42e", "#ce593f"]
+    }];
+
+  public criticalChartLabels: string[] = [];
+  public criticalPieChartData: number[] = [];
+  public criticalCharColors: any[] = [
+    {
+      backgroundColor: ["#FF7360", "#6FC8CE", "#29b42e", "#ce593f"]
+    }];
 
   ngOnInit(): void {
     this.fetchData();
@@ -58,6 +76,21 @@ export class DashboardComponent implements OnInit {
       console.log(response);
       ref.userCount = response['data']['userCount'];
       ref.resourcesCount = response['data']['resourcesCount'];
+      ref.clientsCount = response['data']['clientsCount'];
+      ref.copiesCounts = response['data']['copiesCounts'];
+      ref.borrowedResourcesCount = response['data']['borrowedResourcesCount'];
+      ref.criticalCount = response['data']['criticalCount'];
+
+      ref.borrowPieChartData.push(ref.borrowedResourcesCount);
+      ref.borrowPieChartData.push(ref.copiesCounts - ref.borrowedResourcesCount);
+      ref.borrowChartLabels.push('Borrowed');
+      ref.borrowChartLabels.push('Left');
+
+      ref.criticalPieChartData.push(ref.criticalCount);
+      ref.criticalPieChartData.push(ref.borrowedResourcesCount - ref.criticalCount);
+      ref.criticalChartLabels.push('Critical');
+      ref.criticalChartLabels.push('Not Critical');
+
       ref.loaded = true;
     });
   }

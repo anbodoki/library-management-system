@@ -266,4 +266,9 @@ public class ResourceServiceImpl implements ResourceService {
         result.setResultList(ResourceCopyHelper.fromEntities(materialTypes.getResultList()));
         return result;
     }
+
+    @Override
+    public long getCopiesCount() {
+        return copyRepository.count();
+    }
 }
