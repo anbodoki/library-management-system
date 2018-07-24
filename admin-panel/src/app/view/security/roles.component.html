@@ -71,11 +71,6 @@
         <span class="lms-tag" *ngFor="let p of item.rolePrivileges">{{p.name}}</span>
       </ng-template>
     </lms-column>
-    <lms-column header="Color" field="color">
-      <ng-template #dataTableCell let-item="item">
-        <div class="cap-color-tag m-auto" [ngStyle]="{'background-color': item.color }"></div>
-      </ng-template>
-    </lms-column>
   </lms-table>
 
 </div>

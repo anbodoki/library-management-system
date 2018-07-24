@@ -30,25 +30,24 @@
         <div id="tab-content-resourceDetails" class="cap-flex">
           <div class="half-width">
             <lms-input label="Name" fieldName="name"
-                       [fieldObject]="selectedResource" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
+                       [fieldObject]="selectedResource" fieldType="text" capPattern="^\S+.{2,50}$" [capRequired]="true"
                        alertText="Name must contain minimum 2 characters"></lms-input>
             <lms-input label="Author" fieldName="author"
-                       [fieldObject]="selectedResource" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
+                       [fieldObject]="selectedResource" fieldType="text" capPattern="^\S+.{2,50}$" [capRequired]="true"
                        alertText="Author must contain minimum 2 characters"></lms-input>
             <lms-input label="Subname" fieldName="subName"
-                       [fieldObject]="selectedResource" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
+                       [fieldObject]="selectedResource" fieldType="text" capPattern="^\S+.{2,50}$" [capRequired]="true"
                        alertText="Subname must contain minimum 2 characters"></lms-input>
             <lms-input label="Edition" fieldName="edition"
                        [fieldObject]="selectedResource" fieldType="number" capPattern="^.{1,50}$" [capRequired]="true"
                        alertText="Edition must contain minimum 1 character"></lms-input>
             <lms-input label="Publisher" fieldName="publisher"
-                       [fieldObject]="selectedResource" fieldType="text" capPattern="^.{2,50}$" [capRequired]="true"
+                       [fieldObject]="selectedResource" fieldType="text" capPattern="^\S+.{2,50}$" [capRequired]="true"
                        alertText="Publisher must contain minimum 2 characters"></lms-input>
             <lms-input label="Edition Year" fieldName="editionYear"
                        [fieldObject]="selectedResource" fieldType="text" capPattern="^.{4,6}$" [capRequired]="true"
                        alertText="Edition year must contain minimum 4 characters"></lms-input>
-            <lms-input label="Page count" fieldName="pageNum" [capRequired]="true" [fieldObject]="selectedResource"
-                       alertText="Must not be empty"
+            <lms-input label="Page count" fieldName="pageNum" [fieldObject]="selectedResource"
                        fieldType="number"></lms-input>
             <lms-input label="ISBN" fieldName="isbn"
                        [fieldObject]="selectedResource" fieldType="text" capPattern="^.{13}$" [capRequired]="true"
@@ -61,8 +60,7 @@
             <lms-input label="ISSN" fieldName="issn" [capRequired]="true" [fieldObject]="selectedResource"
                        alertText="Must not be empty"
                        fieldType="text"></lms-input>
-            <lms-input label="Place" fieldName="place" [capRequired]="true" [fieldObject]="selectedResource"
-                       alertText="Must not be empty"
+            <lms-input label="Place" fieldName="place" [fieldObject]="selectedResource"
                        fieldType="text"></lms-input>
             <lms-input label="Reference URL" fieldName="referenceURL"
                        [fieldObject]="selectedResource" fieldType="text"></lms-input>
@@ -211,7 +209,7 @@
     <lms-column header="" field="imageUrl">
       <ng-template #dataTableCell let-item="item">
         <div class="user-profile img-square lms-pointer lms-hover" title="Upload Image" (click)="openImageModal(item)">
-          <img src="{{item.imageUrl ? item.imageUrl : '/assets/default.png'}}"></div>
+          <img src="{{item.imageUrl ? item.imageUrl : environment.srcPref + '/assets/default.png'}}"></div>
       </ng-template>
     </lms-column>
     <lms-column header="" field="resourceUrl">
