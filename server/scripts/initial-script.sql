@@ -160,3 +160,9 @@ VALUES (1, null, 'admin.admin@gmail.com', 'Admin', 'Admin', null, '$2a$10$/awf01
 -- system user and user role
 INSERT INTO lms_v1.systemuser_roles (user_id, roles_id) VALUES (1, 1);
 
+ALTER TABLE lms_v1.resource ALTER COLUMN author TYPE varchar(10000) USING author::varchar(10000);
+ALTER TABLE lms_v1.resource ALTER COLUMN name TYPE varchar(10000) USING name::varchar(10000);
+ALTER TABLE lms_v1.resource ALTER COLUMN sub_name TYPE varchar(10000) USING sub_name::varchar(10000);
+ALTER TABLE lms_v1.resource ALTER COLUMN image_url TYPE varchar(10000) USING image_url::varchar(10000);
+ALTER TABLE lms_v1.resource ALTER COLUMN resource_url TYPE varchar(10000) USING resource_url::varchar(10000);
+

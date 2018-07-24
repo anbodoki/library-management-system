@@ -2,14 +2,19 @@ package com.lms.integration;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class DataParser {
 
-    public static Map<DataLine, List<String>> read() {
+    private static final Path rootLocation = Paths.get("upload-dir");
+
+    public static Map<DataLine, List<String>> read() throws IOException {
         try {
             Map<DataLine, List<String>> map = new HashMap<>();
-            Scanner scanner = new Scanner(new File("C:\\Users\\pc\\Desktop\\lms\\data-parser\\src\\main\\resources\\data.tsv"));
+            Scanner scanner = new Scanner(rootLocation.resolve("data.tsv"), "UTF-8");
             while (scanner.hasNextLine()) {
                 String curr = scanner.nextLine();
                 String[] split = curr.split("\t");
@@ -45,5 +50,4 @@ public class DataParser {
             return null;
         }
     }
-
 }

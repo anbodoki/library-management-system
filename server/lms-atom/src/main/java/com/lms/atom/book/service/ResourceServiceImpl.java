@@ -169,6 +169,12 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
+    public ResourceDTO justSave(ResourceDTO resource) throws Exception{
+        Resource saved = repository.save(ResourceHelper.toEntity(resource));
+        return ResourceHelper.fromEntity(saved);
+    }
+
+    @Override
     public void delete(Long bookId) throws Exception {
         try {
             repository.getOne(bookId);
@@ -218,6 +224,15 @@ public class ResourceServiceImpl implements ResourceService {
             BorrowConcurrencyHelper.unlock(resourceById.getId());
         }
         return resourceCopyDTO;
+    }
+
+    @Override
+    public ResourceCopyDTO justAddResourceCopy(ResourceCopyDTO resourceCopy) throws AtomException {
+        ResourceCopy byIdentifier = copyRepository.findByIdentifier(resourceCopy.getIdentifier());
+        if (byIdentifier != null) {
+            throw new AtomException(Messages.get("resourceCopyWithThisIdentifierAlreadyExistsInSystem"));
+        }
+        return ResourceCopyHelper.fromEntity(copyRepository.save(ResourceCopyHelper.toEntity(resourceCopy)));
     }
 
     @Override

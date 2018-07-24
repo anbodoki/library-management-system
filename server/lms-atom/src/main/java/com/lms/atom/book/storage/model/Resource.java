@@ -26,7 +26,7 @@ public class Resource implements Serializable {
     private String editionYear;
     @ManyToOne
     private Language language;
-    private int pageNum;
+    private Integer pageNum;
     private String isbn;
     private String udc;
     @Enumerated(value = EnumType.STRING)
@@ -111,11 +111,11 @@ public class Resource implements Serializable {
         this.language = language;
     }
 
-    public int getPageNum() {
+    public Integer getPageNum() {
         return pageNum;
     }
 
-    public void setPageNum(int pageNum) {
+    public void setPageNum(Integer pageNum) {
         this.pageNum = pageNum;
     }
 

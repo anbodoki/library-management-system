@@ -56,6 +56,8 @@ public interface ResourceService {
 
     ResourceDTO save(ResourceDTO resource) throws AtomException;
 
+    ResourceDTO justSave(ResourceDTO resource) throws Exception;
+
     void delete(Long bookId) throws Exception;
 
     List<ComboObject> getResourceTypes();
@@ -65,6 +67,8 @@ public interface ResourceService {
     long resourcesCount();
 
     ResourceCopyDTO addResourceCopy(ResourceCopyDTO resourceCopy) throws AtomException;
+
+    ResourceCopyDTO justAddResourceCopy(ResourceCopyDTO resourceCopy) throws AtomException;
 
     ResourceCopyDTO update(ResourceCopyDTO resourceCopy) throws AtomException;
 
