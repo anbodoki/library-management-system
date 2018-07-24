@@ -83,7 +83,7 @@ public class ClientApiServiceImpl implements ClientApiService {
     }
 
     @Override
-    public ListResult<LightResource> find(Long id, String name, String author, String publisher, Date fromEditionDate, Date toEditionDate,
+    public ListResult<LightResource> find(Long id, String name, String author, String publisher, String editionYear,
                                           ResourceTypeDTO resourceType, List<Long> categoryIds, Long languageId, int limit, int offset) throws Exception {
         ListResult<ResourceDTO> resources = resourceService.findSpecial(id,
                 name,
@@ -91,7 +91,7 @@ public class ClientApiServiceImpl implements ClientApiService {
                 null,
                 null,
                 publisher,
-                fromEditionDate, toEditionDate,
+                editionYear,
                 languageId,
                 null,
                 null,

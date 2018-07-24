@@ -32,7 +32,7 @@ public class LightResourceHelper {
         result.setPublisher(resource.getPublisher());
         result.setImageUrl(resource.getImageUrl());
         result.setResourceUrl(resource.getResourceUrl());
-        result.setEditionDate(resource.getEditionDate());
+        result.setEditionYear(resource.getEditionYear());
         result.setCategory(resource.getCategory());
         return result;
     }

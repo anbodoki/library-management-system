@@ -13,7 +13,7 @@ public class LightResource implements Serializable {
     private String subName;
     private String edition;
     private String publisher;
-    private Date editionDate;
+    private String editionYear;
     private String imageUrl;
     private String resourceUrl;
     private CategoryDTO category;
@@ -68,12 +68,12 @@ public class LightResource implements Serializable {
         this.publisher = publisher;
     }
 
-    public Date getEditionDate() {
-        return editionDate;
+    public String getEditionYear() {
+        return editionYear;
     }
 
-    public void setEditionDate(Date editionDate) {
-        this.editionDate = editionDate;
+    public void setEditionYear(String editionYear) {
+        this.editionYear = editionYear;
     }
 
     public String getImageUrl() {

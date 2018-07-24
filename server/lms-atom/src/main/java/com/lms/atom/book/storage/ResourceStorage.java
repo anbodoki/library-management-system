@@ -59,7 +59,7 @@ public class ResourceStorage {
                                      String subName,
                                      String edition,
                                      String publisher,
-                                     Date fromEditionDate, Date toEditionDate,
+                                     String editionYear,
                                      Long language,
                                      String isbn,
                                      String udc,
@@ -97,13 +97,9 @@ public class ResourceStorage {
             builder.append(" AND u.publisher = :publisher");
             params.put("publisher", publisher);
         }
-        if (fromEditionDate != null) {
-            builder.append(" AND u.editionDate >= :fromEditionDate");
-            params.put("fromEditionDate", fromEditionDate);
-        }
-        if (toCreationDate != null) {
-            builder.append(" AND u.editionDate <= :toEditionDate");
-            params.put("toEditionDate", toEditionDate);
+        if (editionYear != null) {
+            builder.append(" AND u.editionYear = :editionYear");
+            params.put("editionYear", editionYear);
         }
         if (language != null) {
             builder.append(" AND u.language.id = :language");
@@ -175,23 +171,23 @@ public class ResourceStorage {
     }
 
     public ListResult<Resource> findSpecial(Long id,
-                                     String name,
-                                     String author,
-                                     String subName,
-                                     String edition,
-                                     String publisher,
-                                     Date fromEditionDate, Date toEditionDate,
-                                     Long language,
-                                     String isbn,
-                                     String udc,
-                                     ResourceType resourceType,
-                                     Long materialTypeCode,
-                                     Date fromCreationDate, Date toCreationDate,
-                                     Date fromModificationDate, Date toModificationDate,
-                                     List<Long> categoryIds,
-                                     String issn,
-                                     String place,
-                                     int limit, int offset) {
+                                            String name,
+                                            String author,
+                                            String subName,
+                                            String edition,
+                                            String publisher,
+                                            String editionYear,
+                                            Long language,
+                                            String isbn,
+                                            String udc,
+                                            ResourceType resourceType,
+                                            Long materialTypeCode,
+                                            Date fromCreationDate, Date toCreationDate,
+                                            Date fromModificationDate, Date toModificationDate,
+                                            List<Long> categoryIds,
+                                            String issn,
+                                            String place,
+                                            int limit, int offset) {
         StringBuilder builder = new StringBuilder();
         Map<String, Object> params = new HashMap<>();
         if (id != null) {
@@ -218,13 +214,9 @@ public class ResourceStorage {
             builder.append(" AND u.publisher = :publisher");
             params.put("publisher", publisher);
         }
-        if (fromEditionDate != null) {
-            builder.append(" AND u.fromEditionDate >= :fromEditionDate");
-            params.put("fromEditionDate", fromEditionDate);
-        }
-        if (toCreationDate != null) {
-            builder.append(" AND u.toEditionDate <= :toEditionDate");
-            params.put("toEditionDate", toEditionDate);
+        if (editionYear != null) {
+            builder.append(" AND u.editionYear = :editionYear");
+            params.put("editionYear", editionYear);
         }
         if (language != null) {
             builder.append(" AND u.language.id = :language");

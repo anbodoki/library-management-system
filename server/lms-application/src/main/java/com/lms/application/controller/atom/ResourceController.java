@@ -45,7 +45,7 @@ public class ResourceController {
                 request.getSubName(),
                 request.getEdition(),
                 request.getPublisher(),
-                request.getFromEditionDate(), request.getToEditionDate(),
+                request.getEditionYear(),
                 request.getLanguageId(),
                 request.getIsbn(),
                 request.getUdc(),

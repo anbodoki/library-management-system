@@ -12,8 +12,7 @@ public class ClientResourceFilteringRequest extends PagingRequest {
     private String name;
     private String author;
     private String publisher;
-    private Date fromEditionDate;
-    private Date toEditionDate;
+    private String editionYear;
     private ResourceTypeDTO resourceType;
     private List<Long> categoryIds;
     private Long languageId;
@@ -50,20 +49,12 @@ public class ClientResourceFilteringRequest extends PagingRequest {
         this.publisher = publisher;
     }
 
-    public Date getFromEditionDate() {
-        return fromEditionDate;
+    public String getEditionYear() {
+        return editionYear;
     }
 
-    public void setFromEditionDate(Date fromEditionDate) {
-        this.fromEditionDate = fromEditionDate;
-    }
-
-    public Date getToEditionDate() {
-        return toEditionDate;
-    }
-
-    public void setToEditionDate(Date toEditionDate) {
-        this.toEditionDate = toEditionDate;
+    public void setEditionYear(String editionYear) {
+        this.editionYear = editionYear;
     }
 
     public ResourceTypeDTO getResourceType() {

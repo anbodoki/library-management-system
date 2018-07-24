@@ -26,7 +26,7 @@ public interface ClientApiService {
                                    String name,
                                    String author,
                                    String publisher,
-                                   Date fromEditionDate, Date toEditionDate,
+                                   String editionYear,
                                    ResourceTypeDTO resourceType,
                                    List<Long> categoryIds,
                                    Long languageId,

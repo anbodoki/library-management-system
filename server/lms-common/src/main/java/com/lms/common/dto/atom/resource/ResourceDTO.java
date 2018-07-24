@@ -22,7 +22,7 @@ public class ResourceDTO implements Serializable {
     private String edition;
     @NotNull
     private String publisher;
-    private Date editionDate;
+    private String editionYear;
     @NotNull
     private LanguageDTO language;
     private Integer pageNum;
@@ -95,12 +95,12 @@ public class ResourceDTO implements Serializable {
         this.publisher = publisher;
     }
 
-    public Date getEditionDate() {
-        return editionDate;
+    public String getEditionYear() {
+        return editionYear;
     }
 
-    public void setEditionDate(Date editionDate) {
-        this.editionDate = editionDate;
+    public void setEditionYear(String editionYear) {
+        this.editionYear = editionYear;
     }
 
     public LanguageDTO getLanguage() {

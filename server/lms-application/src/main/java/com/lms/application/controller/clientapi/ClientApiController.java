@@ -57,7 +57,7 @@ public class ClientApiController {
                 request.getName(),
                 request.getAuthor(),
                 request.getPublisher(),
-                request.getFromEditionDate(), request.getToEditionDate(),
+                request.getEditionYear(),
                 request.getResourceType(),
                 request.getCategoryIds(),
                 request.getLanguageId(),

@@ -24,7 +24,7 @@ public class ResourceHelper {
         result.setSubName(resource.getSubName());
         result.setEdition(resource.getEdition());
         result.setPublisher(resource.getPublisher());
-        result.setEditionDate(resource.getEditionDate());
+        result.setEditionYear(resource.getEditionYear());
         result.setLanguage(LanguageHelper.fromEntity(resource.getLanguage()));
         result.setPageNum(resource.getPageNum());
         result.setIsbn(resource.getIsbn());
@@ -55,7 +55,7 @@ public class ResourceHelper {
         result.setSubName(resource.getSubName());
         result.setEdition(resource.getEdition());
         result.setPublisher(resource.getPublisher());
-        result.setEditionDate(resource.getEditionDate());
+        result.setEditionYear(resource.getEditionYear());
         result.setLanguage(LanguageHelper.toEntity(resource.getLanguage()));
         result.setPageNum(resource.getPageNum());
         result.setIsbn(resource.getIsbn());

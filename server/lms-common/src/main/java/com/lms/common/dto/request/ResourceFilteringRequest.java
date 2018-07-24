@@ -13,8 +13,7 @@ public class ResourceFilteringRequest extends PagingRequest {
     private String subName;
     private String edition;
     private String publisher;
-    private Date fromEditionDate;
-    private Date toEditionDate;
+    private String editionYear;
     private Long languageId;
     private String isbn;
     private String udc;
@@ -76,20 +75,12 @@ public class ResourceFilteringRequest extends PagingRequest {
         this.publisher = publisher;
     }
 
-    public Date getFromEditionDate() {
-        return fromEditionDate;
+    public String getEditionYear() {
+        return editionYear;
     }
 
-    public void setFromEditionDate(Date fromEditionDate) {
-        this.fromEditionDate = fromEditionDate;
-    }
-
-    public Date getToEditionDate() {
-        return toEditionDate;
-    }
-
-    public void setToEditionDate(Date toEditionDate) {
-        this.toEditionDate = toEditionDate;
+    public void setEditionYear(String editionYear) {
+        this.editionYear = editionYear;
     }
 
     public String getIsbn() {
