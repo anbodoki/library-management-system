@@ -224,6 +224,7 @@ public class ClientApiServiceImpl implements ClientApiService {
         }
         setProperImageURLResource(resources);
         setProperResourceURLResource(resources);
+        setFavouritesFull(resources);
         return result;
     }
 
@@ -321,6 +322,15 @@ public class ClientApiServiceImpl implements ClientApiService {
     private void setFavourites(List<LightResource> resources) {
         List<Long> favoriteIds = favoriteService.getClintFavoriteIds();
         for (LightResource lightResource : resources) {
+            if (favoriteIds.contains(lightResource.getId())) {
+                lightResource.setClientFavorite(true);
+            }
+        }
+    }
+
+    private void setFavouritesFull(List<ResourceDTO> resources) {
+        List<Long> favoriteIds = favoriteService.getClintFavoriteIds();
+        for (ResourceDTO lightResource : resources) {
             if (favoriteIds.contains(lightResource.getId())) {
                 lightResource.setClientFavorite(true);
             }

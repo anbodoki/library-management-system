@@ -97,7 +97,7 @@ public class LateResourcesTracker {
                 continue;
             }
             try {
-                emailService.sendMail(client.getEmail(), "Late", "Two days until returning "
+                emailService.sendMail(client.getEmail(), "Warning", "Two days until returning "
                         + resourceBorrow.getResourceCopy().getResource().getName()
                         + " by " + resourceBorrow.getResourceCopy().getResource().getAuthor()
                         + " in library, book identifier is "

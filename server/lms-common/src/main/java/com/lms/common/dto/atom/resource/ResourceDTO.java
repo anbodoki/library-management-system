@@ -20,7 +20,6 @@ public class ResourceDTO implements Serializable {
     @NotNull
     private String subName;
     private String edition;
-    @NotNull
     private String publisher;
     private String editionYear;
     @NotNull

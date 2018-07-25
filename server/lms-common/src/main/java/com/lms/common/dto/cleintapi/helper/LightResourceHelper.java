@@ -34,6 +34,7 @@ public class LightResourceHelper {
         result.setResourceUrl(resource.getResourceUrl());
         result.setEditionYear(resource.getEditionYear());
         result.setCategory(resource.getCategory());
+        result.setQuantity(resource.getQuantity());
         return result;
     }
 }
