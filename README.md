@@ -6,6 +6,13 @@
 * Nino Basialia
 * Anano Bodokia
 
+### Technologies ###
+- Client application : vue.js
+- Admin panel : angular4
+- Server (core) : Java, Spring, JPA, Hibernate, Netty
+- Database : PostgreSQL
+- Web Server : Tomcat
+- Device : python (socket, protocol), flask, vue.js, java (card reader from serial)
 
 ### Project Structure ###
 
